@@ -2,7 +2,7 @@ CXX        = g++ -std=c++11
 OPTFLAG    = -O1
 CXXFLAGS   = -pedantic -std=c++11 -Wall
 LDFLAGS    = -L./lib -I./include 
-LIBS       = -lglfw3 -lpthread -lGLEW -lGLU -lGL -lrt -lXrandr \
+LIBS       = -lglfw -lpthread -lGLEW -lGLU -lGL -lrt -lXrandr \
              -lXxf86vm -lXi -lXinerama -lX11 -ldl -lXcursor     
 PROD       = main
 
