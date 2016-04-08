@@ -13,7 +13,7 @@ Repo for game technology final game project.
 Currently this project only runs on Unix systems.
 In order to build and run the project, the following dependencies are required:
 ```
-GLFW (Including with the project in the lib/ folder)
+GLFW (Included with the project in the lib/ folder)
 OpenGL
 GLU
 GLEW
