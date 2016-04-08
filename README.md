@@ -2,7 +2,8 @@
 Repo for game technology final game project.
 
 ## Contributors
-| Name           | Github         | Email | 
+| Name           | Github         | Email |
+|----------------|----------------|-------|
 | Phoenix Bishea | phoenixbishea  |       |
 | Ryan Lorey     | RyFry          |       |
 | Adam Miller    |                |       |
