@@ -1,9 +1,9 @@
 CXX        = g++ -std=c++11
 OPTFLAG    = -O1
 CXXFLAGS   = -pedantic -std=c++11 -Wall
-LDFLAGS    = -L./lib -I./include 
+LDFLAGS    = -L./lib -I./include
 LIBS       = -lglfw3 -lpthread -lGLEW -lGLU -lGL -lrt -lXrandr \
-             -lXxf86vm -lXi -lXinerama -lX11 -ldl -lXcursor     
+             -lXxf86vm -lXi -lXinerama -lX11 -ldl -lXcursor
 PROD       = main
 
 HDRS       = $(shell ls *.h)
@@ -13,14 +13,16 @@ OBJS       = $(patsubst %.cpp, %.o, $(SRCS))
 all: $(PROD)
 
 $(OBJS): %.o: %.cpp
-	$(CXX) -c $(OPTFLAG) $(CXXFLAGS) $< -o $@
+	mkdir -p objs
+	$(CXX) -c $(OPTFLAG) $(CXXFLAGS) $< -o objs/$@
 
 $(PROD): $(OBJS)
-	$(CXX) -o $(PROD) $(LDFLAGS) $^ $(LIBS)
+	mkdir -p bin
+	$(CXX) -o bin/$(PROD) $(LDFLAGS) objs/$^ $(LIBS)
 
 run: $(PROD)
-	./$(PROD)
+	bin/$(PROD)
 
 clean:
-	rm -f $(PROD)
-	rm -f *.o
+	rm -f bin/$(PROD)
+	rm -f objs/*.o
