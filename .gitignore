@@ -1,0 +1,7 @@
+# Ignore objs and bin folders
+bin/*
+objs/*
+
+# Ignore Emacs temporary files
+\#*\#
+*~
