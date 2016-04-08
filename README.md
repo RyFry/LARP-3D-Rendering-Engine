@@ -26,7 +26,7 @@ X11
 dl
 Xcursor
 ```
-All of these dependencies are what GLFW depend on.
+All of these dependencies are what GLFW depend on, and most of them will be preincluded in a Unix install.
 
 ### Building and Running
 To build and run:
@@ -34,7 +34,7 @@ To build and run:
 cd path/to/repository
 make run
 ```
-If all of the dependencies are met, the project should load and run
+If all of the dependencies are met, the project should load and run.
 
     
 
