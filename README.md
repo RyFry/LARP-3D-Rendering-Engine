@@ -2,12 +2,12 @@
 Repo for game technology final game project.
 
 ### Contributors
-| Name           | Github         | Email |
-|----------------|----------------|-------|
-| Phoenix Bishea | phoenixbishea  |       |
-| Ryan Lorey     | RyFry          |       |
-| Adam Miller    |                |       |
-| Luben Popov    |                |       |
+| Name           | Github         |
+|----------------|----------------|
+| Phoenix Bishea | phoenixbishea  |
+| Ryan Lorey     | RyFry          |
+| Adam Miller    | Zin20          |
+| Luben Popov    | lpopov101      |
 
 ### Dependencies
 Currently this project only runs on Unix systems.
