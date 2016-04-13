@@ -24,12 +24,12 @@ thing: a.cpp
 
 $(OBJS): $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	@mkdir -p $(OBJDIR)
-	@echo [CXX] '\t' $@
+	@echo -e [CXX] '\t' $@
 	@$(CXX) $(OPTFLAG) $(INCLUDES) $(CXXFLAGS) -c $< -o $@
 
 $(PROD): $(OBJS)
 	@mkdir -p $(BINDIR)
-	@echo [CXX] '\t' $@
+	@echo -e [CXX] '\t' $@
 	@$(CXX) -o $@ $(LDFLAGS) $^ $(LIBS)
 
 run: all
