@@ -1,7 +1,12 @@
 #include <GLFW/glfw3.h>
 
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+
 int main(void)
 {
+    Assimp::Importer importer;
     GLFWwindow* window;
 
     /* Initialize the library */
