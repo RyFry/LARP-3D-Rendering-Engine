@@ -2,27 +2,36 @@ CXX        = g++ -std=c++11
 OPTFLAG    = -O1
 CXXFLAGS   = -pedantic -std=c++11 -Wall
 LDFLAGS    = -L./lib -I./include
-LIBS       = -lglfw3 -lpthread -lGLEW -lGLU -lGL -lrt -lXrandr \
-             -lXxf86vm -lXi -lXinerama -lX11 -ldl -lXcursor
-PROD       = main
+LIBS       = -lglfw -lpthread -lGLEW -lGL -lXrandr -lXi -lX11
 
-HDRS       = $(shell ls *.h)
-SRCS       = $(shell ls *.cpp)
-OBJS       = $(patsubst %.cpp, %.o, $(SRCS))
+SRCDIR     = src
+OBJDIR     = objs
+BINDIR     = bin
+
+PROD       = $(BINDIR)/main
+
+HDRS       = $(wildcard $(SRCDIR)/*.hpp)
+SRCS       = $(wildcard $(SRCDIR)/*.cpp)
+OBJS       = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
 
 all: $(PROD)
 
-$(OBJS): %.o: %.cpp
-	mkdir -p objs
-	$(CXX) -c $(OPTFLAG) $(CXXFLAGS) $< -o objs/$@
+thing: a.cpp
+	$(CXX) -o $@ $^
+
+$(OBJS): $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	@mkdir -p $(OBJDIR)
+	@echo -e [CXX] '\t' $@
+	@$(CXX) $(OPTFLAG) $(CXXFLAGS) -c $< -o $@
 
 $(PROD): $(OBJS)
-	mkdir -p bin
-	$(CXX) -o bin/$(PROD) $(LDFLAGS) objs/$^ $(LIBS)
+	@mkdir -p $(BINDIR)
+	@echo -e [CXX] '\t' $@
+	@$(CXX) -o $@ $(LDFLAGS) $^ $(LIBS)
 
-run: $(PROD)
-	bin/$(PROD)
+run: all
+	$(PROD)
 
 clean:
-	rm -f bin/$(PROD)
-	rm -f objs/*.o
+	rm -f $(PROD)
+	rm -f $(OBJDIR)/*.o
