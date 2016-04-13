@@ -17,6 +17,7 @@ SRCS       = $(wildcard $(SRCDIR)/*.cpp)
 OBJS       = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
 
 all: $(PROD)
+	@echo Compilation finished.
 
 thing: a.cpp
 	$(CXX) -o $@ $^
@@ -35,5 +36,6 @@ run: all
 	$(PROD)
 
 clean:
-	rm -f $(PROD)
-	rm -f $(OBJDIR)/*.o
+	@rm -f $(PROD)
+	@rm -f $(OBJDIR)/*.o
+	@echo Clean done.
