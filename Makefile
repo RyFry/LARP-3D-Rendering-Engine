@@ -21,9 +21,6 @@ OBJS          = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
 all: $(PROD)
 	@echo Compilation finished.
 
-thing: a.cpp
-	$(CXX) -o $@ $^
-
 $(OBJS): $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	@mkdir -p $(OBJDIR)
 	@echo [CXX] '\t' $@
@@ -35,7 +32,8 @@ $(PROD): $(OBJS)
 	@$(CXX) -o $@ $(LDFLAGS) $^ $(STATIC_FLAGS) $(STATIC_LIBS) $(DYNAMIC_FLAGS) $(DYNAMIC_LIBS)
 
 run: all
-	$(PROD)
+	@echo Running $(PROD).
+	@$(PROD)
 
 clean:
 	@rm -f $(PROD)
