@@ -1,8 +1,9 @@
+
 CXX        = g++ -std=c++11
 OPTFLAG    = -O1
 CXXFLAGS   = -pedantic -std=c++11 -Wall
 LDFLAGS    = -L./lib -I./include
-LIBS       = -lglfw -lpthread -lGLEW -lGL -lXrandr -lXi -lX11
+LIBS       = -lglfw3 -lpthread -lGLEW -lGL -lXrandr -lXi -lX11 -ldl -lXcursor -lXxf86vm -lXinerama
 
 SRCDIR     = src
 OBJDIR     = objs
@@ -21,12 +22,12 @@ thing: a.cpp
 
 $(OBJS): $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	@mkdir -p $(OBJDIR)
-	@echo -e [CXX] '\t' $@
+	@echo [CXX] '\t' $@
 	@$(CXX) $(OPTFLAG) $(CXXFLAGS) -c $< -o $@
 
 $(PROD): $(OBJS)
 	@mkdir -p $(BINDIR)
-	@echo -e [CXX] '\t' $@
+	@echo [CXX] '\t' $@
 	@$(CXX) -o $@ $(LDFLAGS) $^ $(LIBS)
 
 run: all
