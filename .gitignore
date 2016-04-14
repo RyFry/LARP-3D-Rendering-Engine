@@ -5,3 +5,6 @@ objs/*
 # Ignore Emacs temporary files
 \#*\#
 *~
+
+# Ignore special lib files
+lib/libglfw3.so
