@@ -9,6 +9,8 @@
 #include "Camera.hpp"
 #include "Model.hpp"
 
+#include "Rotation.hpp"
+
 // GLM Mathemtics
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

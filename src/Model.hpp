@@ -1,5 +1,5 @@
-#ifndef MODEL_H
-#define MODEL_H
+#ifndef MODEL_HPP
+#define MODEL_HPP
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
