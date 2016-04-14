@@ -36,5 +36,15 @@ make run
 ```
 If all of the dependencies are met, the project should load and run.
 
-    
+### Known issues
+```
+/usr/bin/ld: cannot find -lglfw3
+```
+If you get this error, type the following commands from the root directory
+```
+cd lib
+ln -s libglfw.so.3.1 libglfw3.so
+```
+This will create a symbolic link to the proper GLFW library that your linker will be able to detect.
+This is already a known issue on Arch Linux.
 
