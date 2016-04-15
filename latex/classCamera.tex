@@ -1,0 +1,144 @@
+\hypertarget{classCamera}{}\section{Camera Class Reference}
+\label{classCamera}\index{Camera@{Camera}}
+
+
+{\ttfamily \#include $<$Camera.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCamera_a535f3a2413a88c2f1e7d1147bec0039c}{Camera} (glm\+::vec3 position=glm\+::vec3(0.\+0f, 0.\+0f, 0.\+0f), glm\+::vec3 up=glm\+::vec3(0.\+0f, 1.\+0f, 0.\+0f), G\+Lfloat yaw=\+Y\+A\+W, G\+Lfloat pitch=\+P\+I\+T\+C\+H)
+\item 
+\hyperlink{classCamera_a1efd973829c22d5fe15a26ede3357ee5}{Camera} (G\+Lfloat posX, G\+Lfloat posY, G\+Lfloat posZ, G\+Lfloat upX, G\+Lfloat upY, G\+Lfloat upZ, G\+Lfloat yaw, G\+Lfloat pitch)
+\item 
+glm\+::mat4 \hyperlink{classCamera_affa333055635aed96518c4c66be9a70c}{Get\+View\+Matrix} ()
+\item 
+void \hyperlink{classCamera_ac7e9a7f3e63c670fd695a8f03d02dbdf}{Process\+Keyboard} (\hyperlink{Camera_8hpp_a605494501af59c9191e7e4d6f9a0ebcb}{Camera\+\_\+\+Movement} direction, G\+Lfloat \hyperlink{test_8cpp_adf7cb443fa70a647d5603ee33b392102}{delta\+Time})
+\item 
+void \hyperlink{classCamera_a97ffbf8d8935fc63bd2ca71a4268eec4}{Process\+Mouse\+Movement} (G\+Lfloat xoffset, G\+Lfloat yoffset, G\+Lboolean constrain\+Pitch=true)
+\item 
+void \hyperlink{classCamera_af269e5ef38e791afb7f4a1dfb8da2399}{Process\+Mouse\+Scroll} (G\+Lfloat yoffset)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+glm\+::vec3 \hyperlink{classCamera_a9733b59f5340f6f1bca24d52a6679039}{Position}
+\item 
+glm\+::vec3 \hyperlink{classCamera_ac95b3737115ffe9a6ff9128344d5b963}{Front}
+\item 
+glm\+::vec3 \hyperlink{classCamera_ad74c4a490bc8865e67e27a2036d0a72d}{Up}
+\item 
+glm\+::vec3 \hyperlink{classCamera_a6624f9f4228f6299a3d4ccb81e28da0a}{Right}
+\item 
+glm\+::vec3 \hyperlink{classCamera_a340d30b833954b87fd016ce0e724c723}{World\+Up}
+\item 
+G\+Lfloat \hyperlink{classCamera_abf27283ca0ccc51bae8446796ffc6b44}{Yaw}
+\item 
+G\+Lfloat \hyperlink{classCamera_ae6afc2507f67baf4390405cfda1d1e87}{Pitch}
+\item 
+G\+Lfloat \hyperlink{classCamera_a93ea63669df9617a6f63fa09e74a01a9}{Movement\+Speed}
+\item 
+G\+Lfloat \hyperlink{classCamera_adc61747052dc386a4ab8e110a1fbc628}{Mouse\+Sensitivity}
+\item 
+G\+Lfloat \hyperlink{classCamera_a1078d85d2e18bdc32291aabfcdda710a}{Zoom}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Camera@{Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Camera(glm\+::vec3 position=glm\+::vec3(0.\+0f, 0.\+0f, 0.\+0f), glm\+::vec3 up=glm\+::vec3(0.\+0f, 1.\+0f, 0.\+0f), G\+Lfloat yaw=\+Y\+A\+W, G\+Lfloat pitch=\+P\+I\+T\+C\+H)}{Camera(glm::vec3 position=glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up=glm::vec3(0.0f, 1.0f, 0.0f), GLfloat yaw=YAW, GLfloat pitch=PITCH)}}]{\setlength{\rightskip}{0pt plus 5cm}Camera\+::\+Camera (
+\begin{DoxyParamCaption}
+\item[{glm\+::vec3}]{position = {\ttfamily glm\+:\+:vec3(0.0f,~0.0f,~0.0f)}, }
+\item[{glm\+::vec3}]{up = {\ttfamily glm\+:\+:vec3(0.0f,~1.0f,~0.0f)}, }
+\item[{G\+Lfloat}]{yaw = {\ttfamily {\bf Y\+AW}}, }
+\item[{G\+Lfloat}]{pitch = {\ttfamily {\bf P\+I\+T\+CH}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classCamera_a535f3a2413a88c2f1e7d1147bec0039c}{}\label{classCamera_a535f3a2413a88c2f1e7d1147bec0039c}
+\index{Camera@{Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Camera(\+G\+Lfloat pos\+X, G\+Lfloat pos\+Y, G\+Lfloat pos\+Z, G\+Lfloat up\+X, G\+Lfloat up\+Y, G\+Lfloat up\+Z, G\+Lfloat yaw, G\+Lfloat pitch)}{Camera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat upX, GLfloat upY, GLfloat upZ, GLfloat yaw, GLfloat pitch)}}]{\setlength{\rightskip}{0pt plus 5cm}Camera\+::\+Camera (
+\begin{DoxyParamCaption}
+\item[{G\+Lfloat}]{posX, }
+\item[{G\+Lfloat}]{posY, }
+\item[{G\+Lfloat}]{posZ, }
+\item[{G\+Lfloat}]{upX, }
+\item[{G\+Lfloat}]{upY, }
+\item[{G\+Lfloat}]{upZ, }
+\item[{G\+Lfloat}]{yaw, }
+\item[{G\+Lfloat}]{pitch}
+\end{DoxyParamCaption}
+)}\hypertarget{classCamera_a1efd973829c22d5fe15a26ede3357ee5}{}\label{classCamera_a1efd973829c22d5fe15a26ede3357ee5}
+
+
+\subsection{Member Function Documentation}
+\index{Camera@{Camera}!Get\+View\+Matrix@{Get\+View\+Matrix}}
+\index{Get\+View\+Matrix@{Get\+View\+Matrix}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Get\+View\+Matrix()}{GetViewMatrix()}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::mat4 Camera\+::\+Get\+View\+Matrix (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classCamera_affa333055635aed96518c4c66be9a70c}{}\label{classCamera_affa333055635aed96518c4c66be9a70c}
+\index{Camera@{Camera}!Process\+Keyboard@{Process\+Keyboard}}
+\index{Process\+Keyboard@{Process\+Keyboard}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Process\+Keyboard(\+Camera\+\_\+\+Movement direction, G\+Lfloat delta\+Time)}{ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime)}}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\+::\+Process\+Keyboard (
+\begin{DoxyParamCaption}
+\item[{{\bf Camera\+\_\+\+Movement}}]{direction, }
+\item[{G\+Lfloat}]{delta\+Time}
+\end{DoxyParamCaption}
+)}\hypertarget{classCamera_ac7e9a7f3e63c670fd695a8f03d02dbdf}{}\label{classCamera_ac7e9a7f3e63c670fd695a8f03d02dbdf}
+\index{Camera@{Camera}!Process\+Mouse\+Movement@{Process\+Mouse\+Movement}}
+\index{Process\+Mouse\+Movement@{Process\+Mouse\+Movement}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Process\+Mouse\+Movement(\+G\+Lfloat xoffset, G\+Lfloat yoffset, G\+Lboolean constrain\+Pitch=true)}{ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch=true)}}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\+::\+Process\+Mouse\+Movement (
+\begin{DoxyParamCaption}
+\item[{G\+Lfloat}]{xoffset, }
+\item[{G\+Lfloat}]{yoffset, }
+\item[{G\+Lboolean}]{constrain\+Pitch = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\hypertarget{classCamera_a97ffbf8d8935fc63bd2ca71a4268eec4}{}\label{classCamera_a97ffbf8d8935fc63bd2ca71a4268eec4}
+\index{Camera@{Camera}!Process\+Mouse\+Scroll@{Process\+Mouse\+Scroll}}
+\index{Process\+Mouse\+Scroll@{Process\+Mouse\+Scroll}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Process\+Mouse\+Scroll(\+G\+Lfloat yoffset)}{ProcessMouseScroll(GLfloat yoffset)}}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\+::\+Process\+Mouse\+Scroll (
+\begin{DoxyParamCaption}
+\item[{G\+Lfloat}]{yoffset}
+\end{DoxyParamCaption}
+)}\hypertarget{classCamera_af269e5ef38e791afb7f4a1dfb8da2399}{}\label{classCamera_af269e5ef38e791afb7f4a1dfb8da2399}
+
+
+\subsection{Member Data Documentation}
+\index{Camera@{Camera}!Front@{Front}}
+\index{Front@{Front}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Front}{Front}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Camera\+::\+Front}\hypertarget{classCamera_ac95b3737115ffe9a6ff9128344d5b963}{}\label{classCamera_ac95b3737115ffe9a6ff9128344d5b963}
+\index{Camera@{Camera}!Mouse\+Sensitivity@{Mouse\+Sensitivity}}
+\index{Mouse\+Sensitivity@{Mouse\+Sensitivity}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Mouse\+Sensitivity}{MouseSensitivity}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Camera\+::\+Mouse\+Sensitivity}\hypertarget{classCamera_adc61747052dc386a4ab8e110a1fbc628}{}\label{classCamera_adc61747052dc386a4ab8e110a1fbc628}
+\index{Camera@{Camera}!Movement\+Speed@{Movement\+Speed}}
+\index{Movement\+Speed@{Movement\+Speed}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Movement\+Speed}{MovementSpeed}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Camera\+::\+Movement\+Speed}\hypertarget{classCamera_a93ea63669df9617a6f63fa09e74a01a9}{}\label{classCamera_a93ea63669df9617a6f63fa09e74a01a9}
+\index{Camera@{Camera}!Pitch@{Pitch}}
+\index{Pitch@{Pitch}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Pitch}{Pitch}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Camera\+::\+Pitch}\hypertarget{classCamera_ae6afc2507f67baf4390405cfda1d1e87}{}\label{classCamera_ae6afc2507f67baf4390405cfda1d1e87}
+\index{Camera@{Camera}!Position@{Position}}
+\index{Position@{Position}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Position}{Position}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Camera\+::\+Position}\hypertarget{classCamera_a9733b59f5340f6f1bca24d52a6679039}{}\label{classCamera_a9733b59f5340f6f1bca24d52a6679039}
+\index{Camera@{Camera}!Right@{Right}}
+\index{Right@{Right}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Right}{Right}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Camera\+::\+Right}\hypertarget{classCamera_a6624f9f4228f6299a3d4ccb81e28da0a}{}\label{classCamera_a6624f9f4228f6299a3d4ccb81e28da0a}
+\index{Camera@{Camera}!Up@{Up}}
+\index{Up@{Up}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Up}{Up}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Camera\+::\+Up}\hypertarget{classCamera_ad74c4a490bc8865e67e27a2036d0a72d}{}\label{classCamera_ad74c4a490bc8865e67e27a2036d0a72d}
+\index{Camera@{Camera}!World\+Up@{World\+Up}}
+\index{World\+Up@{World\+Up}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{World\+Up}{WorldUp}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Camera\+::\+World\+Up}\hypertarget{classCamera_a340d30b833954b87fd016ce0e724c723}{}\label{classCamera_a340d30b833954b87fd016ce0e724c723}
+\index{Camera@{Camera}!Yaw@{Yaw}}
+\index{Yaw@{Yaw}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Yaw}{Yaw}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Camera\+::\+Yaw}\hypertarget{classCamera_abf27283ca0ccc51bae8446796ffc6b44}{}\label{classCamera_abf27283ca0ccc51bae8446796ffc6b44}
+\index{Camera@{Camera}!Zoom@{Zoom}}
+\index{Zoom@{Zoom}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Zoom}{Zoom}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Camera\+::\+Zoom}\hypertarget{classCamera_a1078d85d2e18bdc32291aabfcdda710a}{}\label{classCamera_a1078d85d2e18bdc32291aabfcdda710a}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{Camera_8hpp}{Camera.\+hpp}\item 
+src/\hyperlink{Camera_8cpp}{Camera.\+cpp}\end{DoxyCompactItemize}
