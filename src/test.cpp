@@ -8,8 +8,7 @@
 #include "Shader.hpp"
 #include "Camera.hpp"
 #include "Model.hpp"
-
-#include "Rotation.hpp"
+#include "SceneGraph.hpp"
 
 // GLM Mathemtics
 #include <glm/glm.hpp>
@@ -70,8 +69,13 @@ int main(void)
     glEnable(GL_MULTISAMPLE);
 
     Shader shader("shaders/default.vert", "shaders/default.frag");
-
     Model nanosuit("assets/nanosuit.obj");
+    pEntity entity(new Entity(shader, nanosuit));
+
+    pSceneGraph graph = SceneGraph::singleton();
+    pNode node = graph->create_child_node();
+    node->attach_entity(entity);
+    node->set_scale(0.1, 0.1, 0.1);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -86,22 +90,12 @@ int main(void)
         Do_Movement();
 
         // Clear the colorbuffer
-        glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
+        glClearColor(0.5f, 0.05f, 0.05f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        shader.use();   // <-- Don't forget this one!
-        // Transformation matrices
         glm::mat4 projection = glm::perspective(camera.Zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
-        glUniformMatrix4fv(glGetUniformLocation(shader.mProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-        glUniformMatrix4fv(glGetUniformLocation(shader.mProgram, "view"), 1, GL_FALSE, glm::value_ptr(view));
-
-        // Draw the loaded model
-        glm::mat4 model;
-        model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
-        glUniformMatrix4fv(glGetUniformLocation(shader.mProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        nanosuit.draw(shader);
+        graph->draw(view, projection);
 
         // Swap the buffers
         glfwSwapBuffers(window);

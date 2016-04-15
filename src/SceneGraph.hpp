@@ -15,8 +15,8 @@ private:
     static pSceneGraph _singleton;
     SceneGraph();
 public:
-	static pSceneGraph singleton();
-	pNode create_child_node();
-	void draw(glm::mat4 view, glm::mat4 projection);
-	void set_ambient_light(glm::vec3 color);
+    static pSceneGraph singleton();
+    pNode create_child_node();
+    void draw(glm::mat4& view, glm::mat4& projection);
+    void set_ambient_light(glm::vec3 color);
 };

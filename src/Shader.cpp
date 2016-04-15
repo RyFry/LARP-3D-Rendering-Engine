@@ -74,7 +74,6 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)
     // Delete the shaders as they're linked into our program now and no longer necessery
     glDeleteShader(vertex);
     glDeleteShader(fragment);
-
 }
 
 // Uses the current shader
