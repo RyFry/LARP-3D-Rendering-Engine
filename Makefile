@@ -67,3 +67,9 @@ clean:
 	rm -f $(OBJDIR)/$(DEBUG_DIR)/*.o
 	@echo Clean done.
 
+docs: Doxyfile
+	doxygen Doxyfile
+
+Doxyfile:
+	doxygen -g
+
