@@ -25,8 +25,10 @@ Xinerama
 X11
 dl
 Xcursor
+SOIL
+glm
+assimp
 ```
-All of these dependencies are what GLFW depend on, and most of them will be preincluded in a Unix install.
 
 ### Building and Running
 To build and run:
@@ -36,7 +38,7 @@ make run
 ```
 If all of the dependencies are met, the project should load and run.
 
-### Known issues
+### Known Issues
 ```
 /usr/bin/ld: cannot find -lglfw3
 ```
