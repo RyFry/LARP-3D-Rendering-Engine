@@ -15,15 +15,18 @@ public:
     void draw(Shader& shader);
 private:
     // Model data
-    std::vector<Mesh> meshes;
-    std::string directory;
-    std::vector<Texture> loaded_textures;
+    std::vector<Mesh> _meshes;
+    std::string _directory;
+    std::vector<Texture> _loaded_textures;
 
     // Functions
-    void loadModel(std::string path);
-    void processNode(aiNode* node, const aiScene* scene);
-    Mesh processMesh(aiMesh* mesh, const aiScene* scene);
-    std::vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type,
-                                              Texture::Type textureType);};
+    void load_model(std::string path);
+    void process_node(aiNode* node, const aiScene* scene);
+    Mesh process_mesh(aiMesh* mesh, const aiScene* scene);
+    std::vector<Texture> load_material_textures(aiMaterial* mat, aiTextureType type,
+                                                Texture::Type textureType);
+};
+
+GLint texture_from_file(const char* path, std::string directory);
 
 #endif

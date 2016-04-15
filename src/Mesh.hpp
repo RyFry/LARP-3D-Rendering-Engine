@@ -18,9 +18,9 @@
 
 struct Vertex
 {
-    glm::vec3 mPosition;
-    glm::vec3 mNormal;
-    glm::vec2 mTexCoords;
+    glm::vec3 _position;
+    glm::vec3 _normal;
+    glm::vec2 _tex_coords;
 };
 
 class Texture
@@ -32,33 +32,31 @@ public:
         SPECULAR
     };
 
-    GLuint mID;
-    Type mType;
-    aiString mPath;
+    GLuint _id;
+    Type _type;
+    aiString _path;
 
-    std::string toString();
+    std::string to_string();
 };
 
 class Mesh
 {
 public:
     // Mesh data
-    std::vector<Vertex> vertices;
-    std::vector<GLuint> indices;
-    std::vector<Texture> textures;
+    std::vector<Vertex> _vertices;
+    std::vector<GLuint> _indices;
+    std::vector<Texture> _textures;
     Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<Texture>& textures);
     void draw(Shader& shader);
 private:
     // Render data
-    GLuint VAO;
-    GLuint VBO;
-    GLuint EBO;
+    GLuint _VAO;
+    GLuint _VBO;
+    GLuint _EBO;
 
     // Functions
-    void setupMesh();
+    void setup_mesh();
 };
-
-GLint TextureFromFile(const char* path, std::string directory);
 
 #endif
 
