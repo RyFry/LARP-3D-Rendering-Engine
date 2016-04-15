@@ -1,4 +1,5 @@
 #include <string>
+#include <stdexcept>
 
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -19,13 +20,14 @@
 #include <SOIL.h>
 
 // Properties
-GLuint screenWidth = 1600, screenHeight = 900;
+GLuint screenWidth = 800, screenHeight = 600;
 
 // Function prototypes
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void Do_Movement();
+void error_callback(int error, const char* description);
 
 // Camera
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
@@ -39,14 +41,19 @@ GLfloat lastFrame = 0.0f;
 int main(void)
 {
     // Init GLFW
-    glfwInit();
+    if (!glfwInit())
+        throw std::runtime_error(std::string(__FILE__) + std::string(" : line ") + std::to_string(__LINE__) + std::string(" :: glfwInit() failed!"));
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     glfwWindowHint(GLFW_SAMPLES, 4);
 
+    glfwSetErrorCallback(error_callback);
+
     GLFWwindow* window = glfwCreateWindow(screenWidth, screenHeight, "LearnOpenGL", nullptr, nullptr); // Windowed
+    if (window == nullptr)
+        throw std::runtime_error(std::string(__FILE__) + std::string(" : line ") + std::to_string(__LINE__) + std::string(" :: GLFWwindow* = nullptr"));
     glfwMakeContextCurrent(window);
 
     // Set the required callback functions
@@ -152,4 +159,9 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     camera.ProcessMouseScroll(yoffset);
+}
+
+void error_callback(int error, const char* description)
+{
+    fputs(description, stderr);
 }

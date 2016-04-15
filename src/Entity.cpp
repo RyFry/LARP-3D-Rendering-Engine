@@ -17,7 +17,5 @@ void Entity::draw(const glm::mat4& model, const glm::mat4& view, const glm::mat4
     glUniformMatrix4fv(glGetUniformLocation(this->_shader.mProgram, "model"), 1, GL_FALSE,
                        glm::value_ptr(model));
 
-    std::cout << "Drawing" << std::endl;
-
     this->_model.draw(this->_shader);
 }

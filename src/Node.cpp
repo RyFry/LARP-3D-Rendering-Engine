@@ -8,12 +8,9 @@ Node::Node()
 void Node::draw(glm::mat4 model, glm::mat4& view, glm::mat4& projection)
 {
     glm::mat4 tmp_model = glm::translate(glm::mat4(), this->_position);
-    std::cout << this->_position.x << " " << this->_position.y << ' ' << this->_position.z << std::endl;
     glm::mat4 rotation = glm::mat4_cast(this->_rotation);
-    std::cout << this->_rotation.x << " " << this->_rotation.y << ' ' << this->_rotation.z << std::endl;
     tmp_model = tmp_model * rotation;
     tmp_model = glm::scale(tmp_model, this->_scale);
-    std::cout << this->_scale.x << " " << this->_scale.y << ' ' << this->_scale.z << std::endl;
     glm::mat4 my_model = model * tmp_model;
     if (this->_entity != nullptr)
         this->_entity->draw(my_model, view, projection);
