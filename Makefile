@@ -33,22 +33,22 @@ debug_all: $(DEBUG_PROD)
 
 $(OBJS): $(OBJDIR)/$(RELEASE_DIR)/%.o: $(SRCDIR)/%.cpp
 	@mkdir -p $(OBJDIR)/$(RELEASE_DIR)
-	@echo [CXX] '\t' $@
+	@echo -e [CXX] '\t' $@
 	@$(CXX) $(OPTFLAG) $(INCLUDES) $(CXXFLAGS) -c $< -o $@
 
 $(DEBUG_OBJS): $(OBJDIR)/$(DEBUG_DIR)/%.o: $(SRCDIR)/%.cpp
 	@mkdir -p $(OBJDIR)/$(DEBUG_DIR)
-	@echo [CXX] '\t' $@
+	@echo -e [CXX] '\t' $@
 	@$(CXX) $(OPTFLAG) $(INCLUDES) $(CXXFLAGS) -c $< -o $@
 
 $(PROD): $(OBJS)
 	@mkdir -p $(BINDIR)/$(RELEASE_DIR)
-	@echo [CXX] '\t' $@
+	@echo -e [CXX] '\t' $@
 	@$(CXX) -o $@ $(LDFLAGS) $^ $(STATIC_FLAGS) $(STATIC_LIBS) $(DYNAMIC_FLAGS) $(DYNAMIC_LIBS)
 
 $(DEBUG_PROD): $(DEBUG_OBJS)
 	@mkdir -p $(BINDIR)/$(DEBUG_DIR)
-	@echo [CXX] '\t' $@
+	@echo -e [CXX] '\t' $@
 	@$(CXX) -o $@ $(LDFLAGS) $^ $(STATIC_FLAGS) $(STATIC_LIBS) $(DYNAMIC_FLAGS) $(DYNAMIC_LIBS)
 
 run: all
