@@ -100,8 +100,8 @@ int main(void)
         glClearColor(0.5f, 0.05f, 0.05f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glm::mat4 projection = glm::perspective(camera.Zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
-        glm::mat4 view = camera.GetViewMatrix();
+        glm::mat4 projection = glm::perspective(camera._zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
+        glm::mat4 view = camera.get_view_matrix();
         graph->draw(view, projection);
 
         // Swap the buffers
@@ -117,13 +117,13 @@ void Do_Movement()
 {
     // Camera controls
     if(keys[GLFW_KEY_W])
-        camera.ProcessKeyboard(FORWARD, deltaTime);
+        camera.process_keyboard(Camera::FORWARD, deltaTime);
     if(keys[GLFW_KEY_S])
-        camera.ProcessKeyboard(BACKWARD, deltaTime);
+        camera.process_keyboard(Camera::BACKWARD, deltaTime);
     if(keys[GLFW_KEY_A])
-        camera.ProcessKeyboard(LEFT, deltaTime);
+        camera.process_keyboard(Camera::LEFT, deltaTime);
     if(keys[GLFW_KEY_D])
-        camera.ProcessKeyboard(RIGHT, deltaTime);
+        camera.process_keyboard(Camera::RIGHT, deltaTime);
 }
 
 // Is called whenever a key is pressed/released via GLFW
@@ -153,12 +153,12 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     lastX = xpos;
     lastY = ypos;
 
-    camera.ProcessMouseMovement(xoffset, yoffset);
+    camera.process_mouse_movement(xoffset, yoffset);
 }
 
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+void scroll_callback(GLFWwindow* window, double x_offset, double y_offset)
 {
-    camera.ProcessMouseScroll(yoffset);
+    camera.process_mouse_scroll(y_offset);
 }
 
 void error_callback(int error, const char* description)
