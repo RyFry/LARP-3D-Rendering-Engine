@@ -147,6 +147,7 @@ public:
      * Processes input received from any keyboard-like input system.
      * @param direction A direction to move the Camera. Must be one of the directions
      *                  predefined in the CameraMovement enum
+     * @param delta_time The duration of time between frames. Used to avoid variable camera speeds
      * @throws std::runtime_error whenever direction is not one of those defined by CameraMovement
      */
     void process_keyboard(CameraMovement direction, GLfloat delta_time);

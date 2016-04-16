@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['main',['main',['../test_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe',1,'test.cpp']]],
-  ['mesh',['Mesh',['../classMesh.html#a3a7b7bb4a172a517e86e197b267f324d',1,'Mesh']]],
-  ['model',['Model',['../classModel.html#a54be740d1cd7d9e44b07b747d97940b5',1,'Model']]],
-  ['mouse_5fcallback',['mouse_callback',['../test_8cpp.html#af4ca2891044ac10a664b8d83ce590f1f',1,'test.cpp']]]
+  ['load_5fshader',['load_shader',['../classShader.html#a7bb9a0b9746d86238c4a31a7b9df5247',1,'Shader']]],
+  ['loadmaterialtextures',['loadMaterialTextures',['../classModel.html#af0718330b26c1f99262f40628ae12341',1,'Model']]],
+  ['loadmodel',['loadModel',['../classModel.html#a3cd88224a93dc81a8503d42be807eb86',1,'Model']]]
 ];

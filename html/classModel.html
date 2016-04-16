@@ -84,6 +84,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classModel-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Model Class Reference</div>  </div>
@@ -98,6 +100,26 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a54be740d1cd7d9e44b07b747d97940b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cd069fb85bb68b54c476bd799c4d8d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a5cd069fb85bb68b54c476bd799c4d8d7">draw</a> (<a class="el" href="classShader.html">Shader</a> &amp;shader)</td></tr>
 <tr class="separator:a5cd069fb85bb68b54c476bd799c4d8d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a3cd88224a93dc81a8503d42be807eb86"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a3cd88224a93dc81a8503d42be807eb86">loadModel</a> (std::string path)</td></tr>
+<tr class="separator:a3cd88224a93dc81a8503d42be807eb86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23b167ce0d33f7e6ab5693cd5e81a9a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a23b167ce0d33f7e6ab5693cd5e81a9a5">processNode</a> (aiNode *node, const aiScene *scene)</td></tr>
+<tr class="separator:a23b167ce0d33f7e6ab5693cd5e81a9a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95ae1a9980ded3d98b1c8785cb889d96"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMesh.html">Mesh</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a95ae1a9980ded3d98b1c8785cb889d96">processMesh</a> (aiMesh *mesh, const aiScene *scene)</td></tr>
+<tr class="separator:a95ae1a9980ded3d98b1c8785cb889d96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0718330b26c1f99262f40628ae12341"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classTexture.html">Texture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#af0718330b26c1f99262f40628ae12341">loadMaterialTextures</a> (aiMaterial *mat, aiTextureType type, <a class="el" href="classTexture.html#a9d0b09cfb795f9553db6a4eab396bef9">Texture::Type</a> textureType)</td></tr>
+<tr class="separator:af0718330b26c1f99262f40628ae12341"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a538e42901dcfba59471072a48a162163"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classMesh.html">Mesh</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a538e42901dcfba59471072a48a162163">meshes</a></td></tr>
+<tr class="separator:a538e42901dcfba59471072a48a162163"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ea3aa111c7a7d179e93dcc0bb567701"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a5ea3aa111c7a7d179e93dcc0bb567701">directory</a></td></tr>
+<tr class="separator:a5ea3aa111c7a7d179e93dcc0bb567701"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b63a4363bd6bd2e977b0c022ee7e772"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classTexture.html">Texture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a6b63a4363bd6bd2e977b0c022ee7e772">loaded_textures</a></td></tr>
+<tr class="separator:a6b63a4363bd6bd2e977b0c022ee7e772"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a54be740d1cd7d9e44b07b747d97940b5"></a>
@@ -129,6 +151,199 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af0718330b26c1f99262f40628ae12341"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classTexture.html">Texture</a> &gt; Model::loadMaterialTextures </td>
+          <td>(</td>
+          <td class="paramtype">aiMaterial *&#160;</td>
+          <td class="paramname"><em>mat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">aiTextureType&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classTexture.html#a9d0b09cfb795f9553db6a4eab396bef9">Texture::Type</a>&#160;</td>
+          <td class="paramname"><em>textureType</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3cd88224a93dc81a8503d42be807eb86"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Model::loadModel </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a95ae1a9980ded3d98b1c8785cb889d96"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMesh.html">Mesh</a> Model::processMesh </td>
+          <td>(</td>
+          <td class="paramtype">aiMesh *&#160;</td>
+          <td class="paramname"><em>mesh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const aiScene *&#160;</td>
+          <td class="paramname"><em>scene</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a23b167ce0d33f7e6ab5693cd5e81a9a5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Model::processNode </td>
+          <td>(</td>
+          <td class="paramtype">aiNode *&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const aiScene *&#160;</td>
+          <td class="paramname"><em>scene</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a5ea3aa111c7a7d179e93dcc0bb567701"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Model::directory</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6b63a4363bd6bd2e977b0c022ee7e772"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classTexture.html">Texture</a>&gt; Model::loaded_textures</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a538e42901dcfba59471072a48a162163"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classMesh.html">Mesh</a>&gt; Model::meshes</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

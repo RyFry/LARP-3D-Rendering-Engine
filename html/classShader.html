@@ -85,6 +85,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-static-methods">Static Private Member Functions</a> &#124;
 <a href="classShader-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Shader Class Reference</div>  </div>
@@ -95,18 +96,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a03421a8419cdad4b84cf58ecdb156879"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShader.html#a03421a8419cdad4b84cf58ecdb156879">Shader</a> (const GLchar *vertexPath, const GLchar *fragmentPath)</td></tr>
-<tr class="separator:a03421a8419cdad4b84cf58ecdb156879"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc35c159fc487d020ccb61887289154e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShader.html#afc35c159fc487d020ccb61887289154e">Shader</a> (const GLchar *vertex_path, const GLchar *fragment_path, const GLchar *geometry_path=nullptr)</td></tr>
+<tr class="separator:afc35c159fc487d020ccb61887289154e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a870fa9f13d69e558815d6fd351a469dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShader.html#a870fa9f13d69e558815d6fd351a469dc">use</a> ()</td></tr>
 <tr class="separator:a870fa9f13d69e558815d6fd351a469dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a5978edd53515ba3e8035a13ceb4404ef"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShader.html#a5978edd53515ba3e8035a13ceb4404ef">mProgram</a></td></tr>
-<tr class="separator:a5978edd53515ba3e8035a13ceb4404ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a477aec09e9ee86b96c9843f3715d6a8d"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShader.html#a477aec09e9ee86b96c9843f3715d6a8d">_program</a></td></tr>
+<tr class="separator:a477aec09e9ee86b96c9843f3715d6a8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
+Static Private Member Functions</h2></td></tr>
+<tr class="memitem:a7bb9a0b9746d86238c4a31a7b9df5247"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShader.html#a7bb9a0b9746d86238c4a31a7b9df5247">load_shader</a> (const GLchar *shader_path)</td></tr>
+<tr class="separator:a7bb9a0b9746d86238c4a31a7b9df5247"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94e7a84d8fb4e7c0b2dac403b8d752c1"><td class="memItemLeft" align="right" valign="top">static GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShader.html#a94e7a84d8fb4e7c0b2dac403b8d752c1">compile_shader</a> (const GLchar *shader_code, GLenum shader_type)</td></tr>
+<tr class="separator:a94e7a84d8fb4e7c0b2dac403b8d752c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a03421a8419cdad4b84cf58ecdb156879"></a>
+<a class="anchor" id="afc35c159fc487d020ccb61887289154e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -114,13 +122,19 @@ Public Attributes</h2></td></tr>
           <td class="memname">Shader::Shader </td>
           <td>(</td>
           <td class="paramtype">const GLchar *&#160;</td>
-          <td class="paramname"><em>vertexPath</em>, </td>
+          <td class="paramname"><em>vertex_path</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const GLchar *&#160;</td>
-          <td class="paramname"><em>fragmentPath</em>&#160;</td>
+          <td class="paramname"><em>fragment_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const GLchar *&#160;</td>
+          <td class="paramname"><em>geometry_path</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -129,10 +143,89 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Constructor </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vertex_path</td><td>Path to the desired vertex shader </td></tr>
+    <tr><td class="paramname">fragment_path</td><td>Path to the desired fragment shader </td></tr>
+    <tr><td class="paramname">geometry_path</td><td>Path to the desired geometry shader. If not provided, the default OpenGL geometry shader will be used (Recommended except in a few special cases). </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a94e7a84d8fb4e7c0b2dac403b8d752c1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GLuint Shader::compile_shader </td>
+          <td>(</td>
+          <td class="paramtype">const GLchar *&#160;</td>
+          <td class="paramname"><em>shader_code</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLenum&#160;</td>
+          <td class="paramname"><em>shader_type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Compiles a loaded shader program </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shader_code</td><td>The text version of the shader program as an OpenGL string </td></tr>
+    <tr><td class="paramname">shader_type</td><td>The type of shader to compile. Must be one of GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, or GL_FRAGMENT_SHADER. Other valid shader types are defined at <a href="https://www.opengl.org/sdk/docs/man/docbook4/xhtml/glCreateShader.xml">https://www.opengl.org/sdk/docs/man/docbook4/xhtml/glCreateShader.xml</a> however only the former 3 are currently supported </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a7bb9a0b9746d86238c4a31a7b9df5247"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Shader::load_shader </td>
+          <td>(</td>
+          <td class="paramtype">const GLchar *&#160;</td>
+          <td class="paramname"><em>shader_path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Loads a shader given its path relative to where the program is being run </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shader_path</td><td>The path to the shader program to be loaded </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a870fa9f13d69e558815d6fd351a469dc"></a>
 <div class="memitem">
 <div class="memproto">
@@ -145,19 +238,21 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Tells OpenGL to use this <a class="el" href="classShader.html">Shader</a>'s compiled shader program </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a5978edd53515ba3e8035a13ceb4404ef"></a>
+<a class="anchor" id="a477aec09e9ee86b96c9843f3715d6a8d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">GLuint Shader::mProgram</td>
+          <td class="memname">GLuint Shader::_program</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>The ID of the OpenGL Program associated with this <a class="el" href="classShader.html">Shader</a> </p>
 
 </div>
 </div>

@@ -60,9 +60,14 @@ static const G\+Lfloat \hyperlink{classCamera_afd43f32a47d2db8922dc32030fd84379}
 \item 
 static const G\+Lfloat \hyperlink{classCamera_acc2ddbb4a3bdb2829896703edf72ca1e}{S\+P\+E\+ED} = 3.\+0f
 \item 
-static const G\+Lfloat \hyperlink{classCamera_ad682c7fc69bab5dbc3f8f10a1542b484}{S\+E\+N\+S\+I\+T\+I\+V\+TY} = 0.\+25f
+static const G\+Lfloat \hyperlink{classCamera_adee09ae2133f9fe95a6eb72a6cb8db20}{S\+E\+N\+S\+I\+T\+I\+V\+I\+TY} = 0.\+25f
 \item 
 static const G\+Lfloat \hyperlink{classCamera_a34cdfe4c17868880037d5ff78159f158}{Z\+O\+OM} = 45.\+0f
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classCamera_ad9745a585d867bc34439c36f0a6d66a1}{update\+\_\+camera\+\_\+vectors} ()
 \end{DoxyCompactItemize}
 
 
@@ -168,6 +173,8 @@ Processes input received from any keyboard-\/like input system.
 \begin{DoxyParams}{Parameters}
 {\em direction} & A direction to move the \hyperlink{classCamera}{Camera}. Must be one of the directions predefined in the Camera\+Movement enum \\
 \hline
+{\em delta\+\_\+time} & The duration of time between frames. Used to avoid variable camera speeds \\
+\hline
 \end{DoxyParams}
 
 \begin{DoxyExceptions}{Exceptions}
@@ -204,7 +211,14 @@ Processes input received from a mouse scroll-\/wheel event.
 {\em y\+\_\+offset} & The offset of the input device used to zoom the camera. A positive offset zooms the camera in by reducing the F\+OV in degrees, while a negative offset zooms the camera out. \\
 \hline
 \end{DoxyParams}
-
+\index{Camera@{Camera}!update\+\_\+camera\+\_\+vectors@{update\+\_\+camera\+\_\+vectors}}
+\index{update\+\_\+camera\+\_\+vectors@{update\+\_\+camera\+\_\+vectors}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{update\+\_\+camera\+\_\+vectors()}{update_camera_vectors()}}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\+::update\+\_\+camera\+\_\+vectors (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCamera_ad9745a585d867bc34439c36f0a6d66a1}{}\label{classCamera_ad9745a585d867bc34439c36f0a6d66a1}
+Calculates the front vector from the \hyperlink{classCamera}{Camera}\textquotesingle{}s (updated) Eular Angles 
 
 \subsection{Member Data Documentation}
 \index{Camera@{Camera}!\+\_\+front@{\+\_\+front}}
@@ -240,9 +254,9 @@ This \hyperlink{classCamera}{Camera}\textquotesingle{}s yaw in degrees \index{Ca
 The current zoom of the \hyperlink{classCamera}{Camera} \index{Camera@{Camera}!P\+I\+T\+CH@{P\+I\+T\+CH}}
 \index{P\+I\+T\+CH@{P\+I\+T\+CH}!Camera@{Camera}}
 \subsubsection[{\texorpdfstring{P\+I\+T\+CH}{PITCH}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Lfloat Camera\+::\+P\+I\+T\+CH = 0.\+0f\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classCamera_afd43f32a47d2db8922dc32030fd84379}{}\label{classCamera_afd43f32a47d2db8922dc32030fd84379}
-Default pitch for a \hyperlink{classCamera}{Camera} object when not provided to the constructor \index{Camera@{Camera}!S\+E\+N\+S\+I\+T\+I\+V\+TY@{S\+E\+N\+S\+I\+T\+I\+V\+TY}}
-\index{S\+E\+N\+S\+I\+T\+I\+V\+TY@{S\+E\+N\+S\+I\+T\+I\+V\+TY}!Camera@{Camera}}
-\subsubsection[{\texorpdfstring{S\+E\+N\+S\+I\+T\+I\+V\+TY}{SENSITIVTY}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Lfloat Camera\+::\+S\+E\+N\+S\+I\+T\+I\+V\+TY = 0.\+25f\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classCamera_ad682c7fc69bab5dbc3f8f10a1542b484}{}\label{classCamera_ad682c7fc69bab5dbc3f8f10a1542b484}
+Default pitch for a \hyperlink{classCamera}{Camera} object when not provided to the constructor \index{Camera@{Camera}!S\+E\+N\+S\+I\+T\+I\+V\+I\+TY@{S\+E\+N\+S\+I\+T\+I\+V\+I\+TY}}
+\index{S\+E\+N\+S\+I\+T\+I\+V\+I\+TY@{S\+E\+N\+S\+I\+T\+I\+V\+I\+TY}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{S\+E\+N\+S\+I\+T\+I\+V\+I\+TY}{SENSITIVITY}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Lfloat Camera\+::\+S\+E\+N\+S\+I\+T\+I\+V\+I\+TY = 0.\+25f\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classCamera_adee09ae2133f9fe95a6eb72a6cb8db20}{}\label{classCamera_adee09ae2133f9fe95a6eb72a6cb8db20}
 Default sensitivity for a \hyperlink{classCamera}{Camera} object. \index{Camera@{Camera}!S\+P\+E\+ED@{S\+P\+E\+ED}}
 \index{S\+P\+E\+ED@{S\+P\+E\+ED}!Camera@{Camera}}
 \subsubsection[{\texorpdfstring{S\+P\+E\+ED}{SPEED}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Lfloat Camera\+::\+S\+P\+E\+ED = 3.\+0f\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classCamera_acc2ddbb4a3bdb2829896703edf72ca1e}{}\label{classCamera_acc2ddbb4a3bdb2829896703edf72ca1e}

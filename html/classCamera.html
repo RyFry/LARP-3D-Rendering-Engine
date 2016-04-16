@@ -87,6 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="classCamera-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Camera Class Reference</div>  </div>
@@ -150,10 +151,15 @@ Static Public Attributes</h2></td></tr>
 <tr class="separator:afd43f32a47d2db8922dc32030fd84379"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc2ddbb4a3bdb2829896703edf72ca1e"><td class="memItemLeft" align="right" valign="top">static const GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#acc2ddbb4a3bdb2829896703edf72ca1e">SPEED</a> = 3.0f</td></tr>
 <tr class="separator:acc2ddbb4a3bdb2829896703edf72ca1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad682c7fc69bab5dbc3f8f10a1542b484"><td class="memItemLeft" align="right" valign="top">static const GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#ad682c7fc69bab5dbc3f8f10a1542b484">SENSITIVTY</a> = 0.25f</td></tr>
-<tr class="separator:ad682c7fc69bab5dbc3f8f10a1542b484"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adee09ae2133f9fe95a6eb72a6cb8db20"><td class="memItemLeft" align="right" valign="top">static const GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#adee09ae2133f9fe95a6eb72a6cb8db20">SENSITIVITY</a> = 0.25f</td></tr>
+<tr class="separator:adee09ae2133f9fe95a6eb72a6cb8db20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34cdfe4c17868880037d5ff78159f158"><td class="memItemLeft" align="right" valign="top">static const GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a34cdfe4c17868880037d5ff78159f158">ZOOM</a> = 45.0f</td></tr>
 <tr class="separator:a34cdfe4c17868880037d5ff78159f158"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ad9745a585d867bc34439c36f0a6d66a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#ad9745a585d867bc34439c36f0a6d66a1">update_camera_vectors</a> ()</td></tr>
+<tr class="separator:ad9745a585d867bc34439c36f0a6d66a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An abstract camera class that processes input and calculates the corresponding Eular Angles, Vectors and Matrices for use in OpenGL </p>
@@ -347,6 +353,7 @@ Static Public Attributes</h2></td></tr>
 <p>Processes input received from any keyboard-like input system. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">direction</td><td>A direction to move the <a class="el" href="classCamera.html">Camera</a>. Must be one of the directions predefined in the CameraMovement enum </td></tr>
+    <tr><td class="paramname">delta_time</td><td>The duration of time between frames. Used to avoid variable camera speeds </td></tr>
   </table>
   </dd>
 </dl>
@@ -418,6 +425,30 @@ Static Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a class="anchor" id="ad9745a585d867bc34439c36f0a6d66a1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Camera::update_camera_vectors </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Calculates the front vector from the <a class="el" href="classCamera.html">Camera</a>'s (updated) Eular Angles </p>
 
 </div>
 </div>
@@ -573,7 +604,7 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad682c7fc69bab5dbc3f8f10a1542b484"></a>
+<a class="anchor" id="adee09ae2133f9fe95a6eb72a6cb8db20"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -581,7 +612,7 @@ Static Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const GLfloat Camera::SENSITIVTY = 0.25f</td>
+          <td class="memname">const GLfloat Camera::SENSITIVITY = 0.25f</td>
         </tr>
       </table>
   </td>

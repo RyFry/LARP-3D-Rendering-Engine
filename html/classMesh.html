@@ -85,6 +85,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classMesh-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Mesh Class Reference</div>  </div>
@@ -108,6 +110,20 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a5e55b84c6c967608bcf23ed7d68e4215"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf1e672703bf4f8e104f3b076faaf958"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classTexture.html">Texture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#abf1e672703bf4f8e104f3b076faaf958">textures</a></td></tr>
 <tr class="separator:abf1e672703bf4f8e104f3b076faaf958"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:aafa4e21067a9b0c4407daf5e3c9ea991"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#aafa4e21067a9b0c4407daf5e3c9ea991">setupMesh</a> ()</td></tr>
+<tr class="separator:aafa4e21067a9b0c4407daf5e3c9ea991"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a09b989b9d4df8ae595d7e80e091a4a5b"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a09b989b9d4df8ae595d7e80e091a4a5b">VAO</a></td></tr>
+<tr class="separator:a09b989b9d4df8ae595d7e80e091a4a5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d28b2c6fee628a13f43cae3f858569b"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a0d28b2c6fee628a13f43cae3f858569b">VBO</a></td></tr>
+<tr class="separator:a0d28b2c6fee628a13f43cae3f858569b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a894c6723c0172f4e38b2509582abfa6c"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a894c6723c0172f4e38b2509582abfa6c">EBO</a></td></tr>
+<tr class="separator:a894c6723c0172f4e38b2509582abfa6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a3a7b7bb4a172a517e86e197b267f324d"></a>
@@ -159,7 +175,50 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aafa4e21067a9b0c4407daf5e3c9ea991"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Mesh::setupMesh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a894c6723c0172f4e38b2509582abfa6c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GLuint Mesh::EBO</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a5e55b84c6c967608bcf23ed7d68e4215"></a>
 <div class="memitem">
 <div class="memproto">
@@ -180,6 +239,46 @@ Public Attributes</h2></td></tr>
           <td class="memname">std::vector&lt;<a class="el" href="classTexture.html">Texture</a>&gt; Mesh::textures</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a09b989b9d4df8ae595d7e80e091a4a5b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GLuint Mesh::VAO</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0d28b2c6fee628a13f43cae3f858569b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GLuint Mesh::VBO</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
