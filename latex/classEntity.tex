@@ -22,6 +22,13 @@ void \hyperlink{classEntity_a1a303039c1b5a89341fac2f8eaf5ca7f}{draw} (const glm\
 \item[{const {\bf Model} \&}]{model}
 \end{DoxyParamCaption}
 )}\hypertarget{classEntity_aa98f78aabd488b507c9fdb51eff425b9}{}\label{classEntity_aa98f78aabd488b507c9fdb51eff425b9}
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em shader} & A \hyperlink{classShader}{Shader} object used during rendering \\
+\hline
+{\em model} & the \hyperlink{classModel}{Model} to draw during rendering \\
+\hline
+\end{DoxyParams}
 
 
 \subsection{Member Function Documentation}
@@ -34,6 +41,15 @@ void \hyperlink{classEntity_a1a303039c1b5a89341fac2f8eaf5ca7f}{draw} (const glm\
 \item[{const glm\+::mat4 \&}]{projection}
 \end{DoxyParamCaption}
 )}\hypertarget{classEntity_a1a303039c1b5a89341fac2f8eaf5ca7f}{}\label{classEntity_a1a303039c1b5a89341fac2f8eaf5ca7f}
+Draws the model atteched to this entity using the associated shader 
+\begin{DoxyParams}{Parameters}
+{\em model} & The parent\textquotesingle{}s model matrix. Used to calculate this \hyperlink{classEntity}{Entity}\textquotesingle{}s model matrix prior to rendering \\
+\hline
+{\em view} & The view matrix to apply during rendering. This should be obtained from a \hyperlink{classCamera}{Camera} object. \\
+\hline
+{\em projection} & The projection matrix to apply during rendering. This should also be obtained from a \hyperlink{classCamera}{Camera} object. \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

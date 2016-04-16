@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['right',['RIGHT',['../Camera_8hpp.html#a605494501af59c9191e7e4d6f9a0ebcbaec8379af7490bb9eaaf579cf17876f38',1,'Camera.hpp']]]
+  ['right',['RIGHT',['../classCamera.html#a9825f2bf1ddc209c3b2d336080d8407aaedac3a8506bf2bae7df2d36dd5580884',1,'Camera']]]
 ];

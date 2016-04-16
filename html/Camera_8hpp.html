@@ -85,14 +85,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
 <div class="title">Camera.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;vector&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="Error_8hpp_source.html">Error.hpp</a>&quot;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;GL/glew.h&gt;</code><br />
 <code>#include &lt;glm/glm.hpp&gt;</code><br />
 <code>#include &lt;glm/gtc/matrix_transform.hpp&gt;</code><br />
@@ -103,113 +102,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html">Camera</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a605494501af59c9191e7e4d6f9a0ebcb"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Camera_8hpp.html#a605494501af59c9191e7e4d6f9a0ebcb">Camera_Movement</a> { <a class="el" href="Camera_8hpp.html#a605494501af59c9191e7e4d6f9a0ebcbaa26736999186daf8146f809e863712a1">FORWARD</a>, 
-<a class="el" href="Camera_8hpp.html#a605494501af59c9191e7e4d6f9a0ebcbafed2fca77e454294d6b8bda1bf2c9fd6">BACKWARD</a>, 
-<a class="el" href="Camera_8hpp.html#a605494501af59c9191e7e4d6f9a0ebcbadb45120aafd37a973140edee24708065">LEFT</a>, 
-<a class="el" href="Camera_8hpp.html#a605494501af59c9191e7e4d6f9a0ebcbaec8379af7490bb9eaaf579cf17876f38">RIGHT</a>
- }</td></tr>
-<tr class="separator:a605494501af59c9191e7e4d6f9a0ebcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:aad8ef0922adf3ff721892dfc8eb806d6"><td class="memItemLeft" align="right" valign="top">const GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Camera_8hpp.html#aad8ef0922adf3ff721892dfc8eb806d6">YAW</a> = -90.0f</td></tr>
-<tr class="separator:aad8ef0922adf3ff721892dfc8eb806d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ce864ea1227b9e112d693f8c282290c"><td class="memItemLeft" align="right" valign="top">const GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Camera_8hpp.html#a4ce864ea1227b9e112d693f8c282290c">PITCH</a> = 0.0f</td></tr>
-<tr class="separator:a4ce864ea1227b9e112d693f8c282290c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba924f5d1202a01928a09a6e9aefae8d"><td class="memItemLeft" align="right" valign="top">const GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Camera_8hpp.html#aba924f5d1202a01928a09a6e9aefae8d">SPEED</a> = 3.0f</td></tr>
-<tr class="separator:aba924f5d1202a01928a09a6e9aefae8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a368f8a5badad28150797d883a5716cd0"><td class="memItemLeft" align="right" valign="top">const GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Camera_8hpp.html#a368f8a5badad28150797d883a5716cd0">SENSITIVTY</a> = 0.25f</td></tr>
-<tr class="separator:a368f8a5badad28150797d883a5716cd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d1ba9c31f83438f305a5b773a0d8ab8"><td class="memItemLeft" align="right" valign="top">const GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Camera_8hpp.html#a2d1ba9c31f83438f305a5b773a0d8ab8">ZOOM</a> = 45.0f</td></tr>
-<tr class="separator:a2d1ba9c31f83438f305a5b773a0d8ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a class="anchor" id="a605494501af59c9191e7e4d6f9a0ebcb"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="Camera_8hpp.html#a605494501af59c9191e7e4d6f9a0ebcb">Camera_Movement</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a605494501af59c9191e7e4d6f9a0ebcbaa26736999186daf8146f809e863712a1"></a>FORWARD&#160;</td><td class="fielddoc">
-</td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a605494501af59c9191e7e4d6f9a0ebcbafed2fca77e454294d6b8bda1bf2c9fd6"></a>BACKWARD&#160;</td><td class="fielddoc">
-</td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a605494501af59c9191e7e4d6f9a0ebcbadb45120aafd37a973140edee24708065"></a>LEFT&#160;</td><td class="fielddoc">
-</td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a605494501af59c9191e7e4d6f9a0ebcbaec8379af7490bb9eaaf579cf17876f38"></a>RIGHT&#160;</td><td class="fielddoc">
-</td></tr>
-</table>
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a class="anchor" id="a4ce864ea1227b9e112d693f8c282290c"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const GLfloat PITCH = 0.0f</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a368f8a5badad28150797d883a5716cd0"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const GLfloat SENSITIVTY = 0.25f</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aba924f5d1202a01928a09a6e9aefae8d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const GLfloat SPEED = 3.0f</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aad8ef0922adf3ff721892dfc8eb806d6"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const GLfloat YAW = -90.0f</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2d1ba9c31f83438f305a5b773a0d8ab8"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const GLfloat ZOOM = 45.0f</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

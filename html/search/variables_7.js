@@ -1,5 +1,10 @@
 var searchData=
 [
-  ['pitch',['Pitch',['../classCamera.html#ae6afc2507f67baf4390405cfda1d1e87',1,'Camera::Pitch()'],['../Camera_8hpp.html#a4ce864ea1227b9e112d693f8c282290c',1,'PITCH():&#160;Camera.hpp']]],
-  ['position',['Position',['../classCamera.html#a9733b59f5340f6f1bca24d52a6679039',1,'Camera']]]
+  ['mid',['mID',['../classTexture.html#ad34618c2c7f986a956453d1208a1912b',1,'Texture']]],
+  ['mnormal',['mNormal',['../structVertex.html#a1954547988e2fed7e7e936eb74e09cae',1,'Vertex']]],
+  ['mpath',['mPath',['../classTexture.html#a637c7fd5c6fab7b1b2cbc91d8b5a9bba',1,'Texture']]],
+  ['mposition',['mPosition',['../structVertex.html#a1b8266b61e52e83271623e40b9bbba07',1,'Vertex']]],
+  ['mprogram',['mProgram',['../classShader.html#a5978edd53515ba3e8035a13ceb4404ef',1,'Shader']]],
+  ['mtexcoords',['mTexCoords',['../structVertex.html#a2cff7003a258a96a3a26314024655790',1,'Vertex']]],
+  ['mtype',['mType',['../classTexture.html#a25fca6d1c32a423f83decd7f738864ce',1,'Texture']]]
 ];

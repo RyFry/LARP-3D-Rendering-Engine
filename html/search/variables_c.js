@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vertices',['vertices',['../classMesh.html#a6465a888c97232a39e12aad008c969c3',1,'Mesh']]]
+  ['yaw',['YAW',['../classCamera.html#a79050e94e98c5c1cc0127c41edb4ed16',1,'Camera']]]
 ];

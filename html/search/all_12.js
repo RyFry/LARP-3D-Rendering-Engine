@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['worldup',['WorldUp',['../classCamera.html#a340d30b833954b87fd016ce0e724c723',1,'Camera']]]
+  ['vertex',['Vertex',['../structVertex.html',1,'']]],
+  ['vertices',['vertices',['../classMesh.html#a6465a888c97232a39e12aad008c969c3',1,'Mesh']]]
 ];

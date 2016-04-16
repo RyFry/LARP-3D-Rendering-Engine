@@ -1,5 +1,6 @@
 \hypertarget{Camera_8hpp}{}\section{src/\+Camera.hpp File Reference}
 \label{Camera_8hpp}\index{src/\+Camera.\+hpp@{src/\+Camera.\+hpp}}
+{\ttfamily \#include \char`\"{}Error.\+hpp\char`\"{}}\\*
 {\ttfamily \#include $<$vector$>$}\\*
 {\ttfamily \#include $<$G\+L/glew.\+h$>$}\\*
 {\ttfamily \#include $<$glm/glm.\+hpp$>$}\\*
@@ -9,62 +10,3 @@
 \item 
 class \hyperlink{classCamera}{Camera}
 \end{DoxyCompactItemize}
-\subsection*{Enumerations}
-\begin{DoxyCompactItemize}
-\item 
-enum \hyperlink{Camera_8hpp_a605494501af59c9191e7e4d6f9a0ebcb}{Camera\+\_\+\+Movement} \{ \hyperlink{Camera_8hpp_a605494501af59c9191e7e4d6f9a0ebcbaa26736999186daf8146f809e863712a1}{F\+O\+R\+W\+A\+RD}, 
-\hyperlink{Camera_8hpp_a605494501af59c9191e7e4d6f9a0ebcbafed2fca77e454294d6b8bda1bf2c9fd6}{B\+A\+C\+K\+W\+A\+RD}, 
-\hyperlink{Camera_8hpp_a605494501af59c9191e7e4d6f9a0ebcbadb45120aafd37a973140edee24708065}{L\+E\+FT}, 
-\hyperlink{Camera_8hpp_a605494501af59c9191e7e4d6f9a0ebcbaec8379af7490bb9eaaf579cf17876f38}{R\+I\+G\+HT}
- \}
-\end{DoxyCompactItemize}
-\subsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-const G\+Lfloat \hyperlink{Camera_8hpp_aad8ef0922adf3ff721892dfc8eb806d6}{Y\+AW} = -\/90.\+0f
-\item 
-const G\+Lfloat \hyperlink{Camera_8hpp_a4ce864ea1227b9e112d693f8c282290c}{P\+I\+T\+CH} = 0.\+0f
-\item 
-const G\+Lfloat \hyperlink{Camera_8hpp_aba924f5d1202a01928a09a6e9aefae8d}{S\+P\+E\+ED} = 3.\+0f
-\item 
-const G\+Lfloat \hyperlink{Camera_8hpp_a368f8a5badad28150797d883a5716cd0}{S\+E\+N\+S\+I\+T\+I\+V\+TY} = 0.\+25f
-\item 
-const G\+Lfloat \hyperlink{Camera_8hpp_a2d1ba9c31f83438f305a5b773a0d8ab8}{Z\+O\+OM} = 45.\+0f
-\end{DoxyCompactItemize}
-
-
-\subsection{Enumeration Type Documentation}
-\index{Camera.\+hpp@{Camera.\+hpp}!Camera\+\_\+\+Movement@{Camera\+\_\+\+Movement}}
-\index{Camera\+\_\+\+Movement@{Camera\+\_\+\+Movement}!Camera.\+hpp@{Camera.\+hpp}}
-\subsubsection[{\texorpdfstring{Camera\+\_\+\+Movement}{Camera_Movement}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Camera\+\_\+\+Movement}}\hypertarget{Camera_8hpp_a605494501af59c9191e7e4d6f9a0ebcb}{}\label{Camera_8hpp_a605494501af59c9191e7e4d6f9a0ebcb}
-\begin{Desc}
-\item[Enumerator]\par
-\begin{description}
-\index{F\+O\+R\+W\+A\+RD@{F\+O\+R\+W\+A\+RD}!Camera.\+hpp@{Camera.\+hpp}}\index{Camera.\+hpp@{Camera.\+hpp}!F\+O\+R\+W\+A\+RD@{F\+O\+R\+W\+A\+RD}}\item[{\em 
-F\+O\+R\+W\+A\+RD\hypertarget{Camera_8hpp_a605494501af59c9191e7e4d6f9a0ebcbaa26736999186daf8146f809e863712a1}{}\label{Camera_8hpp_a605494501af59c9191e7e4d6f9a0ebcbaa26736999186daf8146f809e863712a1}
-}]\index{B\+A\+C\+K\+W\+A\+RD@{B\+A\+C\+K\+W\+A\+RD}!Camera.\+hpp@{Camera.\+hpp}}\index{Camera.\+hpp@{Camera.\+hpp}!B\+A\+C\+K\+W\+A\+RD@{B\+A\+C\+K\+W\+A\+RD}}\item[{\em 
-B\+A\+C\+K\+W\+A\+RD\hypertarget{Camera_8hpp_a605494501af59c9191e7e4d6f9a0ebcbafed2fca77e454294d6b8bda1bf2c9fd6}{}\label{Camera_8hpp_a605494501af59c9191e7e4d6f9a0ebcbafed2fca77e454294d6b8bda1bf2c9fd6}
-}]\index{L\+E\+FT@{L\+E\+FT}!Camera.\+hpp@{Camera.\+hpp}}\index{Camera.\+hpp@{Camera.\+hpp}!L\+E\+FT@{L\+E\+FT}}\item[{\em 
-L\+E\+FT\hypertarget{Camera_8hpp_a605494501af59c9191e7e4d6f9a0ebcbadb45120aafd37a973140edee24708065}{}\label{Camera_8hpp_a605494501af59c9191e7e4d6f9a0ebcbadb45120aafd37a973140edee24708065}
-}]\index{R\+I\+G\+HT@{R\+I\+G\+HT}!Camera.\+hpp@{Camera.\+hpp}}\index{Camera.\+hpp@{Camera.\+hpp}!R\+I\+G\+HT@{R\+I\+G\+HT}}\item[{\em 
-R\+I\+G\+HT\hypertarget{Camera_8hpp_a605494501af59c9191e7e4d6f9a0ebcbaec8379af7490bb9eaaf579cf17876f38}{}\label{Camera_8hpp_a605494501af59c9191e7e4d6f9a0ebcbaec8379af7490bb9eaaf579cf17876f38}
-}]\end{description}
-\end{Desc}
-
-
-\subsection{Variable Documentation}
-\index{Camera.\+hpp@{Camera.\+hpp}!P\+I\+T\+CH@{P\+I\+T\+CH}}
-\index{P\+I\+T\+CH@{P\+I\+T\+CH}!Camera.\+hpp@{Camera.\+hpp}}
-\subsubsection[{\texorpdfstring{P\+I\+T\+CH}{PITCH}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Lfloat P\+I\+T\+CH = 0.\+0f}\hypertarget{Camera_8hpp_a4ce864ea1227b9e112d693f8c282290c}{}\label{Camera_8hpp_a4ce864ea1227b9e112d693f8c282290c}
-\index{Camera.\+hpp@{Camera.\+hpp}!S\+E\+N\+S\+I\+T\+I\+V\+TY@{S\+E\+N\+S\+I\+T\+I\+V\+TY}}
-\index{S\+E\+N\+S\+I\+T\+I\+V\+TY@{S\+E\+N\+S\+I\+T\+I\+V\+TY}!Camera.\+hpp@{Camera.\+hpp}}
-\subsubsection[{\texorpdfstring{S\+E\+N\+S\+I\+T\+I\+V\+TY}{SENSITIVTY}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Lfloat S\+E\+N\+S\+I\+T\+I\+V\+TY = 0.\+25f}\hypertarget{Camera_8hpp_a368f8a5badad28150797d883a5716cd0}{}\label{Camera_8hpp_a368f8a5badad28150797d883a5716cd0}
-\index{Camera.\+hpp@{Camera.\+hpp}!S\+P\+E\+ED@{S\+P\+E\+ED}}
-\index{S\+P\+E\+ED@{S\+P\+E\+ED}!Camera.\+hpp@{Camera.\+hpp}}
-\subsubsection[{\texorpdfstring{S\+P\+E\+ED}{SPEED}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Lfloat S\+P\+E\+ED = 3.\+0f}\hypertarget{Camera_8hpp_aba924f5d1202a01928a09a6e9aefae8d}{}\label{Camera_8hpp_aba924f5d1202a01928a09a6e9aefae8d}
-\index{Camera.\+hpp@{Camera.\+hpp}!Y\+AW@{Y\+AW}}
-\index{Y\+AW@{Y\+AW}!Camera.\+hpp@{Camera.\+hpp}}
-\subsubsection[{\texorpdfstring{Y\+AW}{YAW}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Lfloat Y\+AW = -\/90.\+0f}\hypertarget{Camera_8hpp_aad8ef0922adf3ff721892dfc8eb806d6}{}\label{Camera_8hpp_aad8ef0922adf3ff721892dfc8eb806d6}
-\index{Camera.\+hpp@{Camera.\+hpp}!Z\+O\+OM@{Z\+O\+OM}}
-\index{Z\+O\+OM@{Z\+O\+OM}!Camera.\+hpp@{Camera.\+hpp}}
-\subsubsection[{\texorpdfstring{Z\+O\+OM}{ZOOM}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Lfloat Z\+O\+OM = 45.\+0f}\hypertarget{Camera_8hpp_a2d1ba9c31f83438f305a5b773a0d8ab8}{}\label{Camera_8hpp_a2d1ba9c31f83438f305a5b773a0d8ab8}

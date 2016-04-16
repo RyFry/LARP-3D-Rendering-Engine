@@ -83,8 +83,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classCamera-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Camera Class Reference</div>  </div>
@@ -93,44 +95,92 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><code>#include &lt;<a class="el" href="Camera_8hpp_source.html">Camera.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a9825f2bf1ddc209c3b2d336080d8407a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a9825f2bf1ddc209c3b2d336080d8407a">CameraMovement</a> { <a class="el" href="classCamera.html#a9825f2bf1ddc209c3b2d336080d8407aa6388b5408cf8440021383388044ae77f">FORWARD</a>, 
+<a class="el" href="classCamera.html#a9825f2bf1ddc209c3b2d336080d8407aae18db08a2289896f26dcddf6e2ad274f">BACKWARD</a>, 
+<a class="el" href="classCamera.html#a9825f2bf1ddc209c3b2d336080d8407aa1bed5588ea4c26163a72f0fc8621f6be">LEFT</a>, 
+<a class="el" href="classCamera.html#a9825f2bf1ddc209c3b2d336080d8407aaedac3a8506bf2bae7df2d36dd5580884">RIGHT</a>
+ }</td></tr>
+<tr class="separator:a9825f2bf1ddc209c3b2d336080d8407a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a535f3a2413a88c2f1e7d1147bec0039c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a535f3a2413a88c2f1e7d1147bec0039c">Camera</a> (glm::vec3 position=glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up=glm::vec3(0.0f, 1.0f, 0.0f), GLfloat yaw=YAW, GLfloat pitch=PITCH)</td></tr>
 <tr class="separator:a535f3a2413a88c2f1e7d1147bec0039c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1efd973829c22d5fe15a26ede3357ee5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a1efd973829c22d5fe15a26ede3357ee5">Camera</a> (GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat upX, GLfloat upY, GLfloat upZ, GLfloat yaw, GLfloat pitch)</td></tr>
-<tr class="separator:a1efd973829c22d5fe15a26ede3357ee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:affa333055635aed96518c4c66be9a70c"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#affa333055635aed96518c4c66be9a70c">GetViewMatrix</a> ()</td></tr>
-<tr class="separator:affa333055635aed96518c4c66be9a70c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7e9a7f3e63c670fd695a8f03d02dbdf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#ac7e9a7f3e63c670fd695a8f03d02dbdf">ProcessKeyboard</a> (<a class="el" href="Camera_8hpp.html#a605494501af59c9191e7e4d6f9a0ebcb">Camera_Movement</a> direction, GLfloat <a class="el" href="test_8cpp.html#adf7cb443fa70a647d5603ee33b392102">deltaTime</a>)</td></tr>
-<tr class="separator:ac7e9a7f3e63c670fd695a8f03d02dbdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97ffbf8d8935fc63bd2ca71a4268eec4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a97ffbf8d8935fc63bd2ca71a4268eec4">ProcessMouseMovement</a> (GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch=true)</td></tr>
-<tr class="separator:a97ffbf8d8935fc63bd2ca71a4268eec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af269e5ef38e791afb7f4a1dfb8da2399"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#af269e5ef38e791afb7f4a1dfb8da2399">ProcessMouseScroll</a> (GLfloat yoffset)</td></tr>
-<tr class="separator:af269e5ef38e791afb7f4a1dfb8da2399"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0f6ba09d293db5b1c6ba63d195cff57"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#af0f6ba09d293db5b1c6ba63d195cff57">Camera</a> (GLfloat pos_x, GLfloat pos_y, GLfloat pos_z, GLfloat up_x, GLfloat up_y, GLfloat up_z, GLfloat yaw=<a class="el" href="classCamera.html#a79050e94e98c5c1cc0127c41edb4ed16">YAW</a>, GLfloat pitch=<a class="el" href="classCamera.html#afd43f32a47d2db8922dc32030fd84379">PITCH</a>)</td></tr>
+<tr class="separator:af0f6ba09d293db5b1c6ba63d195cff57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedac0150156798ae1880eabaa3b9f071"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#aedac0150156798ae1880eabaa3b9f071">get_view_matrix</a> ()</td></tr>
+<tr class="separator:aedac0150156798ae1880eabaa3b9f071"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac32b5b8c93934f8faa8e8637dec855d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#ac32b5b8c93934f8faa8e8637dec855d4">process_keyboard</a> (<a class="el" href="classCamera.html#a9825f2bf1ddc209c3b2d336080d8407a">CameraMovement</a> direction, GLfloat delta_time)</td></tr>
+<tr class="separator:ac32b5b8c93934f8faa8e8637dec855d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab650c0e1f0c55582339623e7c3b4b10d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#ab650c0e1f0c55582339623e7c3b4b10d">process_mouse_movement</a> (GLfloat x_offset, GLfloat y_offset, GLboolean constrain_pitch=true)</td></tr>
+<tr class="separator:ab650c0e1f0c55582339623e7c3b4b10d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cb2efbeb1a0007f1ea908e3e74c92a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a9cb2efbeb1a0007f1ea908e3e74c92a1">process_mouse_scroll</a> (GLfloat y_offset)</td></tr>
+<tr class="separator:a9cb2efbeb1a0007f1ea908e3e74c92a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a9733b59f5340f6f1bca24d52a6679039"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a9733b59f5340f6f1bca24d52a6679039">Position</a></td></tr>
-<tr class="separator:a9733b59f5340f6f1bca24d52a6679039"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac95b3737115ffe9a6ff9128344d5b963"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#ac95b3737115ffe9a6ff9128344d5b963">Front</a></td></tr>
-<tr class="separator:ac95b3737115ffe9a6ff9128344d5b963"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad74c4a490bc8865e67e27a2036d0a72d"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#ad74c4a490bc8865e67e27a2036d0a72d">Up</a></td></tr>
-<tr class="separator:ad74c4a490bc8865e67e27a2036d0a72d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6624f9f4228f6299a3d4ccb81e28da0a"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a6624f9f4228f6299a3d4ccb81e28da0a">Right</a></td></tr>
-<tr class="separator:a6624f9f4228f6299a3d4ccb81e28da0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a340d30b833954b87fd016ce0e724c723"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a340d30b833954b87fd016ce0e724c723">WorldUp</a></td></tr>
-<tr class="separator:a340d30b833954b87fd016ce0e724c723"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf27283ca0ccc51bae8446796ffc6b44"><td class="memItemLeft" align="right" valign="top">GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#abf27283ca0ccc51bae8446796ffc6b44">Yaw</a></td></tr>
-<tr class="separator:abf27283ca0ccc51bae8446796ffc6b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6afc2507f67baf4390405cfda1d1e87"><td class="memItemLeft" align="right" valign="top">GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#ae6afc2507f67baf4390405cfda1d1e87">Pitch</a></td></tr>
-<tr class="separator:ae6afc2507f67baf4390405cfda1d1e87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93ea63669df9617a6f63fa09e74a01a9"><td class="memItemLeft" align="right" valign="top">GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a93ea63669df9617a6f63fa09e74a01a9">MovementSpeed</a></td></tr>
-<tr class="separator:a93ea63669df9617a6f63fa09e74a01a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc61747052dc386a4ab8e110a1fbc628"><td class="memItemLeft" align="right" valign="top">GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#adc61747052dc386a4ab8e110a1fbc628">MouseSensitivity</a></td></tr>
-<tr class="separator:adc61747052dc386a4ab8e110a1fbc628"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1078d85d2e18bdc32291aabfcdda710a"><td class="memItemLeft" align="right" valign="top">GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a1078d85d2e18bdc32291aabfcdda710a">Zoom</a></td></tr>
-<tr class="separator:a1078d85d2e18bdc32291aabfcdda710a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a931ed2051befaad1f482b3b5e98ca0"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a0a931ed2051befaad1f482b3b5e98ca0">_position</a></td></tr>
+<tr class="separator:a0a931ed2051befaad1f482b3b5e98ca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac610e748840c4b70c9081c2d68df2e8d"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#ac610e748840c4b70c9081c2d68df2e8d">_front</a></td></tr>
+<tr class="separator:ac610e748840c4b70c9081c2d68df2e8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a323a698e4c5773ee3ec380851b145e2d"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a323a698e4c5773ee3ec380851b145e2d">_up</a></td></tr>
+<tr class="separator:a323a698e4c5773ee3ec380851b145e2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c556280ed181d8589c28eec7ebebb49"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a4c556280ed181d8589c28eec7ebebb49">_right</a></td></tr>
+<tr class="separator:a4c556280ed181d8589c28eec7ebebb49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5d721a01ba1cb41eafb02e39ea29e03"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#aa5d721a01ba1cb41eafb02e39ea29e03">_world_up</a></td></tr>
+<tr class="separator:aa5d721a01ba1cb41eafb02e39ea29e03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab815461cc043db1f5810c2f488641740"><td class="memItemLeft" align="right" valign="top">GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#ab815461cc043db1f5810c2f488641740">_yaw</a></td></tr>
+<tr class="separator:ab815461cc043db1f5810c2f488641740"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23a8b8859c44721d7082b89809318918"><td class="memItemLeft" align="right" valign="top">GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a23a8b8859c44721d7082b89809318918">_pitch</a></td></tr>
+<tr class="separator:a23a8b8859c44721d7082b89809318918"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f31b5658310866d3228614a755b59b0"><td class="memItemLeft" align="right" valign="top">GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a6f31b5658310866d3228614a755b59b0">_movement_speed</a></td></tr>
+<tr class="separator:a6f31b5658310866d3228614a755b59b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb483d642e0bcf11aa881467ac9676fe"><td class="memItemLeft" align="right" valign="top">GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#aeb483d642e0bcf11aa881467ac9676fe">_mouse_sensitivity</a></td></tr>
+<tr class="separator:aeb483d642e0bcf11aa881467ac9676fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99dc4d95f58be2427ff6c8d93c676ecd"><td class="memItemLeft" align="right" valign="top">GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a99dc4d95f58be2427ff6c8d93c676ecd">_zoom</a></td></tr>
+<tr class="separator:a99dc4d95f58be2427ff6c8d93c676ecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a79050e94e98c5c1cc0127c41edb4ed16"><td class="memItemLeft" align="right" valign="top">static const GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a79050e94e98c5c1cc0127c41edb4ed16">YAW</a> = -90.0f</td></tr>
+<tr class="separator:a79050e94e98c5c1cc0127c41edb4ed16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd43f32a47d2db8922dc32030fd84379"><td class="memItemLeft" align="right" valign="top">static const GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#afd43f32a47d2db8922dc32030fd84379">PITCH</a> = 0.0f</td></tr>
+<tr class="separator:afd43f32a47d2db8922dc32030fd84379"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc2ddbb4a3bdb2829896703edf72ca1e"><td class="memItemLeft" align="right" valign="top">static const GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#acc2ddbb4a3bdb2829896703edf72ca1e">SPEED</a> = 3.0f</td></tr>
+<tr class="separator:acc2ddbb4a3bdb2829896703edf72ca1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad682c7fc69bab5dbc3f8f10a1542b484"><td class="memItemLeft" align="right" valign="top">static const GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#ad682c7fc69bab5dbc3f8f10a1542b484">SENSITIVTY</a> = 0.25f</td></tr>
+<tr class="separator:ad682c7fc69bab5dbc3f8f10a1542b484"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34cdfe4c17868880037d5ff78159f158"><td class="memItemLeft" align="right" valign="top">static const GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a34cdfe4c17868880037d5ff78159f158">ZOOM</a> = 45.0f</td></tr>
+<tr class="separator:a34cdfe4c17868880037d5ff78159f158"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An abstract camera class that processes input and calculates the corresponding Eular Angles, Vectors and Matrices for use in OpenGL </p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a class="anchor" id="a9825f2bf1ddc209c3b2d336080d8407a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classCamera.html#a9825f2bf1ddc209c3b2d336080d8407a">Camera::CameraMovement</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Enum that defines several directions for the <a class="el" href="classCamera.html">Camera</a> to move </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a9825f2bf1ddc209c3b2d336080d8407aa6388b5408cf8440021383388044ae77f"></a>FORWARD&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a9825f2bf1ddc209c3b2d336080d8407aae18db08a2289896f26dcddf6e2ad274f"></a>BACKWARD&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a9825f2bf1ddc209c3b2d336080d8407aa1bed5588ea4c26163a72f0fc8621f6be"></a>LEFT&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a9825f2bf1ddc209c3b2d336080d8407aaedac3a8506bf2bae7df2d36dd5580884"></a>RIGHT&#160;</td><td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a535f3a2413a88c2f1e7d1147bec0039c"></a>
 <div class="memitem">
@@ -152,13 +202,13 @@ Public Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">GLfloat&#160;</td>
-          <td class="paramname"><em>yaw</em> = <code><a class="el" href="Camera_8hpp.html#aad8ef0922adf3ff721892dfc8eb806d6">YAW</a></code>, </td>
+          <td class="paramname"><em>yaw</em> = <code><a class="el" href="classCamera.html#a79050e94e98c5c1cc0127c41edb4ed16">YAW</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">GLfloat&#160;</td>
-          <td class="paramname"><em>pitch</em> = <code><a class="el" href="Camera_8hpp.html#a4ce864ea1227b9e112d693f8c282290c">PITCH</a></code>&#160;</td>
+          <td class="paramname"><em>pitch</em> = <code><a class="el" href="classCamera.html#afd43f32a47d2db8922dc32030fd84379">PITCH</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -167,10 +217,19 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Constructor </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>The starting position of the <a class="el" href="classCamera.html">Camera</a> as a glm::vec3. If not provided the <a class="el" href="classCamera.html">Camera</a> will be centered at the origin. </td></tr>
+    <tr><td class="paramname">up</td><td>The up vector for the world. If not provided the y-axis will be used as the world up vector </td></tr>
+    <tr><td class="paramname">yaw</td><td>The initial yaw for the <a class="el" href="classCamera.html">Camera</a>. If not provided, the <a class="el" href="classCamera.html">Camera</a> will start pointing down the -z-axis </td></tr>
+    <tr><td class="paramname">pitch</td><td>The initial pitch of the <a class="el" href="classCamera.html">Camera</a>. If not provided, the <a class="el" href="classCamera.html">Camera</a> will start on the xz-plane </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a class="anchor" id="a1efd973829c22d5fe15a26ede3357ee5"></a>
+<a class="anchor" id="af0f6ba09d293db5b1c6ba63d195cff57"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -178,49 +237,49 @@ Public Attributes</h2></td></tr>
           <td class="memname">Camera::Camera </td>
           <td>(</td>
           <td class="paramtype">GLfloat&#160;</td>
-          <td class="paramname"><em>posX</em>, </td>
+          <td class="paramname"><em>pos_x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">GLfloat&#160;</td>
-          <td class="paramname"><em>posY</em>, </td>
+          <td class="paramname"><em>pos_y</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">GLfloat&#160;</td>
-          <td class="paramname"><em>posZ</em>, </td>
+          <td class="paramname"><em>pos_z</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">GLfloat&#160;</td>
-          <td class="paramname"><em>upX</em>, </td>
+          <td class="paramname"><em>up_x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">GLfloat&#160;</td>
-          <td class="paramname"><em>upY</em>, </td>
+          <td class="paramname"><em>up_y</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">GLfloat&#160;</td>
-          <td class="paramname"><em>upZ</em>, </td>
+          <td class="paramname"><em>up_z</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">GLfloat&#160;</td>
-          <td class="paramname"><em>yaw</em>, </td>
+          <td class="paramname"><em>yaw</em> = <code><a class="el" href="classCamera.html#a79050e94e98c5c1cc0127c41edb4ed16">YAW</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">GLfloat&#160;</td>
-          <td class="paramname"><em>pitch</em>&#160;</td>
+          <td class="paramname"><em>pitch</em> = <code><a class="el" href="classCamera.html#afd43f32a47d2db8922dc32030fd84379">PITCH</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -229,40 +288,54 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Constructor </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos_x</td><td>The starting x position of the <a class="el" href="classCamera.html">Camera</a>. </td></tr>
+    <tr><td class="paramname">pos_y</td><td>The starting y position of the <a class="el" href="classCamera.html">Camera</a>. </td></tr>
+    <tr><td class="paramname">pos_z</td><td>The starting z position of the <a class="el" href="classCamera.html">Camera</a>. </td></tr>
+    <tr><td class="paramname">up_x</td><td>The x-value of the world up vector of the <a class="el" href="classCamera.html">Camera</a>. </td></tr>
+    <tr><td class="paramname">up_y</td><td>The y-value of the world up vector of the <a class="el" href="classCamera.html">Camera</a>. </td></tr>
+    <tr><td class="paramname">up_z</td><td>The z-value of the world up vector of the <a class="el" href="classCamera.html">Camera</a>. </td></tr>
+    <tr><td class="paramname">yaw</td><td>The initial yaw for the <a class="el" href="classCamera.html">Camera</a>. If not provided, the <a class="el" href="classCamera.html">Camera</a> will start pointing down the -z-axis </td></tr>
+    <tr><td class="paramname">pitch</td><td>The initial pitch of the <a class="el" href="classCamera.html">Camera</a>. If not provided, the <a class="el" href="classCamera.html">Camera</a> will start on the xz-plane </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="affa333055635aed96518c4c66be9a70c"></a>
+<a class="anchor" id="aedac0150156798ae1880eabaa3b9f071"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">glm::mat4 Camera::GetViewMatrix </td>
+          <td class="memname">glm::mat4 Camera::get_view_matrix </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>the view matrix calculated using Euler angles and the lookAt matrix </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="ac7e9a7f3e63c670fd695a8f03d02dbdf"></a>
+<a class="anchor" id="ac32b5b8c93934f8faa8e8637dec855d4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Camera::ProcessKeyboard </td>
+          <td class="memname">void Camera::process_keyboard </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="Camera_8hpp.html#a605494501af59c9191e7e4d6f9a0ebcb">Camera_Movement</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classCamera.html#a9825f2bf1ddc209c3b2d336080d8407a">CameraMovement</a>&#160;</td>
           <td class="paramname"><em>direction</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">GLfloat&#160;</td>
-          <td class="paramname"><em>deltaTime</em>&#160;</td>
+          <td class="paramname"><em>delta_time</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -271,30 +344,42 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Processes input received from any keyboard-like input system. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">direction</td><td>A direction to move the <a class="el" href="classCamera.html">Camera</a>. Must be one of the directions predefined in the CameraMovement enum </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>whenever direction is not one of those defined by CameraMovement </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a class="anchor" id="a97ffbf8d8935fc63bd2ca71a4268eec4"></a>
+<a class="anchor" id="ab650c0e1f0c55582339623e7c3b4b10d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Camera::ProcessMouseMovement </td>
+          <td class="memname">void Camera::process_mouse_movement </td>
           <td>(</td>
           <td class="paramtype">GLfloat&#160;</td>
-          <td class="paramname"><em>xoffset</em>, </td>
+          <td class="paramname"><em>x_offset</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">GLfloat&#160;</td>
-          <td class="paramname"><em>yoffset</em>, </td>
+          <td class="paramname"><em>y_offset</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">GLboolean&#160;</td>
-          <td class="paramname"><em>constrainPitch</em> = <code>true</code>&#160;</td>
+          <td class="paramname"><em>constrain_pitch</em> = <code>true</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -303,143 +388,272 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Processes input received from a mouse input system. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x_offset</td><td>The value used to update the <a class="el" href="classCamera.html">Camera</a>'s yaw. A positive x_offset will yaw the <a class="el" href="classCamera.html">Camera</a> counter-clockwise. </td></tr>
+    <tr><td class="paramname">y_offset</td><td>The value used to update the <a class="el" href="classCamera.html">Camera</a>'s pitch. A positive y_offset will pitch the <a class="el" href="classCamera.html">Camera</a> up. </td></tr>
+    <tr><td class="paramname">constrain_pitch</td><td>If true, the <a class="el" href="classCamera.html">Camera</a>'s pitch will be constrained to the range [-89.0, 89.0] degrees. Useful to avoid Gimbal lock. If not provided, the <a class="el" href="classCamera.html">Camera</a>'s pitch will be constrained </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a class="anchor" id="af269e5ef38e791afb7f4a1dfb8da2399"></a>
+<a class="anchor" id="a9cb2efbeb1a0007f1ea908e3e74c92a1"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Camera::ProcessMouseScroll </td>
+          <td class="memname">void Camera::process_mouse_scroll </td>
           <td>(</td>
           <td class="paramtype">GLfloat&#160;</td>
-          <td class="paramname"><em>yoffset</em></td><td>)</td>
+          <td class="paramname"><em>y_offset</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Processes input received from a mouse scroll-wheel event. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">y_offset</td><td>The offset of the input device used to zoom the camera. A positive offset zooms the camera in by reducing the FOV in degrees, while a negative offset zooms the camera out. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="ac95b3737115ffe9a6ff9128344d5b963"></a>
+<a class="anchor" id="ac610e748840c4b70c9081c2d68df2e8d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">glm::vec3 Camera::Front</td>
+          <td class="memname">glm::vec3 Camera::_front</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Vector representing which direction the <a class="el" href="classCamera.html">Camera</a> is facing. Used when calculating how the <a class="el" href="classCamera.html">Camera</a> moves forward and backward. </p>
 
 </div>
 </div>
-<a class="anchor" id="adc61747052dc386a4ab8e110a1fbc628"></a>
+<a class="anchor" id="aeb483d642e0bcf11aa881467ac9676fe"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">GLfloat Camera::MouseSensitivity</td>
+          <td class="memname">GLfloat Camera::_mouse_sensitivity</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Determines how much the <a class="el" href="classCamera.html">Camera</a> rotates on mouse movement </p>
 
 </div>
 </div>
-<a class="anchor" id="a93ea63669df9617a6f63fa09e74a01a9"></a>
+<a class="anchor" id="a6f31b5658310866d3228614a755b59b0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">GLfloat Camera::MovementSpeed</td>
+          <td class="memname">GLfloat Camera::_movement_speed</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Determines how fast the <a class="el" href="classCamera.html">Camera</a> moves </p>
 
 </div>
 </div>
-<a class="anchor" id="ae6afc2507f67baf4390405cfda1d1e87"></a>
+<a class="anchor" id="a23a8b8859c44721d7082b89809318918"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">GLfloat Camera::Pitch</td>
+          <td class="memname">GLfloat Camera::_pitch</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>This <a class="el" href="classCamera.html">Camera</a>'s pitch in degrees </p>
 
 </div>
 </div>
-<a class="anchor" id="a9733b59f5340f6f1bca24d52a6679039"></a>
+<a class="anchor" id="a0a931ed2051befaad1f482b3b5e98ca0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">glm::vec3 Camera::Position</td>
+          <td class="memname">glm::vec3 Camera::_position</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Current position of the camera </p>
 
 </div>
 </div>
-<a class="anchor" id="a6624f9f4228f6299a3d4ccb81e28da0a"></a>
+<a class="anchor" id="a4c556280ed181d8589c28eec7ebebb49"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">glm::vec3 Camera::Right</td>
+          <td class="memname">glm::vec3 Camera::_right</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Vector representing the x-axis in view space. Also used to calculate how the <a class="el" href="classCamera.html">Camera</a> moves left and right. </p>
 
 </div>
 </div>
-<a class="anchor" id="ad74c4a490bc8865e67e27a2036d0a72d"></a>
+<a class="anchor" id="a323a698e4c5773ee3ec380851b145e2d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">glm::vec3 Camera::Up</td>
+          <td class="memname">glm::vec3 Camera::_up</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>The vector used to calculate the <a class="el" href="classCamera.html">Camera</a>'s lookAt matrix. </p>
 
 </div>
 </div>
-<a class="anchor" id="a340d30b833954b87fd016ce0e724c723"></a>
+<a class="anchor" id="aa5d721a01ba1cb41eafb02e39ea29e03"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">glm::vec3 Camera::WorldUp</td>
+          <td class="memname">glm::vec3 Camera::_world_up</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>The world's up vector used to update the <a class="el" href="classCamera.html">Camera</a>'s view matrix. </p>
 
 </div>
 </div>
-<a class="anchor" id="abf27283ca0ccc51bae8446796ffc6b44"></a>
+<a class="anchor" id="ab815461cc043db1f5810c2f488641740"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">GLfloat Camera::Yaw</td>
+          <td class="memname">GLfloat Camera::_yaw</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>This <a class="el" href="classCamera.html">Camera</a>'s yaw in degrees </p>
 
 </div>
 </div>
-<a class="anchor" id="a1078d85d2e18bdc32291aabfcdda710a"></a>
+<a class="anchor" id="a99dc4d95f58be2427ff6c8d93c676ecd"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">GLfloat Camera::Zoom</td>
+          <td class="memname">GLfloat Camera::_zoom</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>The current zoom of the <a class="el" href="classCamera.html">Camera</a> </p>
+
+</div>
+</div>
+<a class="anchor" id="afd43f32a47d2db8922dc32030fd84379"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const GLfloat Camera::PITCH = 0.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Default pitch for a <a class="el" href="classCamera.html">Camera</a> object when not provided to the constructor </p>
+
+</div>
+</div>
+<a class="anchor" id="ad682c7fc69bab5dbc3f8f10a1542b484"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const GLfloat Camera::SENSITIVTY = 0.25f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Default sensitivity for a <a class="el" href="classCamera.html">Camera</a> object. </p>
+
+</div>
+</div>
+<a class="anchor" id="acc2ddbb4a3bdb2829896703edf72ca1e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const GLfloat Camera::SPEED = 3.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Default speed for a <a class="el" href="classCamera.html">Camera</a> object when not provided to the constructor </p>
+
+</div>
+</div>
+<a class="anchor" id="a79050e94e98c5c1cc0127c41edb4ed16"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const GLfloat Camera::YAW = -90.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Default yaw for a <a class="el" href="classCamera.html">Camera</a> object when not provided to the constructor </p>
+
+</div>
+</div>
+<a class="anchor" id="a34cdfe4c17868880037d5ff78159f158"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const GLfloat Camera::ZOOM = 45.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Default zoom for a <a class="el" href="classCamera.html">Camera</a> object. </p>
 
 </div>
 </div>

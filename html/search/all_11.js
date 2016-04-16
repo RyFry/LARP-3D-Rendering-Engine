@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['vertex',['Vertex',['../structVertex.html',1,'']]],
-  ['vertices',['vertices',['../classMesh.html#a6465a888c97232a39e12aad008c969c3',1,'Mesh']]]
+  ['use',['use',['../classShader.html#a870fa9f13d69e558815d6fd351a469dc',1,'Shader']]]
 ];

@@ -1,0 +1,28 @@
+\hypertarget{Error_8hpp}{}\section{src/\+Error.hpp File Reference}
+\label{Error_8hpp}\index{src/\+Error.\+hpp@{src/\+Error.\+hpp}}
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$stdexcept$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{Error_8hpp_a92ee83d4fb46a2f4ef94df6b3954a297}{T\+H\+R\+O\+W\+\_\+\+R\+U\+N\+T\+I\+M\+E\+\_\+\+E\+R\+R\+OR}(S)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{Error.\+hpp@{Error.\+hpp}!T\+H\+R\+O\+W\+\_\+\+R\+U\+N\+T\+I\+M\+E\+\_\+\+E\+R\+R\+OR@{T\+H\+R\+O\+W\+\_\+\+R\+U\+N\+T\+I\+M\+E\+\_\+\+E\+R\+R\+OR}}
+\index{T\+H\+R\+O\+W\+\_\+\+R\+U\+N\+T\+I\+M\+E\+\_\+\+E\+R\+R\+OR@{T\+H\+R\+O\+W\+\_\+\+R\+U\+N\+T\+I\+M\+E\+\_\+\+E\+R\+R\+OR}!Error.\+hpp@{Error.\+hpp}}
+\subsubsection[{\texorpdfstring{T\+H\+R\+O\+W\+\_\+\+R\+U\+N\+T\+I\+M\+E\+\_\+\+E\+R\+R\+OR}{THROW_RUNTIME_ERROR}}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+H\+R\+O\+W\+\_\+\+R\+U\+N\+T\+I\+M\+E\+\_\+\+E\+R\+R\+OR(
+\begin{DoxyParamCaption}
+\item[{}]{S}
+\end{DoxyParamCaption}
+)}\hypertarget{Error_8hpp_a92ee83d4fb46a2f4ef94df6b3954a297}{}\label{Error_8hpp_a92ee83d4fb46a2f4ef94df6b3954a297}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+std::ostringstream error\_message; \(\backslash\)
+    error\_message << \textcolor{stringliteral}{"***** "} << \_\_FILE\_\_ << \textcolor{stringliteral}{", line "} << \_\_LINE\_\_ << \textcolor{stringliteral}{" -> "} << \_\_func\_\_ << \textcolor{stringliteral}{" : "} << S << \textcolor{stringliteral}{"
+       *****"}; \(\backslash\)
+    throw std::runtime\_error(error\_message.str());
+\end{DoxyCode}
+Macro for throwing inline runtime\+\_\+errors 

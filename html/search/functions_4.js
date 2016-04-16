@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['getviewmatrix',['GetViewMatrix',['../classCamera.html#affa333055635aed96518c4c66be9a70c',1,'Camera']]]
+  ['get_5fview_5fmatrix',['get_view_matrix',['../classCamera.html#aedac0150156798ae1880eabaa3b9f071',1,'Camera']]]
 ];

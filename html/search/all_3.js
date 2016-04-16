@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['deltatime',['deltaTime',['../test_8cpp.html#adf7cb443fa70a647d5603ee33b392102',1,'test.cpp']]],
-  ['diffuse',['DIFFUSE',['../classTexture.html#a9d0b09cfb795f9553db6a4eab396bef9a30c8ec5c46cfae607655ca4b913b87df',1,'Texture']]],
-  ['do_5fmovement',['Do_Movement',['../test_8cpp.html#ad8a8aa1b002540c003f75bd4cd127fbd',1,'test.cpp']]],
-  ['draw',['draw',['../classEntity.html#a1a303039c1b5a89341fac2f8eaf5ca7f',1,'Entity::draw()'],['../classMesh.html#a431399cb5c25cc84cdf8c8e59a957585',1,'Mesh::draw()'],['../classModel.html#a5cd069fb85bb68b54c476bd799c4d8d7',1,'Model::draw()'],['../classNode.html#a68d5f074d4d9487384500bdcc80d489b',1,'Node::draw()'],['../classSceneGraph.html#a02138d9b44c12b1998141f7890421aee',1,'SceneGraph::draw()']]]
+  ['camera',['Camera',['../classCamera.html',1,'Camera'],['../classCamera.html#a535f3a2413a88c2f1e7d1147bec0039c',1,'Camera::Camera(glm::vec3 position=glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up=glm::vec3(0.0f, 1.0f, 0.0f), GLfloat yaw=YAW, GLfloat pitch=PITCH)'],['../classCamera.html#af0f6ba09d293db5b1c6ba63d195cff57',1,'Camera::Camera(GLfloat pos_x, GLfloat pos_y, GLfloat pos_z, GLfloat up_x, GLfloat up_y, GLfloat up_z, GLfloat yaw=YAW, GLfloat pitch=PITCH)'],['../test_8cpp.html#a4b8f2fd713001944a51e2aa2aa8f4564',1,'camera():&#160;test.cpp']]],
+  ['camera_2ecpp',['Camera.cpp',['../Camera_8cpp.html',1,'']]],
+  ['camera_2ehpp',['Camera.hpp',['../Camera_8hpp.html',1,'']]],
+  ['cameramovement',['CameraMovement',['../classCamera.html#a9825f2bf1ddc209c3b2d336080d8407a',1,'Camera']]],
+  ['create_5fchild',['create_child',['../classNode.html#ac9fb91f489ca00c8e91f10eda66cfffe',1,'Node']]],
+  ['create_5fchild_5fnode',['create_child_node',['../classSceneGraph.html#acbfb3a25078b31f41a2373bf2f7747ae',1,'SceneGraph']]]
 ];

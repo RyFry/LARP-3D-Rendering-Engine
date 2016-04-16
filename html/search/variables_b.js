@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['up',['Up',['../classCamera.html#ad74c4a490bc8865e67e27a2036d0a72d',1,'Camera']]]
+  ['vertices',['vertices',['../classMesh.html#a6465a888c97232a39e12aad008c969c3',1,'Mesh']]]
 ];
