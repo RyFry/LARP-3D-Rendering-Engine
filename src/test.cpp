@@ -75,12 +75,12 @@ int main(void)
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_MULTISAMPLE);
 
-    Shader shader("shaders/default.vert", "shaders/default.frag");
-    Model nanosuit("assets/nanosuit.obj");
-    pEntity entity(new Entity(shader, nanosuit));
+    Larp::Shader shader("shaders/default.vert", "shaders/default.frag");
+    Larp::Model nanosuit("assets/nanosuit.obj");
+    Larp::pEntity entity(new Larp::Entity(shader, nanosuit));
 
-    pSceneGraph graph = SceneGraph::singleton();
-    pNode node = graph->create_child_node();
+    Larp::pSceneGraph graph = Larp::SceneGraph::singleton();
+    Larp::pNode node = graph->create_child_node();
     node->attach_entity(entity);
     node->set_scale(0.1, 0.1, 0.1);
 

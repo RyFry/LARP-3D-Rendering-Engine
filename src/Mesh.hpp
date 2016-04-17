@@ -1,6 +1,7 @@
 #ifndef MESH_HPP
 #define MESH_HPP
 
+#include "LarpPrerequisites.hpp"
 #include "Shader.hpp"
 
 #include <glm/glm.hpp>
@@ -16,49 +17,50 @@
 #include <iostream>
 #include <vector>
 
-struct Vertex
+namespace Larp
 {
-    glm::vec3 mPosition;
-    glm::vec3 mNormal;
-    glm::vec2 mTexCoords;
-};
-
-class Texture
-{
-public:
-    enum Type
+    struct Vertex
     {
-        DIFFUSE,
-        SPECULAR
+        glm::vec3 mPosition;
+        glm::vec3 mNormal;
+        glm::vec2 mTexCoords;
     };
 
-    GLuint mID;
-    Type mType;
-    aiString mPath;
+    class Texture
+    {
+    public:
+        enum Type
+        {
+            DIFFUSE,
+            SPECULAR
+        };
 
-    std::string toString();
-};
+        GLuint mID;
+        Type mType;
+        aiString mPath;
 
-class Mesh
-{
-public:
-    // Mesh data
-    std::vector<Vertex> vertices;
-    std::vector<GLuint> indices;
-    std::vector<Texture> textures;
-    Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<Texture>& textures);
-    void draw(Shader& shader);
-private:
-    // Render data
-    GLuint VAO;
-    GLuint VBO;
-    GLuint EBO;
+        std::string toString();
+    };
 
-    // Functions
-    void setupMesh();
-};
+    class Mesh
+    {
+    public:
+        // Mesh data
+        std::vector<Vertex> vertices;
+        std::vector<GLuint> indices;
+        std::vector<Texture> textures;
+        Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<Texture>& textures);
+        void draw(Shader& shader);
+    private:
+        // Render data
+        GLuint VAO;
+        GLuint VBO;
+        GLuint EBO;
 
-GLint TextureFromFile(const char* path, std::string directory);
+        // Functions
+        void setupMesh();
+    };
+}
 
 #endif
 

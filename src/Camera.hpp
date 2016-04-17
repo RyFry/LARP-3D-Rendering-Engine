@@ -32,22 +32,18 @@ public:
      * Default yaw for a Camera object when not provided to the constructor
      */
     static const GLfloat YAW;
-
     /**
      * Default pitch for a Camera object when not provided to the constructor
      */
     static const GLfloat PITCH;
-
     /**
      * Default speed for a Camera object when not provided to the constructor
      */
     static const GLfloat SPEED;
-
     /**
      * Default sensitivity for a Camera object.
      */
     static const GLfloat SENSITIVITY;
-
     /**
      * Default zoom for a Camera object.
      */
@@ -57,49 +53,40 @@ public:
      * Current position of the camera
      */
     glm::vec3 _position;
-
     /**
      * Vector representing which direction the Camera is facing.
      * Used when calculating how the Camera moves forward and backward.
      */
     glm::vec3 _front;
-
     /**
      * The vector used to calculate the Camera's lookAt matrix.
      */
     glm::vec3 _up;
-
     /**
      * Vector representing the x-axis in view space. Also used to calculate
      * how the Camera moves left and right.
      */
     glm::vec3 _right;
-
     /**
      * The world's up vector used to update the Camera's view matrix.
      */
     glm::vec3 _world_up;
-
     /**
      * This Camera's yaw in degrees
      */
     GLfloat _yaw;
-
     /**
      * This Camera's pitch in degrees
      */
     GLfloat _pitch;
-
     /**
      * Determines how fast the Camera moves
      */
     GLfloat _movement_speed;
-
     /**
      * Determines how much the Camera rotates on mouse movement
      */
     GLfloat _mouse_sensitivity;
-
     /**
      * The current zoom of the Camera
      */
@@ -120,7 +107,6 @@ public:
            glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f),
            GLfloat yaw = YAW,
            GLfloat pitch = PITCH);
-
     /**
      * Constructor
      * @param pos_x The starting x position of the Camera.
@@ -137,21 +123,19 @@ public:
     Camera(GLfloat pos_x, GLfloat pos_y, GLfloat pos_z,
            GLfloat up_x, GLfloat up_y, GLfloat up_z,
            GLfloat yaw = YAW, GLfloat pitch = PITCH);
-
     /**
      * @return the view matrix calculated using Euler angles and the lookAt matrix
      */
     glm::mat4 get_view_matrix();
-
     /**
      * Processes input received from any keyboard-like input system.
      * @param direction A direction to move the Camera. Must be one of the directions
-     *                  predefined in the CameraMovement enum
+     *                  predefined in the CameraMovement enum.
      * @param delta_time The duration of time between frames. Used to avoid variable camera speeds
+     * @see CameraMovement
      * @throws std::runtime_error whenever direction is not one of those defined by CameraMovement
      */
     void process_keyboard(CameraMovement direction, GLfloat delta_time);
-
     /**
      * Processes input received from a mouse input system.
      * @param x_offset The value used to update the Camera's yaw. A positive x_offset will yaw
@@ -162,7 +146,6 @@ public:
      *                        Useful to avoid Gimbal lock. If not provided, the Camera's pitch will be constrained
      */
     void process_mouse_movement(GLfloat x_offset, GLfloat y_offset, GLboolean constrain_pitch = true);
-
     /**
      * Processes input received from a mouse scroll-wheel event.
      * @param y_offset The offset of the input device used to zoom the camera. A positive offset
