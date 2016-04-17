@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['entity',['Entity',['../classEntity.html',1,'']]]
+  ['entity',['Entity',['../classLarp_1_1Entity.html',1,'Larp']]]
 ];

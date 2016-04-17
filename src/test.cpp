@@ -77,12 +77,13 @@ int main(void)
 
     Larp::Shader shader("shaders/default.vert", "shaders/default.frag");
     Larp::Model nanosuit("assets/nanosuit.obj");
-    Larp::pEntity entity(new Larp::Entity(shader, nanosuit));
+    Larp::pEntity entity = Larp::Entity::create(shader, nanosuit);
 
     Larp::pSceneGraph graph = Larp::SceneGraph::singleton();
-    Larp::pNode node = graph->create_child_node();
+    Larp::pNode node1 = graph->create_child_node();
+    Larp::pNode node = node1->create_child();
+    node->set_scale(0.1f, 0.1f, 0.1f);
     node->attach_entity(entity);
-    node->set_scale(0.1, 0.1, 0.1);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -99,6 +100,10 @@ int main(void)
         // Clear the colorbuffer
         glClearColor(0.5f, 0.05f, 0.05f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        node->yaw(deltaTime * 32.0);
+        node->pitch(deltaTime * 23.0);
+        node->roll(deltaTime * 17.0);
 
         glm::mat4 projection = glm::perspective(camera._zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
         glm::mat4 view = camera.get_view_matrix();

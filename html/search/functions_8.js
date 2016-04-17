@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['node',['Node',['../classNode.html#ad7a34779cad45d997bfd6d3d8043c75f',1,'Node']]]
+  ['node',['Node',['../classLarp_1_1Node.html#a2cb8fc6e60b762b02226d73489ac5099',1,'Larp::Node']]]
 ];

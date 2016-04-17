@@ -1,0 +1,150 @@
+\hypertarget{classLarp_1_1Model}{}\section{Larp\+:\+:Model Class Reference}
+\label{classLarp_1_1Model}\index{Larp\+::\+Model@{Larp\+::\+Model}}
+
+
+{\ttfamily \#include $<$Model.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLarp_1_1Model_aa6ec73e894b7d2388bfd0c08bfada774}{Model} (std\+::string path)
+\item 
+void \hyperlink{classLarp_1_1Model_a042ea3bc2add2d3bbe4f199d070a9619}{draw} (\hyperlink{classLarp_1_1Shader}{Shader} \&shader)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classLarp_1_1Model_a5c28074e770e1826496458b82651fefd}{load\+\_\+model} (std\+::string path)
+\item 
+void \hyperlink{classLarp_1_1Model_ad5005f3aa6b553cbcdb9b50cc771ff28}{process\+\_\+node} (ai\+Node $\ast$node, const ai\+Scene $\ast$scene)
+\item 
+\hyperlink{classLarp_1_1Mesh}{Mesh} \hyperlink{classLarp_1_1Model_a4179a0a55a8a422d6bd1a7f6083a70d4}{process\+\_\+mesh} (ai\+Mesh $\ast$mesh, const ai\+Scene $\ast$scene)
+\item 
+std\+::vector$<$ \hyperlink{classLarp_1_1Texture}{Texture} $>$ \hyperlink{classLarp_1_1Model_a732230e84175c2e471309bb9b7e08f31}{load\+\_\+material\+\_\+textures} (ai\+Material $\ast$mat, ai\+Texture\+Type type, \hyperlink{classLarp_1_1Texture_aa4e19b5df6a8f1f0eae8235db7e52daa}{Texture\+::\+Type} texture\+\_\+type)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{classLarp_1_1Mesh}{Mesh} $>$ \hyperlink{classLarp_1_1Model_ae75758feb59857f6b907bbfa0cf993f2}{\+\_\+meshes}
+\item 
+std\+::string \hyperlink{classLarp_1_1Model_a568e7aeee510320b2378a0fc57c5c7c5}{\+\_\+directory}
+\item 
+std\+::vector$<$ \hyperlink{classLarp_1_1Texture}{Texture} $>$ \hyperlink{classLarp_1_1Model_ac5e40faa76039650ae6b32828b8681f9}{\+\_\+loaded\+\_\+textures}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Larp\+::\+Model@{Larp\+::\+Model}!Model@{Model}}
+\index{Model@{Model}!Larp\+::\+Model@{Larp\+::\+Model}}
+\subsubsection[{\texorpdfstring{Model(std\+::string path)}{Model(std::string path)}}]{\setlength{\rightskip}{0pt plus 5cm}Larp\+::\+Model\+::\+Model (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{path}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1Model_aa6ec73e894b7d2388bfd0c08bfada774}{}\label{classLarp_1_1Model_aa6ec73e894b7d2388bfd0c08bfada774}
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the model to load. Should be relative to where this application is run. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Larp\+::\+Model@{Larp\+::\+Model}!draw@{draw}}
+\index{draw@{draw}!Larp\+::\+Model@{Larp\+::\+Model}}
+\subsubsection[{\texorpdfstring{draw(\+Shader \&shader)}{draw(Shader &shader)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Model\+::draw (
+\begin{DoxyParamCaption}
+\item[{{\bf Shader} \&}]{shader}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1Model_a042ea3bc2add2d3bbe4f199d070a9619}{}\label{classLarp_1_1Model_a042ea3bc2add2d3bbe4f199d070a9619}
+Draws all of the meshes in this \hyperlink{classLarp_1_1Model}{Model}. 
+\begin{DoxyParams}{Parameters}
+{\em shader} & The shader program to render this \hyperlink{classLarp_1_1Model}{Model} with. \\
+\hline
+\end{DoxyParams}
+\index{Larp\+::\+Model@{Larp\+::\+Model}!load\+\_\+material\+\_\+textures@{load\+\_\+material\+\_\+textures}}
+\index{load\+\_\+material\+\_\+textures@{load\+\_\+material\+\_\+textures}!Larp\+::\+Model@{Larp\+::\+Model}}
+\subsubsection[{\texorpdfstring{load\+\_\+material\+\_\+textures(ai\+Material $\ast$mat, ai\+Texture\+Type type, Texture\+::\+Type texture\+\_\+type)}{load_material_textures(aiMaterial *mat, aiTextureType type, Texture::Type texture_type)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf Texture} $>$ Larp\+::\+Model\+::load\+\_\+material\+\_\+textures (
+\begin{DoxyParamCaption}
+\item[{ai\+Material $\ast$}]{mat, }
+\item[{ai\+Texture\+Type}]{type, }
+\item[{{\bf Texture\+::\+Type}}]{texture\+\_\+type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Model_a732230e84175c2e471309bb9b7e08f31}{}\label{classLarp_1_1Model_a732230e84175c2e471309bb9b7e08f31}
+Loads the textures for the material. After this function runs, this \hyperlink{classLarp_1_1Model}{Model}\textquotesingle{}s \+\_\+loaded\+\_\+textures will be populated with all of the Textures necessary to render the \hyperlink{classLarp_1_1Model}{Model}. 
+\begin{DoxyParams}{Parameters}
+{\em mat} & The material to load textures for. \\
+\hline
+{\em type} & The type of the texture to load. Should be one of ai\+Texture\+Type\+\_\+\+D\+I\+F\+F\+U\+SE, or ai\+Texture\+Type\+\_\+\+S\+P\+E\+C\+U\+L\+AR. \\
+\hline
+{\em texture\+\_\+type} & The type of the generated \hyperlink{classLarp_1_1Texture}{Texture} object. Should be one of \hyperlink{classLarp_1_1Texture_aa4e19b5df6a8f1f0eae8235db7e52daaa99b3b29878c69b4fc932de604ce39581}{Texture\+::\+D\+I\+F\+F\+U\+SE} or \hyperlink{classLarp_1_1Texture_aa4e19b5df6a8f1f0eae8235db7e52daaa5d8421e01e03aeb7f2911890a0a138b4}{Texture\+::\+S\+P\+E\+C\+U\+L\+AR}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of loaded Textures 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+type and texture\+\_\+type should both be the respective type (i.\+e. D\+I\+F\+F\+U\+SE or S\+P\+E\+C\+U\+L\+AR). 
+\end{DoxyNote}
+\index{Larp\+::\+Model@{Larp\+::\+Model}!load\+\_\+model@{load\+\_\+model}}
+\index{load\+\_\+model@{load\+\_\+model}!Larp\+::\+Model@{Larp\+::\+Model}}
+\subsubsection[{\texorpdfstring{load\+\_\+model(std\+::string path)}{load_model(std::string path)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Model\+::load\+\_\+model (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Model_a5c28074e770e1826496458b82651fefd}{}\label{classLarp_1_1Model_a5c28074e770e1826496458b82651fefd}
+Loads a \hyperlink{classLarp_1_1Model}{Model} given a path. 
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to the \hyperlink{classLarp_1_1Model}{Model} to load. \\
+\hline
+\end{DoxyParams}
+\index{Larp\+::\+Model@{Larp\+::\+Model}!process\+\_\+mesh@{process\+\_\+mesh}}
+\index{process\+\_\+mesh@{process\+\_\+mesh}!Larp\+::\+Model@{Larp\+::\+Model}}
+\subsubsection[{\texorpdfstring{process\+\_\+mesh(ai\+Mesh $\ast$mesh, const ai\+Scene $\ast$scene)}{process_mesh(aiMesh *mesh, const aiScene *scene)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Mesh} Larp\+::\+Model\+::process\+\_\+mesh (
+\begin{DoxyParamCaption}
+\item[{ai\+Mesh $\ast$}]{mesh, }
+\item[{const ai\+Scene $\ast$}]{scene}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Model_a4179a0a55a8a422d6bd1a7f6083a70d4}{}\label{classLarp_1_1Model_a4179a0a55a8a422d6bd1a7f6083a70d4}
+Processes an ai\+Node and extracts the relevant \hyperlink{classLarp_1_1Model}{Model} information. 
+\begin{DoxyParams}{Parameters}
+{\em mesh} & The ai\+Mesh to process. \\
+\hline
+{\em scene} & The ai\+Scene to retrieve \hyperlink{classLarp_1_1Mesh}{Mesh} information from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The processed \hyperlink{classLarp_1_1Mesh}{Mesh}. 
+\end{DoxyReturn}
+\index{Larp\+::\+Model@{Larp\+::\+Model}!process\+\_\+node@{process\+\_\+node}}
+\index{process\+\_\+node@{process\+\_\+node}!Larp\+::\+Model@{Larp\+::\+Model}}
+\subsubsection[{\texorpdfstring{process\+\_\+node(ai\+Node $\ast$node, const ai\+Scene $\ast$scene)}{process_node(aiNode *node, const aiScene *scene)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Model\+::process\+\_\+node (
+\begin{DoxyParamCaption}
+\item[{ai\+Node $\ast$}]{node, }
+\item[{const ai\+Scene $\ast$}]{scene}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Model_ad5005f3aa6b553cbcdb9b50cc771ff28}{}\label{classLarp_1_1Model_ad5005f3aa6b553cbcdb9b50cc771ff28}
+Processes an ai\+Node and extracts the relevant \hyperlink{classLarp_1_1Model}{Model} information. 
+\begin{DoxyParams}{Parameters}
+{\em node} & The ai\+Node to process. \\
+\hline
+{\em scene} & The ai\+Scene to retrieve \hyperlink{classLarp_1_1Mesh}{Mesh} information from. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Larp\+::\+Model@{Larp\+::\+Model}!\+\_\+directory@{\+\_\+directory}}
+\index{\+\_\+directory@{\+\_\+directory}!Larp\+::\+Model@{Larp\+::\+Model}}
+\subsubsection[{\texorpdfstring{\+\_\+directory}{_directory}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Larp\+::\+Model\+::\+\_\+directory\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Model_a568e7aeee510320b2378a0fc57c5c7c5}{}\label{classLarp_1_1Model_a568e7aeee510320b2378a0fc57c5c7c5}
+The directory that this \hyperlink{classLarp_1_1Model}{Model} is stored in. \index{Larp\+::\+Model@{Larp\+::\+Model}!\+\_\+loaded\+\_\+textures@{\+\_\+loaded\+\_\+textures}}
+\index{\+\_\+loaded\+\_\+textures@{\+\_\+loaded\+\_\+textures}!Larp\+::\+Model@{Larp\+::\+Model}}
+\subsubsection[{\texorpdfstring{\+\_\+loaded\+\_\+textures}{_loaded_textures}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Texture}$>$ Larp\+::\+Model\+::\+\_\+loaded\+\_\+textures\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Model_ac5e40faa76039650ae6b32828b8681f9}{}\label{classLarp_1_1Model_ac5e40faa76039650ae6b32828b8681f9}
+List of Textures for each \hyperlink{classLarp_1_1Mesh}{Mesh} in this \hyperlink{classLarp_1_1Model}{Model}. \index{Larp\+::\+Model@{Larp\+::\+Model}!\+\_\+meshes@{\+\_\+meshes}}
+\index{\+\_\+meshes@{\+\_\+meshes}!Larp\+::\+Model@{Larp\+::\+Model}}
+\subsubsection[{\texorpdfstring{\+\_\+meshes}{_meshes}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Mesh}$>$ Larp\+::\+Model\+::\+\_\+meshes\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Model_ae75758feb59857f6b907bbfa0cf993f2}{}\label{classLarp_1_1Model_ae75758feb59857f6b907bbfa0cf993f2}
+List of Meshes for this \hyperlink{classLarp_1_1Model}{Model}. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{Model_8hpp}{Model.\+hpp}\item 
+src/\hyperlink{Model_8cpp}{Model.\+cpp}\end{DoxyCompactItemize}

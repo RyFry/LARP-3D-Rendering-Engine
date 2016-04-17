@@ -9,7 +9,7 @@ namespace Larp
     void Node::draw(glm::mat4 model, glm::mat4& view, glm::mat4& projection)
     {
         glm::mat4 tmp_model = glm::translate(glm::mat4(), this->_position);
-        glm::mat4 rotation = glm::mat4_cast(this->_rotation);
+        glm::mat4 rotation = glm::toMat4(this->_rotation);
         tmp_model = tmp_model * rotation;
         tmp_model = glm::scale(tmp_model, this->_scale);
         glm::mat4 my_model = model * tmp_model;
@@ -47,10 +47,7 @@ namespace Larp
 
     void Node::set_orientation(GLfloat x, GLfloat y, GLfloat z, GLfloat w)
     {
-        this->_rotation.x = x;
-        this->_rotation.y = y;
-        this->_rotation.z = z;
-        this->_rotation.w = w;
+        this->_rotation = glm::angleAxis(w, glm::vec3(x, y, z));
     }
 
     void Node::set_orientation(glm::quat rotation)
@@ -60,30 +57,27 @@ namespace Larp
 
     void Node::set_orientation(glm::vec3 axis, GLfloat w)
     {
-        this->_rotation.x = axis.x;
-        this->_rotation.y = axis.y;
-        this->_rotation.z = axis.z;
-        this->_rotation.w = w;
+        this->_rotation = glm::angleAxis(w, axis);
     }
 
     void Node::yaw(GLfloat yaw)
     {
         this->_rotation = glm::rotate(this->_rotation,
-                                      glm::radians(yaw),
+                                      yaw,
                                       glm::vec3(0, 1, 0));
     }
 
     void Node::pitch(GLfloat pitch)
     {
         this->_rotation = glm::rotate(this->_rotation,
-                                      glm::radians(pitch),
+                                      pitch,
                                       glm::vec3(1, 0, 0));
     }
 
     void Node::roll(GLfloat roll)
     {
         this->_rotation = glm::rotate(this->_rotation,
-                                      glm::radians(roll),
+                                      roll,
                                       glm::vec3(0, 0, 1));
     }
 

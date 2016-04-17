@@ -20,7 +20,7 @@
 )}\hypertarget{Error_8hpp_a92ee83d4fb46a2f4ef94df6b3954a297}{}\label{Error_8hpp_a92ee83d4fb46a2f4ef94df6b3954a297}
 {\bfseries Value\+:}
 \begin{DoxyCode}
-std::ostringstream error\_message; \(\backslash\)
+std::ostringstream error\_message;                                   \(\backslash\)
     error\_message << \textcolor{stringliteral}{"***** "} << \_\_FILE\_\_ << \textcolor{stringliteral}{", line "} << \_\_LINE\_\_ << \textcolor{stringliteral}{" -> "} << \_\_func\_\_ << \textcolor{stringliteral}{" : "} << S << \textcolor{stringliteral}{"
        *****"}; \(\backslash\)
     throw std::runtime\_error(error\_message.str());

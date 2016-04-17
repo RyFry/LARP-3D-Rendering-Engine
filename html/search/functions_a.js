@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['remove_5fchild',['remove_child',['../classNode.html#abdaf4340bd75b5621c0a75f18590476e',1,'Node']]],
-  ['remove_5fentity',['remove_entity',['../classNode.html#ad27c6c51391f092f6dc2fdea545f283d',1,'Node']]],
-  ['roll',['roll',['../classNode.html#a078e56eb86c4049d9c282485b8439cf1',1,'Node']]]
+  ['remove_5fchild',['remove_child',['../classLarp_1_1Node.html#a800ecd41070c27d36e7971e55d3b9842',1,'Larp::Node']]],
+  ['remove_5fentity',['remove_entity',['../classLarp_1_1Node.html#a21823582d4d4fbe9e1b4414efcba6250',1,'Larp::Node']]],
+  ['roll',['roll',['../classLarp_1_1Node.html#a1c839a3075f1e97aa368ba8212c50ee7',1,'Larp::Node']]]
 ];

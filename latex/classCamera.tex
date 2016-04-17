@@ -171,11 +171,14 @@ the view matrix calculated using Euler angles and the look\+At matrix
 )}\hypertarget{classCamera_ac32b5b8c93934f8faa8e8637dec855d4}{}\label{classCamera_ac32b5b8c93934f8faa8e8637dec855d4}
 Processes input received from any keyboard-\/like input system. 
 \begin{DoxyParams}{Parameters}
-{\em direction} & A direction to move the \hyperlink{classCamera}{Camera}. Must be one of the directions predefined in the Camera\+Movement enum \\
+{\em direction} & A direction to move the \hyperlink{classCamera}{Camera}. Must be one of the directions predefined in the Camera\+Movement enum. \\
 \hline
 {\em delta\+\_\+time} & The duration of time between frames. Used to avoid variable camera speeds \\
 \hline
 \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classCamera_a9825f2bf1ddc209c3b2d336080d8407a}{Camera\+Movement} 
+\end{DoxySeeAlso}
 
 \begin{DoxyExceptions}{Exceptions}
 {\em std\+::runtime\+\_\+error} & whenever direction is not one of those defined by Camera\+Movement \\

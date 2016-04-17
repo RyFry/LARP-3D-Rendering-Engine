@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['lastframe',['lastFrame',['../test_8cpp.html#a606e9490a5462c2c60b30dc76ff573a1',1,'test.cpp']]],
-  ['lastx',['lastX',['../test_8cpp.html#a2e16a74f44432ba28cfc03e1f2fae336',1,'test.cpp']]],
-  ['lasty',['lastY',['../test_8cpp.html#af9b48b88a5ab39920f21309262086ef0',1,'test.cpp']]],
-  ['loaded_5ftextures',['loaded_textures',['../classModel.html#a6b63a4363bd6bd2e977b0c022ee7e772',1,'Model']]]
+  ['screenheight',['screenHeight',['../test_8cpp.html#a0460075c03cf49d7303511d0cc8a6f17',1,'test.cpp']]],
+  ['screenwidth',['screenWidth',['../test_8cpp.html#a731f36a93ab349db9e68ec56299e8c0a',1,'test.cpp']]],
+  ['sensitivity',['SENSITIVITY',['../classCamera.html#adee09ae2133f9fe95a6eb72a6cb8db20',1,'Camera']]],
+  ['speed',['SPEED',['../classCamera.html#acc2ddbb4a3bdb2829896703edf72ca1e',1,'Camera']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['specular',['SPECULAR',['../classTexture.html#a9d0b09cfb795f9553db6a4eab396bef9a0dd9b82cf1e92a09e1a78bd0014cbbea',1,'Texture']]]
+  ['specular',['SPECULAR',['../classLarp_1_1Texture.html#aa4e19b5df6a8f1f0eae8235db7e52daaa5d8421e01e03aeb7f2911890a0a138b4',1,'Larp::Texture']]]
 ];
