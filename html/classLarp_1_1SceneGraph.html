@@ -151,6 +151,7 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Default constructor. Made private to avoid having multiple <a class="el" href="classLarp_1_1SceneGraph.html">SceneGraph</a>'s per program. </p>
 
 </div>
 </div>
@@ -167,6 +168,8 @@ Static Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Creates a new child on the root <a class="el" href="classLarp_1_1Node.html">Node</a> of the <a class="el" href="classLarp_1_1SceneGraph.html">SceneGraph</a> </p><dl class="section return"><dt>Returns</dt><dd>The new child node attached to the root </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The new child may not come before the other children during rendering </dd></dl>
 
 </div>
 </div>
@@ -193,6 +196,13 @@ Static Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Draws out every node in the <a class="el" href="classLarp_1_1SceneGraph.html">SceneGraph</a> by performing a depth-first traversal on each <a class="el" href="classLarp_1_1Node.html">Node</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">view</td><td>The view matrix provided by the camera to be passed to each <a class="el" href="classLarp_1_1Node.html">Node</a>'s shader program. </td></tr>
+    <tr><td class="paramname">projection</td><td>The project matrix determined by the field of view to be passed to each <a class="el" href="classLarp_1_1Node.html">Node</a>'s shader program. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -209,6 +219,13 @@ Static Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets ambient lighting </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">color</td><td>The color to set the ambient lighting to. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Warning</dt><dd>This function is currently unimplemented and does nothing. <b>Do not call this function!</b> </dd></dl>
 
 </div>
 </div>
@@ -232,6 +249,7 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Returns the single instance of <a class="el" href="classLarp_1_1SceneGraph.html">SceneGraph</a> </p><dl class="section return"><dt>Returns</dt><dd>The singleton instance of <a class="el" href="classLarp_1_1SceneGraph.html">SceneGraph</a> </dd></dl>
 
 </div>
 </div>
@@ -253,6 +271,7 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The root pNode of this <a class="el" href="classLarp_1_1SceneGraph.html">SceneGraph</a> </p>
 
 </div>
 </div>
@@ -273,6 +292,7 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>A Singleton instance of the <a class="el" href="classLarp_1_1SceneGraph.html">SceneGraph</a> class that prevents users from making more than one <a class="el" href="classLarp_1_1SceneGraph.html">SceneGraph</a>. </p>
 
 </div>
 </div>

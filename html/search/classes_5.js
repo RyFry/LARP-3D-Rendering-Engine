@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['scenegraph',['SceneGraph',['../classLarp_1_1SceneGraph.html',1,'Larp']]],
-  ['shader',['Shader',['../classLarp_1_1Shader.html',1,'Larp']]]
+  ['texture',['Texture',['../classLarp_1_1Texture.html',1,'Larp']]]
 ];
