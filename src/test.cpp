@@ -86,6 +86,10 @@ int main(void)
     node->set_scale(0.1f, 0.1f, 0.1f);
     node->attach_entity(entity);
 
+    // Testing the SceneGraph clear
+    node1.reset(new Larp::Node());
+    node.reset(new Larp::Node());
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
