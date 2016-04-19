@@ -4,7 +4,7 @@ const GLfloat Camera::YAW         = -90.0f;
 const GLfloat Camera::PITCH       = 0.0f;
 const GLfloat Camera::SPEED       = 3.0f;
 const GLfloat Camera::SENSITIVITY = 0.25f;
-const GLfloat Camera::ZOOM        =  45.0f;
+const GLfloat Camera::ZOOM        = 45.0f;
 
 Camera::Camera(glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch)
     : _front(glm::vec3(0.0f, 0.0f, -1.0f)),

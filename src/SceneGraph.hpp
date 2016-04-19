@@ -38,6 +38,10 @@ namespace Larp
          */
         pNode create_child_node();
         /**
+         * Clears all Nodes from the SceneGraph
+         */
+        void clear();
+        /**
          * Draws out every node in the SceneGraph by performing a
          * depth-first traversal on each Node.
          * @param view The view matrix provided by the camera to be passed to each Node's

@@ -5,7 +5,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-// GL includes
+#include "LarpPrerequisites.hpp"
 #include "Shader.hpp"
 #include "Camera.hpp"
 #include "Model.hpp"
@@ -30,6 +30,7 @@ void Do_Movement();
 void error_callback(int error, const char* description);
 
 // Camera
+Larp::pSceneGraph graph;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
@@ -79,7 +80,7 @@ int main(void)
     Larp::Model nanosuit("assets/nanosuit.obj");
     Larp::pEntity entity = Larp::Entity::create(shader, nanosuit);
 
-    Larp::pSceneGraph graph = Larp::SceneGraph::singleton();
+    graph = Larp::SceneGraph::singleton();
     Larp::pNode node1 = graph->create_child_node();
     Larp::pNode node = node1->create_child();
     node->set_scale(0.1f, 0.1f, 0.1f);
@@ -136,6 +137,9 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 {
     if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
+
+    if (key == GLFW_KEY_C)
+        graph->clear();
 
     if(action == GLFW_PRESS)
         keys[key] = true;
