@@ -1,0 +1,116 @@
+\hypertarget{classLarp_1_1SceneGraph}{}\section{Larp\+:\+:Scene\+Graph Class Reference}
+\label{classLarp_1_1SceneGraph}\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+
+
+{\ttfamily \#include $<$Scene\+Graph.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceLarp_a57e9a3e29e68cdf508c964274d9ac1a4}{p\+Node} \hyperlink{classLarp_1_1SceneGraph_ae5e5217dc191780b0e7a05fe2b490d90}{create\+\_\+child\+\_\+node} ()
+\item 
+void \hyperlink{classLarp_1_1SceneGraph_a8113f5f330d20c966c5f2403e1e6386b}{draw} (glm\+::mat4 \&view, glm\+::mat4 \&projection)
+\item 
+void \hyperlink{classLarp_1_1SceneGraph_a3b99e07a52de26cb627e4f6e908a2299}{set\+\_\+ambient\+\_\+light} (glm\+::vec3 color)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{namespaceLarp_a590f73362521ab6a9c682d4eb2719002}{p\+Scene\+Graph} \hyperlink{classLarp_1_1SceneGraph_a5a34524c135b74f97a699aef4dc146b5}{singleton} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLarp_1_1SceneGraph_a256e0ff974a0f905a848a99f18b7ffc4}{Scene\+Graph} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceLarp_a57e9a3e29e68cdf508c964274d9ac1a4}{p\+Node} \hyperlink{classLarp_1_1SceneGraph_adf33065344039fd7fce5f828e800137f}{\+\_\+root}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{namespaceLarp_a590f73362521ab6a9c682d4eb2719002}{p\+Scene\+Graph} \hyperlink{classLarp_1_1SceneGraph_a7e022917365e62f172efa60d7addd242}{\+\_\+singleton}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!Scene\+Graph@{Scene\+Graph}}
+\index{Scene\+Graph@{Scene\+Graph}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{Scene\+Graph()}{SceneGraph()}}]{\setlength{\rightskip}{0pt plus 5cm}Larp\+::\+Scene\+Graph\+::\+Scene\+Graph (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1SceneGraph_a256e0ff974a0f905a848a99f18b7ffc4}{}\label{classLarp_1_1SceneGraph_a256e0ff974a0f905a848a99f18b7ffc4}
+Default constructor. Made private to avoid having multiple \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}\textquotesingle{}s per program. 
+
+\subsection{Member Function Documentation}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!create\+\_\+child\+\_\+node@{create\+\_\+child\+\_\+node}}
+\index{create\+\_\+child\+\_\+node@{create\+\_\+child\+\_\+node}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{create\+\_\+child\+\_\+node()}{create_child_node()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf p\+Node} Larp\+::\+Scene\+Graph\+::create\+\_\+child\+\_\+node (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1SceneGraph_ae5e5217dc191780b0e7a05fe2b490d90}{}\label{classLarp_1_1SceneGraph_ae5e5217dc191780b0e7a05fe2b490d90}
+Creates a new child on the root \hyperlink{classLarp_1_1Node}{Node} of the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} \begin{DoxyReturn}{Returns}
+The new child node attached to the root 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The new child may not come before the other children during rendering 
+\end{DoxyNote}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!draw@{draw}}
+\index{draw@{draw}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{draw(glm\+::mat4 \&view, glm\+::mat4 \&projection)}{draw(glm::mat4 &view, glm::mat4 &projection)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Scene\+Graph\+::draw (
+\begin{DoxyParamCaption}
+\item[{glm\+::mat4 \&}]{view, }
+\item[{glm\+::mat4 \&}]{projection}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1SceneGraph_a8113f5f330d20c966c5f2403e1e6386b}{}\label{classLarp_1_1SceneGraph_a8113f5f330d20c966c5f2403e1e6386b}
+Draws out every node in the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} by performing a depth-\/first traversal on each \hyperlink{classLarp_1_1Node}{Node}. 
+\begin{DoxyParams}{Parameters}
+{\em view} & The view matrix provided by the camera to be passed to each \hyperlink{classLarp_1_1Node}{Node}\textquotesingle{}s shader program. \\
+\hline
+{\em projection} & The project matrix determined by the field of view to be passed to each \hyperlink{classLarp_1_1Node}{Node}\textquotesingle{}s shader program. \\
+\hline
+\end{DoxyParams}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!set\+\_\+ambient\+\_\+light@{set\+\_\+ambient\+\_\+light}}
+\index{set\+\_\+ambient\+\_\+light@{set\+\_\+ambient\+\_\+light}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{set\+\_\+ambient\+\_\+light(glm\+::vec3 color)}{set_ambient_light(glm::vec3 color)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Scene\+Graph\+::set\+\_\+ambient\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{glm\+::vec3}]{color}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1SceneGraph_a3b99e07a52de26cb627e4f6e908a2299}{}\label{classLarp_1_1SceneGraph_a3b99e07a52de26cb627e4f6e908a2299}
+Sets ambient lighting 
+\begin{DoxyParams}{Parameters}
+{\em color} & The color to set the ambient lighting to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+This function is currently unimplemented and does nothing. {\bfseries Do not call this function!} 
+\end{DoxyWarning}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!singleton@{singleton}}
+\index{singleton@{singleton}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{singleton()}{singleton()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf p\+Scene\+Graph} Larp\+::\+Scene\+Graph\+::singleton (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1SceneGraph_a5a34524c135b74f97a699aef4dc146b5}{}\label{classLarp_1_1SceneGraph_a5a34524c135b74f97a699aef4dc146b5}
+Returns the single instance of \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} \begin{DoxyReturn}{Returns}
+The singleton instance of \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!\+\_\+root@{\+\_\+root}}
+\index{\+\_\+root@{\+\_\+root}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{\+\_\+root}{_root}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf p\+Node} Larp\+::\+Scene\+Graph\+::\+\_\+root\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1SceneGraph_adf33065344039fd7fce5f828e800137f}{}\label{classLarp_1_1SceneGraph_adf33065344039fd7fce5f828e800137f}
+The root p\+Node of this \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} \index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!\+\_\+singleton@{\+\_\+singleton}}
+\index{\+\_\+singleton@{\+\_\+singleton}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{\+\_\+singleton}{_singleton}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf p\+Scene\+Graph} Larp\+::\+Scene\+Graph\+::\+\_\+singleton\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1SceneGraph_a7e022917365e62f172efa60d7addd242}{}\label{classLarp_1_1SceneGraph_a7e022917365e62f172efa60d7addd242}
+A Singleton instance of the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} class that prevents users from making more than one \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{SceneGraph_8hpp}{Scene\+Graph.\+hpp}\item 
+src/\hyperlink{SceneGraph_8cpp}{Scene\+Graph.\+cpp}\end{DoxyCompactItemize}

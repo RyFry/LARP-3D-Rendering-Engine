@@ -5,7 +5,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-// GL includes
+#include "LarpPrerequisites.hpp"
 #include "Shader.hpp"
 #include "Camera.hpp"
 #include "Model.hpp"
@@ -30,6 +30,7 @@ void Do_Movement();
 void error_callback(int error, const char* description);
 
 // Camera
+Larp::pSceneGraph graph;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
@@ -75,14 +76,15 @@ int main(void)
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_MULTISAMPLE);
 
-    Shader shader("shaders/default.vert", "shaders/default.frag");
-    Model nanosuit("assets/nanosuit.obj");
-    pEntity entity(new Entity(shader, nanosuit));
+    Larp::Shader shader("shaders/default.vert", "shaders/default.frag");
+    Larp::Model nanosuit("assets/nanosuit.obj");
+    Larp::pEntity entity = Larp::Entity::create(shader, nanosuit);
 
-    pSceneGraph graph = SceneGraph::singleton();
-    pNode node = graph->create_child_node();
+    graph = Larp::SceneGraph::singleton();
+    Larp::pNode node1 = graph->create_child_node();
+    Larp::pNode node = node1->create_child();
+    node->set_scale(0.1f, 0.1f, 0.1f);
     node->attach_entity(entity);
-    node->set_scale(0.1, 0.1, 0.1);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -100,8 +102,12 @@ int main(void)
         glClearColor(0.5f, 0.05f, 0.05f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glm::mat4 projection = glm::perspective(camera.Zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
-        glm::mat4 view = camera.GetViewMatrix();
+        node->yaw(deltaTime * 32.0);
+        node->pitch(deltaTime * 23.0);
+        node->roll(deltaTime * 17.0);
+
+        glm::mat4 projection = glm::perspective(camera._zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
+        glm::mat4 view = camera.get_view_matrix();
         graph->draw(view, projection);
 
         // Swap the buffers
@@ -117,13 +123,13 @@ void Do_Movement()
 {
     // Camera controls
     if(keys[GLFW_KEY_W])
-        camera.ProcessKeyboard(FORWARD, deltaTime);
+        camera.process_keyboard(Camera::FORWARD, deltaTime);
     if(keys[GLFW_KEY_S])
-        camera.ProcessKeyboard(BACKWARD, deltaTime);
+        camera.process_keyboard(Camera::BACKWARD, deltaTime);
     if(keys[GLFW_KEY_A])
-        camera.ProcessKeyboard(LEFT, deltaTime);
+        camera.process_keyboard(Camera::LEFT, deltaTime);
     if(keys[GLFW_KEY_D])
-        camera.ProcessKeyboard(RIGHT, deltaTime);
+        camera.process_keyboard(Camera::RIGHT, deltaTime);
 }
 
 // Is called whenever a key is pressed/released via GLFW
@@ -131,6 +137,9 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 {
     if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
+
+    if (key == GLFW_KEY_C)
+        graph->clear();
 
     if(action == GLFW_PRESS)
         keys[key] = true;
@@ -153,12 +162,12 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     lastX = xpos;
     lastY = ypos;
 
-    camera.ProcessMouseMovement(xoffset, yoffset);
+    camera.process_mouse_movement(xoffset, yoffset);
 }
 
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+void scroll_callback(GLFWwindow* window, double x_offset, double y_offset)
 {
-    camera.ProcessMouseScroll(yoffset);
+    camera.process_mouse_scroll(y_offset);
 }
 
 void error_callback(int error, const char* description)

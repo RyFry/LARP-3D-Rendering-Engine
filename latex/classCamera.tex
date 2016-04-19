@@ -1,0 +1,277 @@
+\hypertarget{classCamera}{}\section{Camera Class Reference}
+\label{classCamera}\index{Camera@{Camera}}
+
+
+{\ttfamily \#include $<$Camera.\+hpp$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{classCamera_a9825f2bf1ddc209c3b2d336080d8407a}{Camera\+Movement} \{ \hyperlink{classCamera_a9825f2bf1ddc209c3b2d336080d8407aa6388b5408cf8440021383388044ae77f}{F\+O\+R\+W\+A\+RD}, 
+\hyperlink{classCamera_a9825f2bf1ddc209c3b2d336080d8407aae18db08a2289896f26dcddf6e2ad274f}{B\+A\+C\+K\+W\+A\+RD}, 
+\hyperlink{classCamera_a9825f2bf1ddc209c3b2d336080d8407aa1bed5588ea4c26163a72f0fc8621f6be}{L\+E\+FT}, 
+\hyperlink{classCamera_a9825f2bf1ddc209c3b2d336080d8407aaedac3a8506bf2bae7df2d36dd5580884}{R\+I\+G\+HT}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCamera_a535f3a2413a88c2f1e7d1147bec0039c}{Camera} (glm\+::vec3 position=glm\+::vec3(0.\+0f, 0.\+0f, 0.\+0f), glm\+::vec3 up=glm\+::vec3(0.\+0f, 1.\+0f, 0.\+0f), G\+Lfloat yaw=\+Y\+A\+W, G\+Lfloat pitch=\+P\+I\+T\+C\+H)
+\item 
+\hyperlink{classCamera_af0f6ba09d293db5b1c6ba63d195cff57}{Camera} (G\+Lfloat pos\+\_\+x, G\+Lfloat pos\+\_\+y, G\+Lfloat pos\+\_\+z, G\+Lfloat up\+\_\+x, G\+Lfloat up\+\_\+y, G\+Lfloat up\+\_\+z, G\+Lfloat yaw=\hyperlink{classCamera_a79050e94e98c5c1cc0127c41edb4ed16}{Y\+AW}, G\+Lfloat pitch=\hyperlink{classCamera_afd43f32a47d2db8922dc32030fd84379}{P\+I\+T\+CH})
+\item 
+glm\+::mat4 \hyperlink{classCamera_aedac0150156798ae1880eabaa3b9f071}{get\+\_\+view\+\_\+matrix} ()
+\item 
+void \hyperlink{classCamera_ac32b5b8c93934f8faa8e8637dec855d4}{process\+\_\+keyboard} (\hyperlink{classCamera_a9825f2bf1ddc209c3b2d336080d8407a}{Camera\+Movement} direction, G\+Lfloat delta\+\_\+time)
+\item 
+void \hyperlink{classCamera_ab650c0e1f0c55582339623e7c3b4b10d}{process\+\_\+mouse\+\_\+movement} (G\+Lfloat x\+\_\+offset, G\+Lfloat y\+\_\+offset, G\+Lboolean constrain\+\_\+pitch=true)
+\item 
+void \hyperlink{classCamera_a9cb2efbeb1a0007f1ea908e3e74c92a1}{process\+\_\+mouse\+\_\+scroll} (G\+Lfloat y\+\_\+offset)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+glm\+::vec3 \hyperlink{classCamera_a0a931ed2051befaad1f482b3b5e98ca0}{\+\_\+position}
+\item 
+glm\+::vec3 \hyperlink{classCamera_ac610e748840c4b70c9081c2d68df2e8d}{\+\_\+front}
+\item 
+glm\+::vec3 \hyperlink{classCamera_a323a698e4c5773ee3ec380851b145e2d}{\+\_\+up}
+\item 
+glm\+::vec3 \hyperlink{classCamera_a4c556280ed181d8589c28eec7ebebb49}{\+\_\+right}
+\item 
+glm\+::vec3 \hyperlink{classCamera_aa5d721a01ba1cb41eafb02e39ea29e03}{\+\_\+world\+\_\+up}
+\item 
+G\+Lfloat \hyperlink{classCamera_ab815461cc043db1f5810c2f488641740}{\+\_\+yaw}
+\item 
+G\+Lfloat \hyperlink{classCamera_a23a8b8859c44721d7082b89809318918}{\+\_\+pitch}
+\item 
+G\+Lfloat \hyperlink{classCamera_a6f31b5658310866d3228614a755b59b0}{\+\_\+movement\+\_\+speed}
+\item 
+G\+Lfloat \hyperlink{classCamera_aeb483d642e0bcf11aa881467ac9676fe}{\+\_\+mouse\+\_\+sensitivity}
+\item 
+G\+Lfloat \hyperlink{classCamera_a99dc4d95f58be2427ff6c8d93c676ecd}{\+\_\+zoom}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const G\+Lfloat \hyperlink{classCamera_a79050e94e98c5c1cc0127c41edb4ed16}{Y\+AW} = -\/90.\+0f
+\item 
+static const G\+Lfloat \hyperlink{classCamera_afd43f32a47d2db8922dc32030fd84379}{P\+I\+T\+CH} = 0.\+0f
+\item 
+static const G\+Lfloat \hyperlink{classCamera_acc2ddbb4a3bdb2829896703edf72ca1e}{S\+P\+E\+ED} = 3.\+0f
+\item 
+static const G\+Lfloat \hyperlink{classCamera_adee09ae2133f9fe95a6eb72a6cb8db20}{S\+E\+N\+S\+I\+T\+I\+V\+I\+TY} = 0.\+25f
+\item 
+static const G\+Lfloat \hyperlink{classCamera_a34cdfe4c17868880037d5ff78159f158}{Z\+O\+OM} = 45.\+0f
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classCamera_ad9745a585d867bc34439c36f0a6d66a1}{update\+\_\+camera\+\_\+vectors} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An abstract camera class that processes input and calculates the corresponding Eular Angles, Vectors and Matrices for use in Open\+GL 
+
+\subsection{Member Enumeration Documentation}
+\index{Camera@{Camera}!Camera\+Movement@{Camera\+Movement}}
+\index{Camera\+Movement@{Camera\+Movement}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Camera\+Movement}{CameraMovement}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Camera\+::\+Camera\+Movement}}\hypertarget{classCamera_a9825f2bf1ddc209c3b2d336080d8407a}{}\label{classCamera_a9825f2bf1ddc209c3b2d336080d8407a}
+Enum that defines several directions for the \hyperlink{classCamera}{Camera} to move \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{F\+O\+R\+W\+A\+RD@{F\+O\+R\+W\+A\+RD}!Camera@{Camera}}\index{Camera@{Camera}!F\+O\+R\+W\+A\+RD@{F\+O\+R\+W\+A\+RD}}\item[{\em 
+F\+O\+R\+W\+A\+RD\hypertarget{classCamera_a9825f2bf1ddc209c3b2d336080d8407aa6388b5408cf8440021383388044ae77f}{}\label{classCamera_a9825f2bf1ddc209c3b2d336080d8407aa6388b5408cf8440021383388044ae77f}
+}]\index{B\+A\+C\+K\+W\+A\+RD@{B\+A\+C\+K\+W\+A\+RD}!Camera@{Camera}}\index{Camera@{Camera}!B\+A\+C\+K\+W\+A\+RD@{B\+A\+C\+K\+W\+A\+RD}}\item[{\em 
+B\+A\+C\+K\+W\+A\+RD\hypertarget{classCamera_a9825f2bf1ddc209c3b2d336080d8407aae18db08a2289896f26dcddf6e2ad274f}{}\label{classCamera_a9825f2bf1ddc209c3b2d336080d8407aae18db08a2289896f26dcddf6e2ad274f}
+}]\index{L\+E\+FT@{L\+E\+FT}!Camera@{Camera}}\index{Camera@{Camera}!L\+E\+FT@{L\+E\+FT}}\item[{\em 
+L\+E\+FT\hypertarget{classCamera_a9825f2bf1ddc209c3b2d336080d8407aa1bed5588ea4c26163a72f0fc8621f6be}{}\label{classCamera_a9825f2bf1ddc209c3b2d336080d8407aa1bed5588ea4c26163a72f0fc8621f6be}
+}]\index{R\+I\+G\+HT@{R\+I\+G\+HT}!Camera@{Camera}}\index{Camera@{Camera}!R\+I\+G\+HT@{R\+I\+G\+HT}}\item[{\em 
+R\+I\+G\+HT\hypertarget{classCamera_a9825f2bf1ddc209c3b2d336080d8407aaedac3a8506bf2bae7df2d36dd5580884}{}\label{classCamera_a9825f2bf1ddc209c3b2d336080d8407aaedac3a8506bf2bae7df2d36dd5580884}
+}]\end{description}
+\end{Desc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Camera@{Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Camera(glm\+::vec3 position=glm\+::vec3(0.\+0f, 0.\+0f, 0.\+0f), glm\+::vec3 up=glm\+::vec3(0.\+0f, 1.\+0f, 0.\+0f), G\+Lfloat yaw=\+Y\+A\+W, G\+Lfloat pitch=\+P\+I\+T\+C\+H)}{Camera(glm::vec3 position=glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up=glm::vec3(0.0f, 1.0f, 0.0f), GLfloat yaw=YAW, GLfloat pitch=PITCH)}}]{\setlength{\rightskip}{0pt plus 5cm}Camera\+::\+Camera (
+\begin{DoxyParamCaption}
+\item[{glm\+::vec3}]{position = {\ttfamily glm\+:\+:vec3(0.0f,~0.0f,~0.0f)}, }
+\item[{glm\+::vec3}]{up = {\ttfamily glm\+:\+:vec3(0.0f,~1.0f,~0.0f)}, }
+\item[{G\+Lfloat}]{yaw = {\ttfamily {\bf Y\+AW}}, }
+\item[{G\+Lfloat}]{pitch = {\ttfamily {\bf P\+I\+T\+CH}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classCamera_a535f3a2413a88c2f1e7d1147bec0039c}{}\label{classCamera_a535f3a2413a88c2f1e7d1147bec0039c}
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em position} & The starting position of the \hyperlink{classCamera}{Camera} as a glm\+::vec3. If not provided the \hyperlink{classCamera}{Camera} will be centered at the origin. \\
+\hline
+{\em up} & The up vector for the world. If not provided the y-\/axis will be used as the world up vector \\
+\hline
+{\em yaw} & The initial yaw for the \hyperlink{classCamera}{Camera}. If not provided, the \hyperlink{classCamera}{Camera} will start pointing down the -\/z-\/axis \\
+\hline
+{\em pitch} & The initial pitch of the \hyperlink{classCamera}{Camera}. If not provided, the \hyperlink{classCamera}{Camera} will start on the xz-\/plane \\
+\hline
+\end{DoxyParams}
+\index{Camera@{Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Camera(\+G\+Lfloat pos\+\_\+x, G\+Lfloat pos\+\_\+y, G\+Lfloat pos\+\_\+z, G\+Lfloat up\+\_\+x, G\+Lfloat up\+\_\+y, G\+Lfloat up\+\_\+z, G\+Lfloat yaw=\+Y\+A\+W, G\+Lfloat pitch=\+P\+I\+T\+C\+H)}{Camera(GLfloat pos_x, GLfloat pos_y, GLfloat pos_z, GLfloat up_x, GLfloat up_y, GLfloat up_z, GLfloat yaw=YAW, GLfloat pitch=PITCH)}}]{\setlength{\rightskip}{0pt plus 5cm}Camera\+::\+Camera (
+\begin{DoxyParamCaption}
+\item[{G\+Lfloat}]{pos\+\_\+x, }
+\item[{G\+Lfloat}]{pos\+\_\+y, }
+\item[{G\+Lfloat}]{pos\+\_\+z, }
+\item[{G\+Lfloat}]{up\+\_\+x, }
+\item[{G\+Lfloat}]{up\+\_\+y, }
+\item[{G\+Lfloat}]{up\+\_\+z, }
+\item[{G\+Lfloat}]{yaw = {\ttfamily {\bf Y\+AW}}, }
+\item[{G\+Lfloat}]{pitch = {\ttfamily {\bf P\+I\+T\+CH}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classCamera_af0f6ba09d293db5b1c6ba63d195cff57}{}\label{classCamera_af0f6ba09d293db5b1c6ba63d195cff57}
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em pos\+\_\+x} & The starting x position of the \hyperlink{classCamera}{Camera}. \\
+\hline
+{\em pos\+\_\+y} & The starting y position of the \hyperlink{classCamera}{Camera}. \\
+\hline
+{\em pos\+\_\+z} & The starting z position of the \hyperlink{classCamera}{Camera}. \\
+\hline
+{\em up\+\_\+x} & The x-\/value of the world up vector of the \hyperlink{classCamera}{Camera}. \\
+\hline
+{\em up\+\_\+y} & The y-\/value of the world up vector of the \hyperlink{classCamera}{Camera}. \\
+\hline
+{\em up\+\_\+z} & The z-\/value of the world up vector of the \hyperlink{classCamera}{Camera}. \\
+\hline
+{\em yaw} & The initial yaw for the \hyperlink{classCamera}{Camera}. If not provided, the \hyperlink{classCamera}{Camera} will start pointing down the -\/z-\/axis \\
+\hline
+{\em pitch} & The initial pitch of the \hyperlink{classCamera}{Camera}. If not provided, the \hyperlink{classCamera}{Camera} will start on the xz-\/plane \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Camera@{Camera}!get\+\_\+view\+\_\+matrix@{get\+\_\+view\+\_\+matrix}}
+\index{get\+\_\+view\+\_\+matrix@{get\+\_\+view\+\_\+matrix}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{get\+\_\+view\+\_\+matrix()}{get_view_matrix()}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::mat4 Camera\+::get\+\_\+view\+\_\+matrix (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classCamera_aedac0150156798ae1880eabaa3b9f071}{}\label{classCamera_aedac0150156798ae1880eabaa3b9f071}
+\begin{DoxyReturn}{Returns}
+the view matrix calculated using Euler angles and the look\+At matrix 
+\end{DoxyReturn}
+\index{Camera@{Camera}!process\+\_\+keyboard@{process\+\_\+keyboard}}
+\index{process\+\_\+keyboard@{process\+\_\+keyboard}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{process\+\_\+keyboard(\+Camera\+Movement direction, G\+Lfloat delta\+\_\+time)}{process_keyboard(CameraMovement direction, GLfloat delta_time)}}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\+::process\+\_\+keyboard (
+\begin{DoxyParamCaption}
+\item[{{\bf Camera\+Movement}}]{direction, }
+\item[{G\+Lfloat}]{delta\+\_\+time}
+\end{DoxyParamCaption}
+)}\hypertarget{classCamera_ac32b5b8c93934f8faa8e8637dec855d4}{}\label{classCamera_ac32b5b8c93934f8faa8e8637dec855d4}
+Processes input received from any keyboard-\/like input system. 
+\begin{DoxyParams}{Parameters}
+{\em direction} & A direction to move the \hyperlink{classCamera}{Camera}. Must be one of the directions predefined in the Camera\+Movement enum. \\
+\hline
+{\em delta\+\_\+time} & The duration of time between frames. Used to avoid variable camera speeds \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classCamera_a9825f2bf1ddc209c3b2d336080d8407a}{Camera\+Movement} 
+\end{DoxySeeAlso}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & whenever direction is not one of those defined by Camera\+Movement \\
+\hline
+\end{DoxyExceptions}
+\index{Camera@{Camera}!process\+\_\+mouse\+\_\+movement@{process\+\_\+mouse\+\_\+movement}}
+\index{process\+\_\+mouse\+\_\+movement@{process\+\_\+mouse\+\_\+movement}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{process\+\_\+mouse\+\_\+movement(\+G\+Lfloat x\+\_\+offset, G\+Lfloat y\+\_\+offset, G\+Lboolean constrain\+\_\+pitch=true)}{process_mouse_movement(GLfloat x_offset, GLfloat y_offset, GLboolean constrain_pitch=true)}}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\+::process\+\_\+mouse\+\_\+movement (
+\begin{DoxyParamCaption}
+\item[{G\+Lfloat}]{x\+\_\+offset, }
+\item[{G\+Lfloat}]{y\+\_\+offset, }
+\item[{G\+Lboolean}]{constrain\+\_\+pitch = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\hypertarget{classCamera_ab650c0e1f0c55582339623e7c3b4b10d}{}\label{classCamera_ab650c0e1f0c55582339623e7c3b4b10d}
+Processes input received from a mouse input system. 
+\begin{DoxyParams}{Parameters}
+{\em x\+\_\+offset} & The value used to update the \hyperlink{classCamera}{Camera}\textquotesingle{}s yaw. A positive x\+\_\+offset will yaw the \hyperlink{classCamera}{Camera} counter-\/clockwise. \\
+\hline
+{\em y\+\_\+offset} & The value used to update the \hyperlink{classCamera}{Camera}\textquotesingle{}s pitch. A positive y\+\_\+offset will pitch the \hyperlink{classCamera}{Camera} up. \\
+\hline
+{\em constrain\+\_\+pitch} & If true, the \hyperlink{classCamera}{Camera}\textquotesingle{}s pitch will be constrained to the range \mbox{[}-\/89.\+0, 89.\+0\mbox{]} degrees. Useful to avoid Gimbal lock. If not provided, the \hyperlink{classCamera}{Camera}\textquotesingle{}s pitch will be constrained \\
+\hline
+\end{DoxyParams}
+\index{Camera@{Camera}!process\+\_\+mouse\+\_\+scroll@{process\+\_\+mouse\+\_\+scroll}}
+\index{process\+\_\+mouse\+\_\+scroll@{process\+\_\+mouse\+\_\+scroll}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{process\+\_\+mouse\+\_\+scroll(\+G\+Lfloat y\+\_\+offset)}{process_mouse_scroll(GLfloat y_offset)}}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\+::process\+\_\+mouse\+\_\+scroll (
+\begin{DoxyParamCaption}
+\item[{G\+Lfloat}]{y\+\_\+offset}
+\end{DoxyParamCaption}
+)}\hypertarget{classCamera_a9cb2efbeb1a0007f1ea908e3e74c92a1}{}\label{classCamera_a9cb2efbeb1a0007f1ea908e3e74c92a1}
+Processes input received from a mouse scroll-\/wheel event. 
+\begin{DoxyParams}{Parameters}
+{\em y\+\_\+offset} & The offset of the input device used to zoom the camera. A positive offset zooms the camera in by reducing the F\+OV in degrees, while a negative offset zooms the camera out. \\
+\hline
+\end{DoxyParams}
+\index{Camera@{Camera}!update\+\_\+camera\+\_\+vectors@{update\+\_\+camera\+\_\+vectors}}
+\index{update\+\_\+camera\+\_\+vectors@{update\+\_\+camera\+\_\+vectors}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{update\+\_\+camera\+\_\+vectors()}{update_camera_vectors()}}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\+::update\+\_\+camera\+\_\+vectors (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCamera_ad9745a585d867bc34439c36f0a6d66a1}{}\label{classCamera_ad9745a585d867bc34439c36f0a6d66a1}
+Calculates the front vector from the \hyperlink{classCamera}{Camera}\textquotesingle{}s (updated) Eular Angles 
+
+\subsection{Member Data Documentation}
+\index{Camera@{Camera}!\+\_\+front@{\+\_\+front}}
+\index{\+\_\+front@{\+\_\+front}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{\+\_\+front}{_front}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Camera\+::\+\_\+front}\hypertarget{classCamera_ac610e748840c4b70c9081c2d68df2e8d}{}\label{classCamera_ac610e748840c4b70c9081c2d68df2e8d}
+Vector representing which direction the \hyperlink{classCamera}{Camera} is facing. Used when calculating how the \hyperlink{classCamera}{Camera} moves forward and backward. \index{Camera@{Camera}!\+\_\+mouse\+\_\+sensitivity@{\+\_\+mouse\+\_\+sensitivity}}
+\index{\+\_\+mouse\+\_\+sensitivity@{\+\_\+mouse\+\_\+sensitivity}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{\+\_\+mouse\+\_\+sensitivity}{_mouse_sensitivity}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Camera\+::\+\_\+mouse\+\_\+sensitivity}\hypertarget{classCamera_aeb483d642e0bcf11aa881467ac9676fe}{}\label{classCamera_aeb483d642e0bcf11aa881467ac9676fe}
+Determines how much the \hyperlink{classCamera}{Camera} rotates on mouse movement \index{Camera@{Camera}!\+\_\+movement\+\_\+speed@{\+\_\+movement\+\_\+speed}}
+\index{\+\_\+movement\+\_\+speed@{\+\_\+movement\+\_\+speed}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{\+\_\+movement\+\_\+speed}{_movement_speed}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Camera\+::\+\_\+movement\+\_\+speed}\hypertarget{classCamera_a6f31b5658310866d3228614a755b59b0}{}\label{classCamera_a6f31b5658310866d3228614a755b59b0}
+Determines how fast the \hyperlink{classCamera}{Camera} moves \index{Camera@{Camera}!\+\_\+pitch@{\+\_\+pitch}}
+\index{\+\_\+pitch@{\+\_\+pitch}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{\+\_\+pitch}{_pitch}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Camera\+::\+\_\+pitch}\hypertarget{classCamera_a23a8b8859c44721d7082b89809318918}{}\label{classCamera_a23a8b8859c44721d7082b89809318918}
+This \hyperlink{classCamera}{Camera}\textquotesingle{}s pitch in degrees \index{Camera@{Camera}!\+\_\+position@{\+\_\+position}}
+\index{\+\_\+position@{\+\_\+position}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{\+\_\+position}{_position}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Camera\+::\+\_\+position}\hypertarget{classCamera_a0a931ed2051befaad1f482b3b5e98ca0}{}\label{classCamera_a0a931ed2051befaad1f482b3b5e98ca0}
+Current position of the camera \index{Camera@{Camera}!\+\_\+right@{\+\_\+right}}
+\index{\+\_\+right@{\+\_\+right}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{\+\_\+right}{_right}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Camera\+::\+\_\+right}\hypertarget{classCamera_a4c556280ed181d8589c28eec7ebebb49}{}\label{classCamera_a4c556280ed181d8589c28eec7ebebb49}
+Vector representing the x-\/axis in view space. Also used to calculate how the \hyperlink{classCamera}{Camera} moves left and right. \index{Camera@{Camera}!\+\_\+up@{\+\_\+up}}
+\index{\+\_\+up@{\+\_\+up}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{\+\_\+up}{_up}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Camera\+::\+\_\+up}\hypertarget{classCamera_a323a698e4c5773ee3ec380851b145e2d}{}\label{classCamera_a323a698e4c5773ee3ec380851b145e2d}
+The vector used to calculate the \hyperlink{classCamera}{Camera}\textquotesingle{}s look\+At matrix. \index{Camera@{Camera}!\+\_\+world\+\_\+up@{\+\_\+world\+\_\+up}}
+\index{\+\_\+world\+\_\+up@{\+\_\+world\+\_\+up}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{\+\_\+world\+\_\+up}{_world_up}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Camera\+::\+\_\+world\+\_\+up}\hypertarget{classCamera_aa5d721a01ba1cb41eafb02e39ea29e03}{}\label{classCamera_aa5d721a01ba1cb41eafb02e39ea29e03}
+The world\textquotesingle{}s up vector used to update the \hyperlink{classCamera}{Camera}\textquotesingle{}s view matrix. \index{Camera@{Camera}!\+\_\+yaw@{\+\_\+yaw}}
+\index{\+\_\+yaw@{\+\_\+yaw}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{\+\_\+yaw}{_yaw}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Camera\+::\+\_\+yaw}\hypertarget{classCamera_ab815461cc043db1f5810c2f488641740}{}\label{classCamera_ab815461cc043db1f5810c2f488641740}
+This \hyperlink{classCamera}{Camera}\textquotesingle{}s yaw in degrees \index{Camera@{Camera}!\+\_\+zoom@{\+\_\+zoom}}
+\index{\+\_\+zoom@{\+\_\+zoom}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{\+\_\+zoom}{_zoom}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Camera\+::\+\_\+zoom}\hypertarget{classCamera_a99dc4d95f58be2427ff6c8d93c676ecd}{}\label{classCamera_a99dc4d95f58be2427ff6c8d93c676ecd}
+The current zoom of the \hyperlink{classCamera}{Camera} \index{Camera@{Camera}!P\+I\+T\+CH@{P\+I\+T\+CH}}
+\index{P\+I\+T\+CH@{P\+I\+T\+CH}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{P\+I\+T\+CH}{PITCH}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Lfloat Camera\+::\+P\+I\+T\+CH = 0.\+0f\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classCamera_afd43f32a47d2db8922dc32030fd84379}{}\label{classCamera_afd43f32a47d2db8922dc32030fd84379}
+Default pitch for a \hyperlink{classCamera}{Camera} object when not provided to the constructor \index{Camera@{Camera}!S\+E\+N\+S\+I\+T\+I\+V\+I\+TY@{S\+E\+N\+S\+I\+T\+I\+V\+I\+TY}}
+\index{S\+E\+N\+S\+I\+T\+I\+V\+I\+TY@{S\+E\+N\+S\+I\+T\+I\+V\+I\+TY}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{S\+E\+N\+S\+I\+T\+I\+V\+I\+TY}{SENSITIVITY}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Lfloat Camera\+::\+S\+E\+N\+S\+I\+T\+I\+V\+I\+TY = 0.\+25f\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classCamera_adee09ae2133f9fe95a6eb72a6cb8db20}{}\label{classCamera_adee09ae2133f9fe95a6eb72a6cb8db20}
+Default sensitivity for a \hyperlink{classCamera}{Camera} object. \index{Camera@{Camera}!S\+P\+E\+ED@{S\+P\+E\+ED}}
+\index{S\+P\+E\+ED@{S\+P\+E\+ED}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{S\+P\+E\+ED}{SPEED}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Lfloat Camera\+::\+S\+P\+E\+ED = 3.\+0f\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classCamera_acc2ddbb4a3bdb2829896703edf72ca1e}{}\label{classCamera_acc2ddbb4a3bdb2829896703edf72ca1e}
+Default speed for a \hyperlink{classCamera}{Camera} object when not provided to the constructor \index{Camera@{Camera}!Y\+AW@{Y\+AW}}
+\index{Y\+AW@{Y\+AW}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Y\+AW}{YAW}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Lfloat Camera\+::\+Y\+AW = -\/90.\+0f\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classCamera_a79050e94e98c5c1cc0127c41edb4ed16}{}\label{classCamera_a79050e94e98c5c1cc0127c41edb4ed16}
+Default yaw for a \hyperlink{classCamera}{Camera} object when not provided to the constructor \index{Camera@{Camera}!Z\+O\+OM@{Z\+O\+OM}}
+\index{Z\+O\+OM@{Z\+O\+OM}!Camera@{Camera}}
+\subsubsection[{\texorpdfstring{Z\+O\+OM}{ZOOM}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Lfloat Camera\+::\+Z\+O\+OM = 45.\+0f\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classCamera_a34cdfe4c17868880037d5ff78159f158}{}\label{classCamera_a34cdfe4c17868880037d5ff78159f158}
+Default zoom for a \hyperlink{classCamera}{Camera} object. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{Camera_8hpp}{Camera.\+hpp}\item 
+src/\hyperlink{Camera_8cpp}{Camera.\+cpp}\end{DoxyCompactItemize}

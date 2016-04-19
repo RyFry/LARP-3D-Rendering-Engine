@@ -1,0 +1,98 @@
+\hypertarget{classLarp_1_1Shader}{}\section{Larp\+:\+:Shader Class Reference}
+\label{classLarp_1_1Shader}\index{Larp\+::\+Shader@{Larp\+::\+Shader}}
+
+
+{\ttfamily \#include $<$Shader.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLarp_1_1Shader_a02cd13e09037075d62c3566e2fc797ab}{Shader} (const G\+Lchar $\ast$vertex\+\_\+path, const G\+Lchar $\ast$fragment\+\_\+path, const G\+Lchar $\ast$geometry\+\_\+path=nullptr)
+\item 
+void \hyperlink{classLarp_1_1Shader_a781750e2455007153ea226c0928bc24a}{use} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+G\+Luint \hyperlink{classLarp_1_1Shader_ae900fbc780cccf1e37eebee294caa69f}{\+\_\+program}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \hyperlink{classLarp_1_1Shader_abf92153766512f9180d0d85062625446}{load\+\_\+shader} (const G\+Lchar $\ast$shader\+\_\+path)
+\item 
+static G\+Luint \hyperlink{classLarp_1_1Shader_ab2b03a9fe1ae3073e87268c7374af3f7}{compile\+\_\+shader} (const G\+Lchar $\ast$shader\+\_\+code, G\+Lenum shader\+\_\+type)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!Shader@{Shader}}
+\index{Shader@{Shader}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{Shader(const G\+Lchar $\ast$vertex\+\_\+path, const G\+Lchar $\ast$fragment\+\_\+path, const G\+Lchar $\ast$geometry\+\_\+path=nullptr)}{Shader(const GLchar *vertex_path, const GLchar *fragment_path, const GLchar *geometry_path=nullptr)}}]{\setlength{\rightskip}{0pt plus 5cm}Larp\+::\+Shader\+::\+Shader (
+\begin{DoxyParamCaption}
+\item[{const G\+Lchar $\ast$}]{vertex\+\_\+path, }
+\item[{const G\+Lchar $\ast$}]{fragment\+\_\+path, }
+\item[{const G\+Lchar $\ast$}]{geometry\+\_\+path = {\ttfamily nullptr}}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1Shader_a02cd13e09037075d62c3566e2fc797ab}{}\label{classLarp_1_1Shader_a02cd13e09037075d62c3566e2fc797ab}
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em vertex\+\_\+path} & The path to the desired vertex shader. \\
+\hline
+{\em fragment\+\_\+path} & The path to the desired fragment shader. \\
+\hline
+{\em geometry\+\_\+path} & The path to the desired geometry shader. If not provided, the default Open\+GL geometry shader will be used (Recommended except when needed). \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!compile\+\_\+shader@{compile\+\_\+shader}}
+\index{compile\+\_\+shader@{compile\+\_\+shader}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{compile\+\_\+shader(const G\+Lchar $\ast$shader\+\_\+code, G\+Lenum shader\+\_\+type)}{compile_shader(const GLchar *shader_code, GLenum shader_type)}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint Larp\+::\+Shader\+::compile\+\_\+shader (
+\begin{DoxyParamCaption}
+\item[{const G\+Lchar $\ast$}]{shader\+\_\+code, }
+\item[{G\+Lenum}]{shader\+\_\+type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1Shader_ab2b03a9fe1ae3073e87268c7374af3f7}{}\label{classLarp_1_1Shader_ab2b03a9fe1ae3073e87268c7374af3f7}
+Compiles a loaded shader program 
+\begin{DoxyParams}{Parameters}
+{\em shader\+\_\+code} & The text version of the shader program as an Open\+GL string. \\
+\hline
+{\em shader\+\_\+type} & The type of shader to compile. Must be one of G\+L\+\_\+\+V\+E\+R\+T\+E\+X\+\_\+\+S\+H\+A\+D\+ER, G\+L\+\_\+\+F\+R\+A\+G\+M\+E\+N\+T\+\_\+\+S\+H\+A\+D\+ER, or G\+L\+\_\+\+F\+R\+A\+G\+M\+E\+N\+T\+\_\+\+S\+H\+A\+D\+ER. Other valid shader types are defined; however, only the former 3 are currently supported. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\href{https://www.opengl.org/sdk/docs/man/docbook4/xhtml/glCreateShader.xml}{\tt https\+://www.\+opengl.\+org/sdk/docs/man/docbook4/xhtml/gl\+Create\+Shader.\+xml} for other valid shader types. 
+\end{DoxySeeAlso}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!load\+\_\+shader@{load\+\_\+shader}}
+\index{load\+\_\+shader@{load\+\_\+shader}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{load\+\_\+shader(const G\+Lchar $\ast$shader\+\_\+path)}{load_shader(const GLchar *shader_path)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Larp\+::\+Shader\+::load\+\_\+shader (
+\begin{DoxyParamCaption}
+\item[{const G\+Lchar $\ast$}]{shader\+\_\+path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1Shader_abf92153766512f9180d0d85062625446}{}\label{classLarp_1_1Shader_abf92153766512f9180d0d85062625446}
+Loads a shader given its path relative to where the program is being run 
+\begin{DoxyParams}{Parameters}
+{\em shader\+\_\+path} & The path to the shader program to be loaded \\
+\hline
+\end{DoxyParams}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!use@{use}}
+\index{use@{use}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{use()}{use()}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Shader\+::use (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1Shader_a781750e2455007153ea226c0928bc24a}{}\label{classLarp_1_1Shader_a781750e2455007153ea226c0928bc24a}
+Tells Open\+GL to use this \hyperlink{classLarp_1_1Shader}{Shader}\textquotesingle{}s compiled shader program 
+
+\subsection{Member Data Documentation}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!\+\_\+program@{\+\_\+program}}
+\index{\+\_\+program@{\+\_\+program}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{\+\_\+program}{_program}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint Larp\+::\+Shader\+::\+\_\+program}\hypertarget{classLarp_1_1Shader_ae900fbc780cccf1e37eebee294caa69f}{}\label{classLarp_1_1Shader_ae900fbc780cccf1e37eebee294caa69f}
+The ID of the Open\+GL Program associated with this \hyperlink{classLarp_1_1Shader}{Shader} 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{Shader_8hpp}{Shader.\+hpp}\item 
+src/\hyperlink{Shader_8cpp}{Shader.\+cpp}\end{DoxyCompactItemize}

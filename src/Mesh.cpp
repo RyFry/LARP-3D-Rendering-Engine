@@ -1,86 +1,112 @@
 #include "Mesh.hpp"
 
-// -------
-// Texture
-// -------
-
-std::string Texture::to_string()
+namespace Larp
 {
-    if (this->_type == Texture::DIFFUSE)
-        return "texture_diffuse";
-    if (this->_type == Texture::SPECULAR)
-        return "texture_specular";
-    return "";
-}
+    // -------
+    // Texture
+    // -------
 
-// ----------------
-// Public Functions
-// ----------------
-
-Mesh::Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<Texture>& textures) :
-    _vertices(vertices),
-    _indices(indices),
-    _textures(textures)
-{
-    this->setup_mesh();
-}
-
-void Mesh::draw(Shader& shader)
-{
-    GLuint diffuseN = 1;
-    GLuint specularN = 1;
-    for (GLuint i = 0; i < this->_textures.size(); ++i)
+    std::string Texture::to_string()
     {
-        glActiveTexture(GL_TEXTURE0 + i); // Activate the proper texture unit before binding
-        // Retrieve the texture number (texture_diffuseN or texture_specularN)
-        std::stringstream ss;
-        std::string number;
-        std::string name = this->_textures.at(i).to_string();
-        if (name == "texture_diffuse")
-            ss << diffuseN++;
-        else if (name == "texture_specular")
-            ss << specularN++;
-        number = ss.str();
-
-        glUniform1f(glGetUniformLocation(shader._program, ("material." + name + number).c_str()), i);
-        glBindTexture(GL_TEXTURE_2D, this->_textures.at(i)._id);
+        if (this->_type == Texture::DIFFUSE)
+            return "texture_diffuse";
+        if (this->_type == Texture::SPECULAR)
+            return "texture_specular";
+        return "";
     }
-    glActiveTexture(GL_TEXTURE0);
 
-    // Draw mesh
-    glBindVertexArray(this->_VAO);
-    glDrawElements(GL_TRIANGLES, this->_indices.size(), GL_UNSIGNED_INT, 0);
-    glBindVertexArray(0);
-}
+    // ----------------
+    // Public Functions
+    // ----------------
 
+    Mesh::Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<Texture>& textures) :
+        _vertices(vertices),
+        _indices(indices),
+        _textures(textures)
+    {
+        this->setup_mesh();
+    }
 
-// -----------------
-// Private Functions
-// -----------------
+    void Mesh::draw(Shader& shader)
+    {
+        GLuint diffuseN = 1;
+        GLuint specularN = 1;
+        for (GLuint i = 0; i < this->_textures.size(); ++i)
+        {
+            glActiveTexture(GL_TEXTURE0 + i); // Activate the proper texture unit before binding
+            // Retrieve the texture number (texture_diffuseN or texture_specularN)
+            std::stringstream ss;
+            std::string number;
+            std::string name = this->_textures.at(i).to_string();
+            if (name == "texture_diffuse")
+                ss << diffuseN++;
+            else if (name == "texture_specular")
+                ss << specularN++;
+            number = ss.str();
 
-void Mesh::setup_mesh()
-{
-    glGenVertexArrays(1, &this->_VAO);
-    glGenBuffers(1, &this->_VBO);
-    glGenBuffers(1, &this->_EBO);
+            glUniform1f(glGetUniformLocation(shader._program, ("material." + name + number).c_str()), i);
+            glBindTexture(GL_TEXTURE_2D, this->_textures.at(i)._id);
+        }
+        glActiveTexture(GL_TEXTURE0);
 
-    glBindVertexArray(this->_VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, this->_VBO);
-    glBufferData(GL_ARRAY_BUFFER, this->_vertices.size() * sizeof(Vertex), &this->_vertices[0], GL_STATIC_DRAW);
+        // Draw mesh
+        glBindVertexArray(this->_VAO);
+        glDrawElements(GL_TRIANGLES, this->_indices.size(), GL_UNSIGNED_INT, 0);
+        glBindVertexArray(0);
+    }
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->_EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->_indices.size() * sizeof(GLuint), &this->_indices[0], GL_STATIC_DRAW);
+    // -----------------
+    // Private Functions
+    // -----------------
 
-    // Vertex Positions
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *) 0);
+    void Mesh::setup_mesh()
+    {
+        glGenVertexArrays(1, &this->_VAO);
+        glGenBuffers(1, &this->_VBO);
+        glGenBuffers(1, &this->_EBO);
 
-    // Vertex Normals
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *) offsetof(Vertex, _normal));
+        glBindVertexArray(this->_VAO);
+        glBindBuffer(GL_ARRAY_BUFFER, this->_VBO);
+        glBufferData(GL_ARRAY_BUFFER, this->_vertices.size() * sizeof(Vertex), &this->_vertices[0], GL_STATIC_DRAW);
 
-    glEnableVertexAttribArray(2);
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *) offsetof(Vertex, _tex_coords));
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->_EBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->_indices.size() * sizeof(GLuint), &this->_indices[0], GL_STATIC_DRAW);
 
-    glBindVertexArray(0);
+        // Vertex Positions
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *) 0);
+
+        // Vertex Normals
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *) offsetof(Vertex, _normal));
+
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *) offsetof(Vertex, _tex_coords));
+
+        glBindVertexArray(0);
+    }
+
+    GLint Mesh::texture_from_file(const char* path, std::string directory)
+    {
+        //Generate texture ID and load texture data
+        std::string filename(path);
+        filename = directory + "/" + filename;
+        GLuint textureID;
+        glGenTextures(1, &textureID);
+        int width, height;
+        unsigned char* image = SOIL_load_image(filename.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+        // Assign texture to ID
+        glBindTexture(GL_TEXTURE_2D, textureID);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+        glGenerateMipmap(GL_TEXTURE_2D);
+
+        // Parameters
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glBindTexture(GL_TEXTURE_2D, 0);
+        SOIL_free_image_data(image);
+        return textureID;
+    }
 }
