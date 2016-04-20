@@ -54,7 +54,7 @@ This is already a known issue on Arch Linux.
 If you see this:
 ```
 terminate called after throwing an instance of 'std::runtime_error'
-  what():  ***** src/Model.cpp, line 71, process_mesh() : mesh->mVertices is NULL *****
+  what():  ***** src/Model.cpp, line 80, process_mesh() : mesh->mNormals is NULL *****
 ```
 Then you probably forgot to export your normals when you exported your Blender file as a .obj!
 When exporting on the left-hand side make sure you check the "Include Normals" option, otherwise
