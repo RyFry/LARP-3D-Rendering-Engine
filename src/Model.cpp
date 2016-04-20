@@ -1,4 +1,5 @@
 #include "Model.hpp"
+#include "Error.hpp"
 
 namespace Larp
 {
@@ -65,11 +66,19 @@ namespace Larp
             Vertex vertex;
             // Process vertex positions, normals and texture coordinates
             glm::vec3 vector;
+            if (mesh->mNormals == NULL)
+            {
+                THROW_RUNTIME_ERROR("mesh->mVertices is NULL");
+            }
             vector.x = mesh->mVertices[i].x;
             vector.y = mesh->mVertices[i].y;
             vector.z = mesh->mVertices[i].z;
             vertex._position = vector;
 
+            if (mesh->mNormals == NULL)
+            {
+                THROW_RUNTIME_ERROR("mesh->mNormals is NULL");
+            }
             vector.x = mesh->mNormals[i].x;
             vector.y = mesh->mNormals[i].y;
             vector.z = mesh->mNormals[i].z;
