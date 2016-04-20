@@ -48,3 +48,12 @@ ln -s libglfw.so.3.1 libglfw3.so
 This will create a symbolic link to the proper GLFW library that your linker will be able to detect.
 This is already a known issue on Arch Linux.
 
+### Easy-to-fix errors
+If you see this:
+```
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  ***** src/Model.cpp, line 71, process_mesh() : mesh->mVertices is NULL *****
+```
+Then you probably forgot to export your normals when you exported your Blender file as a .obj!
+When exporting on the left-hand side make sure you check the "Include Normals" option, otherwise
+you will get this error.
