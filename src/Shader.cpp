@@ -68,7 +68,7 @@ namespace Larp
         }
         catch (std::ifstream::failure e)
         {
-            THROW_RUNTIME_ERROR(std::string("Shader file not read successfully ") + std::string(e.what()));
+            THROW_RUNTIME_ERROR("Shader file not read successfully " << e.what());
         }
 
         return shader_code;
