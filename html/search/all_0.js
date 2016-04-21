@@ -22,6 +22,7 @@ var searchData=
   ['_5froot',['_root',['../classLarp_1_1SceneGraph.html#adf33065344039fd7fce5f828e800137f',1,'Larp::SceneGraph']]],
   ['_5frotation',['_rotation',['../classLarp_1_1Node.html#a3bf60bf55c2cda89031f9327fafa0d17',1,'Larp::Node']]],
   ['_5fscale',['_scale',['../classLarp_1_1Node.html#ae295b7db9065cd5bcc1edb32af6e7987',1,'Larp::Node']]],
+  ['_5fsettings',['_settings',['../classLarp_1_1ConfigurationLoader.html#ab952b0b19ffa465a73fd58302fccb124',1,'Larp::ConfigurationLoader']]],
   ['_5fshader',['_shader',['../classLarp_1_1Entity.html#a237a03d104060dcf5db941d8b4bd5a5a',1,'Larp::Entity']]],
   ['_5fsingleton',['_singleton',['../classLarp_1_1SceneGraph.html#a7e022917365e62f172efa60d7addd242',1,'Larp::SceneGraph']]],
   ['_5ftex_5fcoords',['_tex_coords',['../structLarp_1_1Vertex.html#aa3c59b04ad38f2861683c2784bc137fd',1,'Larp::Vertex']]],

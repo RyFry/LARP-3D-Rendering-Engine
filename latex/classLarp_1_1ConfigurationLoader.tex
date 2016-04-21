@@ -1,0 +1,121 @@
+\hypertarget{classLarp_1_1ConfigurationLoader}{}\section{Larp\+:\+:Configuration\+Loader Class Reference}
+\label{classLarp_1_1ConfigurationLoader}\index{Larp\+::\+Configuration\+Loader@{Larp\+::\+Configuration\+Loader}}
+
+
+{\ttfamily \#include $<$Configuration\+Loader.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLarp_1_1ConfigurationLoader_a56c72334b1d45ba36ec438d249ae7324}{Configuration\+Loader} (std\+::string file\+\_\+path)
+\item 
+std\+::string \hyperlink{classLarp_1_1ConfigurationLoader_a183f5d7ea7af3138ac6858de71333632}{get\+\_\+title} () const 
+\item 
+size\+\_\+t \hyperlink{classLarp_1_1ConfigurationLoader_abc3b910d211aabeb36972f864534f182}{get\+\_\+width} () const 
+\item 
+size\+\_\+t \hyperlink{classLarp_1_1ConfigurationLoader_a780a48cf2f6d3396ea846fc1a2995b9d}{get\+\_\+height} () const 
+\item 
+G\+Lenum \hyperlink{classLarp_1_1ConfigurationLoader_a164ed479f1a77417c799f62a92204690}{is\+\_\+resizable} () const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \hyperlink{classLarp_1_1ConfigurationLoader_ab952b0b19ffa465a73fd58302fccb124}{\+\_\+settings}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \hyperlink{classLarp_1_1ConfigurationLoader_a5b5d1d47f1f5cced025a85d248ae57e7}{D\+E\+F\+A\+U\+L\+TS}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Used to load basic configurations such as screen width and height so that recompiling for simple changes is not necessary. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Larp\+::\+Configuration\+Loader@{Larp\+::\+Configuration\+Loader}!Configuration\+Loader@{Configuration\+Loader}}
+\index{Configuration\+Loader@{Configuration\+Loader}!Larp\+::\+Configuration\+Loader@{Larp\+::\+Configuration\+Loader}}
+\subsubsection[{\texorpdfstring{Configuration\+Loader(std\+::string file\+\_\+path)}{ConfigurationLoader(std::string file_path)}}]{\setlength{\rightskip}{0pt plus 5cm}Larp\+::\+Configuration\+Loader\+::\+Configuration\+Loader (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{file\+\_\+path}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1ConfigurationLoader_a56c72334b1d45ba36ec438d249ae7324}{}\label{classLarp_1_1ConfigurationLoader_a56c72334b1d45ba36ec438d249ae7324}
+Loads the configuration options from the given configuration file. 
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+path} & The path to the configuration file to load. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+If options are provided that are not part of the pre-\/defined acceptable options, an error message is printed to the console, but execution will not be stopped. 
+
+If pre-\/defiined options are not given, then the default settings defined in \hyperlink{classLarp_1_1ConfigurationLoader_a5b5d1d47f1f5cced025a85d248ae57e7}{Configuration\+Loader\+::\+D\+E\+F\+A\+U\+L\+TS} for the missing options will be used. 
+
+If the given file cannot be opened, then all configurations defined in \hyperlink{classLarp_1_1ConfigurationLoader_a5b5d1d47f1f5cced025a85d248ae57e7}{Configuration\+Loader\+::\+D\+E\+F\+A\+U\+L\+TS} will be used. 
+\end{DoxyNote}
+
+
+\subsection{Member Function Documentation}
+\index{Larp\+::\+Configuration\+Loader@{Larp\+::\+Configuration\+Loader}!get\+\_\+height@{get\+\_\+height}}
+\index{get\+\_\+height@{get\+\_\+height}!Larp\+::\+Configuration\+Loader@{Larp\+::\+Configuration\+Loader}}
+\subsubsection[{\texorpdfstring{get\+\_\+height() const }{get_height() const }}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t Larp\+::\+Configuration\+Loader\+::get\+\_\+height (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classLarp_1_1ConfigurationLoader_a780a48cf2f6d3396ea846fc1a2995b9d}{}\label{classLarp_1_1ConfigurationLoader_a780a48cf2f6d3396ea846fc1a2995b9d}
+\begin{DoxyReturn}{Returns}
+The height of the window either from the {\ttfamily height} option in the configuration file, or the {\ttfamily height} entry in D\+E\+F\+A\+U\+L\+TS 
+\end{DoxyReturn}
+\index{Larp\+::\+Configuration\+Loader@{Larp\+::\+Configuration\+Loader}!get\+\_\+title@{get\+\_\+title}}
+\index{get\+\_\+title@{get\+\_\+title}!Larp\+::\+Configuration\+Loader@{Larp\+::\+Configuration\+Loader}}
+\subsubsection[{\texorpdfstring{get\+\_\+title() const }{get_title() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Larp\+::\+Configuration\+Loader\+::get\+\_\+title (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classLarp_1_1ConfigurationLoader_a183f5d7ea7af3138ac6858de71333632}{}\label{classLarp_1_1ConfigurationLoader_a183f5d7ea7af3138ac6858de71333632}
+\begin{DoxyReturn}{Returns}
+The title of the window either from the {\ttfamily title} option in the configuration file, or the {\ttfamily title} entry in D\+E\+F\+A\+U\+L\+TS 
+\end{DoxyReturn}
+\index{Larp\+::\+Configuration\+Loader@{Larp\+::\+Configuration\+Loader}!get\+\_\+width@{get\+\_\+width}}
+\index{get\+\_\+width@{get\+\_\+width}!Larp\+::\+Configuration\+Loader@{Larp\+::\+Configuration\+Loader}}
+\subsubsection[{\texorpdfstring{get\+\_\+width() const }{get_width() const }}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t Larp\+::\+Configuration\+Loader\+::get\+\_\+width (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classLarp_1_1ConfigurationLoader_abc3b910d211aabeb36972f864534f182}{}\label{classLarp_1_1ConfigurationLoader_abc3b910d211aabeb36972f864534f182}
+\begin{DoxyReturn}{Returns}
+The width of the window either from the {\ttfamily width} option in the configuration file, or the {\ttfamily width} entry in D\+E\+F\+A\+U\+L\+TS 
+\end{DoxyReturn}
+\index{Larp\+::\+Configuration\+Loader@{Larp\+::\+Configuration\+Loader}!is\+\_\+resizable@{is\+\_\+resizable}}
+\index{is\+\_\+resizable@{is\+\_\+resizable}!Larp\+::\+Configuration\+Loader@{Larp\+::\+Configuration\+Loader}}
+\subsubsection[{\texorpdfstring{is\+\_\+resizable() const }{is_resizable() const }}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lenum Larp\+::\+Configuration\+Loader\+::is\+\_\+resizable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classLarp_1_1ConfigurationLoader_a164ed479f1a77417c799f62a92204690}{}\label{classLarp_1_1ConfigurationLoader_a164ed479f1a77417c799f62a92204690}
+\begin{DoxyReturn}{Returns}
+The resizable of the window either from the {\ttfamily resizable} option in the configuration file, or the {\ttfamily resizable} entry in D\+E\+F\+A\+U\+L\+TS 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{Larp\+::\+Configuration\+Loader@{Larp\+::\+Configuration\+Loader}!\+\_\+settings@{\+\_\+settings}}
+\index{\+\_\+settings@{\+\_\+settings}!Larp\+::\+Configuration\+Loader@{Larp\+::\+Configuration\+Loader}}
+\subsubsection[{\texorpdfstring{\+\_\+settings}{_settings}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unordered\+\_\+map$<$std\+::string, std\+::string$>$ Larp\+::\+Configuration\+Loader\+::\+\_\+settings\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1ConfigurationLoader_ab952b0b19ffa465a73fd58302fccb124}{}\label{classLarp_1_1ConfigurationLoader_ab952b0b19ffa465a73fd58302fccb124}
+A map of (option -\/$>$ value) that defines the configuration options provided by the user in the config file provided. \index{Larp\+::\+Configuration\+Loader@{Larp\+::\+Configuration\+Loader}!D\+E\+F\+A\+U\+L\+TS@{D\+E\+F\+A\+U\+L\+TS}}
+\index{D\+E\+F\+A\+U\+L\+TS@{D\+E\+F\+A\+U\+L\+TS}!Larp\+::\+Configuration\+Loader@{Larp\+::\+Configuration\+Loader}}
+\subsubsection[{\texorpdfstring{D\+E\+F\+A\+U\+L\+TS}{DEFAULTS}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ Larp\+::\+Configuration\+Loader\+::\+D\+E\+F\+A\+U\+L\+TS\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1ConfigurationLoader_a5b5d1d47f1f5cced025a85d248ae57e7}{}\label{classLarp_1_1ConfigurationLoader_a5b5d1d47f1f5cced025a85d248ae57e7}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+    \{ \textcolor{stringliteral}{"title"},     \textcolor{stringliteral}{"Default Title"} \},
+    \{ \textcolor{stringliteral}{"width"},     \textcolor{stringliteral}{"800"} \},
+    \{ \textcolor{stringliteral}{"height"},    \textcolor{stringliteral}{"600"} \},
+    \{ \textcolor{stringliteral}{"resizable"}, \textcolor{stringliteral}{"false"} \},
+\}
+\end{DoxyCode}
+A map of pre-\/defined options, as well as their default values should the user not provide them in the config file. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{ConfigurationLoader_8hpp}{Configuration\+Loader.\+hpp}\item 
+src/\hyperlink{ConfigurationLoader_8cpp}{Configuration\+Loader.\+cpp}\end{DoxyCompactItemize}

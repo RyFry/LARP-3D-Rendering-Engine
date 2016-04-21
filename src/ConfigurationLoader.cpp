@@ -25,7 +25,7 @@ Larp::ConfigurationLoader::ConfigurationLoader(std::string file_path)
     }
     catch (std::ifstream::failure e)
     {
-        THROW_RUNTIME_ERROR("Failed to read larp.cfg " << e.what());
+        PRINT_ERROR("Failed to read " << file_path << ", so default configuration options will be used : " << e.what());
     }
 
     /*
@@ -47,7 +47,7 @@ Larp::ConfigurationLoader::ConfigurationLoader(std::string file_path)
 
         if (Larp::ConfigurationLoader::DEFAULTS.find(option) == Larp::ConfigurationLoader::DEFAULTS.end())
         {
-            PRINT_ERROR('`' << option << "` is not a valid configuration option");
+            PRINT_ERROR('`' << option << "` is not a valid configuration option. Ignoring.");
         }
         else
         {

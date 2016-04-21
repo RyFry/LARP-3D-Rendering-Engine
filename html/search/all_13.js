@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['zoom',['ZOOM',['../classCamera.html#a34cdfe4c17868880037d5ff78159f158',1,'Camera']]]
+  ['vec3',['Vec3',['../GLMTypedefs_8hpp.html#ad365fcb04dc192033f427163e03fd380',1,'GLMTypedefs.hpp']]],
+  ['vertex',['Vertex',['../structLarp_1_1Vertex.html',1,'Larp']]]
 ];

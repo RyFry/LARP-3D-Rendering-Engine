@@ -94,6 +94,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock"><code>#include &lt;string&gt;</code><br />
 <code>#include &lt;sstream&gt;</code><br />
 <code>#include &lt;stdexcept&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
 </div>
 <p><a href="Error_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -101,8 +102,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Macros</h2></td></tr>
 <tr class="memitem:a92ee83d4fb46a2f4ef94df6b3954a297"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Error_8hpp.html#a92ee83d4fb46a2f4ef94df6b3954a297">THROW_RUNTIME_ERROR</a>(S)</td></tr>
 <tr class="separator:a92ee83d4fb46a2f4ef94df6b3954a297"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab22eaa51a7e4d29d1d7a283679873506"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Error_8hpp.html#ab22eaa51a7e4d29d1d7a283679873506">PRINT_ERROR</a>(S)</td></tr>
+<tr class="separator:ab22eaa51a7e4d29d1d7a283679873506"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="ab22eaa51a7e4d29d1d7a283679873506"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PRINT_ERROR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">S</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">std::ostringstream error_message;           \</div><div class="line">    error_message &lt;&lt; <span class="stringliteral">&quot;***** &quot;</span> &lt;&lt; __FILE__ &lt;&lt; <span class="stringliteral">&quot;, line &quot;</span> &lt;&lt; __LINE__ &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt; S &lt;&lt; <span class="stringliteral">&quot; *****&quot;</span>; \</div><div class="line">    std::cout &lt;&lt; error_message.str() &lt;&lt; std::endl;</div></div><!-- fragment --><p>Macro for printing non-fatal errors </p>
+
+</div>
+</div>
 <a class="anchor" id="a92ee83d4fb46a2f4ef94df6b3954a297"></a>
 <div class="memitem">
 <div class="memproto">
@@ -116,7 +136,7 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">std::ostringstream error_message;                                   \</div><div class="line">    error_message &lt;&lt; <span class="stringliteral">&quot;***** &quot;</span> &lt;&lt; __FILE__ &lt;&lt; <span class="stringliteral">&quot;, line &quot;</span> &lt;&lt; __LINE__ &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt; S &lt;&lt; <span class="stringliteral">&quot; *****&quot;</span>; \</div><div class="line">    throw std::runtime_error(error_message.str());</div></div><!-- fragment --><p>Macro for throwing inline runtime_errors </p>
+<b>Value:</b><div class="fragment"><div class="line">std::ostringstream error_message;                                   \</div><div class="line">    error_message &lt;&lt; <span class="stringliteral">&quot;***** &quot;</span> &lt;&lt; __FILE__ &lt;&lt; <span class="stringliteral">&quot;, line &quot;</span> &lt;&lt; __LINE__ &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; __func__ &lt;&lt; <span class="stringliteral">&quot;() : &quot;</span> &lt;&lt; S &lt;&lt; <span class="stringliteral">&quot; *****&quot;</span>; \</div><div class="line">    throw std::runtime_error(error_message.str());</div></div><!-- fragment --><p>Macro for throwing inline runtime_errors </p>
 
 </div>
 </div>
