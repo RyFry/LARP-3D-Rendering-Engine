@@ -6,10 +6,12 @@
 #include <GLFW/glfw3.h>
 
 #include "LarpPrerequisites.hpp"
-#include "Shader.hpp"
+
 #include "Camera.hpp"
+#include "ConfigurationLoader.hpp"
 #include "Model.hpp"
 #include "SceneGraph.hpp"
+#include "Shader.hpp"
 
 // GLM Mathemtics
 #include <glm/glm.hpp>
@@ -41,6 +43,9 @@ GLfloat lastFrame = 0.0f;
 
 int main(void)
 {
+    Larp::ConfigurationLoader config("larp.cfg");
+    screenWidth = config.get_width();
+    screenHeight = config.get_height();
     // Init GLFW
     if (!glfwInit())
         throw std::runtime_error(std::string(__FILE__) + std::string(" : line ") + std::to_string(__LINE__) + std::string(" :: glfwInit() failed!"));
@@ -52,7 +57,7 @@ int main(void)
 
     glfwSetErrorCallback(error_callback);
 
-    GLFWwindow* window = glfwCreateWindow(screenWidth, screenHeight, "LearnOpenGL", nullptr, nullptr); // Windowed
+    GLFWwindow* window = glfwCreateWindow(screenWidth, screenHeight, config.get_title().c_str(), nullptr, nullptr); // Windowed
     if (window == nullptr)
         throw std::runtime_error(std::string(__FILE__) + std::string(" : line ") + std::to_string(__LINE__) + std::string(" :: GLFWwindow* = nullptr"));
     glfwMakeContextCurrent(window);
