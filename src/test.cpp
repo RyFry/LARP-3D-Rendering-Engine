@@ -91,9 +91,15 @@ int main(void)
     node->set_scale(0.1f, 0.1f, 0.1f);
     node->attach_entity(entity);
 
+    // Create floor
+    Larp::pNode node2 = graph->create_child_node();
+    Larp::Model floor("assets/floor.obj");
+    Larp::pEntity floorE = Larp::Entity::create(shader, floor);
+    node2->attach_entity(floorE);
+
     // Testing the SceneGraph clear
-    node1.reset(new Larp::Node());
-    node.reset(new Larp::Node());
+    // node1.reset(new Larp::Node());
+    // node.reset(new Larp::Node());
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))

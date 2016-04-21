@@ -25,8 +25,10 @@ Xinerama
 X11
 dl
 Xcursor
+SOIL
+glm
+assimp
 ```
-All of these dependencies are what GLFW depend on, and most of them will be preincluded in a Unix install.
 
 ### Building and Running
 To build and run:
@@ -36,7 +38,7 @@ make run
 ```
 If all of the dependencies are met, the project should load and run.
 
-### Known issues
+### Known Issues
 ```
 /usr/bin/ld: cannot find -lglfw3
 ```
@@ -48,3 +50,12 @@ ln -s libglfw.so.3.1 libglfw3.so
 This will create a symbolic link to the proper GLFW library that your linker will be able to detect.
 This is already a known issue on Arch Linux.
 
+### Easy-to-fix errors
+If you see this:
+```
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  ***** src/Model.cpp, line 80, process_mesh() : mesh->mNormals is NULL *****
+```
+Then you probably forgot to export your normals when you exported your Blender file as a .obj!
+When exporting, on the left-hand side make sure you check the "Include Normals" option, otherwise
+you will get this error.
