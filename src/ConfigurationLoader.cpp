@@ -61,7 +61,7 @@ std::string Larp::ConfigurationLoader::get_title() const
     // Was a title provided?
     if (this->_settings.find("title") == this->_settings.end())
     {
-        std::cout << "title was not provided, providing default title of `"
+        std::cout << "`title` was not provided, providing default title of `"
                   << Larp::ConfigurationLoader::DEFAULTS.at("title")
                   << "`."
                   << std::endl;
@@ -76,9 +76,9 @@ std::string Larp::ConfigurationLoader::get_title() const
 size_t Larp::ConfigurationLoader::get_width() const
 {
     // Was a width provided?
-    if (this->_settings.find("title") == this->_settings.end())
+    if (this->_settings.find("width") == this->_settings.end())
     {
-        std::cout << "title was not provided, providing default width of "
+        std::cout << "`width` was not provided, providing default width of "
                   << Larp::ConfigurationLoader::DEFAULTS.at("width")
                   << std::endl;
         std::stringstream sstream(Larp::ConfigurationLoader::DEFAULTS.at("width"));
@@ -98,9 +98,9 @@ size_t Larp::ConfigurationLoader::get_width() const
 size_t Larp::ConfigurationLoader::get_height() const
 {
     // Was a height provided?
-    if (this->_settings.find("title") == this->_settings.end())
+    if (this->_settings.find("height") == this->_settings.end())
     {
-        std::cout << "title was not provided, providing default height of "
+        std::cout << "`height` was not provided, providing default height of "
                   << Larp::ConfigurationLoader::DEFAULTS.at("height")
                   << std::endl;
         std::stringstream sstream(Larp::ConfigurationLoader::DEFAULTS.at("height"));
@@ -120,15 +120,15 @@ size_t Larp::ConfigurationLoader::get_height() const
 GLenum Larp::ConfigurationLoader::is_resizable() const
 {
     // Was a resizable provided?
-    if (this->_settings.find("title") == this->_settings.end())
+    if (this->_settings.find("resizable") == this->_settings.end())
     {
-        std::cout << "title was not provided, providing default resizable of "
+        std::cout << "`resizable` was not provided, providing default resizable of "
                   << Larp::ConfigurationLoader::DEFAULTS.at("resizable")
                   << std::endl;
         return Larp::ConfigurationLoader::DEFAULTS.at("resizable") == "true" ? GL_TRUE : GL_FALSE;
     }
     else
     {
-        return this->_settings.at("height") == "true" ? GL_TRUE : GL_FALSE;
+        return this->_settings.at("resizable") == "true" ? GL_TRUE : GL_FALSE;
     }
 }
