@@ -1,8 +1,10 @@
 #pragma once
 
-#include <memory>
+#include <memory>       // shared_ptr, weak_ptr
 
-#include <GL/glew.h>
+#include <GL/glew.h>    // All da OpenGL schtuff
+
+#include "Error.hpp"    // Custom error handling macro
 
 namespace Larp
 {

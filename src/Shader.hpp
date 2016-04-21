@@ -2,14 +2,11 @@
 #define SHADER_HPP
 
 #include "LarpPrerequisites.hpp"
-#include "Error.hpp"
 
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <iostream>
-
-#include <GL/glew.h> // Include glew to get all the required OpenGL headers
 
 namespace Larp
 {
