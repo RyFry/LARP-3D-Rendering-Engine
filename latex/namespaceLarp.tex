@@ -1,11 +1,16 @@
-\hypertarget{namespaceLarp}{}\section{Larp Namespace Reference}
+\hypertarget{namespaceLarp}{\section{Larp Namespace Reference}
 \label{namespaceLarp}\index{Larp@{Larp}}
+}
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{classLarp_1_1ConfigurationLoader}{Configuration\+Loader}
+class \hyperlink{classLarp_1_1ConfigurationLoader}{Configuration\-Loader}
 \item 
 class \hyperlink{classLarp_1_1Entity}{Entity}
+\item 
+struct \hyperlink{structLarp_1_1Vertex}{Vertex}
+\item 
+class \hyperlink{classLarp_1_1Texture}{Texture}
 \item 
 class \hyperlink{classLarp_1_1Mesh}{Mesh}
 \item 
@@ -13,32 +18,49 @@ class \hyperlink{classLarp_1_1Model}{Model}
 \item 
 class \hyperlink{classLarp_1_1Node}{Node}
 \item 
-class \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}
+class \hyperlink{classLarp_1_1SceneGraph}{Scene\-Graph}
 \item 
 class \hyperlink{classLarp_1_1Shader}{Shader}
-\item 
-class \hyperlink{classLarp_1_1Texture}{Texture}
-\item 
-struct \hyperlink{structLarp_1_1Vertex}{Vertex}
 \end{DoxyCompactItemize}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-typedef std\+::shared\+\_\+ptr$<$ \hyperlink{classLarp_1_1Entity}{Entity} $>$ \hyperlink{namespaceLarp_aca47662468377e5aaf9a665699a4d97f}{p\+Entity}
+typedef std\-::shared\-\_\-ptr$<$ \hyperlink{classLarp_1_1Entity}{Entity} $>$ \hyperlink{namespaceLarp_ae3ffca1f126e4263cbdc59b116ee465a}{Shared\-Entity}
 \item 
-typedef std\+::shared\+\_\+ptr$<$ \hyperlink{classLarp_1_1Node}{Node} $>$ \hyperlink{namespaceLarp_a57e9a3e29e68cdf508c964274d9ac1a4}{p\+Node}
+typedef std\-::unique\-\_\-ptr$<$ \hyperlink{classLarp_1_1Entity}{Entity} $>$ \hyperlink{namespaceLarp_ad6d203c6dc3d8ea7a5517a64e1665403}{Unique\-Entity}
 \item 
-typedef std\+::shared\+\_\+ptr$<$ \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} $>$ \hyperlink{namespaceLarp_a590f73362521ab6a9c682d4eb2719002}{p\+Scene\+Graph}
+typedef \hyperlink{classLarp_1_1Entity}{Entity} $\ast$const \hyperlink{namespaceLarp_a775efcc4cabb308d50168c52df343353}{Entity\-Ptr}
+\item 
+typedef std\-::unique\-\_\-ptr$<$ \hyperlink{classLarp_1_1Node}{Node} $>$ \hyperlink{namespaceLarp_ad95a88bc34f8c78cefd64c9bbeb94a58}{Unique\-Node}
+\item 
+typedef \hyperlink{classLarp_1_1Node}{Node} $\ast$const \hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Node\-Ptr}
+\item 
+typedef std\-::unique\-\_\-ptr\\*
+$<$ \hyperlink{classLarp_1_1SceneGraph}{Scene\-Graph} $>$ \hyperlink{namespaceLarp_a81a0d129ec1fc8f1f9fa231fbba6b19b}{Unique\-Scene\-Graph}
+\item 
+typedef \hyperlink{classLarp_1_1SceneGraph}{Scene\-Graph} $\ast$const \hyperlink{namespaceLarp_acf02d81e4b52238dcd17cb6249eadadc}{Scene\-Graph\-Ptr}
 \end{DoxyCompactItemize}
 
 
 \subsection{Typedef Documentation}
-\index{Larp@{Larp}!p\+Entity@{p\+Entity}}
-\index{p\+Entity@{p\+Entity}!Larp@{Larp}}
-\subsubsection[{\texorpdfstring{p\+Entity}{pEntity}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::shared\+\_\+ptr$<${\bf Entity}$>$ {\bf Larp\+::p\+Entity}}\hypertarget{namespaceLarp_aca47662468377e5aaf9a665699a4d97f}{}\label{namespaceLarp_aca47662468377e5aaf9a665699a4d97f}
-\index{Larp@{Larp}!p\+Node@{p\+Node}}
-\index{p\+Node@{p\+Node}!Larp@{Larp}}
-\subsubsection[{\texorpdfstring{p\+Node}{pNode}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::shared\+\_\+ptr$<${\bf Node}$>$ {\bf Larp\+::p\+Node}}\hypertarget{namespaceLarp_a57e9a3e29e68cdf508c964274d9ac1a4}{}\label{namespaceLarp_a57e9a3e29e68cdf508c964274d9ac1a4}
-\index{Larp@{Larp}!p\+Scene\+Graph@{p\+Scene\+Graph}}
-\index{p\+Scene\+Graph@{p\+Scene\+Graph}!Larp@{Larp}}
-\subsubsection[{\texorpdfstring{p\+Scene\+Graph}{pSceneGraph}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::shared\+\_\+ptr$<${\bf Scene\+Graph}$>$ {\bf Larp\+::p\+Scene\+Graph}}\hypertarget{namespaceLarp_a590f73362521ab6a9c682d4eb2719002}{}\label{namespaceLarp_a590f73362521ab6a9c682d4eb2719002}
+\hypertarget{namespaceLarp_a775efcc4cabb308d50168c52df343353}{\index{Larp@{Larp}!Entity\-Ptr@{Entity\-Ptr}}
+\index{Entity\-Ptr@{Entity\-Ptr}!Larp@{Larp}}
+\subsubsection[{Entity\-Ptr}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Entity}$\ast$ const {\bf Larp\-::\-Entity\-Ptr}}}\label{namespaceLarp_a775efcc4cabb308d50168c52df343353}
+\hypertarget{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{\index{Larp@{Larp}!Node\-Ptr@{Node\-Ptr}}
+\index{Node\-Ptr@{Node\-Ptr}!Larp@{Larp}}
+\subsubsection[{Node\-Ptr}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Node}$\ast$ const {\bf Larp\-::\-Node\-Ptr}}}\label{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}
+\hypertarget{namespaceLarp_acf02d81e4b52238dcd17cb6249eadadc}{\index{Larp@{Larp}!Scene\-Graph\-Ptr@{Scene\-Graph\-Ptr}}
+\index{Scene\-Graph\-Ptr@{Scene\-Graph\-Ptr}!Larp@{Larp}}
+\subsubsection[{Scene\-Graph\-Ptr}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Scene\-Graph}$\ast$ const {\bf Larp\-::\-Scene\-Graph\-Ptr}}}\label{namespaceLarp_acf02d81e4b52238dcd17cb6249eadadc}
+\hypertarget{namespaceLarp_ae3ffca1f126e4263cbdc59b116ee465a}{\index{Larp@{Larp}!Shared\-Entity@{Shared\-Entity}}
+\index{Shared\-Entity@{Shared\-Entity}!Larp@{Larp}}
+\subsubsection[{Shared\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::shared\-\_\-ptr$<${\bf Entity}$>$ {\bf Larp\-::\-Shared\-Entity}}}\label{namespaceLarp_ae3ffca1f126e4263cbdc59b116ee465a}
+\hypertarget{namespaceLarp_ad6d203c6dc3d8ea7a5517a64e1665403}{\index{Larp@{Larp}!Unique\-Entity@{Unique\-Entity}}
+\index{Unique\-Entity@{Unique\-Entity}!Larp@{Larp}}
+\subsubsection[{Unique\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::unique\-\_\-ptr$<${\bf Entity}$>$ {\bf Larp\-::\-Unique\-Entity}}}\label{namespaceLarp_ad6d203c6dc3d8ea7a5517a64e1665403}
+\hypertarget{namespaceLarp_ad95a88bc34f8c78cefd64c9bbeb94a58}{\index{Larp@{Larp}!Unique\-Node@{Unique\-Node}}
+\index{Unique\-Node@{Unique\-Node}!Larp@{Larp}}
+\subsubsection[{Unique\-Node}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::unique\-\_\-ptr$<${\bf Node}$>$ {\bf Larp\-::\-Unique\-Node}}}\label{namespaceLarp_ad95a88bc34f8c78cefd64c9bbeb94a58}
+\hypertarget{namespaceLarp_a81a0d129ec1fc8f1f9fa231fbba6b19b}{\index{Larp@{Larp}!Unique\-Scene\-Graph@{Unique\-Scene\-Graph}}
+\index{Unique\-Scene\-Graph@{Unique\-Scene\-Graph}!Larp@{Larp}}
+\subsubsection[{Unique\-Scene\-Graph}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::unique\-\_\-ptr$<${\bf Scene\-Graph}$>$ {\bf Larp\-::\-Unique\-Scene\-Graph}}}\label{namespaceLarp_a81a0d129ec1fc8f1f9fa231fbba6b19b}

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quat',['Quat',['../GLMTypedefs_8hpp.html#adadd87a811abfb0203bc133517a06946',1,'GLMTypedefs.hpp']]]
+  ['nodeptr',['NodePtr',['../namespaceLarp.html#a171c1dc8b70cfb441b15d7386780db23',1,'Larp']]]
 ];

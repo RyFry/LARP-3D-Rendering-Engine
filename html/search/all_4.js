@@ -1,6 +1,7 @@
 var searchData=
 [
   ['defaults',['DEFAULTS',['../classLarp_1_1ConfigurationLoader.html#a5b5d1d47f1f5cced025a85d248ae57e7',1,'Larp::ConfigurationLoader']]],
+  ['delete_5fchild',['delete_child',['../classLarp_1_1Node.html#a091f322ac9a2dcfcb81ab38bdff61399',1,'Larp::Node']]],
   ['deltatime',['deltaTime',['../test_8cpp.html#adf7cb443fa70a647d5603ee33b392102',1,'test.cpp']]],
   ['diffuse',['DIFFUSE',['../classLarp_1_1Texture.html#aa4e19b5df6a8f1f0eae8235db7e52daaa99b3b29878c69b4fc932de604ce39581',1,'Larp::Texture']]],
   ['do_5fmovement',['Do_Movement',['../test_8cpp.html#ad8a8aa1b002540c003f75bd4cd127fbd',1,'test.cpp']]],

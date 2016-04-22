@@ -8,5 +8,5 @@ var searchData=
   ['set_5fscale',['set_scale',['../classLarp_1_1Node.html#a20048e6f1487b9e6bdb5e2f66794de65',1,'Larp::Node::set_scale(glm::vec3 scale)'],['../classLarp_1_1Node.html#aa212fa28bc6cc6df4ded2a487fd591eb',1,'Larp::Node::set_scale(GLfloat x, GLfloat y, GLfloat z)']]],
   ['setup_5fmesh',['setup_mesh',['../classLarp_1_1Mesh.html#af1c7441ca21e77717edc513865c49c93',1,'Larp::Mesh']]],
   ['shader',['Shader',['../classLarp_1_1Shader.html#a02cd13e09037075d62c3566e2fc797ab',1,'Larp::Shader']]],
-  ['singleton',['singleton',['../classLarp_1_1SceneGraph.html#a5a34524c135b74f97a699aef4dc146b5',1,'Larp::SceneGraph']]]
+  ['singleton',['singleton',['../classLarp_1_1SceneGraph.html#a569504ef263e392f9376bd50bb09a912',1,'Larp::SceneGraph']]]
 ];
