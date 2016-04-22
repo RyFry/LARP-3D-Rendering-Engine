@@ -1,23 +1,23 @@
 #include "SceneGraph.hpp"
 namespace Larp
 {
-    pSceneGraph SceneGraph::_singleton(nullptr);
+    UniqueSceneGraph SceneGraph::_singleton(nullptr);
 
     SceneGraph::SceneGraph()
         : _root(new Node())
     {
     }
 
-    pSceneGraph SceneGraph::singleton()
+    SceneGraphPtr SceneGraph::singleton()
     {
         if (!_singleton)
         {
-            _singleton = pSceneGraph(new SceneGraph());
+            _singleton.reset(new SceneGraph());
         }
-        return _singleton;
+        return _singleton.get();
     }
 
-    pNode SceneGraph::create_child_node()
+    NodePtr SceneGraph::create_child_node()
     {
         return _root->create_child();
     }

@@ -19,18 +19,17 @@ namespace Larp
             it->draw(my_model, view, projection);
     }
 
-    pNode Node::create_child()
+    NodePtr Node::create_child()
     {
-        pNode tmp(new Node());
-        tmp->_parent = shared_from_this();
-        this->_children.insert(tmp);
-        return tmp;
+        Node* tmp = new Node();
+        tmp->_parent = this;
+        this->_children.insert(UniqueNode(tmp));
+        return NodePtr(tmp);
     }
 
-    pNode Node::remove_child(pNode& child)
+    void Node::remove_child(NodePtr child)
     {
-        this->_children.erase(child);
-        return child;
+        this->_children.erase(UniqueNode(const_cast<Node*>(child)));
     }
 
     void Node::set_position(GLfloat x, GLfloat y, GLfloat z)
@@ -103,15 +102,13 @@ namespace Larp
         this->_scale.z = z;
     }
 
-    void Node::attach_entity(pEntity& entity)
+    void Node::attach_entity(EntityPtr entity)
     {
-        this->_entity = entity;
+        this->_entity.reset(const_cast<Entity*>(entity));
     }
 
-    pEntity Node::remove_entity()
+    void Node::remove_entity()
     {
-        pEntity tmp = this->_entity;
-        this->_entity = pEntity(nullptr);
-        return tmp;
+        this->_entity.release();
     }
 }

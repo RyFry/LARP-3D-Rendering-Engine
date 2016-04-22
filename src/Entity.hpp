@@ -28,21 +28,14 @@ namespace Larp
          * Default Constructor
          */
         Entity();
+
+    public:
         /**
          * Constructor
          * @param shader A Shader object used during rendering
          * @param model The Model to draw during rendering
          */
         Entity(const Shader& shader, const Model& model);
-
-    public:
-        /**
-         * Creates a pEntity
-         * @param shader A Shader object used during rendering
-         * @param model The Model to draw during rendering
-         * @return The pEntity with the same shader and model passed as parameters
-         */
-        static pEntity create(const Shader& shader, const Model& model);
         /**
          * Draws the model atteched to this entity using the
          * associated shader

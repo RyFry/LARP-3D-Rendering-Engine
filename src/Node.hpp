@@ -12,21 +12,21 @@
 
 namespace Larp
 {
-    class Node : public std::enable_shared_from_this<Node>
+    class Node
     {
     private:
         /**
          * The Entity object attached to this Node. Drawn during rendering.
          */
-        pEntity _entity;
+        UniqueEntity _entity;
         /**
          * This Node's parent Node.
          */
-        std::weak_ptr<Node> _parent;
+        Node* _parent;
         /**
          * All of this Node's child Node's
          */
-        std::unordered_set<pNode> _children;
+        std::unordered_set<UniqueNode> _children;
 
         /**
          * This Node's position
@@ -58,12 +58,12 @@ namespace Larp
          * Creates a new Node that is a child of this Node.
          * @return A pointer to the new Node
          */
-        pNode create_child();
+        NodePtr create_child();
         /**
          * Removes a given pNode as a child of this Node object.
-         * @return the pNode that was removed
+         * @warning After this function is called, child is no longer a valid pointer.
          */
-        pNode remove_child(pNode& child);
+        void remove_child(NodePtr child);
         /**
          * Sets the position of this Node
          * @param x The new x position.
@@ -153,11 +153,12 @@ namespace Larp
          * Attaches a pEntity to this object
          * @param entity The pEntity to attach to this object
          */
-        void attach_entity(pEntity& entity);
+        void attach_entity(EntityPtr entity);
         /**
          * Detaches the pEntity from this Node
-         * @return the pEntity that was removed from this Node
+         * @warning After this function is called, any pointers to this object's
+         *          Entity are no longer valid.
          */
-        pEntity remove_entity();
+        void remove_entity();
     };
 }

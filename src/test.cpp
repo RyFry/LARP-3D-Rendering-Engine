@@ -32,7 +32,7 @@ void Do_Movement();
 void error_callback(int error, const char* description);
 
 // Camera
-Larp::pSceneGraph graph;
+Larp::SceneGraphPtr graph = Larp::SceneGraph::singleton();
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
@@ -83,23 +83,20 @@ int main(void)
 
     Larp::Shader shader("shaders/default.vert", "shaders/default.frag");
     Larp::Model nanosuit("assets/nanosuit.obj");
-    Larp::pEntity entity = Larp::Entity::create(shader, nanosuit);
+    Larp::EntityPtr entity = new Larp::Entity(shader, nanosuit);
 
-    graph = Larp::SceneGraph::singleton();
-    Larp::pNode node1 = graph->create_child_node();
-    Larp::pNode node = node1->create_child();
+    Larp::NodePtr node1 = graph->create_child_node();
+    Larp::NodePtr node = node1->create_child();
     node->set_scale(0.1f, 0.1f, 0.1f);
     node->attach_entity(entity);
 
     // Create floor
-    Larp::pNode node2 = graph->create_child_node();
+    Larp::NodePtr node2 = graph->create_child_node();
     Larp::Model floor("assets/floor.obj");
-    Larp::pEntity floorE = Larp::Entity::create(shader, floor);
+    Larp::EntityPtr floorE = new Larp::Entity(shader, floor);
     node2->attach_entity(floorE);
 
-    // Testing the SceneGraph clear
-    // node1.reset(new Larp::Node());
-    // node.reset(new Larp::Node());
+    node1->remove_child(node);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
