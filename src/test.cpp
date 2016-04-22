@@ -32,7 +32,7 @@ void Do_Movement();
 void error_callback(int error, const char* description);
 
 // Camera
-Larp::pSceneGraph graph;
+Larp::SceneGraphPtr graph = Larp::SceneGraph::singleton();
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
@@ -85,13 +85,12 @@ int main(void)
     Larp::Model nanosuit("assets/nanosuit.obj");
     Larp::SharedEntity entity = Larp::Entity::create(shader, nanosuit);
 
-    Larp::NodePtr node1 = graph->create_child_node();
-    Larp::NodePtr node11 = node1->create_child();
-    Larp::NodePtr node12 = node1->create_child();
+    Larp::NodePtr node11 = graph->create_child_node();
+    Larp::NodePtr node12 = graph->create_child_node();
 
     Larp::NodePtr node21 = node11->create_child();
-    node11->set_scale(0.1f, 0.1f, 0.1f);
-    node11->attach_entity(entity);
+    node21->set_scale(0.1f, 0.1f, 0.1f);
+    node21->attach_entity(entity);
 
     node11->remove_child(node21);
     node12->attach_child(node21);

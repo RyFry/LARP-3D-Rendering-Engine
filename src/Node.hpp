@@ -13,7 +13,7 @@
 
 namespace Larp
 {
-    class Node : public std::enable_shared_from_this<Node>
+    class Node
     {
     private:
         /**
@@ -23,7 +23,7 @@ namespace Larp
         /**
          * This Node's parent Node.
          */
-        std::weak_ptr<Node> _parent;
+        Node* _parent;
         /**
          * All of this Node's child Node's. We use a map instead of a set
          * because std::unordered_set doesn't support non-const iterators
@@ -60,7 +60,7 @@ namespace Larp
          * Creates a new Node that is a child of this Node.
          * @return A pointer to the new Node
          */
-        pNode create_child();
+        NodePtr create_child();
         /**
          * Removes a given pNode as a child of this Node object.
          * @return A pointer to the child was removed
@@ -170,9 +170,10 @@ namespace Larp
          */
         void attach_entity(SharedEntity entity);
         /**
-         * Detaches the SharedEntity from this Node
-         * @return the SharedEntity that was removed from this Node
+         * Detaches the pEntity from this Node
+         * @warning After this function is called, any pointers to this object's
+         *          Entity are no longer valid.
          */
-         SharedEntity remove_entity();
+        void remove_entity();
     };
 }

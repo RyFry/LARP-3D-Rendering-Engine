@@ -22,6 +22,7 @@ namespace Larp
     class Vertex;
 
     typedef std::shared_ptr<Entity> SharedEntity;
+    typedef std::unique_ptr<Entity> UniqueEntity;
     typedef Entity* const EntityPtr;
     typedef std::unique_ptr<Node> UniqueNode;
     typedef Node* const NodePtr;

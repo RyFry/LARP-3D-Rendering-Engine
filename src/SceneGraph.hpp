@@ -13,12 +13,12 @@ namespace Larp
         /**
          * The root pNode of this SceneGraph
          */
-        pNode _root;
+        UniqueNode _root;
         /**
          * A Singleton instance of the SceneGraph class that prevents
          * users from making more than one SceneGraph.
          */
-        static pSceneGraph _singleton;
+        static UniqueSceneGraph _singleton;
         /**
          * Default constructor. Made private to avoid having multiple
          * SceneGraph's per program.
@@ -29,14 +29,14 @@ namespace Larp
          * Returns the single instance of SceneGraph
          * @return The singleton instance of SceneGraph
          */
-        static pSceneGraph singleton();
+        static SceneGraphPtr singleton();
         /**
          * Creates a new child on the root Node of the SceneGraph
          * @return The new child node attached to the root
          * @note The new child may not come before the other children
          *       during rendering
          */
-        pNode create_child_node();
+        NodePtr create_child_node();
         /**
          * Clears all Nodes from the SceneGraph
          */

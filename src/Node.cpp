@@ -36,7 +36,7 @@ namespace Larp
             PRINT_ERROR("Child is not a child of this Node. Removing nothing.");
             return child;
         }
-        it->second.release(); // Make sure we don't delete the child we are removing
+        it->second.release();       // Make sure we don't delete the child we are removing
         ret_val->_parent = nullptr; // Make the parent nullptr for testing when the user (possibly)
                                     // reatteches the Node somewhere else
         this->_children.erase(it);
@@ -140,7 +140,7 @@ namespace Larp
         this->_entity = entity;
     }
 
-    SharedEntity Node::remove_entity()
+    void Node::remove_entity()
     {
         this->_entity.reset();
     }
