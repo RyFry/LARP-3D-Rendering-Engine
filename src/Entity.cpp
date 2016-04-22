@@ -8,9 +8,9 @@ namespace Larp
           _model(model)
     {}
 
-    pEntity Entity::create(const Shader& shader, const Model& model)
+    SharedEntity Entity::create(const Shader& shader, const Model& model)
     {
-        return pEntity(new Entity(shader, model));
+        return SharedEntity(new Entity(shader, model));
     }
 
     void Entity::draw(const glm::mat4& model, const glm::mat4& view, const glm::mat4& projection)

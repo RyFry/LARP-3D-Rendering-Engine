@@ -16,21 +16,53 @@ namespace Larp
         if (this->_entity != nullptr)
             this->_entity->draw(my_model, view, projection);
         for (auto& it : this->_children)
-            it->draw(my_model, view, projection);
+            it.second->draw(my_model, view, projection);
     }
 
-    pNode Node::create_child()
+    NodePtr Node::create_child()
     {
-        pNode tmp(new Node());
-        tmp->_parent = shared_from_this();
-        this->_children.insert(tmp);
-        return tmp;
+        Node* tmp = new Node();
+        tmp->_parent = this;
+        this->_children[tmp] = UniqueNode(tmp);
+        return NodePtr(tmp);
     }
 
-    pNode Node::remove_child(pNode& child)
+    NodePtr Node::remove_child(NodePtr child)
     {
-        this->_children.erase(child);
-        return child;
+        Node* ret_val = child;
+        auto it = this->_children.find(ret_val);
+        if (it == this->_children.end())
+        {
+            PRINT_ERROR("Child is not a child of this Node. Removing nothing.");
+            return child;
+        }
+        it->second.release(); // Make sure we don't delete the child we are removing
+        ret_val->_parent = nullptr; // Make the parent nullptr for testing when the user (possibly)
+                                    // reatteches the Node somewhere else
+        this->_children.erase(it);
+        return NodePtr(ret_val);
+    }
+
+    void Node::delete_child(NodePtr child)
+    {
+        auto it = this->_children.find(const_cast<Node*>(child));
+        if (it == this->_children.end())
+        {
+            PRINT_ERROR("Child is not a child of this Node. Removing nothing.");
+        }
+        this->_children.erase(it);
+    }
+
+    void Node::attach_child(NodePtr child)
+    {
+        if (child->_parent != nullptr)
+        {
+            THROW_RUNTIME_ERROR("This child is already attached to another Node");
+        }
+
+        Node* tmp = child;
+        this->_children[tmp] = UniqueNode(tmp);
+        tmp->_parent = this;
     }
 
     void Node::set_position(GLfloat x, GLfloat y, GLfloat z)
@@ -103,15 +135,13 @@ namespace Larp
         this->_scale.z = z;
     }
 
-    void Node::attach_entity(pEntity& entity)
+    void Node::attach_entity(SharedEntity entity)
     {
         this->_entity = entity;
     }
 
-    pEntity Node::remove_entity()
+    SharedEntity Node::remove_entity()
     {
-        pEntity tmp = this->_entity;
-        this->_entity = pEntity(nullptr);
-        return tmp;
+        this->_entity.reset();
     }
 }

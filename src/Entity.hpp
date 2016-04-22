@@ -37,12 +37,12 @@ namespace Larp
 
     public:
         /**
-         * Creates a pEntity
+         * Creates a SharedEntity
          * @param shader A Shader object used during rendering
          * @param model The Model to draw during rendering
-         * @return The pEntity with the same shader and model passed as parameters
+         * @return The SharedEntity with the same shader and model passed as parameters
          */
-        static pEntity create(const Shader& shader, const Model& model);
+        static SharedEntity create(const Shader& shader, const Model& model);
         /**
          * Draws the model atteched to this entity using the
          * associated shader

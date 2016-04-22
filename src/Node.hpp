@@ -1,7 +1,8 @@
 #pragma once
 
 #include <memory>			// shared_ptr
-#include <unordered_set>	// unordered_set
+#include <unordered_map>	// unordered_map
+#include <algorithm>        // find_if
 
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
@@ -18,15 +19,16 @@ namespace Larp
         /**
          * The Entity object attached to this Node. Drawn during rendering.
          */
-        pEntity _entity;
+        SharedEntity _entity;
         /**
          * This Node's parent Node.
          */
         std::weak_ptr<Node> _parent;
         /**
-         * All of this Node's child Node's
+         * All of this Node's child Node's. We use a map instead of a set
+         * because std::unordered_set doesn't support non-const iterators
          */
-        std::unordered_set<pNode> _children;
+        std::unordered_map<Node*, UniqueNode> _children;
 
         /**
          * This Node's position
@@ -61,9 +63,22 @@ namespace Larp
         pNode create_child();
         /**
          * Removes a given pNode as a child of this Node object.
-         * @return the pNode that was removed
+         * @return A pointer to the child was removed
          */
-        pNode remove_child(pNode& child);
+        NodePtr remove_child(NodePtr child);
+        /**
+         * Removes a given pNode as a child of this Node object.
+         * @note After calling this function, child is still a valid pointer to a Node.
+         * @note Use this function instead of delete_child if you wish to attach this
+         *       child to another Node.
+         */
+        void delete_child(NodePtr child);
+        /**
+         * Attaches child to this Node, giving it ownership of the child.
+         * @param child The Node to make a child of this node
+         * @throws runtime_error if this child is attached to another Node.
+         */
+        void attach_child(NodePtr child);
         /**
          * Sets the position of this Node
          * @param x The new x position.
@@ -150,14 +165,14 @@ namespace Larp
          */
         void set_scale(GLfloat x, GLfloat y, GLfloat z);
         /**
-         * Attaches a pEntity to this object
-         * @param entity The pEntity to attach to this object
+         * Attaches an SharedEntity to this object
+         * @param entity The SharedEntity to attach to this object
          */
-        void attach_entity(pEntity& entity);
+        void attach_entity(SharedEntity entity);
         /**
-         * Detaches the pEntity from this Node
-         * @return the pEntity that was removed from this Node
+         * Detaches the SharedEntity from this Node
+         * @return the SharedEntity that was removed from this Node
          */
-        pEntity remove_entity();
+         SharedEntity remove_entity();
     };
 }

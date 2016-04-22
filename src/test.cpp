@@ -83,23 +83,24 @@ int main(void)
 
     Larp::Shader shader("shaders/default.vert", "shaders/default.frag");
     Larp::Model nanosuit("assets/nanosuit.obj");
-    Larp::pEntity entity = Larp::Entity::create(shader, nanosuit);
+    Larp::SharedEntity entity = Larp::Entity::create(shader, nanosuit);
 
-    graph = Larp::SceneGraph::singleton();
-    Larp::pNode node1 = graph->create_child_node();
-    Larp::pNode node = node1->create_child();
-    node->set_scale(0.1f, 0.1f, 0.1f);
-    node->attach_entity(entity);
+    Larp::NodePtr node1 = graph->create_child_node();
+    Larp::NodePtr node11 = node1->create_child();
+    Larp::NodePtr node12 = node1->create_child();
+
+    Larp::NodePtr node21 = node11->create_child();
+    node11->set_scale(0.1f, 0.1f, 0.1f);
+    node11->attach_entity(entity);
+
+    node11->remove_child(node21);
+    node12->attach_child(node21);
 
     // Create floor
-    Larp::pNode node2 = graph->create_child_node();
-    Larp::Model floor("assets/floor.obj");
-    Larp::pEntity floorE = Larp::Entity::create(shader, floor);
-    node2->attach_entity(floorE);
-
-    // Testing the SceneGraph clear
-    // node1.reset(new Larp::Node());
-    // node.reset(new Larp::Node());
+    // Larp::NodePtr node2 = graph->create_child_node();
+    // Larp::Model floor("assets/floor.obj");
+    // Larp::SharedEntity floorE = Larp::Entity::create(shader, floor);
+    // node2->attach_entity(floorE);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -117,9 +118,9 @@ int main(void)
         glClearColor(0.5f, 0.05f, 0.05f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        node->yaw(deltaTime * 32.0);
-        node->pitch(deltaTime * 23.0);
-        node->roll(deltaTime * 17.0);
+        node11->yaw(deltaTime * 32.0);
+        node11->pitch(deltaTime * 23.0);
+        node11->roll(deltaTime * 17.0);
 
         glm::mat4 projection = glm::perspective(camera._zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
         glm::mat4 view = camera.get_view_matrix();
