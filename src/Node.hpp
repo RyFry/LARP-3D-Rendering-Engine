@@ -1,8 +1,8 @@
 #pragma once
 
-#include <memory>			// shared_ptr
+#include <memory>			    // shared_ptr
 #include <unordered_map>	// unordered_map
-#include <algorithm>        // find_if
+#include <algorithm>      // find_if
 
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>

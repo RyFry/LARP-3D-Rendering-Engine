@@ -92,8 +92,8 @@ int main(void)
     node21->set_scale(0.1f, 0.1f, 0.1f);
     node21->attach_entity(entity);
 
-    node11->remove_child(node21);
-    node12->attach_child(node21);
+    // node11->remove_child(node21);
+    // node12->attach_child(node21);
 
     // Create floor
     // Larp::NodePtr node2 = graph->create_child_node();

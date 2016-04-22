@@ -4,10 +4,13 @@ CXX           = g++ -std=c++11
 OPTFLAG       = -O1
 CXXFLAGS      = -std=c++11 -Wall
 INCLUDES      = -I$(shell pwd)/include
+INCLUDES     += -I/usr/include/bullet
 STATIC_FLAGS  = -L$(shell pwd)/lib
 STATIC_LIBS   = -lSOIL
 DYNAMIC_FLAGS = -Wl,-rpath $(shell pwd)/lib
-DYNAMIC_LIBS  = -lassimp -lglfw3 -lpthread -lGLEW -lGL -lXrandr -lXi -lX11 -ldl -lXcursor -lXxf86vm -lXinerama
+DYNAMIC_LIBS  = -lassimp
+DYNAMIC_LIBS += -lglfw3 -lpthread -lGLEW -lGL -lXrandr -lXi -lX11 -ldl -lXcursor -lXxf86vm -lXinerama
+DYNAMIC_LIBS += -lBulletSoftBody -lBulletDynamics -lBulletCollision -lLinearMath
 
 SRCDIR        = src
 OBJDIR        = objs
