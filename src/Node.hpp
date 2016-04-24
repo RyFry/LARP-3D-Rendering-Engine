@@ -19,7 +19,7 @@ namespace Larp
         /**
          * The Entity object attached to this Node. Drawn during rendering.
          */
-        SharedEntity _entity;
+        UniqueEntity _entity;
         /**
          * This Node's parent Node.
          */
@@ -165,15 +165,21 @@ namespace Larp
          */
         void set_scale(GLfloat x, GLfloat y, GLfloat z);
         /**
-         * Attaches an SharedEntity to this object
-         * @param entity The SharedEntity to attach to this object
+         * Attaches an Entity to this object
+         * @param entity The pointer to the Entity to attach to this object
          */
-        void attach_entity(SharedEntity entity);
+        void attach_entity(EntityPtr entity);
         /**
-         * Detaches the pEntity from this Node
+         * Deletes the Entity that this Node owns
          * @warning After this function is called, any pointers to this object's
          *          Entity are no longer valid.
          */
         void remove_entity();
+        /**
+         * Detaches the Entity that this Node owns
+         * @warning This function should only be called if you are going to
+         *          attach this Node's Entity to another Node.
+         */
+        EntityPtr detach_entity();
     };
 }

@@ -82,8 +82,8 @@ int main(void)
     glEnable(GL_MULTISAMPLE);
 
     Larp::Shader shader("shaders/default.vert", "shaders/default.frag");
-    Larp::Model nanosuit("assets/LEVEL.obj");
-    Larp::SharedEntity entity = Larp::Entity::create(shader, nanosuit);
+    Larp::ModelPtr nanosuit = Larp::Model::create("assets/LEVEL.obj");
+    Larp::EntityPtr entity = Larp::Entity::create(shader, nanosuit);
 
     Larp::NodePtr node11 = graph->create_child_node();
     Larp::NodePtr node12 = graph->create_child_node();

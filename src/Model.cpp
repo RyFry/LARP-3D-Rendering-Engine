@@ -3,13 +3,19 @@
 
 namespace Larp
 {
+    std::unordered_map<std::string, UniqueModel> Model::_loaded_models;
+
     // ----------------
     // Public functions
     // ----------------
 
-    Model::Model(std::string path)
+    ModelPtr Model::create(std::string path)
     {
-        this->load_model(path);
+        if (_loaded_models.find(path) == _loaded_models.end())
+        {
+            _loaded_models.emplace(path, UniqueModel(new Model(path)));
+        }
+        return _loaded_models.at(path).get();
     }
 
     void Model::draw(Shader& shader)
@@ -21,6 +27,11 @@ namespace Larp
     // -----------------
     // Private functions
     // -----------------
+
+    Model::Model(std::string path)
+    {
+        this->load_model(path);
+    }
 
     void Model::load_model(std::string path)
     {

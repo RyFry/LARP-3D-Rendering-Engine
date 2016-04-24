@@ -21,11 +21,13 @@ namespace Larp
     class Texture;
     class Vertex;
 
-    typedef std::shared_ptr<Entity> SharedEntity;
-    typedef std::unique_ptr<Entity> UniqueEntity;
-    typedef Entity* const EntityPtr;
-    typedef std::unique_ptr<Node> UniqueNode;
-    typedef Node* const NodePtr;
+    typedef std::unique_ptr<Entity>     UniqueEntity;
+    typedef std::unique_ptr<Model>      UniqueModel;
+    typedef std::unique_ptr<Node>       UniqueNode;
     typedef std::unique_ptr<SceneGraph> UniqueSceneGraph;
+
+    typedef Entity*     const EntityPtr;
+    typedef Model*      const ModelPtr;
+    typedef Node*       const NodePtr;
     typedef SceneGraph* const SceneGraphPtr;
 }
