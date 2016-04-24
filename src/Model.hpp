@@ -15,8 +15,8 @@ namespace Larp
     {
     public:
         /**
-         * If the Model at path is not already loaded, then it will be loaded and cached.
-         * @param path The path to the desired Model to be loaded.
+         * If the model at path is not already loaded, then it will be loaded and cached.
+         * @param path The path to the desired model to be loaded.
          * @return A pointer to the Model specified by path.
          */
         static ModelPtr create(std::string path);
@@ -54,17 +54,17 @@ namespace Larp
         Model(std::string path);
         /**
          * Loads a Model given a path.
-         * @param path The path to the Model to load.
+         * @param path The path to the model to load.
          */
         void load_model(std::string path);
         /**
-         * Processes an aiNode and extracts the relevant Model information.
+         * Processes an aiNode and extracts the relevant model information.
          * @param node The aiNode to process.
          * @param scene The aiScene to retrieve Mesh information from.
          */
         void process_node(aiNode* node, const aiScene* scene);
         /**
-         * Processes an aiNode and extracts the relevant Model information.
+         * Processes an aiMesh and extracts the relevant model information.
          * @param mesh The aiMesh to process.
          * @param scene The aiScene to retrieve Mesh information from.
          * @return The processed Mesh.
