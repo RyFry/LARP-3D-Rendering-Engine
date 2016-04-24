@@ -3,14 +3,14 @@
 
 namespace Larp
 {
-    Entity::Entity(const Shader& shader, const Model& model)
+    Entity::Entity(const Shader& shader, ModelPtr model)
         : _shader(shader),
           _model(model)
     {}
 
-    SharedEntity Entity::create(const Shader& shader, const Model& model)
+    EntityPtr Entity::create(const Shader& shader, ModelPtr model)
     {
-        return SharedEntity(new Entity(shader, model));
+        return new Entity(shader, model);
     }
 
     void Entity::draw(const glm::mat4& model, const glm::mat4& view, const glm::mat4& projection)
@@ -24,6 +24,6 @@ namespace Larp
         glUniformMatrix4fv(glGetUniformLocation(this->_shader._program, "model"), 1, GL_FALSE,
                            glm::value_ptr(model));
 
-        this->_model.draw(this->_shader);
+        this->_model->draw(this->_shader);
     }
 }

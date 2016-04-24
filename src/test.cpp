@@ -10,6 +10,7 @@
 #include "Camera.hpp"
 #include "ConfigurationLoader.hpp"
 #include "Model.hpp"
+#include "PhysicsWorld.hpp"
 #include "SceneGraph.hpp"
 #include "Shader.hpp"
 
@@ -33,6 +34,7 @@ void error_callback(int error, const char* description);
 
 // Camera
 Larp::SceneGraphPtr graph = Larp::SceneGraph::singleton();
+PhysicsWorld* world = new PhysicsWorld();
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
@@ -81,9 +83,24 @@ int main(void)
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_MULTISAMPLE);
 
+    // Setting up PhysicsWorld
+    world->initObjects();
+
     Larp::Shader shader("shaders/default.vert", "shaders/default.frag");
-    Larp::Model nanosuit("assets/nanosuit.obj");
-    Larp::SharedEntity entity = Larp::Entity::create(shader, nanosuit);
+    Larp::ModelPtr level = Larp::Model::create("assets/LEVEL.obj");
+    Larp::EntityPtr entity = Larp::Entity::create(shader, level);
+
+
+
+    PhysicsMeshColliderBuilder physics_level = PhysicsMeshColliderBuilder("assets/LEVEL.obj");
+    physics_level.set_rotation(btQuaternion);
+    physics_level.set_position(btVector3);
+    physics_level.set_mass(btScalar);
+    physics_level.set_local_inertia(btVector3());
+
+
+
+
 
     Larp::NodePtr node11 = graph->create_child_node();
     Larp::NodePtr node12 = graph->create_child_node();
@@ -117,9 +134,9 @@ int main(void)
         glClearColor(0.5f, 0.05f, 0.05f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        node11->yaw(deltaTime * 32.0);
-        node11->pitch(deltaTime * 23.0);
-        node11->roll(deltaTime * 17.0);
+        // node11->yaw(deltaTime * 32.0);
+        // node11->pitch(deltaTime * 23.0);
+        // node11->roll(deltaTime * 17.0);
 
         glm::mat4 projection = glm::perspective(camera._zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
         glm::mat4 view = camera.get_view_matrix();

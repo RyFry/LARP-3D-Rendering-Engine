@@ -10,7 +10,7 @@
 
 #include "Error.hpp"
 
-class BulletPhysics
+class PhysicsWorld
 {
 private:
   btDefaultCollisionConfiguration* _collision_configuration;
@@ -21,8 +21,8 @@ private:
   std::vector<btCollisionShape *> _collision_shape;
   std::map<std::string, btRigidBody *> _physics_accessors;
 public:
-  BulletPhysics();
-  ~BulletPhysics();
+  PhysicsWorld();
+  ~PhysicsWorld();
   void init_objects();
   btDiscreteDynamicsWorld* get_dynamics_world();
   std::vector<btCollisionShape *>& get_collision_shapes();

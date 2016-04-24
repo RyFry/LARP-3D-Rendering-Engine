@@ -4,6 +4,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include <unordered_map>
 
 #include "LarpPrerequisites.hpp"
 #include "Mesh.hpp"
@@ -14,16 +15,21 @@ namespace Larp
     {
     public:
         /**
-         * Constructor
-         * @param path Path to the model to load. Should be relative to where this application is run.
+         * If the model at path is not already loaded, then it will be loaded and cached.
+         * @param path The path to the desired model to be loaded.
+         * @return A pointer to the Model specified by path.
          */
-        Model(std::string path);
+        static ModelPtr create(std::string path);
         /**
          * Draws all of the meshes in this Model.
          * @param shader The shader program to render this Model with.
          */
         void draw(Shader& shader);
     private:
+        /**
+         * A cache of loaded Models.
+         */
+        static std::unordered_map<std::string, UniqueModel> _loaded_models;
         /**
          * List of Meshes for this Model.
          */
@@ -37,18 +43,28 @@ namespace Larp
          */
         std::vector<Texture> _loaded_textures;
         /**
+         * Default Constructor
+         * @note This prevents users from creating Models.
+         */
+        Model();
+        /**
+         * Constructor
+         * @param path Path to the model to load. Should be relative to where this application is run.
+         */
+        Model(std::string path);
+        /**
          * Loads a Model given a path.
-         * @param path The path to the Model to load.
+         * @param path The path to the model to load.
          */
         void load_model(std::string path);
         /**
-         * Processes an aiNode and extracts the relevant Model information.
+         * Processes an aiNode and extracts the relevant model information.
          * @param node The aiNode to process.
          * @param scene The aiScene to retrieve Mesh information from.
          */
         void process_node(aiNode* node, const aiScene* scene);
         /**
-         * Processes an aiNode and extracts the relevant Model information.
+         * Processes an aiMesh and extracts the relevant model information.
          * @param mesh The aiMesh to process.
          * @param scene The aiScene to retrieve Mesh information from.
          * @return The processed Mesh.
