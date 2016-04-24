@@ -82,7 +82,7 @@ int main(void)
     glEnable(GL_MULTISAMPLE);
 
     Larp::Shader shader("shaders/default.vert", "shaders/default.frag");
-    Larp::Model nanosuit("assets/nanosuit.obj");
+    Larp::Model nanosuit("assets/LEVEL.obj");
     Larp::SharedEntity entity = Larp::Entity::create(shader, nanosuit);
 
     Larp::NodePtr node11 = graph->create_child_node();
@@ -117,9 +117,9 @@ int main(void)
         glClearColor(0.5f, 0.05f, 0.05f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        node11->yaw(deltaTime * 32.0);
-        node11->pitch(deltaTime * 23.0);
-        node11->roll(deltaTime * 17.0);
+        // node11->yaw(deltaTime * 32.0);
+        // node11->pitch(deltaTime * 23.0);
+        // node11->roll(deltaTime * 17.0);
 
         glm::mat4 projection = glm::perspective(camera._zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
         glm::mat4 view = camera.get_view_matrix();
