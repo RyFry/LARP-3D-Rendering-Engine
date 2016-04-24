@@ -83,7 +83,7 @@ int main(void)
 
     Larp::Shader shader("shaders/default.vert", "shaders/default.frag");
     Larp::Model nanosuit("assets/nanosuit.obj");
-    Larp::SharedEntity entity = Larp::Entity::create(shader, nanosuit);
+    Larp::EntityPtr entity = Larp::Entity::create(shader, nanosuit);
 
     Larp::NodePtr node11 = graph->create_child_node();
     Larp::NodePtr node12 = graph->create_child_node();

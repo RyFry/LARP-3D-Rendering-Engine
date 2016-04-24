@@ -135,13 +135,18 @@ namespace Larp
         this->_scale.z = z;
     }
 
-    void Node::attach_entity(SharedEntity entity)
+    void Node::attach_entity(EntityPtr entity)
     {
-        this->_entity = entity;
+        this->_entity.reset(entity);
     }
 
     void Node::remove_entity()
     {
-        this->_entity.reset();
+        this->_entity.reset(nullptr);
+    }
+
+    EntityPtr Node::detach_entity()
+    {
+        return this->_entity.release();
     }
 }
