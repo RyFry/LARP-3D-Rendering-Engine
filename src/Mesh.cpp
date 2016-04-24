@@ -42,6 +42,11 @@ namespace Larp
                 ss << diffuseN++;
             else if (name == "texture_specular")
                 ss << specularN++;
+            else
+            {
+                PRINT_ERROR("Unsupported texture type provided. Skipping.");
+                continue;
+            }
             number = ss.str();
 
             glUniform1f(glGetUniformLocation(shader._program, ("material." + name + number).c_str()), i);

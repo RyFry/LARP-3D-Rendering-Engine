@@ -31,9 +31,9 @@ void BulletPhysics::init_objects()
     _overlapping_pair_cache->getOverlappingPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
     _solver = new btSequentialImpulseConstraintSolver();
     _dynamics_world = new btDiscreteDynamicsWorld(_dispatcher,
-                                                 _overlapping_pair_cache,
-                                                 _solver,
-                                                 _collision_configuration);
+                                                  _overlapping_pair_cache,
+                                                  _solver,
+                                                  _collision_configuration);
 }
 
 btDiscreteDynamicsWorld* BulletPhysics::get_dynamics_world()
