@@ -82,7 +82,7 @@ int main(void)
     glEnable(GL_MULTISAMPLE);
 
     Larp::Shader shader("shaders/default.vert", "shaders/default.frag");
-    Larp::Model nanosuit("assets/nanosuit.obj");
+    Larp::ModelPtr nanosuit = Larp::Model::create("assets/nanosuit.obj");
     Larp::EntityPtr entity = Larp::Entity::create(shader, nanosuit);
 
     Larp::NodePtr node11 = graph->create_child_node();

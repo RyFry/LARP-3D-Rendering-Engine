@@ -22,7 +22,7 @@ namespace Larp
         /**
          * The Model rendered.
          */
-        Model _model;
+        ModelPtr _model;
 
         /**
          * Default Constructor
@@ -33,7 +33,7 @@ namespace Larp
          * @param shader A Shader object used during rendering
          * @param model The Model to draw during rendering
          */
-        Entity(const Shader& shader, const Model& model);
+        Entity(const Shader& shader, ModelPtr model);
 
     public:
         /**
@@ -42,7 +42,7 @@ namespace Larp
          * @param model The Model to draw during rendering
          * @return The EntityPtr with the same shader and model passed as parameters
          */
-        static EntityPtr create(const Shader& shader, const Model& model);
+        static EntityPtr create(const Shader& shader, ModelPtr model);
         /**
          * Draws the model atteched to this entity using the
          * associated shader
