@@ -63,7 +63,6 @@ namespace Larp
          * File path to the Texture
          */
         aiString _path;
-
         /**
          * @return a string representation of this Texture's Type.
          */
@@ -100,7 +99,6 @@ namespace Larp
          * @warning This function should @b not be called directly as it is called by the Model draw function
          */
         void draw(Shader& shader);
-
         /**
          * Loads a texture from a file.
          * @param path The path to the texture that should be loaded.
