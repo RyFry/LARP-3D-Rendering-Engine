@@ -1,9 +1,12 @@
 #pragma once
 
-#include <memory>	// unique_ptr
+#include <vector>
 
+#include "DirectionalLight.hpp"
 #include "LarpPrerequisites.hpp"
 #include "Node.hpp"
+#include "PointLight.hpp"
+#include "SpotLight.hpp"
 
 namespace Larp
 {
@@ -19,6 +22,12 @@ namespace Larp
          * users from making more than one SceneGraph.
          */
         static UniqueSceneGraph _singleton;
+
+        std::vector<UniqueDirectional> _directional_lights;
+
+        std::vector<UniquePoint> _point_lights;
+
+        std::vector<UniqueSpot> _spot_lights;
         /**
          * Default constructor. Made private to avoid having multiple
          * SceneGraph's per program.
@@ -56,5 +65,11 @@ namespace Larp
          * @warning This function is currently unimplemented and does nothing. <b>Do not call this function!</b>
          */
         void set_ambient_light(glm::vec3 color);
+
+        DirectionalLightPtr create_directional_light();
+
+        PointLightPtr create_point_light();
+
+        SpotLightPtr create_spot_light();
     };
 }
