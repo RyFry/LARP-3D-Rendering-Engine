@@ -12,16 +12,24 @@ private:
     btTransform _transform; // Initialize this to player's transform
     btPairCachingGhostObject* _ghost_object;
     btKinematicCharacterController* _char_controller;
+    btScalar _forward_speed;
+    btScalar _backward_speed;
+    btScalar _strafe_speed;
+    btScalar _jump_height;
 public:
     enum PlayerDirection
     {
+        STOP,
         LEFT,
         RIGHT,
-        FOWARD,
+        FORWARD,
         BACKWARD
     };
 
-    PhysicsPlayerController(PhysicsWorld* physics_world, btVector3 initial_position);
-void move(PhysicsWorld* world, btScalar delta_time, PlayerDirection direction);
+    PhysicsPlayerController(PhysicsWorld* physics_world, btVector3 initial_position = btVector3(0, 0, 0), 
+                            btScalar fwdspeed = 1.5, btScalar bwdspeed = 1, btScalar strspeed = 1.3, btScalar jmpheight = 1);
+    void update_movement(PhysicsWorld* world, PlayerDirection direction);
     void rotate(btScalar rotation_amount);
+    void jump();
+    void set_user_pointer(void * user_pointer);
 };

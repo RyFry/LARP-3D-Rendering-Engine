@@ -10,8 +10,9 @@
 #include "Camera.hpp"
 #include "ConfigurationLoader.hpp"
 #include "Model.hpp"
-#include "PhysicsWorld.hpp"
 #include "PhysicsMeshColliderBuilder.hpp"
+#include "PhysicsPlayerController.hpp"
+#include "PhysicsWorld.hpp"
 #include "SceneGraph.hpp"
 #include "Shader.hpp"
 
