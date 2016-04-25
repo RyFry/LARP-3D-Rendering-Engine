@@ -37,6 +37,8 @@ void make_floor(PhysicsWorld* physics_world);
 
 // Camera
 Larp::SceneGraphPtr graph = Larp::SceneGraph::singleton();
+PhysicsWorld* world;
+PhysicsPlayerController* player;
 Camera camera(glm::vec3(0.0f, 5.0f, 3.0f));
 bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
@@ -86,7 +88,7 @@ int main(void)
     glEnable(GL_MULTISAMPLE);
 
     // Setting up PhysicsWorld
-    PhysicsWorld* world = new PhysicsWorld();
+    world = new PhysicsWorld();
     world->init_objects();
 
     Larp::Shader shader("shaders/default.vert", "shaders/default.frag");
@@ -120,30 +122,33 @@ int main(void)
     node12->attach_entity(entity2);
     node12->set_scale(0.1f, 0.1f, 0.1f);
 
+    player = new PhysicsPlayerController(world, btVector3(0, 5, 2));
+    player->set_user_pointer(node12);
+
     make_floor(world);
 
-    btTransform trans;
-    trans.setOrigin(btVector3(1.0, 5.0, 0.0));
-    trans.setRotation(btQuaternion(0, 0, 0, 1));
-    btScalar mass(0.2);
-    btVector3 local_inertia(0, 0, 0);
+    // btTransform trans;
+    // trans.setOrigin(btVector3(1.0, 5.0, 0.0));
+    // trans.setRotation(btQuaternion(0, 0, 0, 1));
+    // btScalar mass(0.2);
+    // btVector3 local_inertia(0, 0, 0);
 
-    btCollisionShape* shape = new btSphereShape(0.5);
-    world->get_collision_shapes().push_back(shape);
-    btDefaultMotionState* motion_state = new btDefaultMotionState(trans);
+    // btCollisionShape* shape = new btSphereShape(0.5);
+    // world->get_collision_shapes().push_back(shape);
+    // btDefaultMotionState* motion_state = new btDefaultMotionState(trans);
 
-    shape->calculateLocalInertia(mass, local_inertia);
+    // shape->calculateLocalInertia(mass, local_inertia);
 
-    btRigidBody::btRigidBodyConstructionInfo body_info(mass, motion_state, shape, local_inertia);
-    btRigidBody* body = new btRigidBody(body_info);
-    body->setUserPointer(node12);
-    body->setRestitution(1);
+    // btRigidBody::btRigidBodyConstructionInfo body_info(mass, motion_state, shape, local_inertia);
+    // btRigidBody* body = new btRigidBody(body_info);
+    // body->setUserPointer(node12);
+    // body->setRestitution(1);
 
-    world->get_dynamics_world()->addRigidBody(body);
+    // world->get_dynamics_world()->addRigidBody(body);
 
  
 
-    std::cout << body->getWorldTransform().getOrigin() << std::endl;
+    //std::cout << body->getWorldTransform().getOrigin() << std::endl;
 
 
 
@@ -169,12 +174,23 @@ int main(void)
 
         world->get_dynamics_world()->stepSimulation(1.0f / 60.0f);
 
+        player->step(world, 1.0f / 60.0f);
+        Larp::NodePtr player_node = static_cast<Larp::NodePtr>(player->get_user_pointer());
+        btVector3 pos = player->get_position();
+        std::cout << pos << std::endl;
+        btQuaternion quat = player->get_orientation();
+        player_node->set_position(glm::vec3(pos.x(), pos.y(), pos.z()));
+        player_node->set_orientation(glm::quat(quat.w(), quat.x(), quat.y(), quat.z()));
+        camera._position = glm::vec3(pos.x(), pos.y(), pos.z());
+
+
         for (size_t i = 0; i < world->get_collision_object_count(); ++i)
         {
             btCollisionObject* obj = world->get_dynamics_world()->getCollisionObjectArray()[i];
             btRigidBody* body = btRigidBody::upcast(obj);
 
-            if (body && body->getMotionState() && obj->getCollisionFlags() != btCollisionObject::CF_CHARACTER_OBJECT)
+            if (body && body->getMotionState() &&
+                obj->getCollisionFlags() != btCollisionObject::CF_CHARACTER_OBJECT)
             {
                 btTransform trans;
                 body->getMotionState()->getWorldTransform(trans);
@@ -238,6 +254,18 @@ void Do_Movement()
         camera.process_keyboard(Camera::UP, delta_time);
     if (keys[GLFW_KEY_LEFT_SHIFT])
         camera.process_keyboard(Camera::DOWN, delta_time);
+
+    if (keys[GLFW_KEY_DOWN])
+        player->update_movement(world, PhysicsPlayerController::PlayerDirection::BACKWARD);
+    if (keys[GLFW_KEY_LEFT])
+        player->update_movement(world, PhysicsPlayerController::PlayerDirection::LEFT);
+    if (keys[GLFW_KEY_RIGHT])
+        player->update_movement(world, PhysicsPlayerController::PlayerDirection::RIGHT);
+    if (keys[GLFW_KEY_UP])
+        player->update_movement(world, PhysicsPlayerController::PlayerDirection::FORWARD);
+
+    if (!keys[GLFW_KEY_UP] && !keys[GLFW_KEY_DOWN] && !keys[GLFW_KEY_RIGHT] && !keys[GLFW_KEY_LEFT])
+        player->update_movement(world, PhysicsPlayerController::PlayerDirection::STOP);
 }
 
 // Is called whenever a key is pressed/released via GLFW
@@ -290,7 +318,7 @@ void make_floor(PhysicsWorld* world)
     btScalar mass(0.0);
     btVector3 local_inertia(0, 0, 0);
 
-    btCollisionShape* shape = new btStaticPlaneShape(btVector3(0, 1, 0), 0.0);
+    btStaticPlaneShape* shape = new btStaticPlaneShape(btVector3(0, 1, 0), 0.0);
     world->get_collision_shapes().push_back(shape);
     btDefaultMotionState* motion_state = new btDefaultMotionState(trans);
 

@@ -8,7 +8,7 @@ PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, bt
     _jump_height(jmpheight)
 {
     // Create player shape
-    btBoxShape* player_shape = new btBoxShape(btVector3(0.4, 0.8, 0.4));
+    btCylinderShape* player_shape = new btCylinderShape(btVector3(0.2, 0.6, 1.0));
 
     // Init player ghost object
     this->_ghost_object = new btPairCachingGhostObject();
@@ -24,6 +24,7 @@ PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, bt
     // Setup the character controller and add it to the physics world
     this->_char_controller =
         new btKinematicCharacterController(this->_ghost_object, player_shape, 1.0);
+    this->_char_controller->setGravity(0.1);
     physics_world->get_dynamics_world()->addCollisionObject(
         this->_ghost_object,
         btBroadphaseProxy::CharacterFilter,
@@ -37,12 +38,17 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world, PhysicsPlayer
     //   forward X up = right
     //   up X forward = left
     /*
-    And the great thing about transformation matrices, is that this 3x3 rotation sub-matrix itself consists of three normalized vectors.
-    Turns out, the first column is the vector pointing to the right (positive X axis). 
-    The column to the right of that is the 'up vector' (positive Y). 
-    The column next to that, is the vector pointing rearward or forward depending on your camera orientation convention (positive Z axis).
-    https://www.opengl.org/discussion_boards/showthread.php/175515-Get-Direction-from-Transformation-Matrix-or-Quat
+      And the great thing about transformation matrices, is that this 3x3 rotation sub-matrix
+      itself consists of three normalized vectors.
+      Turns out, the first column is the vector pointing to the right (positive X axis).
+      The column to the right of that is the 'up vector' (positive Y).
+      The column next to that, is the vector pointing rearward or forward depending on your
+      camera orientation convention (positive Z axis).
+      https://www.opengl.org/discussion_boards/showthread.php/175515-Get-Direction-from-Transformation-Matrix-or-Quat
     */
+
+    btScalar matrix[16];
+    this->_ghost_object->getWorldTransform().getOpenGLMatrix(matrix);
 
     if (direction == PlayerDirection::STOP)
     {
@@ -50,24 +56,28 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world, PhysicsPlayer
     }
     if (direction == PlayerDirection::FORWARD)
     {
-        btVector3 forward(_ghost_object->getWorldTransform().getRotation() * btVector3(0, 0, _forward_speed));
-        _char_controller->setWalkDirection(forward.safeNormalize());
+        btVector3 forward(matrix[8], matrix[9], matrix[10]);
+        forward *= this->_forward_speed;
+        _char_controller->setWalkDirection(forward);
     }
     else if (direction == PlayerDirection::BACKWARD)
     {
-        btVector3 forward(_ghost_object->getWorldTransform().getRotation() * btVector3(0, 0, _backward_speed));
-        _char_controller->setWalkDirection(-(forward.safeNormalize()));
+        btVector3 forward(matrix[8], matrix[9], matrix[10]);
+        forward *= -this->_backward_speed;
+        _char_controller->setWalkDirection(forward);
     }
     else if (direction == PlayerDirection::LEFT)
     {
-        btVector3 forward(_ghost_object->getWorldTransform().getRotation() * btVector3(0, 0, _strafe_speed));
-        btVector3 left = btVector3(0, 1, 0).cross(forward).safeNormalize();
+        btVector3 forward(matrix[8], matrix[9], matrix[10]);
+        forward *= this->_strafe_speed;
+        btVector3 left = btVector3(0, 1, 0).cross(forward);
         _char_controller->setWalkDirection(left);
     }
     else if (direction == PlayerDirection::RIGHT)
     {
-        btVector3 forward(_ghost_object->getWorldTransform().getRotation() * btVector3(0, 0, _strafe_speed));
-        btVector3 right = forward.cross(btVector3(0, 1, 0)).safeNormalize();
+        btVector3 forward(matrix[8], matrix[9], matrix[10]);
+        forward *= this->_strafe_speed;
+        btVector3 right = forward.cross(btVector3(0, 1, 0));
         _char_controller->setWalkDirection(right);
     }
 }
@@ -89,5 +99,21 @@ void PhysicsPlayerController::set_user_pointer(void * user_pointer)
 
 void PhysicsPlayerController::step(PhysicsWorld* world, btScalar delta_time)
 {
-    this->_char_controller->playerStep(world, delta_time);
+    this->_char_controller->playerStep(world->get_dynamics_world(), delta_time);
 }
+
+void * PhysicsPlayerController::get_user_pointer()
+{
+    return this->_ghost_object->getUserPointer();
+}
+
+btVector3 PhysicsPlayerController::get_position() const
+{
+    return this->_ghost_object->getWorldTransform().getOrigin();
+}
+
+btQuaternion PhysicsPlayerController::get_orientation() const
+{
+    return this->_ghost_object->getWorldTransform().getRotation();
+}
+
