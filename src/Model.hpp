@@ -83,6 +83,10 @@ namespace Larp
          */
         std::vector<Texture> load_material_textures(aiMaterial* mat, aiTextureType type,
                                                     Texture::Type texture_type);
+        /**
+         *
+         */
+        const std::vector<Mesh>& get_meshes();
     };
 }
 #endif
