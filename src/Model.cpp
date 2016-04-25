@@ -163,7 +163,7 @@ namespace Larp
         return textures;
     }
 
-    std::vector<Mesh>& Model::get_meshes()
+    const std::vector<Mesh>& Model::get_meshes()
     {
         return this->_meshes;
     }

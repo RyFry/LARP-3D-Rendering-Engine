@@ -11,6 +11,7 @@
 #include "ConfigurationLoader.hpp"
 #include "Model.hpp"
 #include "PhysicsWorld.hpp"
+#include "PhysicsMeshColliderBuilder.hpp"
 #include "SceneGraph.hpp"
 #include "Shader.hpp"
 
@@ -40,8 +41,8 @@ bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
 bool firstMouse = true;
 
-GLfloat deltaTime = 0.0f;
-GLfloat lastFrame = 0.0f;
+GLfloat delta_time = 0.0f;
+GLfloat last_frame = 0.0f;
 
 int main(void)
 {
@@ -84,23 +85,11 @@ int main(void)
     glEnable(GL_MULTISAMPLE);
 
     // Setting up PhysicsWorld
-    world->initObjects();
+    world->init_objects();
 
     Larp::Shader shader("shaders/default.vert", "shaders/default.frag");
     Larp::ModelPtr level = Larp::Model::create("assets/LEVEL.obj");
     Larp::EntityPtr entity = Larp::Entity::create(shader, level);
-
-
-
-    PhysicsMeshColliderBuilder physics_level = PhysicsMeshColliderBuilder("assets/LEVEL.obj");
-    physics_level.set_rotation(btQuaternion);
-    physics_level.set_position(btVector3);
-    physics_level.set_mass(btScalar);
-    physics_level.set_local_inertia(btVector3());
-
-
-
-
 
     Larp::NodePtr node11 = graph->create_child_node();
     Larp::NodePtr node12 = graph->create_child_node();
@@ -109,22 +98,32 @@ int main(void)
     node21->set_scale(0.1f, 0.1f, 0.1f);
     node21->attach_entity(entity);
 
-    // node11->remove_child(node21);
-    // node12->attach_child(node21);
 
-    // Create floor
-    // Larp::NodePtr node2 = graph->create_child_node();
-    // Larp::Model floor("assets/floor.obj");
-    // Larp::SharedEntity floorE = Larp::Entity::create(shader, floor);
-    // node2->attach_entity(floorE);
+    PhysicsMeshColliderBuilder physics_level_builder = PhysicsMeshColliderBuilder("assets/LEVEL.obj");
+    physics_level_builder.set_mass(0.0);
+    physics_level_builder.set_local_inertia(btVector3(0.0, 0.0, 0.0));
+    physics_level_builder.set_user_pointer(node21);
 
+    PhysicsMeshColliderPtr physics_level = physics_level_builder.build();
+
+    world->get_dynamics_world()->addRigidBody(physics_level->get_rigid_body());
+
+    GLfloat frame_rate_limiter = 0.0f;
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         // Set frame time
-        GLfloat currentFrame = glfwGetTime();
-        deltaTime = currentFrame - lastFrame;
-        lastFrame = currentFrame;
+        GLfloat current_frame = glfwGetTime();
+        delta_time = current_frame - last_frame;
+        last_frame = current_frame;
+
+        frame_rate_limiter += delta_time;
+        if (frame_rate_limiter > 1.0 / 60.0)
+            frame_rate_limiter -= 1.0 / 60.0;
+        else
+            continue;
+
+        world->get_dynamics_world()->stepSimulation(1.0f / 60.0f);
 
         // Check and call events
         glfwPollEvents();
@@ -134,9 +133,9 @@ int main(void)
         glClearColor(0.5f, 0.05f, 0.05f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // node11->yaw(deltaTime * 32.0);
-        // node11->pitch(deltaTime * 23.0);
-        // node11->roll(deltaTime * 17.0);
+        // node11->yaw(delta_time * 32.0);
+        // node11->pitch(delta_time * 23.0);
+        // node11->roll(delta_time * 17.0);
 
         glm::mat4 projection = glm::perspective(camera._zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
         glm::mat4 view = camera.get_view_matrix();
@@ -154,14 +153,18 @@ int main(void)
 void Do_Movement()
 {
     // Camera controls
-    if(keys[GLFW_KEY_W])
-        camera.process_keyboard(Camera::FORWARD, deltaTime);
-    if(keys[GLFW_KEY_S])
-        camera.process_keyboard(Camera::BACKWARD, deltaTime);
-    if(keys[GLFW_KEY_A])
-        camera.process_keyboard(Camera::LEFT, deltaTime);
-    if(keys[GLFW_KEY_D])
-        camera.process_keyboard(Camera::RIGHT, deltaTime);
+    if (keys[GLFW_KEY_W])
+        camera.process_keyboard(Camera::FORWARD, delta_time);
+    if (keys[GLFW_KEY_S])
+        camera.process_keyboard(Camera::BACKWARD, delta_time);
+    if (keys[GLFW_KEY_A])
+        camera.process_keyboard(Camera::LEFT, delta_time);
+    if (keys[GLFW_KEY_D])
+        camera.process_keyboard(Camera::RIGHT, delta_time);
+    if (keys[GLFW_KEY_SPACE])
+        camera.process_keyboard(Camera::UP, delta_time);
+    if (keys[GLFW_KEY_LEFT_SHIFT])
+        camera.process_keyboard(Camera::DOWN, delta_time);
 }
 
 // Is called whenever a key is pressed/released via GLFW

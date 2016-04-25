@@ -5,11 +5,16 @@
 
 #include "Model.hpp"
 
-typedef PhysicsMeshCollider* const PhysicsMeshColliderPtr;
-
 class PhysicsMeshCollider
 {
+private:
     btRigidBody* _rigid_body;
-	PhysicsMeshCollider(ModelPtr model, btQuaternion rotation, btPosition position,
-                        btScalar mass, btVector3 local_inertia, btScalar restitution);
+
+public:
+    PhysicsMeshCollider(Larp::ModelPtr model, btQuaternion rotation, btVector3 position,
+                        btScalar mass, btVector3 local_inertia, btScalar restitution,
+                        void * user_pointer);
+    btRigidBody* get_rigid_body() const;
 };
+
+typedef PhysicsMeshCollider* const PhysicsMeshColliderPtr;

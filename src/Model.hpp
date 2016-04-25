@@ -25,6 +25,10 @@ namespace Larp
          * @param shader The shader program to render this Model with.
          */
         void draw(Shader& shader);
+        /**
+         *
+         */
+        const std::vector<Mesh>& get_meshes();
     private:
         /**
          * A cache of loaded Models.
@@ -83,10 +87,6 @@ namespace Larp
          */
         std::vector<Texture> load_material_textures(aiMaterial* mat, aiTextureType type,
                                                     Texture::Type texture_type);
-        /**
-         *
-         */
-        const std::vector<Mesh>& get_meshes();
     };
 }
 #endif

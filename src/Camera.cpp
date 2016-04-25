@@ -56,6 +56,12 @@ void Camera::process_keyboard(CameraMovement direction, GLfloat delta_time)
     case RIGHT:
         this->_position += this->_right * velocity;
         break;
+    case UP:
+        this->_position.y += Camera::SPEED * delta_time / 2.0;
+        break;
+    case DOWN:
+        this->_position.y -= Camera::SPEED * delta_time / 2.0;
+        break;
     default:
         THROW_RUNTIME_ERROR("Invalid CameraMovement passed.");
     }
