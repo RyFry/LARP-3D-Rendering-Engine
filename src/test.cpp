@@ -32,6 +32,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void Do_Movement();
 void error_callback(int error, const char* description);
+void make_floor(PhysicsWorld* physics_world);
 
 // Camera
 Larp::SceneGraphPtr graph = Larp::SceneGraph::singleton();
@@ -101,7 +102,7 @@ int main(void)
     PhysicsMeshColliderBuilder physics_level_builder = PhysicsMeshColliderBuilder("assets/LEVEL.obj");
     physics_level_builder.set_mass(0.0);
     physics_level_builder.set_local_inertia(btVector3(0.0, 0.0, 0.0));
-    physics_level_builder.set_restitution(0.2);
+    physics_level_builder.set_restitution(1);
     physics_level_builder.set_user_pointer(node21);
 
     PhysicsMeshColliderPtr physics_level = physics_level_builder.build();
@@ -118,10 +119,12 @@ int main(void)
     node12->attach_entity(entity2);
     node12->set_scale(0.1f, 0.1f, 0.1f);
 
+    make_floor(world);
+
     btTransform trans;
-    trans.setOrigin(btVector3(0.0, 10.0, 0.0));
-    trans.setRotation(btQuaternion(0.0, 0.0, 0.0, 1.0));
-    btScalar mass(0.05);
+    trans.setOrigin(btVector3(1.0, 5.0, 0.0));
+    trans.setRotation(btQuaternion(0, 0, 0, 1));
+    btScalar mass(0.2);
     btVector3 local_inertia(0, 0, 0);
 
     btCollisionShape* shape = new btSphereShape(0.5);
@@ -132,9 +135,12 @@ int main(void)
 
     btRigidBody::btRigidBodyConstructionInfo body_info(mass, motion_state, shape, local_inertia);
     btRigidBody* body = new btRigidBody(body_info);
-    world->get_dynamics_world()->addRigidBody(body);
-    body->setRestitution(1);
     body->setUserPointer(node12);
+    body->setRestitution(1);
+
+    world->get_dynamics_world()->addRigidBody(body);
+
+ 
 
     std::cout << body->getWorldTransform().getOrigin() << std::endl;
 
@@ -162,18 +168,14 @@ int main(void)
 
         world->get_dynamics_world()->stepSimulation(1.0f / 60.0f);
 
-
-        std::cout << "Iteration number\n\t" << iteration_number << std::endl << std::endl;
         for (size_t i = 0; i < world->get_collision_object_count(); ++i)
         {
-            std::cout << i << std::endl;
             btCollisionObject* obj = world->get_dynamics_world()->getCollisionObjectArray()[i];
             btRigidBody* body = btRigidBody::upcast(obj);
 
             if (body && body->getMotionState() && obj->getCollisionFlags() != btCollisionObject::CF_CHARACTER_OBJECT)
             {
                 btTransform trans;
-                std::cout << "trans.getOrigin(): " << trans.getOrigin() << std::endl;
                 body->getMotionState()->getWorldTransform(trans);
                 void* user_pointer = body->getUserPointer();
 
@@ -279,3 +281,24 @@ void error_callback(int error, const char* description)
 {
     fputs(description, stderr);
 }
+
+void make_floor(PhysicsWorld* world)
+{
+    btTransform trans;
+    trans.setOrigin(btVector3(0.0, -5.0, 0.0));
+    btScalar mass(0.0);
+    btVector3 local_inertia(0, 0, 0);
+
+    btCollisionShape* shape = new btStaticPlaneShape(btVector3(0, 1, 0), 0.0);
+    world->get_collision_shapes().push_back(shape);
+    btDefaultMotionState* motion_state = new btDefaultMotionState(trans);
+
+    shape->calculateLocalInertia(mass, local_inertia);
+
+    btRigidBody::btRigidBodyConstructionInfo body_info(mass, motion_state, shape, local_inertia);
+    btRigidBody* body = new btRigidBody(body_info);
+    body->setRestitution(0);
+
+    world->get_dynamics_world()->addRigidBody(body);
+}
+
