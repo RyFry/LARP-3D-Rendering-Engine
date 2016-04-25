@@ -1,9 +1,10 @@
 #include "PhysicsWorld.hpp"
 
-// std::ostream& operator << (std::ostream& out, const btVector3& vec)
-// {
-//   out << "(" << vec.x() << ", " << vec.y() << ", " << vec.z() << ")";
-// }
+std::ostream& operator << (std::ostream& out, const btVector3& vec)
+{
+    out << "(" << vec.x() << ", " << vec.y() << ", " << vec.z() << ")";
+    return out;
+}
 
 PhysicsWorld::PhysicsWorld()
     : _collision_configuration(0),
@@ -16,11 +17,11 @@ PhysicsWorld::PhysicsWorld()
 
 PhysicsWorld::~PhysicsWorld() 
 {
-    if (_collision_configuration) delete _collision_configuration;
-    if (_dispatcher) delete _dispatcher;
-    if (_overlapping_pair_cache) delete _overlapping_pair_cache;
-    if (_solver) delete _solver;
     if (_dynamics_world) delete _dynamics_world;
+    if (_solver) delete _solver;
+    if (_dispatcher) delete _dispatcher;
+    if (_collision_configuration) delete _collision_configuration;
+    if (_overlapping_pair_cache) delete _overlapping_pair_cache;
 }
 
 void PhysicsWorld::init_objects()

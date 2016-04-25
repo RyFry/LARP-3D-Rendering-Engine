@@ -31,4 +31,4 @@ public:
   size_t get_collision_object_count();
 };
 
-// std::ostream& operator << (std::ostream& out, const btVector3& vec);
+std::ostream& operator << (std::ostream& out, const btVector3& vec);

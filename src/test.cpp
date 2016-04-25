@@ -35,8 +35,7 @@ void error_callback(int error, const char* description);
 
 // Camera
 Larp::SceneGraphPtr graph = Larp::SceneGraph::singleton();
-PhysicsWorld* world = new PhysicsWorld();
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, 5.0f, 3.0f));
 bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
 bool firstMouse = true;
@@ -85,6 +84,7 @@ int main(void)
     glEnable(GL_MULTISAMPLE);
 
     // Setting up PhysicsWorld
+    PhysicsWorld* world = new PhysicsWorld();
     world->init_objects();
 
     Larp::Shader shader("shaders/default.vert", "shaders/default.frag");
@@ -95,20 +95,54 @@ int main(void)
     Larp::NodePtr node12 = graph->create_child_node();
 
     Larp::NodePtr node21 = node11->create_child();
-    node21->set_scale(0.1f, 0.1f, 0.1f);
+//    node21->set_scale(0.1f, 0.1f, 0.1f);
     node21->attach_entity(entity);
-
 
     PhysicsMeshColliderBuilder physics_level_builder = PhysicsMeshColliderBuilder("assets/LEVEL.obj");
     physics_level_builder.set_mass(0.0);
     physics_level_builder.set_local_inertia(btVector3(0.0, 0.0, 0.0));
+    physics_level_builder.set_restitution(0.2);
     physics_level_builder.set_user_pointer(node21);
 
     PhysicsMeshColliderPtr physics_level = physics_level_builder.build();
 
     world->get_dynamics_world()->addRigidBody(physics_level->get_rigid_body());
 
+
+    /*******************************
+     * TESTING - DELETE THIS       *
+     *******************************/
+    Larp::ModelPtr nanosuit = Larp::Model::create("assets/nanosuit.obj");
+    Larp::EntityPtr entity2 = Larp::Entity::create(shader, nanosuit);
+
+    node12->attach_entity(entity2);
+    node12->set_scale(0.1f, 0.1f, 0.1f);
+
+    btTransform trans;
+    trans.setOrigin(btVector3(0.0, 10.0, 0.0));
+    trans.setRotation(btQuaternion(0.0, 0.0, 0.0, 1.0));
+    btScalar mass(0.05);
+    btVector3 local_inertia(0, 0, 0);
+
+    btCollisionShape* shape = new btSphereShape(0.5);
+    world->get_collision_shapes().push_back(shape);
+    btDefaultMotionState* motion_state = new btDefaultMotionState(trans);
+
+    shape->calculateLocalInertia(mass, local_inertia);
+
+    btRigidBody::btRigidBodyConstructionInfo body_info(mass, motion_state, shape, local_inertia);
+    btRigidBody* body = new btRigidBody(body_info);
+    world->get_dynamics_world()->addRigidBody(body);
+    body->setRestitution(1);
+    body->setUserPointer(node12);
+
+    std::cout << body->getWorldTransform().getOrigin() << std::endl;
+
+
+
+
     GLfloat frame_rate_limiter = 0.0f;
+    uint64_t iteration_number = 0;
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
@@ -119,11 +153,45 @@ int main(void)
 
         frame_rate_limiter += delta_time;
         if (frame_rate_limiter > 1.0 / 60.0)
+        {
             frame_rate_limiter -= 1.0 / 60.0;
+            ++iteration_number;
+        }
         else
             continue;
 
         world->get_dynamics_world()->stepSimulation(1.0f / 60.0f);
+
+
+        std::cout << "Iteration number\n\t" << iteration_number << std::endl << std::endl;
+        for (size_t i = 0; i < world->get_collision_object_count(); ++i)
+        {
+            std::cout << i << std::endl;
+            btCollisionObject* obj = world->get_dynamics_world()->getCollisionObjectArray()[i];
+            btRigidBody* body = btRigidBody::upcast(obj);
+
+            if (body && body->getMotionState() && obj->getCollisionFlags() != btCollisionObject::CF_CHARACTER_OBJECT)
+            {
+                btTransform trans;
+                std::cout << "trans.getOrigin(): " << trans.getOrigin() << std::endl;
+                body->getMotionState()->getWorldTransform(trans);
+                void* user_pointer = body->getUserPointer();
+
+                if (user_pointer)
+                {
+                    btQuaternion orientation = trans.getRotation();
+                    Larp::NodePtr user_node = static_cast<Larp::NodePtr>(user_pointer);
+
+                    user_node->set_position(trans.getOrigin().getX(),
+                                            trans.getOrigin().getY(),
+                                            trans.getOrigin().getZ());
+                    user_node->set_orientation(orientation.getX(),
+                                               orientation.getY(),
+                                               orientation.getZ(),
+                                               orientation.getW());
+                }
+            }
+        }
 
         // Check and call events
         glfwPollEvents();
@@ -146,6 +214,8 @@ int main(void)
     }
 
     glfwTerminate();
+
+    delete world;
     return 0;
 }
 
