@@ -81,6 +81,8 @@ int main(void)
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_MULTISAMPLE);
 
+    Larp::DirectionalLightPtr light = graph->create_directional_light();
+
     Larp::Shader shader("shaders/default.vert", "shaders/default.frag");
     Larp::ModelPtr nanosuit = Larp::Model::create("assets/nanosuit.obj");
     Larp::EntityPtr entity = Larp::Entity::create(shader, nanosuit);

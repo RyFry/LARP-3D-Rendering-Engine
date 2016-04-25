@@ -4,27 +4,96 @@ namespace Larp
 {
     Shader::Shader(const GLchar * vertex_path, const GLchar * fragment_path, const GLchar * geometry_path)
     {
-        // 1. Retrieve the vertex/fragment source code from filePath
-        std::string vertex_code = Shader::load_shader(vertex_path);
-        std::string fragment_code = Shader::load_shader(fragment_path);
-        std::string geometry_code = Shader::load_shader(geometry_path);
+        // Retrieve the vertex/fragment source code from filePath
+        _vertex_code = Shader::load_shader(vertex_path);
+        _fragment_code = Shader::load_shader(fragment_path);
+        _geometry_code = Shader::load_shader(geometry_path);     
+    }
 
-        const GLchar * v_shader_code = vertex_code.c_str();
-        const GLchar * f_shader_code = fragment_code.c_str();
-        const GLchar * g_shader_code = geometry_code.c_str();
+    void Shader::use()
+    {
+        glUseProgram(this->_program);
+    }
+
+    void Shader::enable_directional_lighting()
+    {
+        // 1. Find the position in the fragment source code to be modified
+        std::string text("#define DIRECTIONAL_LIGHT 0");
+        std::size_t pos = this->_fragment_code.find(text);
+        if (pos == std::string::npos)
+        {
+            THROW_RUNTIME_ERROR("This shader does not support directional lighting");
+        }
+        pos += text.size() - 1;
+
+        // 2. Enable directional lighting calculations
+        this->_fragment_code[pos] = 1;
+    }
+
+    void Shader::set_number_point_lights(GLfloat light_number)
+    {
+        // 1. Ensure light number provided does not exceed the max number of point lights
+        if (light_number > this->_max_lights)
+        {
+            THROW_RUNTIME_ERROR("Specified number of point lights exceeds maximum value");
+        }
+
+        // 2. Find the position in the fragment source code to be modified
+        std::string text("#define NR_POINT_LIGHTS 0");
+        std::size_t pos = this->_fragment_code.find(text);
+        if (pos == std::string::npos)
+        {
+            THROW_RUNTIME_ERROR("This shader does not support point lights");
+        }
+        pos += text.size() - 1;
+
+        // 3. Set the number of point lights
+        this->_fragment_code[pos] = light_number;
+    }
+
+    void Shader::set_number_spot_lights(GLfloat light_number)
+    {
+        // 1. Ensure light number provided does not exceed the max number of spot lights
+        if (light_number > this->_max_lights)
+        {
+            THROW_RUNTIME_ERROR("Specified number of spot lights exceeds maximum value");
+        }
+
+        // 2. Find the position in the fragment source code to be modified
+        std::string text("#define NR_SPOT_LIGHTS 0");
+        std::size_t pos = this->_fragment_code.find(text);
+        if (pos == std::string::npos)
+        {
+            THROW_RUNTIME_ERROR("This shader does not support spot lights");
+        }
+        pos += text.size() - 1;
+        
+        // 3. Set the number of spot lights
+        this->_fragment_code[pos] = light_number;
+    }
+
+    void Shader::build_shader()
+    {
+        // 1. Convert the vertex/fragment source code to a c string
+        const GLchar * v_shader_code = this->_vertex_code.c_str();
+        const GLchar * f_shader_code = this->_fragment_code.c_str();
+        const GLchar * g_shader_code = this->_geometry_code.c_str();
+
         // 2. Compile shaders
         GLuint vertex = Shader::compile_shader(v_shader_code, GL_VERTEX_SHADER);
         GLuint fragment = Shader::compile_shader(f_shader_code, GL_FRAGMENT_SHADER);
         GLuint geometry = 0;
-        if (geometry_path != nullptr)
+        if (!this->_geometry_code.empty())
             geometry = Shader::compile_shader(g_shader_code, GL_GEOMETRY_SHADER);
+
         // Shader Program
         this->_program = glCreateProgram();
         glAttachShader(this->_program, vertex);
         glAttachShader(this->_program, fragment);
-        if (geometry_path != nullptr)
+        if (!this->_geometry_code.empty())
             glAttachShader(this->_program, geometry);
         glLinkProgram(this->_program);
+
         // Print linking errors if any
         GLint success;
         GLchar infoLog[512];
@@ -34,16 +103,12 @@ namespace Larp
             glGetProgramInfoLog(this->_program, 512, NULL, infoLog);
             std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
         }
+
         // Delete the shaders as they're linked into our program now and no longer necessery
         glDeleteShader(vertex);
         glDeleteShader(fragment);
-        if (geometry_path != nullptr)
+        if (!this->_geometry_code.empty())
             glDeleteShader(geometry);
-    }
-
-    void Shader::use()
-    {
-        glUseProgram(this->_program);
     }
 
     std::string Shader::load_shader(const GLchar * shader_path)
