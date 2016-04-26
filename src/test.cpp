@@ -90,6 +90,7 @@ int main(void)
     // Setting up PhysicsWorld
     world = new PhysicsWorld();
     world->init_objects();
+    Larp::DirectionalLightPtr light = graph->create_directional_light();
 
     Larp::Shader shader("shaders/default.vert", "shaders/default.frag");
     Larp::ModelPtr level = Larp::Model::create("assets/LEVEL.obj");

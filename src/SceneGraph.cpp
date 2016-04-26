@@ -43,4 +43,22 @@ namespace Larp
     void SceneGraph::set_ambient_light(glm::vec3 color)
     {
     }
+
+    DirectionalLightPtr SceneGraph::create_directional_light()
+    {
+        this->_directional_lights.push_back(UniqueDirectional(new DirectionalLight()));
+        return this->_directional_lights.back().get();
+    }
+
+    PointLightPtr SceneGraph::create_point_light()
+    {
+        this->_point_lights.push_back(UniquePoint(new PointLight()));
+        return this->_point_lights.back().get();
+    }
+
+    SpotLightPtr SceneGraph::create_spot_light()
+    {
+        this->_spot_lights.push_back(UniqueSpot(new SpotLight()));
+        return this->_spot_lights.back().get();
+    }
 }
