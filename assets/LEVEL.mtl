@@ -62,6 +62,7 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Kd ramp.jpg
+map_Ks rampspecular.png
 
 newmtl RampMaterial_edge
 Ns 96.078431

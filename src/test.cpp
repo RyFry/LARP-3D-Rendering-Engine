@@ -97,8 +97,8 @@ int main(void)
     Larp::DirectionalLightPtr dir_light = graph->create_directional_light();
     Larp::PointLightPtr point_light = graph->create_point_light();
 
-    point_light->set_ambient_color(0.1f, 0.4f, 1.0f);
-    point_light->set_position(0.0f, 0.0f, -10.0f);
+    point_light->set_ambient_color(1.0f, 1.0f, 1.0f);
+    point_light->set_position(0.0f, 5.0f, 0.0f);
     //graph->remove_light(dir_light);
     Larp::NodePtr node11 = graph->create_child_node();
     Larp::NodePtr node12 = graph->create_child_node();
@@ -116,6 +116,27 @@ int main(void)
     PhysicsMeshColliderPtr physics_level = physics_level_builder.build();
 
     world->get_dynamics_world()->addRigidBody(physics_level->get_rigid_body());
+
+
+
+    Larp::Shader crate_shader("shaders/lighting.vert", "shaders/lighting.frag");
+    Larp::ModelPtr crate_model = Larp::Model::create("assets/crate.obj");
+    Larp::EntityPtr entity22 = Larp::Entity::create(crate_shader, crate_model);
+    Larp::NodePtr node22 = graph->create_child_node();
+    node22->attach_entity(entity22);
+    node22->set_scale(0.4, 0.4, 0.4);
+    node22->set_position(0.0, 4.0, 0.0);
+    /// Can't add mesh collider for crate. It's too big.
+    // PhysicsMeshColliderBuilder crate_builder = PhysicsMeshColliderBuilder("assets/crate.obj");
+    // crate_builder.set_mass(1.0);
+    // crate_builder.set_position(btVector3(0.0, 5.0, 2.0));
+    // crate_builder.set_local_inertia(btVector3(0.0, 0.0, 0.0));
+    // crate_builder.set_restitution(1);
+    // crate_builder.set_user_pointer(node22);
+
+    // PhysicsMeshColliderPtr crate = crate_builder.build();
+
+    // world->get_dynamics_world()->addRigidBody(crate->get_rigid_body());
 
 
     /*******************************
@@ -286,8 +307,9 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
 
-    if (key == GLFW_KEY_C)
-        graph->clear();
+    // We don't want people to actually clear the graph
+    // if (key == GLFW_KEY_C)
+    //     graph->clear();
 
     if(action == GLFW_PRESS)
         keys[key] = true;
