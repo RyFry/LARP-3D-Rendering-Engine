@@ -3,6 +3,7 @@
 #include <btBulletDynamicsCommon.h>
 #include <BulletDynamics/Character/btKinematicCharacterController.h>
 #include <BulletCollision/CollisionDispatch/btGhostObject.h>
+#include <iostream>
 
 #include "PhysicsWorld.hpp"
 
@@ -16,6 +17,7 @@ private:
     btScalar _backward_speed;
     btScalar _strafe_speed;
     btScalar _jump_height;
+    btScalar _max_slope;
 public:
     enum PlayerDirection
     {
@@ -28,7 +30,7 @@ public:
 
     PhysicsPlayerController(PhysicsWorld* physics_world, btVector3 initial_position = btVector3(0, 0, 0), 
                             btScalar fwdspeed = .15, btScalar bwdspeed = .1, btScalar strspeed = .13,
-                            btScalar jmpheight = .1);
+                            btScalar jmpheight = .1, btScalar mxslope = .872665);
     void update_movement(PhysicsWorld* world, PlayerDirection direction);
     void rotate(btScalar rotation_amount);
     void jump();

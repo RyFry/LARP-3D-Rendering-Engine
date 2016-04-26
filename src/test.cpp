@@ -242,29 +242,29 @@ int main(void)
 void Do_Movement()
 {
     // Camera controls
-    if (keys[GLFW_KEY_W])
+    if (keys[GLFW_KEY_UP])
         camera.process_keyboard(Camera::FORWARD, delta_time);
-    if (keys[GLFW_KEY_S])
+    if (keys[GLFW_KEY_DOWN])
         camera.process_keyboard(Camera::BACKWARD, delta_time);
-    if (keys[GLFW_KEY_A])
+    if (keys[GLFW_KEY_LEFT])
         camera.process_keyboard(Camera::LEFT, delta_time);
-    if (keys[GLFW_KEY_D])
+    if (keys[GLFW_KEY_RIGHT])
         camera.process_keyboard(Camera::RIGHT, delta_time);
     if (keys[GLFW_KEY_SPACE])
         camera.process_keyboard(Camera::UP, delta_time);
     if (keys[GLFW_KEY_LEFT_SHIFT])
         camera.process_keyboard(Camera::DOWN, delta_time);
 
-    if (keys[GLFW_KEY_DOWN])
+    if (keys[GLFW_KEY_S])
         player->update_movement(world, PhysicsPlayerController::PlayerDirection::BACKWARD);
-    if (keys[GLFW_KEY_LEFT])
+    if (keys[GLFW_KEY_A])
         player->update_movement(world, PhysicsPlayerController::PlayerDirection::LEFT);
-    if (keys[GLFW_KEY_RIGHT])
+    if (keys[GLFW_KEY_D])
         player->update_movement(world, PhysicsPlayerController::PlayerDirection::RIGHT);
-    if (keys[GLFW_KEY_UP])
+    if (keys[GLFW_KEY_W])
         player->update_movement(world, PhysicsPlayerController::PlayerDirection::FORWARD);
 
-    if (!keys[GLFW_KEY_UP] && !keys[GLFW_KEY_DOWN] && !keys[GLFW_KEY_RIGHT] && !keys[GLFW_KEY_LEFT])
+    if (!keys[GLFW_KEY_W] && !keys[GLFW_KEY_A] && !keys[GLFW_KEY_S] && !keys[GLFW_KEY_D])
         player->update_movement(world, PhysicsPlayerController::PlayerDirection::STOP);
 }
 

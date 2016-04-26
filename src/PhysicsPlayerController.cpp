@@ -1,7 +1,7 @@
 #include "PhysicsPlayerController.hpp"
 
 PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, btVector3 initial_position, 
-    btScalar fwdspeed, btScalar bwdspeed, btScalar strspeed, btScalar jmpheight)
+    btScalar fwdspeed, btScalar bwdspeed, btScalar strspeed, btScalar jmpheight, btScalar mxslope)
     :_forward_speed(fwdspeed),
     _backward_speed(bwdspeed),
     _strafe_speed(strspeed),
@@ -25,6 +25,7 @@ PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, bt
     this->_char_controller =
         new btKinematicCharacterController(this->_ghost_object, player_shape, 1.0);
     this->_char_controller->setGravity(0.1);
+    this->_char_controller->setMaxSlope(mxslope);
     physics_world->get_dynamics_world()->addCollisionObject(
         this->_ghost_object,
         btBroadphaseProxy::CharacterFilter,
@@ -46,7 +47,23 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world, PhysicsPlayer
       camera orientation convention (positive Z axis).
       https://www.opengl.org/discussion_boards/showthread.php/175515-Get-Direction-from-Transformation-Matrix-or-Quat
     */
+    btVector3 btFrom = this->_ghost_object->getWorldTransform().getOrigin();
+    btVector3 btTo(btFrom.x(), -0.00a1f, btFrom.z());
+    btCollisionWorld::ClosestRayResultCallback res(btFrom, btTo);
+    
+    world->get_dynamics_world()->rayTest(btFrom, btTo, res); // m_btWorld is btDiscreteDynamicsWorld
+    
 
+    if(res.hasHit())
+    {
+        std::cout << "lmao we hit shit bruh" << std::endl;
+        _char_controller->setGravity(0);
+    }
+    else
+    {
+        std::cout << "lmao we should be falling bruh" << std::endl;
+        _char_controller->setGravity(0.1);
+    }
     btScalar matrix[16];
     this->_ghost_object->getWorldTransform().getOpenGLMatrix(matrix);
 
