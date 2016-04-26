@@ -34,10 +34,11 @@ namespace Larp
         this->_root.reset(new Node());
     }
 
-    void SceneGraph::draw(glm::mat4& view, glm::mat4& projection)
+    void SceneGraph::draw(glm::mat4& view, glm::mat4& projection, const glm::vec3& view_pos)
     {
         glm::mat4 identity;
-        this->_root->draw(identity, view, projection);
+        this->_root->draw(identity, view, projection, view_pos, this->_directional_lights,
+                          this->_point_lights, this->_spot_lights);
     }
 
     void SceneGraph::set_ambient_light(glm::vec3 color)

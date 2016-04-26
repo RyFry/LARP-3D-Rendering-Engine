@@ -27,7 +27,8 @@ namespace Larp
         pos += text.size() - 1;
 
         // 2. Enable directional lighting calculations
-        this->_fragment_code[pos] = 1;
+        this->_fragment_code[pos] = 1 + '0';
+        this->_directional_light = true;
     }
 
     void Shader::set_number_point_lights(GLfloat light_number)
@@ -48,7 +49,8 @@ namespace Larp
         pos += text.size() - 1;
 
         // 3. Set the number of point lights
-        this->_fragment_code[pos] = light_number;
+        this->_fragment_code[pos] = light_number + '0';
+        this->_point_lights = light_number;
     }
 
     void Shader::set_number_spot_lights(GLfloat light_number)
@@ -69,11 +71,13 @@ namespace Larp
         pos += text.size() - 1;
         
         // 3. Set the number of spot lights
-        this->_fragment_code[pos] = light_number;
+        this->_fragment_code[pos] = light_number + '0';
+        this->_spot_lights = light_number;
     }
 
     void Shader::build_shader()
     {
+        // std::cout << this->_fragment_code << std::endl;
         // 1. Convert the vertex/fragment source code to a c string
         const GLchar * v_shader_code = this->_vertex_code.c_str();
         const GLchar * f_shader_code = this->_fragment_code.c_str();
@@ -143,6 +147,7 @@ namespace Larp
     {
         GLuint shader;
         GLint success;
+        GLsizei length;
         GLchar infoLog[512];
 
         shader = glCreateShader(shader_type);
@@ -168,8 +173,8 @@ namespace Larp
                 error = "UNSUPPORTED_SHADER_TYPE";
                 break;
             }
-            THROW_RUNTIME_ERROR(std::string("Error compiling ") +
-                                error + std::string(" [") + std::string(infoLog) + std::string("]"));
+            glGetShaderInfoLog(shader, 512, &length, infoLog);
+            THROW_RUNTIME_ERROR("Error compiling " << error << " [" << infoLog << "]");
         }
 
         return shader;

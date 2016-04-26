@@ -9,9 +9,9 @@ namespace Larp
     std::string Texture::to_string()
     {
         if (this->_type == Texture::DIFFUSE)
-            return "texture_diffuse";
+            return "diffuse";
         if (this->_type == Texture::SPECULAR)
-            return "texture_specular";
+            return "specular";
         return "";
     }
 
@@ -34,13 +34,13 @@ namespace Larp
         for (GLuint i = 0; i < this->_textures.size(); ++i)
         {
             glActiveTexture(GL_TEXTURE0 + i); // Activate the proper texture unit before binding
-            // Retrieve the texture number (texture_diffuseN or texture_specularN)
+            // Retrieve the texture number (diffuseN or specularN)
             std::stringstream ss;
             std::string number;
             std::string name = this->_textures.at(i).to_string();
-            if (name == "texture_diffuse")
+            if (name == "diffuse")
                 ss << diffuseN++;
-            else if (name == "texture_specular")
+            else if (name == "specular")
                 ss << specularN++;
             else
             {
@@ -49,7 +49,7 @@ namespace Larp
             }
             number = ss.str();
 
-            glUniform1f(glGetUniformLocation(shader._program, ("material." + name + number).c_str()), i);
+            glUniform1i(glGetUniformLocation(shader._program, ("material." + name + number).c_str()), i);
             glBindTexture(GL_TEXTURE_2D, this->_textures.at(i)._id);
         }
         glActiveTexture(GL_TEXTURE0);

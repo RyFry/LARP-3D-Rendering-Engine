@@ -11,6 +11,17 @@ namespace Larp
     {
     }
 
+    PointLight::PointLight(GLfloat x, GLfloat y, GLfloat z)
+        : _position(glm::vec3(x, y, z)),
+        _constant(1.0f),
+        _linear(0.09f),
+        _quadratic(0.032f),
+        _ambient(glm::vec3(0.05f)),
+        _diffuse(glm::vec3(0.8f)),
+        _specular(glm::vec3(1.0f))
+    {
+    }
+
     void PointLight::set_position(glm::vec3 position)
     {
         this->_position = position;

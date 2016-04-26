@@ -13,6 +13,12 @@ namespace Larp
     class Shader
     {
     public:
+        
+        bool _directional_light = false;
+
+        GLint _point_lights = 0;
+
+        GLint _spot_lights = 0;
         /**
          * The ID of the OpenGL Program associated with this Shader
          */

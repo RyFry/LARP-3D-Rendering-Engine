@@ -9,27 +9,30 @@ namespace Larp
     class SpotLight
     {
     private:
-    	glm::vec3 _position;
-
-    	glm::vec3 _direction;
-
-    	GLfloat _cut_off;
-
-    	GLfloat _outer_cut_off;
-
-    	const GLfloat _constant;
-
-    	GLfloat _linear;
-
-    	GLfloat _quadratic;
-
-    	glm::vec3 _ambient;
-
-    	glm::vec3 _diffuse;
-
-    	glm::vec3 _specular;
     public:
+        glm::vec3 _position;
+
+        glm::vec3 _direction;
+
+        GLfloat _cut_off;
+
+        GLfloat _outer_cut_off;
+
+        const GLfloat _constant;
+
+        GLfloat _linear;
+
+        GLfloat _quadratic;
+
+        glm::vec3 _ambient;
+
+        glm::vec3 _diffuse;
+
+        glm::vec3 _specular;
+
         SpotLight();
+
+        SpotLight(GLfloat x, GLfloat y, GLfloat z);
 
     	void set_position(glm::vec3 position);
 
