@@ -97,6 +97,12 @@ int main(void)
     Larp::DirectionalLightPtr dir_light = graph->create_directional_light();
     Larp::PointLightPtr point_light = graph->create_point_light();
 
+
+
+    point_light->set_ambient_color(0.1f, 0.4f, 1.0f);
+    point_light->set_position(0.0f, 0.0f, -10.0f);
+    //graph->remove_light(dir_light);
+
     point_light->set_ambient_color(0.1f, 0.4f, 1.0f);
     point_light->set_position(0.0f, 0.0f, -10.0f);
     //graph->remove_light(dir_light);
