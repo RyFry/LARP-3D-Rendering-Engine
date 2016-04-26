@@ -31,7 +31,6 @@ namespace Larp
          * Tells OpenGL to use this Shader's compiled shader program
          */
         void use();
-
     private:
         /**
          * Loads a shader given its path relative to where the program is being run

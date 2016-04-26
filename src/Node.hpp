@@ -11,6 +11,10 @@
 #include "LarpPrerequisites.hpp"
 #include "Entity.hpp"
 
+#include "DirectionalLight.hpp"
+#include "PointLight.hpp"
+#include "SpotLight.hpp"
+
 namespace Larp
 {
     class Node
@@ -55,7 +59,11 @@ namespace Larp
          * @note the order in which the draw method is called on the Node's children is
          *       not necessarily the order in which they were created.
          */
-        void draw(glm::mat4 model, glm::mat4& view, glm::mat4& projection);
+        void draw(glm::mat4 model, glm::mat4& view, glm::mat4& projection, 
+                  const glm::vec3& view_pos,
+                  const std::vector<UniqueDirectional>& directional_lights,
+                  const std::vector<UniquePoint>& point_lights,
+                  const std::vector<UniqueSpot>& spot_lights);
         /**
          * Creates a new Node that is a child of this Node.
          * @return A pointer to the new Node

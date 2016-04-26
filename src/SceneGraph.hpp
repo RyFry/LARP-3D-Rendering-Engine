@@ -1,6 +1,7 @@
 #pragma once
 
-#include <memory>	// unique_ptr
+#include <algorithm>
+#include <vector>
 
 #include "LarpPrerequisites.hpp"
 #include "Node.hpp"
@@ -19,6 +20,18 @@ namespace Larp
          * users from making more than one SceneGraph.
          */
         static UniqueSceneGraph _singleton;
+
+        std::vector<UniqueDirectional> _directional_lights;
+
+        std::vector<UniquePoint> _point_lights;
+
+        std::vector<UniqueSpot> _spot_lights;
+
+        static const size_t _max_directional_lights;
+
+        static const size_t _max_point_lights;
+
+        static const size_t _max_spot_lights;
         /**
          * Default constructor. Made private to avoid having multiple
          * SceneGraph's per program.
@@ -49,12 +62,24 @@ namespace Larp
          * @param projection The project matrix determined by the field of view to be
          *                   passed to each Node's shader program.
          */
-        void draw(glm::mat4& view, glm::mat4& projection);
-        /**
-         * Sets ambient lighting
-         * @param color The color to set the ambient lighting to.
-         * @warning This function is currently unimplemented and does nothing. <b>Do not call this function!</b>
-         */
-        void set_ambient_light(glm::vec3 color);
+        void draw(glm::mat4& view, glm::mat4& projection, const glm::vec3& view_pos);
+
+        DirectionalLightPtr create_directional_light(glm::vec3 direction = glm::vec3(0.0f, -1.0f, 0.0f));
+
+        DirectionalLightPtr create_directional_light(GLfloat x, GLfloat y, GLfloat z);
+
+        PointLightPtr create_point_light(glm::vec3 position = glm::vec3(0.0f));
+
+        PointLightPtr create_point_light(GLfloat x, GLfloat y, GLfloat z);
+
+        SpotLightPtr create_spot_light(glm::vec3 position = glm::vec3(0.0f));
+
+        SpotLightPtr create_spot_light(GLfloat x, GLfloat y, GLfloat z);
+
+        void remove_light(DirectionalLightPtr light);
+
+        void remove_light(PointLightPtr light);
+
+        void remove_light(SpotLightPtr light);
     };
 }

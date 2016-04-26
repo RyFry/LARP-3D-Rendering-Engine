@@ -38,7 +38,7 @@ namespace Larp
         glDeleteShader(vertex);
         glDeleteShader(fragment);
         if (geometry_path != nullptr)
-            glDeleteShader(geometry);
+            glDeleteShader(geometry);   
     }
 
     void Shader::use()
@@ -78,6 +78,7 @@ namespace Larp
     {
         GLuint shader;
         GLint success;
+        GLsizei length;
         GLchar infoLog[512];
 
         shader = glCreateShader(shader_type);
@@ -103,8 +104,8 @@ namespace Larp
                 error = "UNSUPPORTED_SHADER_TYPE";
                 break;
             }
-            THROW_RUNTIME_ERROR(std::string("Error compiling ") +
-                                error + std::string(" [") + std::string(infoLog) + std::string("]"));
+            glGetShaderInfoLog(shader, 512, &length, infoLog);
+            THROW_RUNTIME_ERROR("Error compiling " << error << " [" << infoLog << "]");
         }
 
         return shader;

@@ -4,10 +4,14 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <memory>
+#include <vector>
 
 #include "LarpPrerequisites.hpp"
 #include "Model.hpp"
 #include "Shader.hpp"
+#include "DirectionalLight.hpp"
+#include "PointLight.hpp"
+#include "SpotLight.hpp"
 
 namespace Larp
 {
@@ -53,6 +57,10 @@ namespace Larp
          * @param projection The projection matrix to apply during rendering.
          *                   This should also be obtained from a Camera object.
          */
-        void draw(const glm::mat4& model, const glm::mat4& view, const glm::mat4& projection);
+        void draw(const glm::mat4& model, const glm::mat4& view, const glm::mat4& projection,
+                  const glm::vec3& view_pos,
+                  const std::vector<UniqueDirectional>& directional_lights,
+                  const std::vector<UniquePoint>& point_lights,
+                  const std::vector<UniqueSpot>& spot_lights);
     };
 }

@@ -94,6 +94,14 @@ int main(void)
     Larp::Shader shader("shaders/default.vert", "shaders/default.frag");
     Larp::ModelPtr level = Larp::Model::create("assets/LEVEL.obj");
     Larp::EntityPtr entity = Larp::Entity::create(shader, level);
+    Larp::DirectionalLightPtr dir_light = graph->create_directional_light();
+    Larp::PointLightPtr point_light = graph->create_point_light();
+
+    point_light->set_ambient_color(0.1f, 0.4f, 1.0f);
+    point_light->set_position(0.0f, 0.0f, -10.0f);
+    graph->remove_light(dir_light);
+
+    Larp::Shader shader("shaders/lighting.vert", "shaders/lighting.frag");
 
     Larp::NodePtr node11 = graph->create_child_node();
     Larp::NodePtr node12 = graph->create_child_node();
@@ -229,7 +237,8 @@ int main(void)
 
         glm::mat4 projection = glm::perspective(camera._zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
         glm::mat4 view = camera.get_view_matrix();
-        graph->draw(view, projection);
+        glm::vec3 view_pos = camera._position;
+        graph->draw(view, projection, view_pos);
 
         // Swap the buffers
         glfwSwapBuffers(window);
