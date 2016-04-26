@@ -6,10 +6,8 @@
 
 namespace Larp
 {
-    class DirectionalLight
+    struct DirectionalLight
     {
-    private:
-    public:
         glm::vec3 _direction;
 
         glm::vec3 _ambient;
@@ -17,8 +15,6 @@ namespace Larp
         glm::vec3 _diffuse;
 
         glm::vec3 _specular;
-
-        DirectionalLight();
 
         DirectionalLight(GLfloat x, GLfloat y, GLfloat z);
 

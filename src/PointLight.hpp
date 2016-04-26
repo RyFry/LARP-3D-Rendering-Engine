@@ -6,10 +6,8 @@
 
 namespace Larp
 {
-    class PointLight
+    struct PointLight
     {
-    private:
-    public:
         glm::vec3 _position;
 
         const GLfloat _constant;
@@ -23,8 +21,6 @@ namespace Larp
         glm::vec3 _diffuse;
 
         glm::vec3 _specular;
-        
-        PointLight();
 
         PointLight(GLfloat x, GLfloat y, GLfloat z);
         

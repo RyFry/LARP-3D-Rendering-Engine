@@ -1,14 +1,6 @@
 #include "DirectionalLight.hpp"
 namespace Larp
 {
-    DirectionalLight::DirectionalLight()
-        : _direction(glm::vec3(-0.2f, -1.0f, -0.3f)),
-        _ambient(glm::vec3(0.05f)),
-        _diffuse(glm::vec3(0.4f)),
-        _specular(glm::vec3(0.5f))
-    {
-    }
-
     DirectionalLight::DirectionalLight(GLfloat x, GLfloat y, GLfloat z)
         : _direction(glm::vec3(x, y, z)),
         _ambient(glm::vec3(0.05f)),
