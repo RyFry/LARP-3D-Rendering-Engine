@@ -16,7 +16,7 @@ private:
     btScalar _forward_speed;
     btScalar _backward_speed;
     btScalar _strafe_speed;
-    btScalar _jump_height;
+    btScalar _jump_speed;
     btScalar _max_slope;
 public:
     enum PlayerDirection
@@ -28,11 +28,13 @@ public:
         BACKWARD
     };
 
-    PhysicsPlayerController(PhysicsWorld* physics_world, btVector3 initial_position = btVector3(0, 0, 0), 
-                            btScalar fwdspeed = .15, btScalar bwdspeed = .1, btScalar strspeed = .13,
-                            btScalar jmpheight = .1, btScalar mxslope = .872665);
+    PhysicsPlayerController(PhysicsWorld* physics_world,
+                            btVector3 initial_position = btVector3(0, 0, 0),
+                            btScalar forward_speed = .03,
+                            btScalar backward_speed = .01, btScalar strafe_speed = .02,
+                            btScalar jump_speed = 5.0, btScalar max_slope = .872665); // 50 degrees in radians
     void update_movement(PhysicsWorld* world, PlayerDirection direction);
-    void rotate(btScalar rotation_amount);
+    void rotate(btQuaternion rotation_amount);
     void jump();
     void set_user_pointer(void * user_pointer);
     void step(PhysicsWorld* world, btScalar delta_time);

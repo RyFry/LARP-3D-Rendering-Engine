@@ -1,11 +1,11 @@
 #include "PhysicsPlayerController.hpp"
 
-PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, btVector3 initial_position, 
-    btScalar fwdspeed, btScalar bwdspeed, btScalar strspeed, btScalar jmpheight, btScalar mxslope)
-    :_forward_speed(fwdspeed),
-    _backward_speed(bwdspeed),
-    _strafe_speed(strspeed),
-    _jump_height(jmpheight)
+PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, btVector3 initial_position,
+    btScalar forward_speed, btScalar backward_speed, btScalar strafe_speed, btScalar jump_speed, btScalar max_slope)
+    : _forward_speed(forward_speed),
+      _backward_speed(backward_speed),
+      _strafe_speed(strafe_speed),
+      _jump_speed(jump_speed)
 {
     // Create player shape
     btCylinderShape* player_shape = new btCylinderShape(btVector3(0.2, 0.6, 1.0));
@@ -24,8 +24,9 @@ PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, bt
     // Setup the character controller and add it to the physics world
     this->_char_controller =
         new btKinematicCharacterController(this->_ghost_object, player_shape, 1.0);
-    this->_char_controller->setGravity(0.1);
-    this->_char_controller->setMaxSlope(mxslope);
+    this->_char_controller->setGravity(4.9);
+    this->_char_controller->setMaxSlope(max_slope);
+    this->_char_controller->setJumpSpeed(jump_speed);
     physics_world->get_dynamics_world()->addCollisionObject(
         this->_ghost_object,
         btBroadphaseProxy::CharacterFilter,
@@ -47,23 +48,26 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world, PhysicsPlayer
       camera orientation convention (positive Z axis).
       https://www.opengl.org/discussion_boards/showthread.php/175515-Get-Direction-from-Transformation-Matrix-or-Quat
     */
-    btVector3 btFrom = this->_ghost_object->getWorldTransform().getOrigin();
-    btVector3 btTo(btFrom.x(), -0.00a1f, btFrom.z());
-    btCollisionWorld::ClosestRayResultCallback res(btFrom, btTo);
-    
-    world->get_dynamics_world()->rayTest(btFrom, btTo, res); // m_btWorld is btDiscreteDynamicsWorld
-    
+    // btVector3 btFrom = this->_ghost_object->getWorldTransform().getOrigin();
+    // btVector3 btTo(btFrom.x(), -0.001f, btFrom.z());
+    // btCollisionWorld::ClosestRayResultCallback res(btFrom, btTo);
 
-    if(res.hasHit())
-    {
-        std::cout << "lmao we hit shit bruh" << std::endl;
-        _char_controller->setGravity(0);
-    }
-    else
-    {
-        std::cout << "lmao we should be falling bruh" << std::endl;
-        _char_controller->setGravity(0.1);
-    }
+    // world->get_dynamics_world()->rayTest(btFrom, btTo, res); // m_btWorld is btDiscreteDynamicsWorld
+
+
+    // /*
+    //  * 0.7 is the magic number for detecting whether the player has hit one of the slopes
+    //  */
+    // if(res.hasHit() && btFrom.y() - res.m_hitPointWorld.y() < 0.7f)
+    // {
+    //     _char_controller->setGravity(0);
+    // }
+    // else
+    // {
+    //     _char_controller->setGravity(4.9);
+    // }
+
+
     btScalar matrix[16];
     this->_ghost_object->getWorldTransform().getOpenGLMatrix(matrix);
 
@@ -71,6 +75,7 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world, PhysicsPlayer
     {
         _char_controller->setWalkDirection(btVector3(0, 0, 0));
     }
+
     if (direction == PlayerDirection::FORWARD)
     {
         btVector3 forward(matrix[8], matrix[9], matrix[10]);
@@ -99,14 +104,18 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world, PhysicsPlayer
     }
 }
 
-void PhysicsPlayerController::rotate(btScalar rotation_amount)
+void PhysicsPlayerController::rotate(btQuaternion rotation_amount)
 {
-    btQuaternion(btVector3(0, 1, 0), rotation_amount);
+    btTransform trans = this->_ghost_object->getWorldTransform();
+    btQuaternion quat = trans.getRotation();
+    quat = rotation_amount * quat;
+    trans.setRotation(quat);
+    this->_ghost_object->setWorldTransform(trans);
 }
 
 void PhysicsPlayerController::jump()
 {
-    
+     this->_char_controller->jump();
 }
 
 void PhysicsPlayerController::set_user_pointer(void * user_pointer)
@@ -133,4 +142,3 @@ btQuaternion PhysicsPlayerController::get_orientation() const
 {
     return this->_ghost_object->getWorldTransform().getRotation();
 }
-

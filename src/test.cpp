@@ -177,12 +177,15 @@ int main(void)
         player->step(world, 1.0f / 60.0f);
         Larp::NodePtr player_node = static_cast<Larp::NodePtr>(player->get_user_pointer());
         btVector3 pos = player->get_position();
-        std::cout << pos << std::endl;
         btQuaternion quat = player->get_orientation();
         player_node->set_position(glm::vec3(pos.x(), pos.y(), pos.z()));
         player_node->set_orientation(glm::quat(quat.w(), quat.x(), quat.y(), quat.z()));
-        camera._position = glm::vec3(pos.x(), pos.y(), pos.z());
+        camera._position = glm::vec3(pos.x(), pos.y() + 1.5, pos.z());
 
+        btScalar matrix[16];
+        btTransform trans(quat, pos);
+        trans.getOpenGLMatrix(matrix);
+        camera._yaw = glm::degrees(btAtan2(-matrix[8], matrix[10])) + 90.0;
 
         for (size_t i = 0; i < world->get_collision_object_count(); ++i)
         {
@@ -250,8 +253,10 @@ void Do_Movement()
         camera.process_keyboard(Camera::LEFT, delta_time);
     if (keys[GLFW_KEY_RIGHT])
         camera.process_keyboard(Camera::RIGHT, delta_time);
+
+
     if (keys[GLFW_KEY_SPACE])
-        camera.process_keyboard(Camera::UP, delta_time);
+        player->jump();
     if (keys[GLFW_KEY_LEFT_SHIFT])
         camera.process_keyboard(Camera::DOWN, delta_time);
 
@@ -298,7 +303,10 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     lastX = xpos;
     lastY = ypos;
 
-    camera.process_mouse_movement(xoffset, yoffset);
+    btQuaternion rotation;
+    rotation.setEuler(-xoffset * 0.005, 0, 0);
+    player->rotate(rotation);
+    camera.process_mouse_movement(0, yoffset);
 }
 
 void scroll_callback(GLFWwindow* window, double x_offset, double y_offset)
