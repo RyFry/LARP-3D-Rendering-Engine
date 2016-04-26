@@ -2,11 +2,8 @@
 
 #include <vector>
 
-#include "DirectionalLight.hpp"
 #include "LarpPrerequisites.hpp"
 #include "Node.hpp"
-#include "PointLight.hpp"
-#include "SpotLight.hpp"
 
 namespace Larp
 {
@@ -58,7 +55,7 @@ namespace Larp
          * @param projection The project matrix determined by the field of view to be
          *                   passed to each Node's shader program.
          */
-        void draw(glm::mat4& view, glm::mat4& projection);
+        void draw(glm::mat4& view, glm::mat4& projection, const glm::vec3& view_pos);
         /**
          * Sets ambient lighting
          * @param color The color to set the ambient lighting to.

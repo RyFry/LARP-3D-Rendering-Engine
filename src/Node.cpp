@@ -6,17 +6,24 @@ namespace Larp
         : _scale(glm::vec3(1.0f, 1.0f, 1.0f))
     {}
 
-    void Node::draw(glm::mat4 model, glm::mat4& view, glm::mat4& projection)
+    void Node::draw(glm::mat4 model, glm::mat4& view, glm::mat4& projection, 
+                  const glm::vec3& view_pos, 
+                  const std::vector<UniqueDirectional>& directional_lights,
+                  const std::vector<UniquePoint>& point_lights,
+                  const std::vector<UniqueSpot>& spot_lights)
     {
         glm::mat4 tmp_model = glm::translate(glm::mat4(), this->_position);
         glm::mat4 rotation = glm::toMat4(this->_rotation);
         tmp_model = tmp_model * rotation;
         tmp_model = glm::scale(tmp_model, this->_scale);
         glm::mat4 my_model = model * tmp_model;
+
         if (this->_entity != nullptr)
-            this->_entity->draw(my_model, view, projection);
+            this->_entity->draw(my_model, view, projection, view_pos, directional_lights,
+                                point_lights, spot_lights);
         for (auto& it : this->_children)
-            it.second->draw(my_model, view, projection);
+            it.second->draw(my_model, view, projection, view_pos, directional_lights,
+                                point_lights, spot_lights);
     }
 
     NodePtr Node::create_child()
