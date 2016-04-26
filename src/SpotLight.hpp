@@ -6,10 +6,8 @@
 
 namespace Larp
 {
-    class SpotLight
+    struct SpotLight
     {
-    private:
-    public:
         glm::vec3 _position;
 
         glm::vec3 _direction;
@@ -29,8 +27,6 @@ namespace Larp
         glm::vec3 _diffuse;
 
         glm::vec3 _specular;
-
-        SpotLight();
 
         SpotLight(GLfloat x, GLfloat y, GLfloat z);
 

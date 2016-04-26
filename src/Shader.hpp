@@ -13,12 +13,6 @@ namespace Larp
     class Shader
     {
     public:
-        
-        bool _directional_light = false;
-
-        GLint _point_lights = 0;
-
-        GLint _spot_lights = 0;
         /**
          * The ID of the OpenGL Program associated with this Shader
          */
@@ -37,24 +31,7 @@ namespace Larp
          * Tells OpenGL to use this Shader's compiled shader program
          */
         void use();
-
-        void enable_directional_lighting();
-
-        void set_number_point_lights(GLfloat light_number);
-
-        void set_number_spot_lights(GLfloat light_number);
-
-        void build_shader();
-
     private:
-
-        const GLuint _max_lights = 9;
-
-        std::string _vertex_code;
-
-        std::string _fragment_code;
-
-        std::string _geometry_code;
         /**
          * Loads a shader given its path relative to where the program is being run
          * @param shader_path The path to the shader program to be loaded

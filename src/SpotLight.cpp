@@ -1,17 +1,6 @@
 #include "SpotLight.hpp"
 namespace Larp
 {
-    SpotLight::SpotLight()
-        : _cut_off(12.5f),
-        _outer_cut_off(15.0f),
-        _constant(1.0f),
-        _linear(0.09f),
-        _quadratic(0.032f),
-        _diffuse(glm::vec3(1.0f)),
-        _specular(glm::vec3(1.0f))
-    {
-    }
-
     SpotLight::SpotLight(GLfloat x, GLfloat y, GLfloat z)
         : _position(glm::vec3(x, y, z)),
         _cut_off(12.5f),

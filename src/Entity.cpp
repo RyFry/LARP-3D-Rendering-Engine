@@ -21,14 +21,14 @@ namespace Larp
     {
         this->_shader.use();
 
-
-        GLint view_pos_loc = glGetUniformLocation(this->_shader._program, "viewPos");
-        // std::cout << "view pos x " << view_pos.x << " view pos y " << view_pos.y << " view pos z " << view_pos.z << std::endl;
-        glUniform3f(view_pos_loc, view_pos.x, view_pos.y, view_pos.z);
+        glUniform3f(glGetUniformLocation(this->_shader._program, "viewPos"), view_pos.x, view_pos.y, view_pos.z);
         glUniform1f(glGetUniformLocation(this->_shader._program, "material.shininess"), 32.0f);
 
+        bool use_directional_lighting = !directional_lights.empty();
+        glUniform1i(glGetUniformLocation(this->_shader._program, "directionalLight"), use_directional_lighting);
+
         // Directional light
-        if (this->_shader._directional_light)
+        if (use_directional_lighting)
         {
           // std::cout << "dir light" << std::endl;
           glUniform3f(glGetUniformLocation(this->_shader._program, "dirLight.direction"), directional_lights[0]->_direction.x, directional_lights[0]->_direction.y, directional_lights[0]->_direction.z);
@@ -36,8 +36,12 @@ namespace Larp
           glUniform3f(glGetUniformLocation(this->_shader._program, "dirLight.diffuse"), directional_lights[0]->_diffuse.x, directional_lights[0]->_diffuse.y, directional_lights[0]->_diffuse.z);
           glUniform3f(glGetUniformLocation(this->_shader._program, "dirLight.specular"), directional_lights[0]->_specular.x, directional_lights[0]->_specular.y, directional_lights[0]->_specular.z);
         }
+
+        int num_point_lights = point_lights.size();
+        glUniform1i(glGetUniformLocation(this->_shader._program, "numPointLights"), num_point_lights);
+        
         // Point lights
-        for (int i = 0; i < this->_shader._point_lights; ++i)
+        for (int i = 0; i < num_point_lights; ++i)
         {
           glUniform3f(glGetUniformLocation(this->_shader._program, ("pointLights[" + std::to_string(i) + "].position").c_str()), point_lights[i]->_position.x, point_lights[i]->_position.y, point_lights[i]->_position.z);
           glUniform3f(glGetUniformLocation(this->_shader._program, ("pointLights[" + std::to_string(i) + "].ambient").c_str()), point_lights[i]->_ambient.x, point_lights[i]->_ambient.y, point_lights[i]->_ambient.z);
