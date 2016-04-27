@@ -189,5 +189,10 @@ namespace Larp
          *          attach this Node's Entity to another Node.
          */
         EntityPtr detach_entity();
+
+        GLfloat get_scaled_width() const;
+        GLfloat get_scaled_height() const;
+        GLfloat get_scaled_depth() const;
+        glm::vec3 get_scaled_bounding_box() const;
     };
 }

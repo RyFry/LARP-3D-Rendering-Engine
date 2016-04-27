@@ -156,4 +156,26 @@ namespace Larp
     {
         return this->_entity.release();
     }
+
+    GLfloat Node::get_scaled_width() const
+    {
+        return this->_entity->get_width() * this->_scale.x;
+    }
+
+    GLfloat Node::get_scaled_height() const
+    {
+        return this->_entity->get_height() * this->_scale.y;
+    }
+
+    GLfloat Node::get_scaled_depth() const
+    {
+        return this->_entity->get_depth() * this->_scale.z;
+    }
+
+    glm::vec3 Node::get_scaled_bounding_box() const
+    {
+        return glm::vec3(this->_entity->get_width() * this->_scale.x,
+                         this->_entity->get_height() * this->_scale.y,
+                         this->_entity->get_depth() * this->_scale.z);
+    }
 }
