@@ -191,9 +191,9 @@ int main(void)
         last_frame = current_frame;
 
         frame_rate_limiter += delta_time;
-        if (frame_rate_limiter > 1.0 / 60.0)
+        if (frame_rate_limiter > 1.0 / 120.0)
         {
-            frame_rate_limiter -= 1.0 / 60.0;
+            frame_rate_limiter -= 1.0 / 120.0;
             ++iteration_number;
         }
         else
@@ -201,9 +201,9 @@ int main(void)
 
         player->update_movement(world);
 
-        world->get_dynamics_world()->stepSimulation(1.0f / 60.0f);
+        world->get_dynamics_world()->stepSimulation(1.0f / 120.0f);
 
-        player->step(world, 1.0f / 60.0f);
+        player->step(world, 1.0f / 120.0f);
         Larp::NodePtr player_node = player->get_user_pointer();
         glm::vec3 pos = player->get_position();
         glm::quat quat = player->get_orientation();
@@ -351,7 +351,7 @@ void make_floor(PhysicsWorld* world)
     btScalar mass(0.0);
     btVector3 local_inertia(0, 0, 0);
 
-    btStaticPlaneShape* shape = new btStaticPlaneShape(btVector3(0, 1, 0), 0.0);
+    btStaticPlaneShape* shape = new btStaticPlaneShape(btVector3(0.0f, 1.0f, 0.0f), 0.0f);
     world->get_collision_shapes().push_back(shape);
     btDefaultMotionState* motion_state = new btDefaultMotionState(trans);
 

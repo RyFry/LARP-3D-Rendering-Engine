@@ -11,9 +11,9 @@ PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, co
       _max_slope(max_slope)
 {
     // Create player shape
-    btBoxShape* player_shape = new btBoxShape(btVector3(node->get_scaled_width() / 2.0f,
-                                                                  node->get_scaled_height() / 2.0f,
-                                                                  node->get_scaled_depth() / 2.0f));
+    btCylinderShape* player_shape = new btCylinderShape(btVector3(0.5f * node->get_scaled_width(),
+                                                                  0.5f * node->get_scaled_height(),
+                                                                  0.5f * node->get_scaled_depth()));
 
     // Init player ghost object
     this->_ghost_object = new btPairCachingGhostObject();
@@ -66,7 +66,7 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world)
     /*
      * 0.7 is the magic number for detecting whether the player has hit one of the slopes
      */
-    if(res.hasHit() && btFrom.y() - res.m_hitPointWorld.y() < 0.7f)
+    if(res.hasHit() && btFrom.y() - res.m_hitPointWorld.y() < 0.485f)
     {
         _char_controller->setGravity(0);
     }
