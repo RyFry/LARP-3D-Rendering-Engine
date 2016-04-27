@@ -30,7 +30,6 @@ namespace Larp
         // Directional light
         if (use_directional_lighting)
         {
-          // std::cout << "dir light" << std::endl;
           glUniform3f(glGetUniformLocation(this->_shader._program, "dirLight.direction"), directional_lights[0]->_direction.x, directional_lights[0]->_direction.y, directional_lights[0]->_direction.z);
           glUniform3f(glGetUniformLocation(this->_shader._program, "dirLight.ambient"), directional_lights[0]->_ambient.x, directional_lights[0]->_ambient.y, directional_lights[0]->_ambient.z);
           glUniform3f(glGetUniformLocation(this->_shader._program, "dirLight.diffuse"), directional_lights[0]->_diffuse.x, directional_lights[0]->_diffuse.y, directional_lights[0]->_diffuse.z);
@@ -62,5 +61,20 @@ namespace Larp
                            glm::value_ptr(model));
 
         this->_model->draw(this->_shader);
+    }
+
+    GLfloat Entity::get_width() const
+    {
+        return this->_model->get_width();
+    }
+
+    GLfloat Entity::get_height() const
+    {
+        return this->_model->get_height();
+    }
+
+    GLfloat Entity::get_depth() const
+    {
+        return this->_model->get_depth();
     }
 }

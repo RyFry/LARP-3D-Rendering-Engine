@@ -5,6 +5,8 @@
 #include <BulletCollision/CollisionDispatch/btGhostObject.h>
 #include <iostream>
 
+#include "LarpPrerequisites.hpp"
+#include "Node.hpp"
 #include "PhysicsWorld.hpp"
 
 class PhysicsPlayerController
@@ -18,27 +20,31 @@ private:
     btScalar _strafe_speed;
     btScalar _jump_speed;
     btScalar _max_slope;
+    uint8_t _directions;
 public:
     enum PlayerDirection
     {
-        STOP,
-        LEFT,
-        RIGHT,
-        FORWARD,
-        BACKWARD
+        STOP = 0,
+        LEFT = 1,
+        RIGHT = 2,
+        FORWARD = 4,
+        BACKWARD = 8
     };
 
-    PhysicsPlayerController(PhysicsWorld* physics_world,
+    PhysicsPlayerController(PhysicsWorld* physics_world, const Larp::NodePtr node,
                             btVector3 initial_position = btVector3(0, 0, 0),
                             btScalar forward_speed = .03,
                             btScalar backward_speed = .01, btScalar strafe_speed = .02,
                             btScalar jump_speed = 5.0, btScalar max_slope = .872665); // 50 degrees in radians
-    void update_movement(PhysicsWorld* world, PlayerDirection direction);
+    void add_movement_direction(PlayerDirection direction);
+    void update_movement(PhysicsWorld* world);
     void rotate(btQuaternion rotation_amount);
     void jump();
     void set_user_pointer(void * user_pointer);
     void step(PhysicsWorld* world, btScalar delta_time);
-    void * get_user_pointer();
-    btVector3 get_position() const;
-    btQuaternion get_orientation() const;
+    Larp::NodePtr get_user_pointer();
+    glm::vec3 get_position() const;
+    glm::quat get_orientation() const;
+    glm::vec3 get_direction() const;
+    GLfloat get_yaw() const;
 };

@@ -1,10 +1,11 @@
-#ifndef MODEL_HPP
-#define MODEL_HPP
+#pragma once
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-#include <unordered_map>
+#include <unordered_map>        // std::unordered_map
+#include <cfloat>               // FLT_MAX, FLT_MIN
+#include <cmath>                // abs, exp
 
 #include "LarpPrerequisites.hpp"
 #include "Mesh.hpp"
@@ -29,6 +30,9 @@ namespace Larp
          *
          */
         const std::vector<Mesh>& get_meshes();
+        GLfloat get_width() const;
+        GLfloat get_height() const;
+        GLfloat get_depth() const;
     private:
         /**
          * A cache of loaded Models.
@@ -46,6 +50,18 @@ namespace Larp
          * List of Textures for each Mesh in this Model.
          */
         std::vector<Texture> _loaded_textures;
+        /**
+         * The width of the Model (measured along x-axis)
+         */
+        GLfloat _width;
+        /**
+         * The height of the Model (measured along y-axis)
+         */
+        GLfloat _height;
+        /**
+         * The depth of the Model (measured along z-axis)
+         */
+        GLfloat _depth;
         /**
          * Default Constructor
          * @note This prevents users from creating Models.
@@ -89,4 +105,4 @@ namespace Larp
                                                     Texture::Type texture_type);
     };
 }
-#endif
+

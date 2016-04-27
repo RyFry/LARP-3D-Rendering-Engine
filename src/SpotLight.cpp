@@ -1,11 +1,12 @@
 #include "SpotLight.hpp"
 namespace Larp
 {
+    const GLfloat SpotLight::_constant = 1.0f;
+
     SpotLight::SpotLight(GLfloat x, GLfloat y, GLfloat z)
         : _position(glm::vec3(x, y, z)),
         _cut_off(12.5f),
         _outer_cut_off(15.0f),
-        _constant(1.0f),
         _linear(0.09f),
         _quadratic(0.032f),
         _diffuse(glm::vec3(1.0f)),
@@ -53,36 +54,36 @@ namespace Larp
         this->_quadratic = quadratic;
     }
 
-    void SpotLight::set_ambient_color(glm::vec3 color)
+    void SpotLight::set_ambient_intensity(glm::vec3 intensity)
     {
-        this->_ambient = color; 
+        this->_ambient = intensity; 
     }
 
-    void SpotLight::set_ambient_color(GLfloat x, GLfloat y, GLfloat z)
+    void SpotLight::set_ambient_intensity(GLfloat x, GLfloat y, GLfloat z)
     {
         this->_ambient.x = x;
         this->_ambient.y = y;
         this->_ambient.z = z;
     }
 
-    void SpotLight::set_diffuse_color(glm::vec3 color)
+    void SpotLight::set_diffuse_intensity(glm::vec3 intensity)
     {
-        this->_diffuse = color;
+        this->_diffuse = intensity;
     }
 
-    void SpotLight::set_diffuse_color(GLfloat x, GLfloat y, GLfloat z)
+    void SpotLight::set_diffuse_intensity(GLfloat x, GLfloat y, GLfloat z)
     {
         this->_diffuse.x = x;
         this->_diffuse.y = y;
         this->_diffuse.z = z;
     }
 
-    void SpotLight::set_specular_color(glm::vec3 color)
+    void SpotLight::set_specular_intensity(glm::vec3 intensity)
     {
-        this->_specular = color;
+        this->_specular = intensity;
     }
 
-    void SpotLight::set_specular_color(GLfloat x, GLfloat y, GLfloat z)
+    void SpotLight::set_specular_intensity(GLfloat x, GLfloat y, GLfloat z)
     {
         this->_specular.x = x;
         this->_specular.y = y;

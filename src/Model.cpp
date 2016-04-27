@@ -1,5 +1,4 @@
 #include "Model.hpp"
-#include "Error.hpp"
 
 namespace Larp
 {
@@ -24,13 +23,72 @@ namespace Larp
             this->_meshes.at(i).draw(shader);
     }
 
+    const std::vector<Mesh>& Model::get_meshes()
+    {
+        return this->_meshes;
+    }
+
+    GLfloat Model::get_width() const
+    {
+        return this->_width;
+    }
+
+    GLfloat Model::get_height() const
+    {
+        return this->_height;
+    }
+
+    GLfloat Model::get_depth() const
+    {
+        return this->_depth;
+    }
+
     // -----------------
     // Private functions
     // -----------------
 
     Model::Model(std::string path)
+        : _width(0.0f),
+          _height(0.0f),
+          _depth(0.0f)
     {
         this->load_model(path);
+
+        // Calculate the width, height and depth of the mesh
+        GLfloat min_x = FLT_MAX;
+        GLfloat min_y = FLT_MAX;
+        GLfloat min_z = FLT_MAX;
+        GLfloat max_x = FLT_MIN;
+        GLfloat max_y = FLT_MIN;
+        GLfloat max_z = FLT_MIN;
+
+        for (auto& mesh : this->_meshes)
+        {
+            for (auto& vert : mesh._vertices)
+            {
+                if (vert._position.x < min_x)
+                    min_x = vert._position.x;
+                if (vert._position.x > max_x)
+                    max_x = vert._position.x;
+                if (vert._position.y < min_y)
+                    min_y = vert._position.y;
+                if (vert._position.y > max_y)
+                    max_y = vert._position.y;
+                if (vert._position.z < min_z)
+                    min_z = vert._position.z;
+                if (vert._position.z > max_z)
+                    max_z = vert._position.z;
+            }
+        }
+
+        this->_width = max_x - min_x;
+        this->_height = max_y - min_y;
+        this->_depth = max_z - min_z;
+
+        std::cout << "Dimensions of \"" << path << "\"" << std::endl
+                  << "\twidth: " << this->_width << std::endl
+                  << "\theight: " << this->_height << std::endl
+                  << "\tdepth: " << this->_depth << std::endl;
     }
 
     void Model::load_model(std::string path)
@@ -162,9 +220,5 @@ namespace Larp
 
         return textures;
     }
-
-    const std::vector<Mesh>& Model::get_meshes()
-    {
-        return this->_meshes;
-    }
 }
+

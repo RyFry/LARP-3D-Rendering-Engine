@@ -1,5 +1,4 @@
-#ifndef SHADER_HPP
-#define SHADER_HPP
+#pragma once
 
 #include "LarpPrerequisites.hpp"
 
@@ -49,5 +48,3 @@ namespace Larp
         static GLuint compile_shader(const GLchar * shader_code, GLenum shader_type);
     };
 }
-
-#endif

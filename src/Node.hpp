@@ -33,7 +33,6 @@ namespace Larp
          * because std::unordered_set doesn't support non-const iterators
          */
         std::unordered_map<Node*, UniqueNode> _children;
-
         /**
          * This Node's position
          */
@@ -56,6 +55,15 @@ namespace Larp
         /**
          * Draws the Entity attached to this node using this Node's derived model matrix,
          * then recursively calls the draw method on each of this Node's children.
+         * @param view_pos The camera view position to apply during rendering.
+         *                 This should be obtained from a Camera object and passed in
+         *                 via the SceneGraph.
+         * @param directional_lights The vector of directional lights currently held
+         *                           by the SceneGraph.
+         * @param point_lights The vector of point lights currently held
+         *                      by the SceneGraph.
+         * @param spot_lights The vector of spot lights currently held
+         *                    by the SceneGraph.
          * @note the order in which the draw method is called on the Node's children is
          *       not necessarily the order in which they were created.
          */
@@ -189,5 +197,10 @@ namespace Larp
          *          attach this Node's Entity to another Node.
          */
         EntityPtr detach_entity();
+
+        GLfloat get_scaled_width() const;
+        GLfloat get_scaled_height() const;
+        GLfloat get_scaled_depth() const;
+        glm::vec3 get_scaled_bounding_box() const;
     };
 }

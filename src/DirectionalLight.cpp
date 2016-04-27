@@ -21,36 +21,36 @@ namespace Larp
         this->_direction.z = z;
     }
     
-    void DirectionalLight::set_ambient_color(glm::vec3 color)
+    void DirectionalLight::set_ambient_intensity(glm::vec3 intensity)
     {
-        this->_ambient = color; 
+        this->_ambient = intensity; 
     }
 
-    void DirectionalLight::set_ambient_color(GLfloat x, GLfloat y, GLfloat z)
+    void DirectionalLight::set_ambient_intensity(GLfloat x, GLfloat y, GLfloat z)
     {
         this->_ambient.x = x;
         this->_ambient.y = y;
         this->_ambient.z = z;
     }
 
-    void DirectionalLight::set_diffuse_color(glm::vec3 color)
+    void DirectionalLight::set_diffuse_intensity(glm::vec3 intensity)
     {
-        this->_diffuse = color;
+        this->_diffuse = intensity;
     }
 
-    void DirectionalLight::set_diffuse_color(GLfloat x, GLfloat y, GLfloat z)
+    void DirectionalLight::set_diffuse_intensity(GLfloat x, GLfloat y, GLfloat z)
     {
         this->_diffuse.x = x;
         this->_diffuse.y = y;
         this->_diffuse.z = z;
     }
 
-    void DirectionalLight::set_specular_color(glm::vec3 color)
+    void DirectionalLight::set_specular_intensity(glm::vec3 intensity)
     {
-        this->_specular = color;
+        this->_specular = intensity;
     }
 
-    void DirectionalLight::set_specular_color(GLfloat x, GLfloat y, GLfloat z)
+    void DirectionalLight::set_specular_intensity(GLfloat x, GLfloat y, GLfloat z)
     {
         this->_specular.x = x;
         this->_specular.y = y;
