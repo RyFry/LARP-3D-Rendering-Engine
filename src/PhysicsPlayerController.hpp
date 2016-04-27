@@ -20,7 +20,7 @@ private:
     btScalar _strafe_speed;
     btScalar _jump_speed;
     btScalar _max_slope;
-    uint8_t directions;
+    uint8_t _directions;
 public:
     enum PlayerDirection
     {
@@ -36,7 +36,8 @@ public:
                             btScalar forward_speed = .03,
                             btScalar backward_speed = .01, btScalar strafe_speed = .02,
                             btScalar jump_speed = 5.0, btScalar max_slope = .872665); // 50 degrees in radians
-    void update_movement(PhysicsWorld* world, PlayerDirection direction);
+    void add_movement_direction(PlayerDirection direction);
+    void update_movement(PhysicsWorld* world);
     void rotate(btQuaternion rotation_amount);
     void jump();
     void set_user_pointer(void * user_pointer);

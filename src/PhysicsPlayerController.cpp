@@ -58,62 +58,61 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world)
       camera orientation convention (positive Z axis).
       https://www.opengl.org/discussion_boards/showthread.php/175515-Get-Direction-from-Transformation-Matrix-or-Quat
     */
-    // btVector3 btFrom = this->_ghost_object->getWorldTransform().getOrigin();
-    // btVector3 btTo(btFrom.x(), -0.001f, btFrom.z());
-    // btCollisionWorld::ClosestRayResultCallback res(btFrom, btTo);
+    btVector3 btFrom = this->_ghost_object->getWorldTransform().getOrigin();
+    btVector3 btTo(btFrom.x(), -0.001f, btFrom.z());
+    btCollisionWorld::ClosestRayResultCallback res(btFrom, btTo);
 
-    // world->get_dynamics_world()->rayTest(btFrom, btTo, res); // m_btWorld is btDiscreteDynamicsWorld
-
-
-    // /*
-    //  * 0.7 is the magic number for detecting whether the player has hit one of the slopes
-    //  */
-    // if(res.hasHit() && btFrom.y() - res.m_hitPointWorld.y() < 0.7f)
-    // {
-    //     _char_controller->setGravity(0);
-    // }
-    // else
-    // {
-    //     _char_controller->setGravity(4.9);
-    // }
+    world->get_dynamics_world()->rayTest(btFrom, btTo, res); // m_btWorld is btDiscreteDynamicsWorld
+    /*
+     * 0.7 is the magic number for detecting whether the player has hit one of the slopes
+     */
+    if(res.hasHit() && btFrom.y() - res.m_hitPointWorld.y() < 0.7f)
+    {
+        _char_controller->setGravity(0);
+    }
+    else
+    {
+        _char_controller->setGravity(4.9);
+    }
 
     btVector3 movement_direction(0.0f, 0.0f, 0.0f);
 
     btScalar matrix[16];
     this->_ghost_object->getWorldTransform().getOpenGLMatrix(matrix);
 
-    if (direction == PlayerDirection::STOP)
+    if (this->_directions == PlayerDirection::STOP)
     {
-        _char_controller->setWalkDirection(movement_direction);
+        this->_char_controller->setWalkDirection(movement_direction);
         return;
     }
 
-    if (direction == PlayerDirection::FORWARD)
+    if ((this->_directions & PlayerDirection::FORWARD) != 0)
     {
         btVector3 forward(matrix[8], matrix[9], matrix[10]);
-        forward *= this->_forward_speed;
-        _char_controller->setWalkDirection(forward);
+        movement_direction += forward * this->_forward_speed;
     }
-    else if (direction == PlayerDirection::BACKWARD)
+    if ((this->_directions & PlayerDirection::BACKWARD) != 0)
     {
         btVector3 forward(matrix[8], matrix[9], matrix[10]);
-        forward *= -this->_backward_speed;
-        _char_controller->setWalkDirection(forward);
+        movement_direction += forward * -this->_backward_speed;
     }
-    else if (direction == PlayerDirection::LEFT)
+    if ((this->_directions & PlayerDirection::LEFT) != 0)
     {
         btVector3 forward(matrix[8], matrix[9], matrix[10]);
         forward *= this->_strafe_speed;
         btVector3 left = btVector3(0, 1, 0).cross(forward);
-        _char_controller->setWalkDirection(left);
+        movement_direction += left;
     }
-    else if (direction == PlayerDirection::RIGHT)
+    if ((this->_directions & PlayerDirection::RIGHT) != 0)
     {
         btVector3 forward(matrix[8], matrix[9], matrix[10]);
         forward *= this->_strafe_speed;
         btVector3 right = forward.cross(btVector3(0, 1, 0));
-        _char_controller->setWalkDirection(right);
+        movement_direction += right;
     }
+
+    this->_char_controller->setWalkDirection(movement_direction);
+    this->_directions = STOP;
 }
 
 void PhysicsPlayerController::rotate(btQuaternion rotation_amount)
