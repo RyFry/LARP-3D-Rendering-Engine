@@ -1,7 +1,7 @@
 #include "SpotLight.hpp"
 namespace Larp
 {
-    const GLfloat _constant = 1.0f;
+    const GLfloat SpotLight::_constant = 1.0f;
 
     SpotLight::SpotLight(GLfloat x, GLfloat y, GLfloat z)
         : _position(glm::vec3(x, y, z)),

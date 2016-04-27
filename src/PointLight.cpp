@@ -1,7 +1,7 @@
 #include "PointLight.hpp"
 namespace Larp
 {
-    const GLfloat _constant = 1.0f;
+    const GLfloat PointLight::_constant = 1.0f;
 
     PointLight::PointLight(GLfloat x, GLfloat y, GLfloat z)
         : _position(glm::vec3(x, y, z)),
