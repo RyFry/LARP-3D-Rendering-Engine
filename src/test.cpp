@@ -147,9 +147,9 @@ int main(void)
     Larp::EntityPtr entity2 = Larp::Entity::create(shader, nanosuit);
 
     node12->attach_entity(entity2);
-    node12->set_scale(0.1f, 0.1f, 0.1f);
+    node12->set_scale(0.05f, 0.05f, 0.05f);
 
-    player = new PhysicsPlayerController(world, btVector3(0, 5, 2));
+    player = new PhysicsPlayerController(world, node12, btVector3(0, 5, 2));
     player->set_user_pointer(node12);
 
     make_floor(world);
@@ -199,20 +199,19 @@ int main(void)
         else
             continue;
 
+        player->update_movement(world);
+
         world->get_dynamics_world()->stepSimulation(1.0f / 60.0f);
 
         player->step(world, 1.0f / 60.0f);
-        Larp::NodePtr player_node = static_cast<Larp::NodePtr>(player->get_user_pointer());
-        btVector3 pos = player->get_position();
-        btQuaternion quat = player->get_orientation();
-        player_node->set_position(glm::vec3(pos.x(), pos.y(), pos.z()));
-        player_node->set_orientation(glm::quat(quat.w(), quat.x(), quat.y(), quat.z()));
-        camera._position = glm::vec3(pos.x(), pos.y() + 1.5, pos.z());
+        Larp::NodePtr player_node = player->get_user_pointer();
+        glm::vec3 pos = player->get_position();
+        glm::quat quat = player->get_orientation();
+        player_node->set_position(glm::vec3(pos.x, pos.y, pos.z));
+        player_node->set_orientation(glm::quat(quat.w, quat.x, quat.y, quat.z));
+        camera._position = glm::vec3(pos.x, pos.y + player_node->get_scaled_height(), pos.z);
 
-        btScalar matrix[16];
-        btTransform trans(quat, pos);
-        trans.getOpenGLMatrix(matrix);
-        camera._yaw = glm::degrees(btAtan2(-matrix[8], matrix[10])) + 90.0;
+        camera._yaw = player->get_yaw();
 
         for (size_t i = 0; i < world->get_collision_object_count(); ++i)
         {
@@ -289,16 +288,13 @@ void Do_Movement()
         camera.process_keyboard(Camera::DOWN, delta_time);
 
     if (keys[GLFW_KEY_S])
-        player->update_movement(world, PhysicsPlayerController::PlayerDirection::BACKWARD);
+        player->add_movement_direction(PhysicsPlayerController::PlayerDirection::BACKWARD);
     if (keys[GLFW_KEY_A])
-        player->update_movement(world, PhysicsPlayerController::PlayerDirection::LEFT);
+        player->add_movement_direction(PhysicsPlayerController::PlayerDirection::LEFT);
     if (keys[GLFW_KEY_D])
-        player->update_movement(world, PhysicsPlayerController::PlayerDirection::RIGHT);
+        player->add_movement_direction(PhysicsPlayerController::PlayerDirection::RIGHT);
     if (keys[GLFW_KEY_W])
-        player->update_movement(world, PhysicsPlayerController::PlayerDirection::FORWARD);
-
-    if (!keys[GLFW_KEY_W] && !keys[GLFW_KEY_A] && !keys[GLFW_KEY_S] && !keys[GLFW_KEY_D])
-        player->update_movement(world, PhysicsPlayerController::PlayerDirection::STOP);
+        player->add_movement_direction(PhysicsPlayerController::PlayerDirection::FORWARD);
 }
 
 // Is called whenever a key is pressed/released via GLFW

@@ -1,14 +1,19 @@
 #include "PhysicsPlayerController.hpp"
 
-PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, btVector3 initial_position,
-    btScalar forward_speed, btScalar backward_speed, btScalar strafe_speed, btScalar jump_speed, btScalar max_slope)
+PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, const Larp::NodePtr node,
+                                                 btVector3 initial_position, btScalar forward_speed,
+                                                 btScalar backward_speed, btScalar strafe_speed,
+                                                 btScalar jump_speed, btScalar max_slope)
     : _forward_speed(forward_speed),
       _backward_speed(backward_speed),
       _strafe_speed(strafe_speed),
-      _jump_speed(jump_speed)
+      _jump_speed(jump_speed),
+      _max_slope(max_slope)
 {
     // Create player shape
-    btCylinderShape* player_shape = new btCylinderShape(btVector3(0.2, 0.6, 1.0));
+    btBoxShape* player_shape = new btBoxShape(btVector3(node->get_scaled_width() / 2.0f,
+                                                                  node->get_scaled_height() / 2.0f,
+                                                                  node->get_scaled_depth() / 2.0f));
 
     // Init player ghost object
     this->_ghost_object = new btPairCachingGhostObject();
@@ -34,7 +39,12 @@ PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, bt
     physics_world->get_dynamics_world()->addAction(this->_char_controller);
 }
 
-void PhysicsPlayerController::update_movement(PhysicsWorld* world, PhysicsPlayerController::PlayerDirection direction)
+void PhysicsPlayerController::add_movement_direction(PhysicsPlayerController::PlayerDirection direction)
+{
+    this->_directions |= direction;
+}
+
+void PhysicsPlayerController::update_movement(PhysicsWorld* world)
 {
     // For finding movement vectors:
     //   forward X up = right
@@ -67,13 +77,15 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world, PhysicsPlayer
     //     _char_controller->setGravity(4.9);
     // }
 
+    btVector3 movement_direction(0.0f, 0.0f, 0.0f);
 
     btScalar matrix[16];
     this->_ghost_object->getWorldTransform().getOpenGLMatrix(matrix);
 
     if (direction == PlayerDirection::STOP)
     {
-        _char_controller->setWalkDirection(btVector3(0, 0, 0));
+        _char_controller->setWalkDirection(movement_direction);
+        return;
     }
 
     if (direction == PlayerDirection::FORWARD)
@@ -128,17 +140,33 @@ void PhysicsPlayerController::step(PhysicsWorld* world, btScalar delta_time)
     this->_char_controller->playerStep(world->get_dynamics_world(), delta_time);
 }
 
-void * PhysicsPlayerController::get_user_pointer()
+Larp::NodePtr PhysicsPlayerController::get_user_pointer()
 {
-    return this->_ghost_object->getUserPointer();
+    return static_cast<Larp::NodePtr>(this->_ghost_object->getUserPointer());
 }
 
-btVector3 PhysicsPlayerController::get_position() const
+glm::vec3 PhysicsPlayerController::get_position() const
 {
-    return this->_ghost_object->getWorldTransform().getOrigin();
+    btVector3 vec(this->_ghost_object->getWorldTransform().getOrigin());
+    return glm::vec3(vec.x(), vec.y(), vec.z());
 }
 
-btQuaternion PhysicsPlayerController::get_orientation() const
+glm::quat PhysicsPlayerController::get_orientation() const
 {
-    return this->_ghost_object->getWorldTransform().getRotation();
+    btQuaternion quat(this->_ghost_object->getWorldTransform().getRotation());
+    return glm::quat(quat.w(), quat.x(), quat.y(), quat.z());
+}
+
+glm::vec3 PhysicsPlayerController::get_direction() const
+{
+    btScalar matrix[16];
+    this->_ghost_object->getWorldTransform().getOpenGLMatrix(matrix);
+    return glm::vec3(matrix[8], matrix[9], matrix[10]);
+}
+
+GLfloat PhysicsPlayerController::get_yaw() const
+{
+    btScalar matrix[16];
+    this->_ghost_object->getWorldTransform().getOpenGLMatrix(matrix);
+    return glm::degrees(btAtan2(matrix[10], matrix[8]));
 }
