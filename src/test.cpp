@@ -96,9 +96,15 @@ int main(void)
     Larp::EntityPtr entity = Larp::Entity::create(level_shader, level);
     Larp::DirectionalLightPtr dir_light = graph->create_directional_light();
     Larp::PointLightPtr point_light = graph->create_point_light();
+    Larp::PointLightPtr point_light1 = graph->create_point_light();
+    Larp::PointLightPtr point_light2 = graph->create_point_light();
 
-    point_light->set_ambient_color(1.0f, 1.0f, 1.0f);
-    point_light->set_position(0.0f, 5.0f, 0.0f);
+    point_light->set_ambient_color(4.0f, 2.0f, 6.0f);
+    point_light->set_position(0.0f, 2.0f, -5.0f);
+    point_light1->set_ambient_color(1.0f, 1.0f, 1.0f);
+    point_light1->set_position(0.0f, 5.0f, 0.0f);
+    point_light2->set_ambient_color(0.7f, 0.3f, 0.2f);
+    point_light2->set_position(-1.0f, 0.0f, 0.0f);
     //graph->remove_light(dir_light);
     Larp::NodePtr node11 = graph->create_child_node();
     Larp::NodePtr node12 = graph->create_child_node();
