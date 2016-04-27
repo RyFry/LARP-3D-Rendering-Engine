@@ -56,6 +56,20 @@ namespace Larp
          *             be obtained from a Camera object.
          * @param projection The projection matrix to apply during rendering.
          *                   This should also be obtained from a Camera object.
+         * @param view_pos The camera view position to apply during rendering.
+         *                 This should be obtained from a Camera object and passed in
+         *                 via the SceneGraph.
+         * @param directional_lights The vector of directional lights currently held
+         *                           by the SceneGraph. If the vector is not empty, these
+         *                           should be incorporated in the lighting calculations.
+         * @param point_lights The vector of point lights currently held
+         *                      by the SceneGraph. If the vector is not empty, these
+         *                      should be incorporated in the lighting calculations.
+         * @param spot_lights The vector of spot lights currently held
+         *                    by the SceneGraph. If the vector is not empty, these
+         *                    should be incorporated in the lighting calculations.
+         * @warning This method assumes that each model has provided shaders with
+         *          variables matching those specified in the method.
          */
         void draw(const glm::mat4& model, const glm::mat4& view, const glm::mat4& projection,
                   const glm::vec3& view_pos,
