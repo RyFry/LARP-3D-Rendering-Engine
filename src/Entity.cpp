@@ -62,4 +62,19 @@ namespace Larp
 
         this->_model->draw(this->_shader);
     }
+
+    GLfloat Entity::get_width() const
+    {
+        return this->_model->get_width();
+    }
+
+    GLfloat Entity::get_height() const
+    {
+        return this->_model->get_height();
+    }
+
+    GLfloat Entity::get_depth() const
+    {
+        return this->_model->get_depth();
+    }
 }

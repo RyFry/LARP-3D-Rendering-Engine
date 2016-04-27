@@ -76,5 +76,8 @@ namespace Larp
                   const std::vector<UniqueDirectional>& directional_lights,
                   const std::vector<UniquePoint>& point_lights,
                   const std::vector<UniqueSpot>& spot_lights);
+        GLfloat get_width() const;
+        GLfloat get_height() const;
+        GLfloat get_depth() const;
     };
 }

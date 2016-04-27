@@ -1,5 +1,4 @@
-#ifndef MESH_HPP
-#define MESH_HPP
+#pragma once
 
 #include "LarpPrerequisites.hpp"
 #include "Shader.hpp"
@@ -128,7 +127,5 @@ namespace Larp
         void setup_mesh();
     };
 }
-
-#endif
 
 

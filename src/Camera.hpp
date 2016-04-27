@@ -1,5 +1,4 @@
-#ifndef CAMERA_HPP
-#define CAMERA_HPP
+#pragma once
 
 #include "Error.hpp" // Throwing errors
 
@@ -162,5 +161,3 @@ private:
      */
     void update_camera_vectors();
 };
-
-#endif
