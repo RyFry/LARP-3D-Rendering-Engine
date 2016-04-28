@@ -23,6 +23,8 @@
 
 // Other Libs
 #include <SOIL.h>
+#include <SDL/SDL.h>
+
 
 // Properties
 GLuint screenWidth = 800, screenHeight = 600;
