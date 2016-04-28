@@ -50,7 +50,7 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world)
     //   forward X up = right
     //   up X forward = left
     /*
-      And the great thing about transformation matrices, is that this 3x3 rotation sub-matrix
+      And the great thing about transformation matrices, is that this 3x3 orientation sub-matrix
       itself consists of three normalized vectors.
       Turns out, the first column is the vector pointing to the right (positive X axis).
       The column to the right of that is the 'up vector' (positive Y).
@@ -115,11 +115,11 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world)
     this->_directions = STOP;
 }
 
-void PhysicsPlayerController::rotate(btQuaternion rotation_amount)
+void PhysicsPlayerController::rotate(glm::quat orientation_amount)
 {
     btTransform trans = this->_ghost_object->getWorldTransform();
     btQuaternion quat = trans.getRotation();
-    quat = rotation_amount * quat;
+    quat = orientation_amount * quat;
     trans.setRotation(quat);
     this->_ghost_object->setWorldTransform(trans);
 }
@@ -134,7 +134,7 @@ void PhysicsPlayerController::set_user_pointer(void * user_pointer)
     this->_ghost_object->setUserPointer(user_pointer);
 }
 
-void PhysicsPlayerController::step(PhysicsWorld* world, btScalar delta_time)
+void PhysicsPlayerController::step(PhysicsWorld* world, GLfloat delta_time)
 {
     this->_char_controller->playerStep(world->get_dynamics_world(), delta_time);
 }
@@ -168,4 +168,18 @@ GLfloat PhysicsPlayerController::get_yaw() const
     btScalar matrix[16];
     this->_ghost_object->getWorldTransform().getOpenGLMatrix(matrix);
     return glm::degrees(btAtan2(matrix[10], matrix[8]));
+}
+
+GLfloat PhysicsPlayerController::get_pitch() const
+{
+    btScalar matrix[16];
+    this->_ghost_object->getWorldTransform().getOpenGLMatrix(matrix);
+    return glm::degrees(btAsin(-matrix[9]));
+}
+
+GLfloat PhysicsPlayerController::get_roll() const
+{
+    btScalar matrix[16];
+    this->_ghost_object->getWorldTransform().getOpenGLMatrix(matrix);
+    return glm::degrees(btAtan2(matrix[9], matrix[8]));
 }
