@@ -1,0 +1,12 @@
+prefix=/lusr/opt/cegui-0.8.ceed
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include/cegui-0
+moduledir=${prefix}/lib/cegui-0.8
+datafiles=${prefix}/share/cegui-0
+
+Name: CEGUI-0 OpenGL Renderer
+Description: OpenGL based renderer module for CEGUI.
+Version: 0.8.5
+Requires: CEGUI-0 = 0.8.5
+Libs: -lCEGUIOpenGLRenderer-0

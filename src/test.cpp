@@ -15,6 +15,7 @@
 #include "PhysicsWorld.hpp"
 #include "SceneGraph.hpp"
 #include "Shader.hpp"
+#include "SoundManager.hpp"
 
 // GLM Mathemtics
 #include <glm/glm.hpp>
@@ -39,6 +40,7 @@ void make_floor(PhysicsWorld* physics_world);
 Larp::SceneGraphPtr graph = Larp::SceneGraph::singleton();
 PhysicsWorld* world;
 PhysicsPlayerController* player;
+SoundManager* soundMan;
 Camera camera(glm::vec3(0.0f, 5.0f, 3.0f));
 bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
@@ -176,6 +178,9 @@ int main(void)
  
 
     //std::cout << body->getWorldTransform().getOrigin() << std::endl;
+
+
+   soundMan = new SoundManager();
 
 
 

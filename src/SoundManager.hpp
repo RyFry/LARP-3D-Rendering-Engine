@@ -9,8 +9,12 @@
 #include "SDL/SDL_mixer.h"
 	
 class SoundManager
-	{
-		SoundManager();
-		~SoundManager();
-	};
+{
+		public:
+			SoundManager();
+			~SoundManager();
+		private:
+			
+
+};
 
