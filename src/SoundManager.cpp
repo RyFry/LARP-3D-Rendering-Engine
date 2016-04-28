@@ -6,6 +6,7 @@ SoundManager::SoundManager()
 
 	srand(time(NULL));
 	Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 4096);
+	
 
 
 }
