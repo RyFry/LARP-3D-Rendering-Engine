@@ -55,6 +55,7 @@ int main(void)
     screenWidth = config.get_width();
     screenHeight = config.get_height();
     // Init GLFW
+    int dumb ;
     if (!glfwInit())
         throw std::runtime_error(std::string(__FILE__) + std::string(" : line ") + std::to_string(__LINE__) + std::string(" :: glfwInit() failed!"));
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
