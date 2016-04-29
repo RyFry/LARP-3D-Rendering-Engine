@@ -4,6 +4,7 @@
 #include "LarpPrerequisites.hpp"
 #include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
 #include <CEGUI/CEGUI.h>
+#include <iostream>
 
 class GUIManager
 {
@@ -15,8 +16,8 @@ class GUIManager
 		};
 
 	  /**
-     * Constructor
-     */
+      * Constructor
+      */
 		GUIManager();
 
 		/**
@@ -42,4 +43,11 @@ class GUIManager
 		* Setups all the resource groups that CEGUI requires.
 		*/
 		void _setup_resources();
+
+		/**
+		* Setups up the main menu for use
+		*/
+		void _setup_main_menu();
+
+		void _start(const CEGUI::EventArgs&);
 };

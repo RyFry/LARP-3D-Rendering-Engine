@@ -33,6 +33,7 @@ GLuint screenWidth = 800, screenHeight = 600;
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 void Do_Movement();
 void error_callback(int error, const char* description);
 void make_floor(PhysicsWorld* physics_world);
@@ -77,9 +78,10 @@ int main(void)
     glfwSetKeyCallback(window, key_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
 
     // Options
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
     // Initialize GLEW to setup the OpenGL Function pointers
     glewExperimental = GL_TRUE;
@@ -268,8 +270,11 @@ int main(void)
         glm::vec3 view_pos = camera._position;
         graph->draw(view, projection, view_pos);
 
+        CEGUI::System::getSingleton().renderAllGUIContexts();
+
         // Swap the buffers
         glfwSwapBuffers(window);
+
     }
 
     glfwTerminate();
@@ -338,6 +343,10 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     GLfloat xoffset = xpos - lastX;
     GLfloat yoffset = lastY - ypos;
 
+    /* May need to change the movement feels weird */
+    CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+    context.injectMouseMove(xpos - lastX,  ypos - lastY); 
+
     lastX = xpos;
     lastY = ypos;
 
@@ -355,6 +364,19 @@ void scroll_callback(GLFWwindow* window, double x_offset, double y_offset)
 void error_callback(int error, const char* description)
 {
     fputs(description, stderr);
+}
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{   
+
+    if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
+        CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::RightButton);
+    else if(button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
+        CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::RightButton);
+    else if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+         CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::LeftButton);
+    else if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+         CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::LeftButton);
 }
 
 void make_floor(PhysicsWorld* world)

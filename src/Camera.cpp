@@ -75,6 +75,7 @@ void Camera::process_mouse_movement(GLfloat x_offset, GLfloat y_offset, GLboolea
     this->_yaw   += x_offset;
     this->_pitch += y_offset;
 
+
     // Make sure that when pitch is out of bounds, screen doesn't get flipped
     if (constrain_pitch)
     {
