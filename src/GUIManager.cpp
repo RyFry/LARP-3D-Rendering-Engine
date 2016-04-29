@@ -8,7 +8,8 @@ GUIManager::GUIManager()
 	this->_renderer = &CEGUI::OpenGL3Renderer::bootstrapSystem();
 	this->_wmgr =  &CEGUI::WindowManager::getSingleton();
 
-	this->_renderer->enableExtraStateSettings(true);
+	// this->_renderer->setupExtraStates();
+	// this->_renderer->enableExtraStateSettings(true);
 
 	this->_setup_resources();
 	this->_setup_main_menu();
@@ -24,15 +25,13 @@ void GUIManager::_setup_resources()
 	CEGUI::DefaultResourceProvider* rp = static_cast<CEGUI::DefaultResourceProvider*>
    (CEGUI::System::getSingleton().getResourceProvider());
 
-  /***
-  ** NEED TO CHANGE THE RESOURCE PATH IN CASE OF DIFFERENT FOLDER NAME 
-  ***/
-  rp->setResourceGroupDirectory("schemes", "../cs354r-final-game-project/assets/schemes/");
-	rp->setResourceGroupDirectory("imagesets", "../cs354r-final-game-project/assets/imagesets/");
-	rp->setResourceGroupDirectory("fonts", "../cs354r-final-game-project/assets/fonts/");
-	rp->setResourceGroupDirectory("layouts", "../cs354r-final-game-project/assets/layouts/");
-	rp->setResourceGroupDirectory("looknfeels", "../cs354r-final-game-project/assets/looknfeel/");
-	rp->setResourceGroupDirectory("lua_scripts", "../cs354r-final-game-project/assets/lua_scripts/");
+
+  rp->setResourceGroupDirectory("schemes", "assets/schemes/");
+	rp->setResourceGroupDirectory("imagesets", "assets/imagesets/");
+	rp->setResourceGroupDirectory("fonts", "assets/fonts/");
+	rp->setResourceGroupDirectory("layouts", "assets/layouts/");
+	rp->setResourceGroupDirectory("looknfeels", "assets/looknfeel/");
+	rp->setResourceGroupDirectory("lua_scripts", "assets/lua_scripts/");
 
 	/* Setups all the resources */
 	CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
@@ -45,7 +44,7 @@ void GUIManager::_setup_resources()
 	/* Using the TahrezLook since it is prebuilt. May change for custom gui */
 	CEGUI::SchemeManager::getSingleton().createFromFile("TaharezLook.scheme");
 	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
-	// CEGUI::FontManager::getSingleton().createFromFile( "DejaVuSans-10.font" );
+	CEGUI::FontManager::getSingleton().createFromFile( "DejaVuSans-10.font" );
 
 
 }
