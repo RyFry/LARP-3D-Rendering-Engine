@@ -8,6 +8,8 @@ GUIManager::GUIManager()
 	this->_renderer = &CEGUI::OpenGL3Renderer::bootstrapSystem();
 	this->_wmgr =  &CEGUI::WindowManager::getSingleton();
 
+	this->_renderer->enableExtraStateSettings(true);
+
 	this->_setup_resources();
 	this->_setup_main_menu();
 }
@@ -43,6 +45,7 @@ void GUIManager::_setup_resources()
 	/* Using the TahrezLook since it is prebuilt. May change for custom gui */
 	CEGUI::SchemeManager::getSingleton().createFromFile("TaharezLook.scheme");
 	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
+	// CEGUI::FontManager::getSingleton().createFromFile( "DejaVuSans-10.font" );
 
 
 }
@@ -55,7 +58,7 @@ void GUIManager::_setup_main_menu()
 	CEGUI::Window* start = _wmgr->createWindow("TaharezLook/Button", "Game/mainTitle");
 
 
-	start->setText("DICKS");
+	start->setText("Start");
 	start->setSize(CEGUI::USize(CEGUI::UDim(0.15,0), CEGUI::UDim(0.05,0)));
   start->setPosition(CEGUI::UVector2(CEGUI::UDim(0.4f,0),CEGUI::UDim(0.4f,0)));
 
