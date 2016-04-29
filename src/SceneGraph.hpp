@@ -5,6 +5,7 @@
 
 #include "LarpPrerequisites.hpp"
 #include "Node.hpp"
+#include "SkyBox.hpp"
 
 namespace Larp
 {
@@ -54,6 +55,9 @@ namespace Larp
          * @warning SpotLights are not currently supported.
          */
         static const size_t _max_spot_lights;
+
+        SkyBox* _skybox;
+
         /**
          * Default constructor. Made private to avoid having multiple
          * SceneGraph's per program.
@@ -158,5 +162,7 @@ namespace Larp
          * @param A constant spot light pointer that will be used to remove the light from the vector.
          */
         void remove_light(SpotLightPtr light);
+
+        void set_skybox(SkyBox* skybox);
     };
 }

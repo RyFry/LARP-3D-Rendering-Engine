@@ -66,7 +66,7 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world)
     /*
      * 0.7 is the magic number for detecting whether the player has hit one of the slopes
      */
-    if(res.hasHit() && btFrom.y() - res.m_hitPointWorld.y() < 0.485f)
+    if(res.hasHit() && btFrom.y() - res.m_hitPointWorld.y() < 0.4f)
     {
         _char_controller->setGravity(0);
     }

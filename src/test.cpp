@@ -15,6 +15,7 @@
 #include "PhysicsWorld.hpp"
 #include "SceneGraph.hpp"
 #include "Shader.hpp"
+#include "SkyBox.hpp"
 
 // GLM Mathemtics
 #include <glm/glm.hpp>
@@ -39,7 +40,7 @@ void make_floor(PhysicsWorld* physics_world);
 Larp::SceneGraphPtr graph = Larp::SceneGraph::singleton();
 PhysicsWorld* world;
 PhysicsPlayerController* player;
-Camera camera(glm::vec3(0.0f, 5.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
 bool firstMouse = true;
@@ -59,7 +60,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, config.is_resizable());
-    glfwWindowHint(GLFW_SAMPLES, 4);
+    //glfwWindowHint(GLFW_SAMPLES, 4);
 
     glfwSetErrorCallback(error_callback);
 
@@ -85,7 +86,8 @@ int main(void)
 
     // Setup some OpenGL options
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_MULTISAMPLE);
+    glDepthFunc(GL_LESS);
+    //glEnable(GL_MULTISAMPLE);
 
     // Setting up PhysicsWorld
     world = new PhysicsWorld();
@@ -96,24 +98,16 @@ int main(void)
     Larp::EntityPtr entity = Larp::Entity::create(level_shader, level);
     Larp::DirectionalLightPtr dir_light = graph->create_directional_light();
     Larp::PointLightPtr point_light = graph->create_point_light();
-    Larp::PointLightPtr point_light1 = graph->create_point_light();
-    Larp::PointLightPtr point_light2 = graph->create_point_light();
 
-    point_light->set_ambient_color(4.0f, 2.0f, 6.0f);
+    //point_light->set_ambient_color(4.0f, 2.0f, 6.0f);
     point_light->set_position(0.0f, 2.0f, -5.0f);
-    point_light1->set_ambient_color(1.0f, 1.0f, 1.0f);
-    point_light1->set_position(0.0f, 5.0f, 0.0f);
-    point_light2->set_ambient_color(0.7f, 0.3f, 0.2f);
-    point_light2->set_position(-1.0f, 0.0f, 0.0f);
 
-    point_light->set_ambient_intensity(1.0f, 1.0f, 1.0f);
-    point_light->set_position(0.0f, 5.0f, 0.0f);
     //graph->remove_light(dir_light);
     Larp::NodePtr node11 = graph->create_child_node();
     Larp::NodePtr node12 = graph->create_child_node();
 
     Larp::NodePtr node21 = node11->create_child();
-//    node21->set_scale(0.1f, 0.1f, 0.1f);
+    //node21->set_scale(0.1f, 0.1f, 0.1f);
     node21->attach_entity(entity);
 
     PhysicsMeshColliderBuilder physics_level_builder = PhysicsMeshColliderBuilder("assets/LEVEL.obj");
@@ -125,8 +119,6 @@ int main(void)
     PhysicsMeshColliderPtr physics_level = physics_level_builder.build();
 
     world->get_dynamics_world()->addRigidBody(physics_level->get_rigid_body());
-
-
 
     Larp::Shader crate_shader("shaders/lighting.vert", "shaders/lighting.frag");
     Larp::ModelPtr crate_model = Larp::Model::create("assets/crate.obj");
@@ -145,7 +137,7 @@ int main(void)
 
     // PhysicsMeshColliderPtr crate = crate_builder.build();
 
-    // world->get_dynamics_world()->addRigidBody(crate->get_rigid_body());
+    //world->get_dynamics_world()->addRigidBody(crate->get_rigid_body());
 
 
     /*******************************
@@ -163,30 +155,16 @@ int main(void)
 
     make_floor(world);
 
-    // btTransform trans;
-    // trans.setOrigin(btVector3(1.0, 5.0, 0.0));
-    // trans.setRotation(btQuaternion(0, 0, 0, 1));
-    // btScalar mass(0.2);
-    // btVector3 local_inertia(0, 0, 0);
-
-    // btCollisionShape* shape = new btSphereShape(0.5);
-    // world->get_collision_shapes().push_back(shape);
-    // btDefaultMotionState* motion_state = new btDefaultMotionState(trans);
-
-    // shape->calculateLocalInertia(mass, local_inertia);
-
-    // btRigidBody::btRigidBodyConstructionInfo body_info(mass, motion_state, shape, local_inertia);
-    // btRigidBody* body = new btRigidBody(body_info);
-    // body->setUserPointer(node12);
-    // body->setRestitution(1);
-
-    // world->get_dynamics_world()->addRigidBody(body);
-
- 
-
-    //std::cout << body->getWorldTransform().getOrigin() << std::endl;
-
-
+    // Skybox stuff
+    std::vector<const GLchar*> skybox_files;
+    skybox_files.push_back("assets/skybox/right.jpg");
+    skybox_files.push_back("assets/skybox/left.jpg");
+    skybox_files.push_back("assets/skybox/top.jpg");
+    skybox_files.push_back("assets/skybox/bottom.jpg");
+    skybox_files.push_back("assets/skybox/back.jpg");
+    skybox_files.push_back("assets/skybox/front.jpg");
+    Larp::SkyBox skybox(skybox_files);
+    graph->set_skybox(&skybox);
 
 
     GLfloat frame_rate_limiter = 0.0f;
@@ -255,12 +233,8 @@ int main(void)
         Do_Movement();
 
         // Clear the colorbuffer
-        glClearColor(0.5f, 0.05f, 0.05f, 1.0f);
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        // node11->yaw(delta_time * 32.0);
-        // node11->pitch(delta_time * 23.0);
-        // node11->roll(delta_time * 17.0);
 
         glm::mat4 projection = glm::perspective(camera._zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
         glm::mat4 view = camera.get_view_matrix();

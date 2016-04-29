@@ -38,7 +38,7 @@ namespace Larp
         glDeleteShader(vertex);
         glDeleteShader(fragment);
         if (geometry_path != nullptr)
-            glDeleteShader(geometry);   
+            glDeleteShader(geometry);
     }
 
     void Shader::use()
