@@ -12,14 +12,13 @@
 class PhysicsPlayerController
 {
 private:
-    btTransform _transform; // Initialize this to player's transform
     btPairCachingGhostObject* _ghost_object;
     btKinematicCharacterController* _char_controller;
-    btScalar _forward_speed;
-    btScalar _backward_speed;
-    btScalar _strafe_speed;
-    btScalar _jump_speed;
-    btScalar _max_slope;
+    GLfloat _forward_speed;
+    GLfloat _backward_speed;
+    GLfloat _strafe_speed;
+    GLfloat _jump_speed;
+    GLfloat _max_slope;
     uint8_t _directions;
 public:
     enum PlayerDirection
@@ -32,10 +31,10 @@ public:
     };
 
     PhysicsPlayerController(PhysicsWorld* physics_world, const Larp::NodePtr node,
-                            btVector3 initial_position = btVector3(0, 0, 0),
-                            btScalar forward_speed = .03,
-                            btScalar backward_speed = .01, btScalar strafe_speed = .02,
-                            btScalar jump_speed = 5.0, btScalar max_slope = .872665); // 50 degrees in radians
+                            glm::vec3 initial_position = glm::vec3(0, 0, 0),
+                            GLfloat forward_speed = .03,
+                            GLfloat backward_speed = .01, GLfloat strafe_speed = .02,
+                            GLfloat jump_speed = 3.0, GLfloat max_slope = .872665); // 50 degrees in radians
     /**
      * Adds a movement direction to this PlayerControl for the next call
      * to update_movement().

@@ -40,7 +40,7 @@ private:
      * to the Larp::NodePtr that is attached to the Model provided
      * to the Mesh collider.
      */
-    void * _user_pointer;
+    Larp::Node* _user_pointer;
 public:
     /**
      * Constructor
@@ -84,6 +84,6 @@ public:
      * @param user_pointer The user pointer amount
      * @default nullptr
      */
-    void set_user_pointer(void * user_pointer);
+    void set_user_pointer(Larp::NodePtr user_pointer);
     PhysicsMeshColliderPtr build();
 };

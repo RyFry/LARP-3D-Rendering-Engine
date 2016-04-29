@@ -1,9 +1,9 @@
 #include "PhysicsPlayerController.hpp"
 
 PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, const Larp::NodePtr node,
-                                                 btVector3 initial_position, btScalar forward_speed,
-                                                 btScalar backward_speed, btScalar strafe_speed,
-                                                 btScalar jump_speed, btScalar max_slope)
+                                                 glm::vec3 initial_position, GLfloat forward_speed,
+                                                 GLfloat backward_speed, GLfloat strafe_speed,
+                                                 GLfloat jump_speed, GLfloat max_slope)
     : _forward_speed(forward_speed),
       _backward_speed(backward_speed),
       _strafe_speed(strafe_speed),
@@ -17,10 +17,10 @@ PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, co
 
     // Init player ghost object
     this->_ghost_object = new btPairCachingGhostObject();
-    this->_transform = this->_ghost_object->getWorldTransform();
-    this->_transform.setOrigin(initial_position);
+    btTransform transform = this->_ghost_object->getWorldTransform();
+    transform.setOrigin(btVector3(initial_position.x, initial_position.y, initial_position.z));
 
-    this->_ghost_object->setWorldTransform(this->_transform);
+    this->_ghost_object->setWorldTransform(transform);
 
     // Set the shape and collision object type
     this->_ghost_object->setCollisionShape(player_shape);
@@ -119,7 +119,8 @@ void PhysicsPlayerController::rotate(glm::quat orientation_amount)
 {
     btTransform trans = this->_ghost_object->getWorldTransform();
     btQuaternion quat = trans.getRotation();
-    quat = orientation_amount * quat;
+    btQuaternion rot(orientation_amount.w, orientation_amount.x, orientation_amount.y, orientation_amount.z);
+    quat = rot * quat;
     trans.setRotation(quat);
     this->_ghost_object->setWorldTransform(trans);
 }

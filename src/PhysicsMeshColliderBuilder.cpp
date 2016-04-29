@@ -13,17 +13,17 @@ PhysicsMeshColliderBuilder::PhysicsMeshColliderBuilder(std::string path)
 
 void PhysicsMeshColliderBuilder::set_orientation(glm::quat orientation)
 {
-    this->_orientation.setX(orientation.x);
-    this->_orientation.setY(orientation.y);
-    this->_orientation.setZ(orientation.z);
-    this->_orientation.setW(orientation.w);
+    this->_orientation.x = orientation.x;
+    this->_orientation.y = orientation.y;
+    this->_orientation.z = orientation.z;
+    this->_orientation.w = orientation.w;
 }
 
 void PhysicsMeshColliderBuilder::set_position(glm::vec3 position)
 {
-    this->_position.setX(position.x);
-    this->_position.setY(position.y);
-    this->_position.setZ(position.z);
+    this->_position.x = position.x;
+    this->_position.y = position.y;
+    this->_position.z = position.z;
 }
 
 void PhysicsMeshColliderBuilder::set_mass(GLfloat mass)
@@ -33,9 +33,9 @@ void PhysicsMeshColliderBuilder::set_mass(GLfloat mass)
 
 void PhysicsMeshColliderBuilder::set_local_inertia(glm::vec3 local_inertia)
 {
-    this->_local_inertia.setX(local_inertia.x);
-    this->_local_inertia.setY(local_inertia.y);
-    this->_local_inertia.setZ(local_inertia.z);
+    this->_local_inertia.x = local_inertia.x;
+    this->_local_inertia.y = local_inertia.y;
+    this->_local_inertia.z = local_inertia.z;
 }
 
 void PhysicsMeshColliderBuilder::set_restitution(GLfloat restitution)
@@ -43,7 +43,7 @@ void PhysicsMeshColliderBuilder::set_restitution(GLfloat restitution)
     this->_restitution = restitution;
 }
 
-void PhysicsMeshColliderBuilder::set_user_pointer(void * user_pointer)
+void PhysicsMeshColliderBuilder::set_user_pointer(Larp::NodePtr user_pointer)
 {
     this->_user_pointer = user_pointer;
 }

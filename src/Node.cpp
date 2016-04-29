@@ -142,6 +142,11 @@ namespace Larp
         this->_scale.z = z;
     }
 
+    glm::vec3 Node::get_scale() const
+    {
+        return this->_scale;
+    }
+
     void Node::attach_entity(EntityPtr entity)
     {
         this->_entity.reset(entity);

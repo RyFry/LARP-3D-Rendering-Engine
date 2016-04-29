@@ -4,6 +4,7 @@
 #include <BulletCollision/CollisionDispatch/btGhostObject.h>
 
 #include "Model.hpp"
+#include "Node.hpp"
 
 class PhysicsMeshCollider
 {
@@ -11,9 +12,9 @@ private:
     btRigidBody* _rigid_body;
 
 public:
-    PhysicsMeshCollider(Larp::ModelPtr model, btQuaternion rotation, btVector3 position,
-                        btScalar mass, btVector3 local_inertia, btScalar restitution,
-                        void * user_pointer);
+    PhysicsMeshCollider(Larp::ModelPtr model, glm::quat rotation, glm::vec3 position,
+                        GLfloat mass, glm::vec3 local_inertia, GLfloat restitution,
+                        Larp::NodePtr user_pointer);
     btRigidBody* get_rigid_body() const;
 };
 
