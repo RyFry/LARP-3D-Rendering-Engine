@@ -6,6 +6,7 @@
 #include <GLFW/glfw3.h>
 
 #include "LarpPrerequisites.hpp"
+#include "LightFactory.hpp"
 
 #include "Camera.hpp"
 #include "ConfigurationLoader.hpp"
@@ -91,11 +92,11 @@ int main(void)
     world = new PhysicsWorld();
     world->init_objects();
 
-    Larp::Shader level_shader("shaders/lighting.vert", "shaders/lighting.frag");
+    // Larp::Shader level_shader("shaders/lighting.vert", "shaders/lighting.frag");
     Larp::ModelPtr level = Larp::Model::create("assets/LEVEL.obj");
-    Larp::EntityPtr entity = Larp::Entity::create(level_shader, level);
-    Larp::DirectionalLightPtr dir_light = graph->create_directional_light();
-    Larp::PointLightPtr point_light = graph->create_point_light();
+    Larp::EntityPtr entity = Larp::Entity::create(level);
+    Larp::DirectionalLightPtr dir_light = Larp::LightFactory::create_directional_light();
+    Larp::PointLightPtr point_light = Larp::LightFactory::create_point_light();
 
     point_light->set_ambient_intensity(1.0f, 1.0f, 1.0f);
     point_light->set_position(0.0f, 5.0f, 0.0f);
@@ -117,11 +118,9 @@ int main(void)
 
     world->get_dynamics_world()->addRigidBody(physics_level->get_rigid_body());
 
-
-
-    Larp::Shader crate_shader("shaders/lighting.vert", "shaders/lighting.frag");
+    // Larp::Shader crate_shader("shaders/lighting.vert", "shaders/lighting.frag");
     Larp::ModelPtr crate_model = Larp::Model::create("assets/crate.obj");
-    Larp::EntityPtr entity22 = Larp::Entity::create(crate_shader, crate_model);
+    Larp::EntityPtr entity22 = Larp::Entity::create(crate_model);
     Larp::NodePtr node22 = graph->create_child_node();
     node22->attach_entity(entity22);
     node22->set_scale(0.4, 0.4, 0.4);
@@ -142,9 +141,9 @@ int main(void)
     /*******************************
      * TESTING - DELETE THIS       *
      *******************************/
-    Larp::Shader shader("shaders/lighting.vert", "shaders/lighting.frag");
+    // Larp::Shader shader("shaders/lighting.vert", "shaders/lighting.frag");
     Larp::ModelPtr nanosuit = Larp::Model::create("assets/nanosuit.obj");
-    Larp::EntityPtr entity2 = Larp::Entity::create(shader, nanosuit);
+    Larp::EntityPtr entity2 = Larp::Entity::create(nanosuit);
 
     node12->attach_entity(entity2);
     node12->set_scale(0.1f, 0.1f, 0.1f);

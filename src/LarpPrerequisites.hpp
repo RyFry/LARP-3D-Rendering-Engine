@@ -30,6 +30,7 @@ namespace Larp
     typedef std::unique_ptr<Node>             UniqueNode;
     typedef std::unique_ptr<PointLight>       UniquePoint;
     typedef std::unique_ptr<SceneGraph>       UniqueSceneGraph;
+    typedef std::unique_ptr<Shader>           UniqueShader;
     typedef std::unique_ptr<SpotLight>        UniqueSpot;
 
     typedef Entity*                const EntityPtr;
@@ -39,5 +40,4 @@ namespace Larp
     typedef PointLight*            const PointLightPtr;
     typedef SceneGraph*            const SceneGraphPtr;
     typedef SpotLight*             const SpotLightPtr;
-
 }
