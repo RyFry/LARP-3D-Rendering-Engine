@@ -10,7 +10,7 @@ STATIC_LIBS   = -lSOIL
 DYNAMIC_FLAGS = -Wl,-rpath $(shell pwd)/lib
 DYNAMIC_LIBS  = -lassimp
 DYNAMIC_LIBS += -lglfw3 -lpthread -lGLEW -lGL -lXrandr -lXi -lX11 -ldl -lXcursor -lXxf86vm -lXinerama
-DYNAMIC_LIBS += -lBulletSoftBody -lBulletDynamics -lBulletCollision -lLinearMath
+DYNAMIC_LIBS += -lBulletSoftBody -lBulletDynamics -lBulletCollision -lLinearMath -lSDL -lSDL_mixer
 
 SRCDIR        = src
 OBJDIR        = objs
