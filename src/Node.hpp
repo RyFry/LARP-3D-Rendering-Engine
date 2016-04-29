@@ -181,6 +181,10 @@ namespace Larp
          */
         void set_scale(GLfloat x, GLfloat y, GLfloat z);
         /**
+         * @return the scale of this Node
+         */
+        glm::vec3 get_scale() const;
+        /**
          * Attaches an Entity to this object
          * @param entity The pointer to the Entity to attach to this object
          */

@@ -1,9 +1,9 @@
 #include "PhysicsPlayerController.hpp"
 
 PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, const Larp::NodePtr node,
-                                                 btVector3 initial_position, btScalar forward_speed,
-                                                 btScalar backward_speed, btScalar strafe_speed,
-                                                 btScalar jump_speed, btScalar max_slope)
+                                                 glm::vec3 initial_position, GLfloat forward_speed,
+                                                 GLfloat backward_speed, GLfloat strafe_speed,
+                                                 GLfloat jump_speed, GLfloat max_slope)
     : _forward_speed(forward_speed),
       _backward_speed(backward_speed),
       _strafe_speed(strafe_speed),
@@ -11,16 +11,16 @@ PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, co
       _max_slope(max_slope)
 {
     // Create player shape
-    btBoxShape* player_shape = new btBoxShape(btVector3(node->get_scaled_width() / 2.0f,
-                                                                  node->get_scaled_height() / 2.0f,
-                                                                  node->get_scaled_depth() / 2.0f));
+    btCylinderShape* player_shape = new btCylinderShape(btVector3(0.5f * node->get_scaled_width(),
+                                                                  0.5f * node->get_scaled_height(),
+                                                                  0.5f * node->get_scaled_depth()));
 
     // Init player ghost object
     this->_ghost_object = new btPairCachingGhostObject();
-    this->_transform = this->_ghost_object->getWorldTransform();
-    this->_transform.setOrigin(initial_position);
+    btTransform transform = this->_ghost_object->getWorldTransform();
+    transform.setOrigin(btVector3(initial_position.x, initial_position.y, initial_position.z));
 
-    this->_ghost_object->setWorldTransform(this->_transform);
+    this->_ghost_object->setWorldTransform(transform);
 
     // Set the shape and collision object type
     this->_ghost_object->setCollisionShape(player_shape);
@@ -50,7 +50,7 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world)
     //   forward X up = right
     //   up X forward = left
     /*
-      And the great thing about transformation matrices, is that this 3x3 rotation sub-matrix
+      And the great thing about transformation matrices, is that this 3x3 orientation sub-matrix
       itself consists of three normalized vectors.
       Turns out, the first column is the vector pointing to the right (positive X axis).
       The column to the right of that is the 'up vector' (positive Y).
@@ -66,7 +66,7 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world)
     /*
      * 0.7 is the magic number for detecting whether the player has hit one of the slopes
      */
-    if(res.hasHit() && btFrom.y() - res.m_hitPointWorld.y() < 0.7f)
+    if(res.hasHit() && btFrom.y() - res.m_hitPointWorld.y() < 0.485f)
     {
         _char_controller->setGravity(0);
     }
@@ -115,11 +115,12 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world)
     this->_directions = STOP;
 }
 
-void PhysicsPlayerController::rotate(btQuaternion rotation_amount)
+void PhysicsPlayerController::rotate(glm::quat orientation_amount)
 {
     btTransform trans = this->_ghost_object->getWorldTransform();
     btQuaternion quat = trans.getRotation();
-    quat = rotation_amount * quat;
+    btQuaternion rot(orientation_amount.w, orientation_amount.x, orientation_amount.y, orientation_amount.z);
+    quat = rot * quat;
     trans.setRotation(quat);
     this->_ghost_object->setWorldTransform(trans);
 }
@@ -134,7 +135,7 @@ void PhysicsPlayerController::set_user_pointer(void * user_pointer)
     this->_ghost_object->setUserPointer(user_pointer);
 }
 
-void PhysicsPlayerController::step(PhysicsWorld* world, btScalar delta_time)
+void PhysicsPlayerController::step(PhysicsWorld* world, GLfloat delta_time)
 {
     this->_char_controller->playerStep(world->get_dynamics_world(), delta_time);
 }
@@ -168,4 +169,18 @@ GLfloat PhysicsPlayerController::get_yaw() const
     btScalar matrix[16];
     this->_ghost_object->getWorldTransform().getOpenGLMatrix(matrix);
     return glm::degrees(btAtan2(matrix[10], matrix[8]));
+}
+
+GLfloat PhysicsPlayerController::get_pitch() const
+{
+    btScalar matrix[16];
+    this->_ghost_object->getWorldTransform().getOpenGLMatrix(matrix);
+    return glm::degrees(btAsin(-matrix[9]));
+}
+
+GLfloat PhysicsPlayerController::get_roll() const
+{
+    btScalar matrix[16];
+    this->_ghost_object->getWorldTransform().getOpenGLMatrix(matrix);
+    return glm::degrees(btAtan2(matrix[9], matrix[8]));
 }

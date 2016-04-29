@@ -8,6 +8,7 @@
 #include <GL/glew.h>    // All da OpenGL schtuff
 
 #include "Error.hpp"    // Custom error handling macro
+#include "GLMTypedefs.hpp"
 
 namespace Larp
 {
@@ -39,5 +40,4 @@ namespace Larp
     typedef PointLight*            const PointLightPtr;
     typedef SceneGraph*            const SceneGraphPtr;
     typedef SpotLight*             const SpotLightPtr;
-
 }

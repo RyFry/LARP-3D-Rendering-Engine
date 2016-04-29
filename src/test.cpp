@@ -118,7 +118,7 @@ int main(void)
 
     PhysicsMeshColliderBuilder physics_level_builder = PhysicsMeshColliderBuilder("assets/LEVEL.obj");
     physics_level_builder.set_mass(0.0);
-    physics_level_builder.set_local_inertia(btVector3(0.0, 0.0, 0.0));
+    physics_level_builder.set_local_inertia(glm::vec3(0.0, 0.0, 0.0));
     physics_level_builder.set_restitution(1);
     physics_level_builder.set_user_pointer(node21);
 
@@ -158,7 +158,7 @@ int main(void)
     node12->attach_entity(entity2);
     node12->set_scale(0.05f, 0.05f, 0.05f);
 
-    player = new PhysicsPlayerController(world, node12, btVector3(0, 5, 2));
+    player = new PhysicsPlayerController(world, node12, glm::vec3(0, 5, 2));
     player->set_user_pointer(node12);
 
     make_floor(world);
@@ -200,9 +200,9 @@ int main(void)
         last_frame = current_frame;
 
         frame_rate_limiter += delta_time;
-        if (frame_rate_limiter > 1.0 / 60.0)
+        if (frame_rate_limiter > 1.0 / 120.0)
         {
-            frame_rate_limiter -= 1.0 / 60.0;
+            frame_rate_limiter -= 1.0 / 120.0;
             ++iteration_number;
         }
         else
@@ -210,14 +210,14 @@ int main(void)
 
         player->update_movement(world);
 
-        world->get_dynamics_world()->stepSimulation(1.0f / 60.0f);
+        world->get_dynamics_world()->stepSimulation(1.0f / 120.0f);
 
-        player->step(world, 1.0f / 60.0f);
+        player->step(world, 1.0f / 120.0f);
         Larp::NodePtr player_node = player->get_user_pointer();
         glm::vec3 pos = player->get_position();
         glm::quat quat = player->get_orientation();
-        player_node->set_position(glm::vec3(pos.x, pos.y, pos.z));
-        player_node->set_orientation(glm::quat(quat.w, quat.x, quat.y, quat.z));
+        player_node->set_position(pos);
+        player_node->set_orientation(quat);
         camera._position = glm::vec3(pos.x, pos.y + player_node->get_scaled_height(), pos.z);
 
         camera._yaw = player->get_yaw();
@@ -337,9 +337,8 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     lastX = xpos;
     lastY = ypos;
 
-    btQuaternion rotation;
-    rotation.setEuler(-xoffset * 0.005, 0, 0);
-    player->rotate(rotation);
+    glm::quat rotation(0, 0, 0, 1);
+    player->rotate(glm::rotate(rotation, xoffset * 0.05, glm::vec3(0, 1, 0)));
     camera.process_mouse_movement(0, yoffset);
 }
 
@@ -356,11 +355,12 @@ void error_callback(int error, const char* description)
 void make_floor(PhysicsWorld* world)
 {
     btTransform trans;
+    trans.setIdentity();
     trans.setOrigin(btVector3(0.0, -5.0, 0.0));
     btScalar mass(0.0);
     btVector3 local_inertia(0, 0, 0);
 
-    btStaticPlaneShape* shape = new btStaticPlaneShape(btVector3(0, 1, 0), 0.0);
+    btStaticPlaneShape* shape = new btStaticPlaneShape(btVector3(0.0f, 1.0f, 0.0f), 0.0f);
     world->get_collision_shapes().push_back(shape);
     btDefaultMotionState* motion_state = new btDefaultMotionState(trans);
 
