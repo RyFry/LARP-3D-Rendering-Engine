@@ -41,9 +41,9 @@ namespace Larp
     void SceneGraph::draw(glm::mat4& view, glm::mat4& projection, const glm::vec3& view_pos)
     {
         glm::mat4 identity;
-        this->_skybox->draw(view, projection);
         this->_root->draw(identity, view, projection, view_pos, this->_directional_lights,
                           this->_point_lights, this->_spot_lights);
+        this->_skybox->draw(view, projection);
     }
 
     DirectionalLightPtr SceneGraph::create_directional_light(glm::vec3 direction)

@@ -157,7 +157,7 @@ int main(void)
 
     // Skybox stuff
     std::vector<const GLchar*> skybox_files;
-    skybox_files.push_back("assets/skybox/right.jpg");
+    skybox_files.push_back("assets/skybox/right.jpg");//assets/mp_drakeq/drakeq_rt.tga");
     skybox_files.push_back("assets/skybox/left.jpg");
     skybox_files.push_back("assets/skybox/top.jpg");
     skybox_files.push_back("assets/skybox/bottom.jpg");

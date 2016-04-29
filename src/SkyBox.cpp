@@ -115,7 +115,7 @@ namespace Larp
 
     void SkyBox::draw(const glm::mat4& view, const glm::mat4& projection)
     {
-        glDepthMask(GL_FALSE);
+        glDepthFunc(GL_LEQUAL);
         this->_shader->use();
         // Remove translation part of the view matrix
         glm::mat4 new_view = glm::mat4(glm::mat3(view));
@@ -133,6 +133,6 @@ namespace Larp
         glBindTexture(GL_TEXTURE_CUBE_MAP, this->_texture_id);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glBindVertexArray(0);
-        glDepthMask(GL_TRUE);
+        glDepthFunc(GL_LESS);
     }
 }

@@ -58,21 +58,27 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world)
       camera orientation convention (positive Z axis).
       https://www.opengl.org/discussion_boards/showthread.php/175515-Get-Direction-from-Transformation-Matrix-or-Quat
     */
-    btVector3 btFrom = this->_ghost_object->getWorldTransform().getOrigin();
-    btVector3 btTo(btFrom.x(), -0.001f, btFrom.z());
-    btCollisionWorld::ClosestRayResultCallback res(btFrom, btTo);
+//     btVector3 btFrom = this->_ghost_object->getWorldTransform().getOrigin();
+//     btVector3 btTo(btFrom.x(), -0.001f, btFrom.z());
+//     btCollisionWorld::ClosestRayResultCallback res(btFrom, btTo);
 
-    world->get_dynamics_world()->rayTest(btFrom, btTo, res); // m_btWorld is btDiscreteDynamicsWorld
-    /*
-     * 0.7 is the magic number for detecting whether the player has hit one of the slopes
-     */
-    if(res.hasHit() && btFrom.y() - res.m_hitPointWorld.y() < 0.4f)
+//     world->get_dynamics_world()->rayTest(btFrom, btTo, res); // m_btWorld is btDiscreteDynamicsWorld
+//     /*
+//      * 0.485 is the magic number for detecting whether the player has hit one of the slopes
+//      */
+//     if(res.hasHit() && btFrom.y() - res.m_hitPointWorld.y() < 0.485f)
+//     {
+// //        this->_char_controller->setGravity(0);
+//     }
+//     else
+//     {
+//         //      this->_char_controller->setGravity(4.9);
+//     }
+
+    if (!this->_char_controller->onGround())
     {
-        _char_controller->setGravity(0);
-    }
-    else
-    {
-        _char_controller->setGravity(4.9);
+        this->_directions = PlayerDirection::STOP;
+        this->_char
     }
 
     btVector3 movement_direction(0.0f, 0.0f, 0.0f);
