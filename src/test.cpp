@@ -44,9 +44,6 @@ bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
 bool firstMouse = true;
 
-GLfloat delta_time = 0.0f;
-GLfloat last_frame = 0.0f;
-
 int main(void)
 {
     Larp::ConfigurationLoader config("larp.cfg");
@@ -116,9 +113,9 @@ int main(void)
     PhysicsMeshColliderPtr physics_level = physics_level_builder.build();
 
     world->get_dynamics_world()->addRigidBody(physics_level->get_rigid_body());
-
-
-
+    
+    
+    
     Larp::Shader crate_shader("shaders/lighting.vert", "shaders/lighting.frag");
     Larp::ModelPtr crate_model = Larp::Model::create("assets/crate.obj");
     Larp::EntityPtr entity22 = Larp::Entity::create(crate_shader, crate_model);
@@ -126,6 +123,14 @@ int main(void)
     node22->attach_entity(entity22);
     node22->set_scale(0.4, 0.4, 0.4);
     node22->set_position(0.0, 4.0, 0.0);
+
+    Larp::Shader lamp_shader("shaders/lighting.vert", "shaders/lighting.frag");
+    Larp::ModelPtr lamp_model = Larp::Model::create("assets/lamp.obj");
+    Larp::EntityPtr entity69 = Larp::Entity::create(lamp_shader, lamp_model);
+    Larp::NodePtr node69 = graph->create_child_node();
+    node69->attach_entity(entity69);
+    node69->set_scale(1, 1, 1);
+    node69->set_position(2, 3, 0);
     /// Can't add mesh collider for crate. It's too big.
     // PhysicsMeshColliderBuilder crate_builder = PhysicsMeshColliderBuilder("assets/crate.obj");
     // crate_builder.set_mass(1.0);
@@ -186,11 +191,9 @@ int main(void)
     while (!glfwWindowShouldClose(window))
     {
         // Set frame time
-        GLfloat current_frame = glfwGetTime();
-        delta_time = current_frame - last_frame;
-        last_frame = current_frame;
+        Time.update_time();
 
-        frame_rate_limiter += delta_time;
+        frame_rate_limiter += Time::delta_time();
         if (frame_rate_limiter > 1.0 / 60.0)
         {
             frame_rate_limiter -= 1.0 / 60.0;
@@ -249,9 +252,9 @@ int main(void)
         glClearColor(0.5f, 0.05f, 0.05f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // node11->yaw(delta_time * 32.0);
-        // node11->pitch(delta_time * 23.0);
-        // node11->roll(delta_time * 17.0);
+        // node11->yaw(Time::delta_time() * 32.0);
+        // node11->pitch(Time::delta_time() * 23.0);
+        // node11->roll(Time::delta_time() * 17.0);
 
         glm::mat4 projection = glm::perspective(camera._zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
         glm::mat4 view = camera.get_view_matrix();
@@ -273,19 +276,19 @@ void Do_Movement()
 {
     // Camera controls
     if (keys[GLFW_KEY_UP])
-        camera.process_keyboard(Camera::FORWARD, delta_time);
+        camera.process_keyboard(Camera::FORWARD, Time::delta_time());
     if (keys[GLFW_KEY_DOWN])
-        camera.process_keyboard(Camera::BACKWARD, delta_time);
+        camera.process_keyboard(Camera::BACKWARD, Time::delta_time());
     if (keys[GLFW_KEY_LEFT])
-        camera.process_keyboard(Camera::LEFT, delta_time);
+        camera.process_keyboard(Camera::LEFT, Time::delta_time());
     if (keys[GLFW_KEY_RIGHT])
-        camera.process_keyboard(Camera::RIGHT, delta_time);
+        camera.process_keyboard(Camera::RIGHT, Time::delta_time());
 
 
     if (keys[GLFW_KEY_SPACE])
         player->jump();
     if (keys[GLFW_KEY_LEFT_SHIFT])
-        camera.process_keyboard(Camera::DOWN, delta_time);
+        camera.process_keyboard(Camera::DOWN, Time::delta_time());
 
     if (keys[GLFW_KEY_S])
         player->add_movement_direction(PhysicsPlayerController::PlayerDirection::BACKWARD);

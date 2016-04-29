@@ -2,6 +2,7 @@
 
 #include <memory>       // shared_ptr, weak_ptr
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <sstream>
 
@@ -11,6 +12,7 @@
 
 namespace Larp
 {
+    class AnimationHandler;
     class ConfigurationLoader;
     class DirectionalLight;
     class Entity;
@@ -22,6 +24,7 @@ namespace Larp
     class Shader;
     class SpotLight;
     class Texture;
+    class Time;
     class Vertex;
 
     typedef std::unique_ptr<DirectionalLight> UniqueDirectional;

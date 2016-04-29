@@ -134,7 +134,7 @@ namespace Larp
             Vertex vertex;
             // Process vertex positions, normals and texture coordinates
             glm::vec3 vector;
-            if (mesh->mNormals == NULL)
+            if (mesh->mVertices == NULL)
             {
                 THROW_RUNTIME_ERROR("mesh->mVertices is NULL");
             }
