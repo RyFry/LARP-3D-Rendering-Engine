@@ -186,6 +186,10 @@ int main(void)
         else
             continue;
 
+        // Check and call events
+        glfwPollEvents();
+        Do_Movement();
+
         player->update_movement(world);
 
         world->get_dynamics_world()->stepSimulation(1.0f / 120.0f);
@@ -228,10 +232,6 @@ int main(void)
             }
         }
 
-        // Check and call events
-        glfwPollEvents();
-        Do_Movement();
-
         // Clear the colorbuffer
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -264,12 +264,6 @@ void Do_Movement()
     if (keys[GLFW_KEY_RIGHT])
         camera.process_keyboard(Camera::RIGHT, delta_time);
 
-
-    if (keys[GLFW_KEY_SPACE])
-        player->jump();
-    if (keys[GLFW_KEY_LEFT_SHIFT])
-        camera.process_keyboard(Camera::DOWN, delta_time);
-
     if (keys[GLFW_KEY_S])
         player->add_movement_direction(PhysicsPlayerController::PlayerDirection::BACKWARD);
     if (keys[GLFW_KEY_A])
@@ -278,6 +272,11 @@ void Do_Movement()
         player->add_movement_direction(PhysicsPlayerController::PlayerDirection::RIGHT);
     if (keys[GLFW_KEY_W])
         player->add_movement_direction(PhysicsPlayerController::PlayerDirection::FORWARD);
+
+    if (keys[GLFW_KEY_SPACE])
+        player->jump();
+    if (keys[GLFW_KEY_LEFT_SHIFT])
+        camera.process_keyboard(Camera::DOWN, delta_time);
 }
 
 // Is called whenever a key is pressed/released via GLFW

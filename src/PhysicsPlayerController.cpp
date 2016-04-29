@@ -8,7 +8,8 @@ PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, co
       _backward_speed(backward_speed),
       _strafe_speed(strafe_speed),
       _jump_speed(jump_speed),
-      _max_slope(max_slope)
+      _max_slope(max_slope),
+      _directions(0)
 {
     // Create player shape
     btCylinderShape* player_shape = new btCylinderShape(btVector3(0.5f * node->get_scaled_width(),
@@ -41,8 +42,7 @@ PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, co
 
 void PhysicsPlayerController::add_movement_direction(PhysicsPlayerController::PlayerDirection direction)
 {
-    if (this->_char_controller->onGround())
-        this->_directions |= direction;
+    this->_directions |= direction;
 }
 
 int num = 0;
@@ -77,9 +77,6 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world)
     //     this->_char_controller->setGravity(0);
     // }
 
-    if (this->_directions == STOP)
-        std::cout << "STOPPED " << num++ << std::endl;
-
     btVector3 movement_direction(0.0f, 0.0f, 0.0f);
 
     if (this->_directions == PlayerDirection::STOP && this->_char_controller->onGround())
@@ -96,24 +93,25 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world)
     btScalar matrix[16];
     this->_ghost_object->getWorldTransform().getOpenGLMatrix(matrix);
 
-    if ((this->_directions & PlayerDirection::FORWARD) != 0)
+    uint8_t dirs = this->_directions;
+    if ((dirs & PlayerDirection::FORWARD) != 0)
     {
         btVector3 forward(matrix[8], matrix[9], matrix[10]);
         movement_direction += forward * this->_forward_speed;
     }
-    if ((this->_directions & PlayerDirection::BACKWARD) != 0)
+    if ((dirs & PlayerDirection::BACKWARD) != 0)
     {
         btVector3 forward(matrix[8], matrix[9], matrix[10]);
         movement_direction += forward * -this->_backward_speed;
     }
-    if ((this->_directions & PlayerDirection::LEFT) != 0)
+    if ((dirs & PlayerDirection::LEFT) != 0)
     {
         btVector3 forward(matrix[8], matrix[9], matrix[10]);
         forward *= this->_strafe_speed;
         btVector3 left = btVector3(0, 1, 0).cross(forward);
         movement_direction += left;
     }
-    if ((this->_directions & PlayerDirection::RIGHT) != 0)
+    if ((dirs & PlayerDirection::RIGHT) != 0)
     {
         btVector3 forward(matrix[8], matrix[9], matrix[10]);
         forward *= this->_strafe_speed;
@@ -122,11 +120,7 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world)
     }
 
     this->_char_controller->setWalkDirection(movement_direction);
-    if (this->_char_controller->onGround())
-    {
-        std::cout << "ONGROUND" << std::endl;
-        this->_directions = STOP;
-    }
+    this->_directions = STOP;
 }
 
 void PhysicsPlayerController::rotate(glm::quat orientation_amount)
