@@ -93,7 +93,7 @@ int main(void)
     glewInit();
 
    soundMan = new SoundManager();
-   GUIMan = new GUIManager(graph);
+   GUIMan = new GUIManager(graph, window);
    GUIrendering = true;
 
 

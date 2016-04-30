@@ -3,8 +3,8 @@
 
 
 
-GUIManager::GUIManager(Larp::SceneGraphPtr g):
-_graph(g)
+GUIManager::GUIManager(Larp::SceneGraphPtr g, GLFWwindow* window):
+_graph(g), _window(window)
 {
 	this->_renderer = &CEGUI::OpenGL3Renderer::bootstrapSystem();
 	this->_wmgr =  &CEGUI::WindowManager::getSingleton();
@@ -51,14 +51,17 @@ void GUIManager::setup_resources()
 
 void GUIManager::setup_main_menu()
 {
-	CEGUI::Window* mainSheet = this->_wmgr->createWindow("DefaultWindow", "CEGUIDemo/mainSheet");
+	CEGUI::Window* mainSheet = this->_wmgr->createWindow("DefaultWindow", "mainSheet");
 
-	CEGUI::Window* addLight = this->_wmgr->createWindow("TaharezLook/Button", "Game/addLight");
+	CEGUI::Window* addLight = this->_wmgr->createWindow("TaharezLook/Button", "addLight");
 	CEGUI::Window* lightMenu = this->_wmgr->createWindow("TaharezLook/Menubar", "lightMenu");
 
 	CEGUI::Window* pointLight = this->_wmgr->createWindow("TaharezLook/MenuItem", "point");
 	CEGUI::Window* spotLight = this->_wmgr->createWindow("TaharezLook/MenuItem", "spot");
 	CEGUI::Window* directionalLight = this->_wmgr->createWindow("TaharezLook/MenuItem", "directional");
+
+
+	CEGUI::Window* quit = this->_wmgr->createWindow("TaharezLook/Button", "quit");
 
 
 
@@ -67,6 +70,7 @@ void GUIManager::setup_main_menu()
 	spotLight->setText("Spotlight");
 	directionalLight->setText("Directional Light");
 
+
   lightMenu->setPosition(CEGUI::UVector2(CEGUI::UDim(0.4f,0),CEGUI::UDim(0.4f,0)));
   lightMenu->setSize(CEGUI::USize(CEGUI::UDim(0.25,0), CEGUI::UDim(0.05,0)));
 
@@ -74,9 +78,15 @@ void GUIManager::setup_main_menu()
   addLight->setPosition(CEGUI::UVector2(CEGUI::UDim(0.05f,0),CEGUI::UDim(0.2f,0)));
   addLight->setSize(CEGUI::USize(CEGUI::UDim(0.10,0), CEGUI::UDim(0.05,0)));
 
+
+  quit->setText("Quit");
+  quit->setPosition(CEGUI::UVector2(CEGUI::UDim(0.05f,0),CEGUI::UDim(0.6f,0)));
+  quit->setSize(CEGUI::USize(CEGUI::UDim(0.10,0), CEGUI::UDim(0.05,0)));
+
   addLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_light, this));
   pointLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_point_light, this));
   spotLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_spot_light, this));
+  quit->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::quit, this));
 
   lightMenu->addChild(pointLight);
   lightMenu->addChild(spotLight);
@@ -84,6 +94,7 @@ void GUIManager::setup_main_menu()
 
 
   mainSheet->addChild(addLight);
+  mainSheet->addChild(quit);
   // popupMenu->addChild(start);
 
   this->_sheets.push_back(mainSheet);
@@ -139,6 +150,11 @@ void GUIManager::add_directional_light(const CEGUI::EventArgs&)
 	// directional_light->set_ambient_intensity(0.0f, 1.0f, 0.0f);
  // 	directional_light->set_position(0.0f, 2.0f, 0.0f);
 
+}
+
+void GUIManager::quit(const CEGUI::EventArgs&)
+{
+	glfwSetWindowShouldClose(this->_window, GL_TRUE);
 }
 
 void GUIManager::hide_GUI()

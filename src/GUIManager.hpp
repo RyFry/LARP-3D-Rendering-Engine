@@ -6,6 +6,10 @@
 #include <iostream>
 #include <vector>
 
+#define GLEW_STATIC
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
 #include "LarpPrerequisites.hpp"
 
 #include "Camera.hpp"
@@ -30,7 +34,7 @@ class GUIManager
 	  /**
       * Constructor
       */
-		GUIManager(Larp::SceneGraphPtr g);
+		GUIManager(Larp::SceneGraphPtr g, GLFWwindow* window);
 
 		/**
      * Destructor
@@ -39,15 +43,26 @@ class GUIManager
 
 		// void set_GUI(string GUI_name);
 
+		/**
+		* Tells the user if the GUI is currently rendering out
+		*/
 		bool _GUI_rendering;
 
+		/**
+		* Returns the GUI's current rendering state 
+		*/
 		bool get_rendering_state();
 
+		/** 
+		* Shows the main menu used for adding different elements to the scene
+		*/
 	  void show_main();
 
 	private:
 
 		Larp::SceneGraphPtr _graph;
+
+		GLFWwindow* _window;
 
 		/**
 		* CEGUI renderer that is required when using OpenGL3
@@ -74,7 +89,7 @@ class GUIManager
 		void add_light(const CEGUI::EventArgs&);
 
 		/**
-		* Will handle adding lights to the scene 
+		* Adds a point light to the scene 
 		*/
 		void add_point_light(const CEGUI::EventArgs&);
 
@@ -82,8 +97,16 @@ class GUIManager
 
 		void add_directional_light(const CEGUI::EventArgs&);
 
+		void quit(const CEGUI::EventArgs&);
+
+		/**
+		* Hides the current GUI sheet and mouse
+		*/ 
 		void hide_GUI();
 
+		/**
+		* Shows the current GUI sheet and mouse
+		*/ 
 		void show_GUI();
 
 };
