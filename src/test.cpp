@@ -60,7 +60,9 @@ int main(void)
     // Init GLFW
     int dumb ;
     if (!glfwInit())
-        throw std::runtime_error(std::string(__FILE__) + std::string(" : line ") + std::to_string(__LINE__) + std::string(" :: glfwInit() failed!"));
+    {
+        THROW_RUNTIME_ERROR("glfwInit() failed!");
+    }
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -71,7 +73,9 @@ int main(void)
 
     GLFWwindow* window = glfwCreateWindow(screenWidth, screenHeight, config.get_title().c_str(), nullptr, nullptr); // Windowed
     if (window == nullptr)
-        throw std::runtime_error(std::string(__FILE__) + std::string(" : line ") + std::to_string(__LINE__) + std::string(" :: GLFWwindow* = nullptr"));
+    {
+        THROW_RUNTIME_ERROR("GLFWwindow* = nullptr");
+    }
     glfwMakeContextCurrent(window);
 
     // Set the required callback functions
@@ -99,7 +103,7 @@ int main(void)
     world->init_objects();
 
     Larp::Shader level_shader("shaders/lighting.vert", "shaders/lighting.frag");
-    Larp::ModelPtr level = Larp::Model::create("assets/LEVEL.obj");
+    Larp::ModelPtr level = Larp::Model::create("assets/LEVEL/LEVEL.obj");
     Larp::EntityPtr entity = Larp::Entity::create(level_shader, level);
     Larp::DirectionalLightPtr dir_light = graph->create_directional_light();
     Larp::PointLightPtr point_light = graph->create_point_light();
@@ -115,7 +119,7 @@ int main(void)
     //node21->set_scale(0.1f, 0.1f, 0.1f);
     node21->attach_entity(entity);
 
-    PhysicsMeshColliderBuilder physics_level_builder = PhysicsMeshColliderBuilder("assets/LEVEL.obj");
+    PhysicsMeshColliderBuilder physics_level_builder = PhysicsMeshColliderBuilder("assets/LEVEL/LEVEL.obj");
     physics_level_builder.set_mass(0.0);
     physics_level_builder.set_local_inertia(glm::vec3(0.0, 0.0, 0.0));
     physics_level_builder.set_restitution(1);
@@ -126,7 +130,7 @@ int main(void)
     world->get_dynamics_world()->addRigidBody(physics_level->get_rigid_body());
 
     Larp::Shader crate_shader("shaders/lighting.vert", "shaders/lighting.frag");
-    Larp::ModelPtr crate_model = Larp::Model::create("assets/crate.obj");
+    Larp::ModelPtr crate_model = Larp::Model::create("assets/crate/crate.obj");
     Larp::EntityPtr entity22 = Larp::Entity::create(crate_shader, crate_model);
     Larp::NodePtr node22 = graph->create_child_node();
     node22->attach_entity(entity22);
@@ -149,7 +153,7 @@ int main(void)
      * TESTING - DELETE THIS       *
      *******************************/
     Larp::Shader shader("shaders/lighting.vert", "shaders/lighting.frag");
-    Larp::ModelPtr nanosuit = Larp::Model::create("assets/nanosuit.obj");
+    Larp::ModelPtr nanosuit = Larp::Model::create("assets/nanosuit/nanosuit.obj");
     Larp::EntityPtr entity2 = Larp::Entity::create(shader, nanosuit);
 
     node12->attach_entity(entity2);
