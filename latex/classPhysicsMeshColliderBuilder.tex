@@ -1,0 +1,169 @@
+\hypertarget{classPhysicsMeshColliderBuilder}{}\section{Physics\+Mesh\+Collider\+Builder Class Reference}
+\label{classPhysicsMeshColliderBuilder}\index{Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}}
+
+
+{\ttfamily \#include $<$Physics\+Mesh\+Collider\+Builder.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPhysicsMeshColliderBuilder_a952bf520c1027f8e0eb5578a5cd25b89}{Physics\+Mesh\+Collider\+Builder} (std\+::string path)
+\item 
+void \hyperlink{classPhysicsMeshColliderBuilder_a7d0c5bfaf8e0bca011ee311ed4c36fc9}{set\+\_\+orientation} (glm\+::quat orientation)
+\item 
+void \hyperlink{classPhysicsMeshColliderBuilder_aaf6db772b22a11411492b3f43fc95f88}{set\+\_\+position} (glm\+::vec3 position)
+\item 
+void \hyperlink{classPhysicsMeshColliderBuilder_a011838ad8805502d286182e8017fe3a7}{set\+\_\+mass} (G\+Lfloat mass)
+\item 
+void \hyperlink{classPhysicsMeshColliderBuilder_a37138f70dbc02843fa06a661f8624439}{set\+\_\+local\+\_\+inertia} (glm\+::vec3 local\+\_\+inertia)
+\item 
+void \hyperlink{classPhysicsMeshColliderBuilder_a8262d206da5afc9aa1f60471a0c37f1c}{set\+\_\+restitution} (G\+Lfloat restitution)
+\item 
+void \hyperlink{classPhysicsMeshColliderBuilder_a1c85c9d22611d1b78ef867e04b3bcc07}{set\+\_\+user\+\_\+pointer} (\hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Larp\+::\+Node\+Ptr} user\+\_\+pointer)
+\item 
+\hyperlink{PhysicsMeshCollider_8hpp_a16ccb056e995aced46eb1a10fbfaee87}{Physics\+Mesh\+Collider\+Ptr} \hyperlink{classPhysicsMeshColliderBuilder_a3136483052f4740f1bb544b212f78cc2}{build} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceLarp_a1fbc1dec59f7a571dc06e152b1e7d38c}{Larp\+::\+Model\+Ptr} \hyperlink{classPhysicsMeshColliderBuilder_a41bb17e3b830ef92b2f04d500a25a829}{\+\_\+model}
+\item 
+glm\+::quat \hyperlink{classPhysicsMeshColliderBuilder_a443158e70fca5a8df35e90b99e75c6b9}{\+\_\+orientation}
+\item 
+glm\+::vec3 \hyperlink{classPhysicsMeshColliderBuilder_a1ed543ce75168fc3516a43095f375986}{\+\_\+position}
+\item 
+G\+Lfloat \hyperlink{classPhysicsMeshColliderBuilder_ab1829c5f0156de48786ea2a2971bb5e0}{\+\_\+mass}
+\item 
+glm\+::vec3 \hyperlink{classPhysicsMeshColliderBuilder_a5916a7f1e88bb3ac4fc38e1826ba9539}{\+\_\+local\+\_\+inertia}
+\item 
+G\+Lfloat \hyperlink{classPhysicsMeshColliderBuilder_afd9be67d71afcfedbb4a245e38db0947}{\+\_\+restitution}
+\item 
+\hyperlink{classLarp_1_1Node}{Larp\+::\+Node} $\ast$ \hyperlink{classPhysicsMeshColliderBuilder_adef014a03eaa91a9006d50267d1068b3}{\+\_\+user\+\_\+pointer}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}!Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}}
+\index{Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}!Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}}
+\subsubsection[{\texorpdfstring{Physics\+Mesh\+Collider\+Builder(std\+::string path)}{PhysicsMeshColliderBuilder(std::string path)}}]{\setlength{\rightskip}{0pt plus 5cm}Physics\+Mesh\+Collider\+Builder\+::\+Physics\+Mesh\+Collider\+Builder (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{path}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsMeshColliderBuilder_a952bf520c1027f8e0eb5578a5cd25b89}{}\label{classPhysicsMeshColliderBuilder_a952bf520c1027f8e0eb5578a5cd25b89}
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to the Model to build a Mesh\+Collider off of \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}!build@{build}}
+\index{build@{build}!Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}}
+\subsubsection[{\texorpdfstring{build()}{build()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Physics\+Mesh\+Collider\+Ptr} Physics\+Mesh\+Collider\+Builder\+::build (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsMeshColliderBuilder_a3136483052f4740f1bb544b212f78cc2}{}\label{classPhysicsMeshColliderBuilder_a3136483052f4740f1bb544b212f78cc2}
+\index{Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}!set\+\_\+local\+\_\+inertia@{set\+\_\+local\+\_\+inertia}}
+\index{set\+\_\+local\+\_\+inertia@{set\+\_\+local\+\_\+inertia}!Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}}
+\subsubsection[{\texorpdfstring{set\+\_\+local\+\_\+inertia(glm\+::vec3 local\+\_\+inertia)}{set_local_inertia(glm::vec3 local_inertia)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Mesh\+Collider\+Builder\+::set\+\_\+local\+\_\+inertia (
+\begin{DoxyParamCaption}
+\item[{glm\+::vec3}]{local\+\_\+inertia}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsMeshColliderBuilder_a37138f70dbc02843fa06a661f8624439}{}\label{classPhysicsMeshColliderBuilder_a37138f70dbc02843fa06a661f8624439}
+Set the local inertia for the Mesh\+Collider to be built by this object 
+\begin{DoxyParams}{Parameters}
+{\em local} & inertia The local inertia amount  (0, 0, 0) \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}!set\+\_\+mass@{set\+\_\+mass}}
+\index{set\+\_\+mass@{set\+\_\+mass}!Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}}
+\subsubsection[{\texorpdfstring{set\+\_\+mass(\+G\+Lfloat mass)}{set_mass(GLfloat mass)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Mesh\+Collider\+Builder\+::set\+\_\+mass (
+\begin{DoxyParamCaption}
+\item[{G\+Lfloat}]{mass}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsMeshColliderBuilder_a011838ad8805502d286182e8017fe3a7}{}\label{classPhysicsMeshColliderBuilder_a011838ad8805502d286182e8017fe3a7}
+Set the mass for the Mesh\+Collider to be built by this object A mass of 0.\+0 means that this object will not move or be affected by gravity 
+\begin{DoxyParams}{Parameters}
+{\em mass} & The mass amount  0.\+0 \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}!set\+\_\+orientation@{set\+\_\+orientation}}
+\index{set\+\_\+orientation@{set\+\_\+orientation}!Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}}
+\subsubsection[{\texorpdfstring{set\+\_\+orientation(glm\+::quat orientation)}{set_orientation(glm::quat orientation)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Mesh\+Collider\+Builder\+::set\+\_\+orientation (
+\begin{DoxyParamCaption}
+\item[{glm\+::quat}]{orientation}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsMeshColliderBuilder_a7d0c5bfaf8e0bca011ee311ed4c36fc9}{}\label{classPhysicsMeshColliderBuilder_a7d0c5bfaf8e0bca011ee311ed4c36fc9}
+Set the orientation for the Mesh\+Collider to be built by this object 
+\begin{DoxyParams}{Parameters}
+{\em orientation} & The orientation amount  (0, 0, 0, 1) \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}!set\+\_\+position@{set\+\_\+position}}
+\index{set\+\_\+position@{set\+\_\+position}!Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}}
+\subsubsection[{\texorpdfstring{set\+\_\+position(glm\+::vec3 position)}{set_position(glm::vec3 position)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Mesh\+Collider\+Builder\+::set\+\_\+position (
+\begin{DoxyParamCaption}
+\item[{glm\+::vec3}]{position}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsMeshColliderBuilder_aaf6db772b22a11411492b3f43fc95f88}{}\label{classPhysicsMeshColliderBuilder_aaf6db772b22a11411492b3f43fc95f88}
+Set the position for the Mesh\+Collider to be built by this object 
+\begin{DoxyParams}{Parameters}
+{\em position} & The position amount  (0, 0, 0) \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}!set\+\_\+restitution@{set\+\_\+restitution}}
+\index{set\+\_\+restitution@{set\+\_\+restitution}!Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}}
+\subsubsection[{\texorpdfstring{set\+\_\+restitution(\+G\+Lfloat restitution)}{set_restitution(GLfloat restitution)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Mesh\+Collider\+Builder\+::set\+\_\+restitution (
+\begin{DoxyParamCaption}
+\item[{G\+Lfloat}]{restitution}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsMeshColliderBuilder_a8262d206da5afc9aa1f60471a0c37f1c}{}\label{classPhysicsMeshColliderBuilder_a8262d206da5afc9aa1f60471a0c37f1c}
+Set the restitution for the Mesh\+Collider to be built by this object 
+\begin{DoxyParams}{Parameters}
+{\em restitution} & The restitution amount  0.\+0 \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}!set\+\_\+user\+\_\+pointer@{set\+\_\+user\+\_\+pointer}}
+\index{set\+\_\+user\+\_\+pointer@{set\+\_\+user\+\_\+pointer}!Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}}
+\subsubsection[{\texorpdfstring{set\+\_\+user\+\_\+pointer(\+Larp\+::\+Node\+Ptr user\+\_\+pointer)}{set_user_pointer(Larp::NodePtr user_pointer)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Mesh\+Collider\+Builder\+::set\+\_\+user\+\_\+pointer (
+\begin{DoxyParamCaption}
+\item[{{\bf Larp\+::\+Node\+Ptr}}]{user\+\_\+pointer}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsMeshColliderBuilder_a1c85c9d22611d1b78ef867e04b3bcc07}{}\label{classPhysicsMeshColliderBuilder_a1c85c9d22611d1b78ef867e04b3bcc07}
+Set the user pointer for the Mesh\+Collider to be built by this object 
+\begin{DoxyParams}{Parameters}
+{\em user\+\_\+pointer} & The user pointer amount  nullptr \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}!\+\_\+local\+\_\+inertia@{\+\_\+local\+\_\+inertia}}
+\index{\+\_\+local\+\_\+inertia@{\+\_\+local\+\_\+inertia}!Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}}
+\subsubsection[{\texorpdfstring{\+\_\+local\+\_\+inertia}{_local_inertia}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Physics\+Mesh\+Collider\+Builder\+::\+\_\+local\+\_\+inertia\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsMeshColliderBuilder_a5916a7f1e88bb3ac4fc38e1826ba9539}{}\label{classPhysicsMeshColliderBuilder_a5916a7f1e88bb3ac4fc38e1826ba9539}
+The local intertia of the Mesh collider that will be built. \index{Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}!\+\_\+mass@{\+\_\+mass}}
+\index{\+\_\+mass@{\+\_\+mass}!Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}}
+\subsubsection[{\texorpdfstring{\+\_\+mass}{_mass}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Physics\+Mesh\+Collider\+Builder\+::\+\_\+mass\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsMeshColliderBuilder_ab1829c5f0156de48786ea2a2971bb5e0}{}\label{classPhysicsMeshColliderBuilder_ab1829c5f0156de48786ea2a2971bb5e0}
+The mas of the Mesh collider that will be built. \index{Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}!\+\_\+model@{\+\_\+model}}
+\index{\+\_\+model@{\+\_\+model}!Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}}
+\subsubsection[{\texorpdfstring{\+\_\+model}{_model}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Larp\+::\+Model\+Ptr} Physics\+Mesh\+Collider\+Builder\+::\+\_\+model\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsMeshColliderBuilder_a41bb17e3b830ef92b2f04d500a25a829}{}\label{classPhysicsMeshColliderBuilder_a41bb17e3b830ef92b2f04d500a25a829}
+The Model that this mesh collider will be built from. \index{Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}!\+\_\+orientation@{\+\_\+orientation}}
+\index{\+\_\+orientation@{\+\_\+orientation}!Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}}
+\subsubsection[{\texorpdfstring{\+\_\+orientation}{_orientation}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::quat Physics\+Mesh\+Collider\+Builder\+::\+\_\+orientation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsMeshColliderBuilder_a443158e70fca5a8df35e90b99e75c6b9}{}\label{classPhysicsMeshColliderBuilder_a443158e70fca5a8df35e90b99e75c6b9}
+The orientation of the Mesh collider that will be built. \index{Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}!\+\_\+position@{\+\_\+position}}
+\index{\+\_\+position@{\+\_\+position}!Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}}
+\subsubsection[{\texorpdfstring{\+\_\+position}{_position}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Physics\+Mesh\+Collider\+Builder\+::\+\_\+position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsMeshColliderBuilder_a1ed543ce75168fc3516a43095f375986}{}\label{classPhysicsMeshColliderBuilder_a1ed543ce75168fc3516a43095f375986}
+The position of the Mesh collider that will be built. \index{Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}!\+\_\+restitution@{\+\_\+restitution}}
+\index{\+\_\+restitution@{\+\_\+restitution}!Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}}
+\subsubsection[{\texorpdfstring{\+\_\+restitution}{_restitution}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Physics\+Mesh\+Collider\+Builder\+::\+\_\+restitution\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsMeshColliderBuilder_afd9be67d71afcfedbb4a245e38db0947}{}\label{classPhysicsMeshColliderBuilder_afd9be67d71afcfedbb4a245e38db0947}
+The restitution of the Mesh collider that will be built. A value of 1.\+0 will have perfect bouncing, and a value of 0.\+0 will have no bouncing. \index{Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}!\+\_\+user\+\_\+pointer@{\+\_\+user\+\_\+pointer}}
+\index{\+\_\+user\+\_\+pointer@{\+\_\+user\+\_\+pointer}!Physics\+Mesh\+Collider\+Builder@{Physics\+Mesh\+Collider\+Builder}}
+\subsubsection[{\texorpdfstring{\+\_\+user\+\_\+pointer}{_user_pointer}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Larp\+::\+Node}$\ast$ Physics\+Mesh\+Collider\+Builder\+::\+\_\+user\+\_\+pointer\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsMeshColliderBuilder_adef014a03eaa91a9006d50267d1068b3}{}\label{classPhysicsMeshColliderBuilder_adef014a03eaa91a9006d50267d1068b3}
+The data pointer of this Mesh collider. This should be initialized to the \hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Larp\+::\+Node\+Ptr} that is attached to the Model provided to the Mesh collider. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{PhysicsMeshColliderBuilder_8hpp}{Physics\+Mesh\+Collider\+Builder.\+hpp}\item 
+src/\hyperlink{PhysicsMeshColliderBuilder_8cpp}{Physics\+Mesh\+Collider\+Builder.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,294 @@
+\hypertarget{classPhysicsPlayerController}{}\section{Physics\+Player\+Controller Class Reference}
+\label{classPhysicsPlayerController}\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+
+
+{\ttfamily \#include $<$Physics\+Player\+Controller.\+hpp$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5e}{Player\+Direction} \{ \\*
+\hyperlink{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5ea9d11193b52d280beca381dc2a4835616}{S\+T\+OP} = 0, 
+\hyperlink{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5eade713714921588c30cd3fffee5cc5c19}{L\+E\+FT} = 1, 
+\hyperlink{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5ea292310309c7421df12e82e529f41ec12}{R\+I\+G\+HT} = 2, 
+\hyperlink{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5eaf14d17d4e0e8cf06489669241e1fd164}{F\+O\+R\+W\+A\+RD} = 4, 
+\\*
+\hyperlink{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5ea2cef5a1e4661f46e91fb12727556f62b}{B\+A\+C\+K\+W\+A\+RD} = 8
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPhysicsPlayerController_a5e35a8bbba953a855c0ffa605ed58f07}{Physics\+Player\+Controller} (\hyperlink{classPhysicsWorld}{Physics\+World} $\ast$physics\+\_\+world, const \hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Larp\+::\+Node\+Ptr} node, glm\+::vec3 initial\+\_\+position=glm\+::vec3(0, 0, 0), G\+Lfloat forward\+\_\+speed=.\+03, G\+Lfloat backward\+\_\+speed=.\+01, G\+Lfloat strafe\+\_\+speed=.\+02, G\+Lfloat jump\+\_\+speed=3.\+0, G\+Lfloat max\+\_\+slope=.\+872665)
+\item 
+void \hyperlink{classPhysicsPlayerController_a9980ea5d6d8b96826d8a86ff7a9e8716}{add\+\_\+movement\+\_\+direction} (\hyperlink{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5e}{Player\+Direction} direction)
+\item 
+void \hyperlink{classPhysicsPlayerController_a611f5a0cdc5b9f74376880c47dc997a4}{update\+\_\+movement} (\hyperlink{classPhysicsWorld}{Physics\+World} $\ast$\hyperlink{test_8cpp_a80518da77f9ca26660dd6e4584b92be4}{world})
+\item 
+void \hyperlink{classPhysicsPlayerController_a540179190225822c918851855f3fadbf}{rotate} (glm\+::quat rotation\+\_\+amount)
+\item 
+void \hyperlink{classPhysicsPlayerController_a392fedfa034d9fbd261fd6d4d348b2ce}{jump} ()
+\item 
+void \hyperlink{classPhysicsPlayerController_a976d927f76cb9fd366c303660d24c585}{set\+\_\+user\+\_\+pointer} (void $\ast$user\+\_\+pointer)
+\item 
+void \hyperlink{classPhysicsPlayerController_a1e32faab6f2e50c13c9a9e64e3163079}{step} (\hyperlink{classPhysicsWorld}{Physics\+World} $\ast$\hyperlink{test_8cpp_a80518da77f9ca26660dd6e4584b92be4}{world}, G\+Lfloat \hyperlink{test_8cpp_a45742981446f2bedcf5573ca6b329564}{delta\+\_\+time})
+\item 
+\hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Larp\+::\+Node\+Ptr} \hyperlink{classPhysicsPlayerController_aa7f40ea9fc5b1ef645972e0f2b0042ed}{get\+\_\+user\+\_\+pointer} ()
+\item 
+glm\+::vec3 \hyperlink{classPhysicsPlayerController_a18889e54457b7f91196d9302fd524775}{get\+\_\+position} () const 
+\item 
+glm\+::quat \hyperlink{classPhysicsPlayerController_a276711b873a6520fd01c4834c20bd37b}{get\+\_\+orientation} () const 
+\item 
+glm\+::vec3 \hyperlink{classPhysicsPlayerController_aa7ffb4df3b50b550f33d2d64a76ee57b}{get\+\_\+direction} () const 
+\item 
+G\+Lfloat \hyperlink{classPhysicsPlayerController_a1ffac5f72a1c4db9fb126e9c820615ef}{get\+\_\+yaw} () const 
+\item 
+G\+Lfloat \hyperlink{classPhysicsPlayerController_a5c16cff5a570099d9b4f4ed0d0939509}{get\+\_\+pitch} () const 
+\item 
+G\+Lfloat \hyperlink{classPhysicsPlayerController_a4f59ca49508ea75f5c608323e4af5019}{get\+\_\+roll} () const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bt\+Pair\+Caching\+Ghost\+Object $\ast$ \hyperlink{classPhysicsPlayerController_ac8839101912598ae6c620c76864665e1}{\+\_\+ghost\+\_\+object}
+\item 
+bt\+Kinematic\+Character\+Controller $\ast$ \hyperlink{classPhysicsPlayerController_acb97f8a1c4155bd6b269fc7276484dc5}{\+\_\+char\+\_\+controller}
+\item 
+G\+Lfloat \hyperlink{classPhysicsPlayerController_a765afe9efa2c07cce8c0531b2bc220c9}{\+\_\+forward\+\_\+speed}
+\item 
+G\+Lfloat \hyperlink{classPhysicsPlayerController_acba91da49b4a1fcd492624763376ae67}{\+\_\+backward\+\_\+speed}
+\item 
+G\+Lfloat \hyperlink{classPhysicsPlayerController_a0650942e3b59e8598ab70d649d9823a9}{\+\_\+strafe\+\_\+speed}
+\item 
+G\+Lfloat \hyperlink{classPhysicsPlayerController_a768842aa2f729fafe55ec1308708f006}{\+\_\+jump\+\_\+speed}
+\item 
+G\+Lfloat \hyperlink{classPhysicsPlayerController_a29cffd08733c1fb185ed3fdbfaa9e045}{\+\_\+max\+\_\+slope}
+\item 
+uint8\+\_\+t \hyperlink{classPhysicsPlayerController_a21fb45f73d246a1fa5c6aa36525d3a85}{\+\_\+directions}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!Player\+Direction@{Player\+Direction}}
+\index{Player\+Direction@{Player\+Direction}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{Player\+Direction}{PlayerDirection}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Physics\+Player\+Controller\+::\+Player\+Direction}}\hypertarget{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5e}{}\label{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5e}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{S\+T\+OP@{S\+T\+OP}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!S\+T\+OP@{S\+T\+OP}}\item[{\em 
+S\+T\+OP\hypertarget{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5ea9d11193b52d280beca381dc2a4835616}{}\label{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5ea9d11193b52d280beca381dc2a4835616}
+}]\index{L\+E\+FT@{L\+E\+FT}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!L\+E\+FT@{L\+E\+FT}}\item[{\em 
+L\+E\+FT\hypertarget{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5eade713714921588c30cd3fffee5cc5c19}{}\label{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5eade713714921588c30cd3fffee5cc5c19}
+}]\index{R\+I\+G\+HT@{R\+I\+G\+HT}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!R\+I\+G\+HT@{R\+I\+G\+HT}}\item[{\em 
+R\+I\+G\+HT\hypertarget{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5ea292310309c7421df12e82e529f41ec12}{}\label{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5ea292310309c7421df12e82e529f41ec12}
+}]\index{F\+O\+R\+W\+A\+RD@{F\+O\+R\+W\+A\+RD}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!F\+O\+R\+W\+A\+RD@{F\+O\+R\+W\+A\+RD}}\item[{\em 
+F\+O\+R\+W\+A\+RD\hypertarget{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5eaf14d17d4e0e8cf06489669241e1fd164}{}\label{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5eaf14d17d4e0e8cf06489669241e1fd164}
+}]\index{B\+A\+C\+K\+W\+A\+RD@{B\+A\+C\+K\+W\+A\+RD}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!B\+A\+C\+K\+W\+A\+RD@{B\+A\+C\+K\+W\+A\+RD}}\item[{\em 
+B\+A\+C\+K\+W\+A\+RD\hypertarget{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5ea2cef5a1e4661f46e91fb12727556f62b}{}\label{classPhysicsPlayerController_a947993cc77a553b6a30c9ea95c81de5ea2cef5a1e4661f46e91fb12727556f62b}
+}]\end{description}
+\end{Desc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{Physics\+Player\+Controller(\+Physics\+World $\ast$physics\+\_\+world, const Larp\+::\+Node\+Ptr node, glm\+::vec3 initial\+\_\+position=glm\+::vec3(0, 0, 0), G\+Lfloat forward\+\_\+speed=.\+03, G\+Lfloat backward\+\_\+speed=.\+01, G\+Lfloat strafe\+\_\+speed=.\+02, G\+Lfloat jump\+\_\+speed=3.\+0, G\+Lfloat max\+\_\+slope=.\+872665)}{PhysicsPlayerController(PhysicsWorld *physics_world, const Larp::NodePtr node, glm::vec3 initial_position=glm::vec3(0, 0, 0), GLfloat forward_speed=.03, GLfloat backward_speed=.01, GLfloat strafe_speed=.02, GLfloat jump_speed=3.0, GLfloat max_slope=.872665)}}]{\setlength{\rightskip}{0pt plus 5cm}Physics\+Player\+Controller\+::\+Physics\+Player\+Controller (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+World} $\ast$}]{physics\+\_\+world, }
+\item[{const {\bf Larp\+::\+Node\+Ptr}}]{node, }
+\item[{glm\+::vec3}]{initial\+\_\+position = {\ttfamily glm\+:\+:vec3(0,~0,~0)}, }
+\item[{G\+Lfloat}]{forward\+\_\+speed = {\ttfamily .03}, }
+\item[{G\+Lfloat}]{backward\+\_\+speed = {\ttfamily .01}, }
+\item[{G\+Lfloat}]{strafe\+\_\+speed = {\ttfamily .02}, }
+\item[{G\+Lfloat}]{jump\+\_\+speed = {\ttfamily 3.0}, }
+\item[{G\+Lfloat}]{max\+\_\+slope = {\ttfamily .872665}}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsPlayerController_a5e35a8bbba953a855c0ffa605ed58f07}{}\label{classPhysicsPlayerController_a5e35a8bbba953a855c0ffa605ed58f07}
+
+
+\subsection{Member Function Documentation}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!add\+\_\+movement\+\_\+direction@{add\+\_\+movement\+\_\+direction}}
+\index{add\+\_\+movement\+\_\+direction@{add\+\_\+movement\+\_\+direction}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{add\+\_\+movement\+\_\+direction(\+Player\+Direction direction)}{add_movement_direction(PlayerDirection direction)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Player\+Controller\+::add\+\_\+movement\+\_\+direction (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+Player\+Controller\+::\+Player\+Direction}}]{direction}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsPlayerController_a9980ea5d6d8b96826d8a86ff7a9e8716}{}\label{classPhysicsPlayerController_a9980ea5d6d8b96826d8a86ff7a9e8716}
+Adds a movement direction to this Player\+Control for the next call to \hyperlink{classPhysicsPlayerController_a611f5a0cdc5b9f74376880c47dc997a4}{update\+\_\+movement()}. 
+\begin{DoxyParams}{Parameters}
+{\em direction} & The direction to add to the already specified directions \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+If a direction is added twice before the next call update\+\_\+movement, nothing happens 
+\end{DoxyNote}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!get\+\_\+direction@{get\+\_\+direction}}
+\index{get\+\_\+direction@{get\+\_\+direction}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{get\+\_\+direction() const }{get_direction() const }}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Physics\+Player\+Controller\+::get\+\_\+direction (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsPlayerController_aa7ffb4df3b50b550f33d2d64a76ee57b}{}\label{classPhysicsPlayerController_aa7ffb4df3b50b550f33d2d64a76ee57b}
+\begin{DoxyReturn}{Returns}
+The direction that this Player\+Controller is facing 
+\end{DoxyReturn}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!get\+\_\+orientation@{get\+\_\+orientation}}
+\index{get\+\_\+orientation@{get\+\_\+orientation}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{get\+\_\+orientation() const }{get_orientation() const }}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::quat Physics\+Player\+Controller\+::get\+\_\+orientation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsPlayerController_a276711b873a6520fd01c4834c20bd37b}{}\label{classPhysicsPlayerController_a276711b873a6520fd01c4834c20bd37b}
+\begin{DoxyReturn}{Returns}
+The orientation of this Player\+Controller in the \hyperlink{classPhysicsWorld}{Physics\+World} 
+\end{DoxyReturn}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!get\+\_\+pitch@{get\+\_\+pitch}}
+\index{get\+\_\+pitch@{get\+\_\+pitch}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{get\+\_\+pitch() const }{get_pitch() const }}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Physics\+Player\+Controller\+::get\+\_\+pitch (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsPlayerController_a5c16cff5a570099d9b4f4ed0d0939509}{}\label{classPhysicsPlayerController_a5c16cff5a570099d9b4f4ed0d0939509}
+\begin{DoxyReturn}{Returns}
+The pitch of this Player\+Controller 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+This function may not work 
+\end{DoxyWarning}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!get\+\_\+position@{get\+\_\+position}}
+\index{get\+\_\+position@{get\+\_\+position}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{get\+\_\+position() const }{get_position() const }}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Physics\+Player\+Controller\+::get\+\_\+position (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsPlayerController_a18889e54457b7f91196d9302fd524775}{}\label{classPhysicsPlayerController_a18889e54457b7f91196d9302fd524775}
+\begin{DoxyReturn}{Returns}
+The position of this Player\+Controller in the \hyperlink{classPhysicsWorld}{Physics\+World} 
+\end{DoxyReturn}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!get\+\_\+roll@{get\+\_\+roll}}
+\index{get\+\_\+roll@{get\+\_\+roll}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{get\+\_\+roll() const }{get_roll() const }}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Physics\+Player\+Controller\+::get\+\_\+roll (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsPlayerController_a4f59ca49508ea75f5c608323e4af5019}{}\label{classPhysicsPlayerController_a4f59ca49508ea75f5c608323e4af5019}
+\begin{DoxyReturn}{Returns}
+The roll of this Player\+Controller 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+This function may not work 
+\end{DoxyWarning}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!get\+\_\+user\+\_\+pointer@{get\+\_\+user\+\_\+pointer}}
+\index{get\+\_\+user\+\_\+pointer@{get\+\_\+user\+\_\+pointer}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{get\+\_\+user\+\_\+pointer()}{get_user_pointer()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Larp\+::\+Node\+Ptr} Physics\+Player\+Controller\+::get\+\_\+user\+\_\+pointer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsPlayerController_aa7f40ea9fc5b1ef645972e0f2b0042ed}{}\label{classPhysicsPlayerController_aa7f40ea9fc5b1ef645972e0f2b0042ed}
+\begin{DoxyReturn}{Returns}
+The user pointer attached to this object 
+\end{DoxyReturn}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!get\+\_\+yaw@{get\+\_\+yaw}}
+\index{get\+\_\+yaw@{get\+\_\+yaw}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{get\+\_\+yaw() const }{get_yaw() const }}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Physics\+Player\+Controller\+::get\+\_\+yaw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsPlayerController_a1ffac5f72a1c4db9fb126e9c820615ef}{}\label{classPhysicsPlayerController_a1ffac5f72a1c4db9fb126e9c820615ef}
+\begin{DoxyReturn}{Returns}
+The yaw of this Player\+Controller 
+\end{DoxyReturn}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!jump@{jump}}
+\index{jump@{jump}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{jump()}{jump()}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Player\+Controller\+::jump (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsPlayerController_a392fedfa034d9fbd261fd6d4d348b2ce}{}\label{classPhysicsPlayerController_a392fedfa034d9fbd261fd6d4d348b2ce}
+Tells this Player\+Controller to jump \index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!rotate@{rotate}}
+\index{rotate@{rotate}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{rotate(glm\+::quat rotation\+\_\+amount)}{rotate(glm::quat rotation_amount)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Player\+Controller\+::rotate (
+\begin{DoxyParamCaption}
+\item[{glm\+::quat}]{rotation\+\_\+amount}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsPlayerController_a540179190225822c918851855f3fadbf}{}\label{classPhysicsPlayerController_a540179190225822c918851855f3fadbf}
+Rotates this Player\+Controller 
+\begin{DoxyParams}{Parameters}
+{\em rotation\+\_\+amount} & The quaternion amount to rotate this Player\+Controller \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!set\+\_\+user\+\_\+pointer@{set\+\_\+user\+\_\+pointer}}
+\index{set\+\_\+user\+\_\+pointer@{set\+\_\+user\+\_\+pointer}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{set\+\_\+user\+\_\+pointer(void $\ast$user\+\_\+pointer)}{set_user_pointer(void *user_pointer)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Player\+Controller\+::set\+\_\+user\+\_\+pointer (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{user\+\_\+pointer}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsPlayerController_a976d927f76cb9fd366c303660d24c585}{}\label{classPhysicsPlayerController_a976d927f76cb9fd366c303660d24c585}
+Changes the user pointer of this object. 
+\begin{DoxyParams}{Parameters}
+{\em user\+\_\+pointer} & The pointer that this object should reference and have attached to it. \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!step@{step}}
+\index{step@{step}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{step(\+Physics\+World $\ast$world, G\+Lfloat delta\+\_\+time)}{step(PhysicsWorld *world, GLfloat delta_time)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Player\+Controller\+::step (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+World} $\ast$}]{world, }
+\item[{G\+Lfloat}]{delta\+\_\+time}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsPlayerController_a1e32faab6f2e50c13c9a9e64e3163079}{}\label{classPhysicsPlayerController_a1e32faab6f2e50c13c9a9e64e3163079}
+Steps the player in the \hyperlink{classPhysicsWorld}{Physics\+World} it is associated with 
+\begin{DoxyParams}{Parameters}
+{\em world} & The \hyperlink{classPhysicsWorld}{Physics\+World} object that is tracking this Player\+Controller \\
+\hline
+{\em delta\+\_\+time} & The time between this update and the last update \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!update\+\_\+movement@{update\+\_\+movement}}
+\index{update\+\_\+movement@{update\+\_\+movement}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{update\+\_\+movement(\+Physics\+World $\ast$world)}{update_movement(PhysicsWorld *world)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Player\+Controller\+::update\+\_\+movement (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+World} $\ast$}]{world}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsPlayerController_a611f5a0cdc5b9f74376880c47dc997a4}{}\label{classPhysicsPlayerController_a611f5a0cdc5b9f74376880c47dc997a4}
+Updates this Player\+Controller\textquotesingle{}s movement based on the directions specified by \hyperlink{classPhysicsPlayerController_a9980ea5d6d8b96826d8a86ff7a9e8716}{add\+\_\+movement\+\_\+direction()}. 
+\begin{DoxyParams}{Parameters}
+{\em world} & The \hyperlink{classPhysicsWorld}{Physics\+World} object that this object is tracked by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+After this function is called, the Player\+Controller\textquotesingle{}s direction is set to S\+T\+OP 
+\end{DoxyNote}
+
+
+\subsection{Member Data Documentation}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!\+\_\+backward\+\_\+speed@{\+\_\+backward\+\_\+speed}}
+\index{\+\_\+backward\+\_\+speed@{\+\_\+backward\+\_\+speed}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{\+\_\+backward\+\_\+speed}{_backward_speed}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Physics\+Player\+Controller\+::\+\_\+backward\+\_\+speed\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsPlayerController_acba91da49b4a1fcd492624763376ae67}{}\label{classPhysicsPlayerController_acba91da49b4a1fcd492624763376ae67}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!\+\_\+char\+\_\+controller@{\+\_\+char\+\_\+controller}}
+\index{\+\_\+char\+\_\+controller@{\+\_\+char\+\_\+controller}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{\+\_\+char\+\_\+controller}{_char_controller}}]{\setlength{\rightskip}{0pt plus 5cm}bt\+Kinematic\+Character\+Controller$\ast$ Physics\+Player\+Controller\+::\+\_\+char\+\_\+controller\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsPlayerController_acb97f8a1c4155bd6b269fc7276484dc5}{}\label{classPhysicsPlayerController_acb97f8a1c4155bd6b269fc7276484dc5}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!\+\_\+directions@{\+\_\+directions}}
+\index{\+\_\+directions@{\+\_\+directions}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{\+\_\+directions}{_directions}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Physics\+Player\+Controller\+::\+\_\+directions\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsPlayerController_a21fb45f73d246a1fa5c6aa36525d3a85}{}\label{classPhysicsPlayerController_a21fb45f73d246a1fa5c6aa36525d3a85}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!\+\_\+forward\+\_\+speed@{\+\_\+forward\+\_\+speed}}
+\index{\+\_\+forward\+\_\+speed@{\+\_\+forward\+\_\+speed}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{\+\_\+forward\+\_\+speed}{_forward_speed}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Physics\+Player\+Controller\+::\+\_\+forward\+\_\+speed\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsPlayerController_a765afe9efa2c07cce8c0531b2bc220c9}{}\label{classPhysicsPlayerController_a765afe9efa2c07cce8c0531b2bc220c9}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!\+\_\+ghost\+\_\+object@{\+\_\+ghost\+\_\+object}}
+\index{\+\_\+ghost\+\_\+object@{\+\_\+ghost\+\_\+object}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{\+\_\+ghost\+\_\+object}{_ghost_object}}]{\setlength{\rightskip}{0pt plus 5cm}bt\+Pair\+Caching\+Ghost\+Object$\ast$ Physics\+Player\+Controller\+::\+\_\+ghost\+\_\+object\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsPlayerController_ac8839101912598ae6c620c76864665e1}{}\label{classPhysicsPlayerController_ac8839101912598ae6c620c76864665e1}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!\+\_\+jump\+\_\+speed@{\+\_\+jump\+\_\+speed}}
+\index{\+\_\+jump\+\_\+speed@{\+\_\+jump\+\_\+speed}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{\+\_\+jump\+\_\+speed}{_jump_speed}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Physics\+Player\+Controller\+::\+\_\+jump\+\_\+speed\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsPlayerController_a768842aa2f729fafe55ec1308708f006}{}\label{classPhysicsPlayerController_a768842aa2f729fafe55ec1308708f006}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!\+\_\+max\+\_\+slope@{\+\_\+max\+\_\+slope}}
+\index{\+\_\+max\+\_\+slope@{\+\_\+max\+\_\+slope}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{\+\_\+max\+\_\+slope}{_max_slope}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Physics\+Player\+Controller\+::\+\_\+max\+\_\+slope\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsPlayerController_a29cffd08733c1fb185ed3fdbfaa9e045}{}\label{classPhysicsPlayerController_a29cffd08733c1fb185ed3fdbfaa9e045}
+\index{Physics\+Player\+Controller@{Physics\+Player\+Controller}!\+\_\+strafe\+\_\+speed@{\+\_\+strafe\+\_\+speed}}
+\index{\+\_\+strafe\+\_\+speed@{\+\_\+strafe\+\_\+speed}!Physics\+Player\+Controller@{Physics\+Player\+Controller}}
+\subsubsection[{\texorpdfstring{\+\_\+strafe\+\_\+speed}{_strafe_speed}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Physics\+Player\+Controller\+::\+\_\+strafe\+\_\+speed\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsPlayerController_a0650942e3b59e8598ab70d649d9823a9}{}\label{classPhysicsPlayerController_a0650942e3b59e8598ab70d649d9823a9}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{PhysicsPlayerController_8hpp}{Physics\+Player\+Controller.\+hpp}\item 
+src/\hyperlink{PhysicsPlayerController_8cpp}{Physics\+Player\+Controller.\+cpp}\end{DoxyCompactItemize}

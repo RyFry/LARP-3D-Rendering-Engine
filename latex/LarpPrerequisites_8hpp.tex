@@ -1,32 +1,65 @@
-\hypertarget{LarpPrerequisites_8hpp}{\section{src/\-Larp\-Prerequisites.hpp File Reference}
-\label{LarpPrerequisites_8hpp}\index{src/\-Larp\-Prerequisites.\-hpp@{src/\-Larp\-Prerequisites.\-hpp}}
-}
+\hypertarget{LarpPrerequisites_8hpp}{}\section{src/\+Larp/\+Larp\+Prerequisites.hpp File Reference}
+\label{LarpPrerequisites_8hpp}\index{src/\+Larp/\+Larp\+Prerequisites.\+hpp@{src/\+Larp/\+Larp\+Prerequisites.\+hpp}}
 {\ttfamily \#include $<$memory$>$}\\*
 {\ttfamily \#include $<$iostream$>$}\\*
 {\ttfamily \#include $<$string$>$}\\*
 {\ttfamily \#include $<$sstream$>$}\\*
-{\ttfamily \#include $<$G\-L/glew.\-h$>$}\\*
-{\ttfamily \#include \char`\"{}Error.\-hpp\char`\"{}}\\*
+{\ttfamily \#include $<$assimp/\+Importer.\+hpp$>$}\\*
+{\ttfamily \#include $<$assimp/scene.\+h$>$}\\*
+{\ttfamily \#include $<$assimp/postprocess.\+h$>$}\\*
+{\ttfamily \#include $<$G\+L/glew.\+h$>$}\\*
+{\ttfamily \#include $<$glm/glm.\+hpp$>$}\\*
+{\ttfamily \#include $<$glm/gtc/matrix\+\_\+transform.\+hpp$>$}\\*
+{\ttfamily \#include $<$glm/gtc/type\+\_\+ptr.\+hpp$>$}\\*
+{\ttfamily \#include $<$S\+O\+I\+L.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}Error.\+hpp\char`\"{}}\\*
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{namespaceLarp}{Larp}
+ \hyperlink{namespaceLarp}{Larp}
 \end{DoxyCompactItemize}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-typedef std\-::shared\-\_\-ptr$<$ Entity $>$ \hyperlink{namespaceLarp_ae3ffca1f126e4263cbdc59b116ee465a}{Larp\-::\-Shared\-Entity}
+typedef std\+::unique\+\_\+ptr$<$ Directional\+Light $>$ \hyperlink{namespaceLarp_af87ce889468b60d51aa1479335ba19bf}{Larp\+::\+Unique\+Directional}
 \item 
-typedef std\-::unique\-\_\-ptr$<$ Entity $>$ \hyperlink{namespaceLarp_ad6d203c6dc3d8ea7a5517a64e1665403}{Larp\-::\-Unique\-Entity}
+typedef std\+::unique\+\_\+ptr$<$ Entity $>$ \hyperlink{namespaceLarp_ad6d203c6dc3d8ea7a5517a64e1665403}{Larp\+::\+Unique\+Entity}
 \item 
-typedef Entity $\ast$const \hyperlink{namespaceLarp_a775efcc4cabb308d50168c52df343353}{Larp\-::\-Entity\-Ptr}
+typedef std\+::unique\+\_\+ptr$<$ Model $>$ \hyperlink{namespaceLarp_a6e9a93e4118b723d56766c7ae7e1e94a}{Larp\+::\+Unique\+Model}
 \item 
-typedef std\-::unique\-\_\-ptr$<$ Node $>$ \hyperlink{namespaceLarp_ad95a88bc34f8c78cefd64c9bbeb94a58}{Larp\-::\-Unique\-Node}
+typedef std\+::unique\+\_\+ptr$<$ Node $>$ \hyperlink{namespaceLarp_ad95a88bc34f8c78cefd64c9bbeb94a58}{Larp\+::\+Unique\+Node}
 \item 
-typedef Node $\ast$const \hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Larp\-::\-Node\-Ptr}
+typedef std\+::unique\+\_\+ptr$<$ Point\+Light $>$ \hyperlink{namespaceLarp_acd7cacff15535544525abc2e90e07b91}{Larp\+::\+Unique\+Point}
 \item 
-typedef std\-::unique\-\_\-ptr\\*
-$<$ Scene\-Graph $>$ \hyperlink{namespaceLarp_a81a0d129ec1fc8f1f9fa231fbba6b19b}{Larp\-::\-Unique\-Scene\-Graph}
+typedef std\+::unique\+\_\+ptr$<$ Scene\+Graph $>$ \hyperlink{namespaceLarp_a81a0d129ec1fc8f1f9fa231fbba6b19b}{Larp\+::\+Unique\+Scene\+Graph}
 \item 
-typedef Scene\-Graph $\ast$const \hyperlink{namespaceLarp_acf02d81e4b52238dcd17cb6249eadadc}{Larp\-::\-Scene\-Graph\-Ptr}
+typedef std\+::unique\+\_\+ptr$<$ Sky\+Box $>$ \hyperlink{namespaceLarp_a9acaa85c01aee19dafa995b4eba59bd0}{Larp\+::\+Unique\+Sky\+Box}
+\item 
+typedef std\+::unique\+\_\+ptr$<$ Spot\+Light $>$ \hyperlink{namespaceLarp_a288b58c470c3ed41d3b23e764ba5b6eb}{Larp\+::\+Unique\+Spot}
+\item 
+typedef Entity $\ast$const \hyperlink{namespaceLarp_a775efcc4cabb308d50168c52df343353}{Larp\+::\+Entity\+Ptr}
+\item 
+typedef Directional\+Light $\ast$const \hyperlink{namespaceLarp_a38725e08be7b2ebb94f5f71eb0f0c692}{Larp\+::\+Directional\+Light\+Ptr}
+\item 
+typedef Model $\ast$const \hyperlink{namespaceLarp_a1fbc1dec59f7a571dc06e152b1e7d38c}{Larp\+::\+Model\+Ptr}
+\item 
+typedef Node $\ast$const \hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Larp\+::\+Node\+Ptr}
+\item 
+typedef Point\+Light $\ast$const \hyperlink{namespaceLarp_a07215808e8e3c5229ca8549c5450e3e5}{Larp\+::\+Point\+Light\+Ptr}
+\item 
+typedef Scene\+Graph $\ast$const \hyperlink{namespaceLarp_acf02d81e4b52238dcd17cb6249eadadc}{Larp\+::\+Scene\+Graph\+Ptr}
+\item 
+typedef Sky\+Box $\ast$const \hyperlink{namespaceLarp_a09c73976019d9e892b1b3c995d9a9430}{Larp\+::\+Sky\+Box\+Ptr}
+\item 
+typedef Spot\+Light $\ast$const \hyperlink{namespaceLarp_a5366be98946441fcea9b8a155bc52d95}{Larp\+::\+Spot\+Light\+Ptr}
+\item 
+typedef glm\+::vec2 \hyperlink{namespaceLarp_ad25d627b744435e2a62f84fce6db89a6}{Larp\+::\+Vec2}
+\item 
+typedef glm\+::vec3 \hyperlink{namespaceLarp_a477b379311661e072acd751be3d473aa}{Larp\+::\+Vec3}
+\item 
+typedef glm\+::vec4 \hyperlink{namespaceLarp_a516c3e9937a8bc59ccc93698bad0dc2c}{Larp\+::\+Vec4}
+\item 
+typedef glm\+::mat4 \hyperlink{namespaceLarp_af9602e8b75abbefde183900a720429f6}{Larp\+::\+Mat4}
+\item 
+typedef glm\+::quat \hyperlink{namespaceLarp_a24b78f83da1be54c0645d80ca4f47b39}{Larp\+::\+Quat}
 \end{DoxyCompactItemize}
