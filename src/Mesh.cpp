@@ -12,6 +12,8 @@ namespace Larp
             return "diffuse";
         if (this->_type == Texture::SPECULAR)
             return "specular";
+        if (this->_type == Texture::REFLECTION)
+            return "reflection";
         return "";
     }
 
@@ -31,6 +33,7 @@ namespace Larp
     {
         GLuint diffuseN = 1;
         GLuint specularN = 1;
+        GLuint reflectionNr = 1;
         for (GLuint i = 0; i < this->_textures.size(); ++i)
         {
             glActiveTexture(GL_TEXTURE0 + i); // Activate the proper texture unit before binding
@@ -41,6 +44,8 @@ namespace Larp
             if (name == "diffuse")
                 ss << diffuseN++;
             else if (name == "specular")
+                ss << specularN++;
+            else if (name == "reflection")
                 ss << specularN++;
             else
             {

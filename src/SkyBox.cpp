@@ -27,7 +27,7 @@ namespace Larp
 
     void SkyBox::setup_skybox(std::vector<const GLchar*> faces)
     {
-        add_vertices();
+        this->add_vertices();
 
         // Get the shader
         this->_shader = new Shader("shaders/skybox.vert", "shaders/skybox.frag");

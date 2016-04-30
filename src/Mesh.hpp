@@ -42,7 +42,8 @@ namespace Larp
         enum Type
         {
             DIFFUSE,
-            SPECULAR
+            SPECULAR,
+            REFLECTION
         };
 
         /**
