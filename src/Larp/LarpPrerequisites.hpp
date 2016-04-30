@@ -5,14 +5,16 @@
 #include <string>
 #include <sstream>
 
-#include <SOIL.h>
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include <GL/glew.h>    // All da OpenGL schtuff
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <SOIL.h>
 
 #include "Error.hpp"    // Custom error handling macro
-#include "GLMTypedefs.hpp"
 
 namespace Larp
 {
