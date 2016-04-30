@@ -93,7 +93,7 @@ int main(void)
     glewInit();
 
    soundMan = new SoundManager();
-   GUIMan = new GUIManager();
+   GUIMan = new GUIManager(graph);
    GUIrendering = true;
 
 
@@ -204,7 +204,7 @@ int main(void)
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
-        GUIrendering = GUIMan->_get_rendering_state();
+        GUIrendering = GUIMan->get_rendering_state();
         // Set frame time
         GLfloat current_frame = glfwGetTime();
         delta_time = current_frame - last_frame;
@@ -335,7 +335,8 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 {
     if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
-
+    else if(key == GLFW_KEY_M && action == GLFW_PRESS)
+        GUIMan->show_main();
     // We don't want people to actually clear the graph
     // if (key == GLFW_KEY_C)
     //     graph->clear();
@@ -371,8 +372,6 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     /* If the GUI is rendering stop mouse movement for the player camera */
     if(!GUIrendering)
     {
-
-
         btQuaternion rotation;
         rotation.setEuler(-xoffset * 0.005, 0, 0);
         player->rotate(rotation);

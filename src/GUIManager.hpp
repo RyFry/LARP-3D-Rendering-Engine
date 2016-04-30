@@ -1,11 +1,21 @@
 #pragma once
 
 
-#include "LarpPrerequisites.hpp"
 #include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
 #include <CEGUI/CEGUI.h>
 #include <iostream>
 #include <vector>
+
+#include "LarpPrerequisites.hpp"
+
+#include "Camera.hpp"
+#include "ConfigurationLoader.hpp"
+#include "Model.hpp"
+#include "PhysicsMeshColliderBuilder.hpp"
+#include "PhysicsPlayerController.hpp"
+#include "PhysicsWorld.hpp"
+#include "SceneGraph.hpp"
+#include "Shader.hpp"
 
 
 class GUIManager
@@ -20,7 +30,7 @@ class GUIManager
 	  /**
       * Constructor
       */
-		GUIManager();
+		GUIManager(Larp::SceneGraphPtr g);
 
 		/**
      * Destructor
@@ -31,9 +41,13 @@ class GUIManager
 
 		bool _GUI_rendering;
 
-		bool _get_rendering_state();
+		bool get_rendering_state();
+
+	  void show_main();
 
 	private:
+
+		Larp::SceneGraphPtr _graph;
 
 		/**
 		* CEGUI renderer that is required when using OpenGL3
@@ -50,19 +64,26 @@ class GUIManager
 		/**
 		* Setups all the resource groups that CEGUI requires.
 		*/
-		void _setup_resources();
+		void setup_resources();
 
 		/**
 		* Setups up the main menu for use
 		*/
-		void _setup_main_menu();
+		void setup_main_menu();
 
-		void _add_light(const CEGUI::EventArgs&);
+		void add_light(const CEGUI::EventArgs&);
 
 		/**
 		* Will handle adding lights to the scene 
 		*/
-		void _add_point_light(const CEGUI::EventArgs&);
+		void add_point_light(const CEGUI::EventArgs&);
 
-		void _hide_GUI();
+		void add_spot_light(const CEGUI::EventArgs&);
+
+		void add_directional_light(const CEGUI::EventArgs&);
+
+		void hide_GUI();
+
+		void show_GUI();
+
 };
