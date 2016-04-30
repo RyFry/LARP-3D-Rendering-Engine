@@ -23,10 +23,10 @@ DEBUG_PROD    = $(BINDIR)/$(DEBUG_DIR)/main
 
 PROFILER      = valgrind
 
-HDRS          = $(wildcard $(SRCDIR)/*.hpp)
-SRCS          = $(wildcard $(SRCDIR)/*.cpp)
-OBJS          = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/$(RELEASE_DIR)/%.o, $(SRCS))
-DEBUG_OBJS    = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/$(DEBUG_DIR)/%.o, $(SRCS))
+HDRS         := $(shell find $(SRCDIR) -name '*.hpp')
+SRCS         := $(shell find $(SRCDIR) -name '*.cpp')
+OBJS         := $(subst $(SRCDIR), $(OBJDIR)/$(RELEASE_DIR), $(SRCS:%.cpp=%.o))
+DEBUG_OBJS   := $(subst $(SRCDIR), $(OBJDIR)/$(DEBUG_DIR), $(SRCS:%.cpp=%.o))
 
 all: $(PROD)
 	@echo 'Compilation finished (release).'
@@ -35,7 +35,7 @@ debug_all: $(DEBUG_PROD)
 	@echo 'Compilation finished (debug).'
 
 $(OBJS): $(OBJDIR)/$(RELEASE_DIR)/%.o: $(SRCDIR)/%.cpp
-	@mkdir -p $(OBJDIR)/$(RELEASE_DIR)
+	@mkdir -p $(@D)
 	@echo -e [CXX] '\t' $@
 	@$(CXX) $(OPTFLAG) $(INCLUDES) $(CXXFLAGS) -c $< -o $@
 

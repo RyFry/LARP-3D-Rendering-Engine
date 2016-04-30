@@ -8,7 +8,7 @@
 #include <map>
 #include <iostream>
 
-#include "Error.hpp"
+#include "Larp/Error.hpp"
 
 class PhysicsWorld
 {

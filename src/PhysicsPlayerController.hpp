@@ -5,8 +5,8 @@
 #include <BulletCollision/CollisionDispatch/btGhostObject.h>
 #include <iostream>
 
-#include "LarpPrerequisites.hpp"
-#include "Node.hpp"
+#include "Larp/LarpPrerequisites.hpp"
+#include "Larp/Node.hpp"
 #include "PhysicsWorld.hpp"
 
 class PhysicsPlayerController

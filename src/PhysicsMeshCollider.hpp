@@ -3,8 +3,8 @@
 #include <btBulletDynamicsCommon.h>
 #include <BulletCollision/CollisionDispatch/btGhostObject.h>
 
-#include "Model.hpp"
-#include "Node.hpp"
+#include "Larp/Model.hpp"
+#include "Larp/Node.hpp"
 
 class PhysicsMeshCollider
 {

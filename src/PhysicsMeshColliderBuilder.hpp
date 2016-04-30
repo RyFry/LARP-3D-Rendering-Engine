@@ -2,9 +2,10 @@
 
 #include <string>
 
-#include "LarpPrerequisites.hpp"
+#include "Larp/LarpPrerequisites.hpp"
+#include "Larp/Model.hpp"
+
 #include "PhysicsMeshCollider.hpp"
-#include "Model.hpp"
 
 class PhysicsMeshColliderBuilder
 {

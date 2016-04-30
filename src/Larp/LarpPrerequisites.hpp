@@ -27,8 +27,6 @@ namespace Larp
     class Shader;
     class SkyBox;
     class SpotLight;
-    class Texture;
-    class Vertex;
 
     typedef std::unique_ptr<DirectionalLight> UniqueDirectional;
     typedef std::unique_ptr<Entity>           UniqueEntity;

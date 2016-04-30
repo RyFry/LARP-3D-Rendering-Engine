@@ -5,17 +5,19 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "LarpPrerequisites.hpp"
+#include "Larp/LarpPrerequisites.hpp"
+#include "Larp/ConfigurationLoader.hpp"
+#include "Larp/Model.hpp"
+#include "Larp/SceneGraph.hpp"
+#include "Larp/Shader.hpp"
+#include "Larp/SkyBox.hpp"
 
 #include "Camera.hpp"
-#include "ConfigurationLoader.hpp"
-#include "Model.hpp"
+
 #include "PhysicsMeshColliderBuilder.hpp"
 #include "PhysicsPlayerController.hpp"
 #include "PhysicsWorld.hpp"
-#include "SceneGraph.hpp"
-#include "Shader.hpp"
-#include "SkyBox.hpp"
+
 
 // GLM Mathemtics
 #include <glm/glm.hpp>
