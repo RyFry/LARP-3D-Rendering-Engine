@@ -1,5 +1,6 @@
 #include <string>
 #include <stdexcept>
+#include <time.h>
 
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -46,6 +47,8 @@ Camera camera(glm::vec3(0.0f, 5.0f, 3.0f));
 bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
 bool firstMouse = true;
+bool GUIrendering;
+
 
 GLfloat delta_time = 0.0f;
 GLfloat last_frame = 0.0f;
@@ -58,6 +61,7 @@ int main(void)
     Larp::ConfigurationLoader config("larp.cfg");
     screenWidth = config.get_width();
     screenHeight = config.get_height();
+
     // Init GLFW
     if (!glfwInit())
         throw std::runtime_error(std::string(__FILE__) + std::string(" : line ") + std::to_string(__LINE__) + std::string(" :: glfwInit() failed!"));
@@ -66,6 +70,7 @@ int main(void)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, config.is_resizable());
     glfwWindowHint(GLFW_SAMPLES, 4);
+
 
     glfwSetErrorCallback(error_callback);
 
@@ -86,6 +91,11 @@ int main(void)
     // Initialize GLEW to setup the OpenGL Function pointers
     glewExperimental = GL_TRUE;
     glewInit();
+
+   soundMan = new SoundManager();
+   GUIMan = new GUIManager();
+   GUIrendering = true;
+
 
     // Define the viewport dimensions
     glViewport(0, 0, screenWidth, screenHeight);
@@ -185,8 +195,6 @@ int main(void)
     //std::cout << body->getWorldTransform().getOrigin() << std::endl;
 
 
-   soundMan = new SoundManager();
-   GUIMan = new GUIManager();
 
 
 
@@ -196,6 +204,7 @@ int main(void)
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
+        GUIrendering = GUIMan->_get_rendering_state();
         // Set frame time
         GLfloat current_frame = glfwGetTime();
         delta_time = current_frame - last_frame;
@@ -270,7 +279,13 @@ int main(void)
         glm::vec3 view_pos = camera._position;
         graph->draw(view, projection, view_pos);
 
-        CEGUI::System::getSingleton().renderAllGUIContexts();
+        if(GUIrendering)
+        {
+            glDisable(GL_DEPTH_TEST);
+            CEGUI::System::getSingleton().renderAllGUIContexts();
+        }
+        else
+            glEnable(GL_DEPTH_TEST);
 
         // Swap the buffers
         glfwSwapBuffers(window);
@@ -340,20 +355,29 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
         firstMouse = false;
     }
 
-    GLfloat xoffset = xpos - lastX;
-    GLfloat yoffset = lastY - ypos;
-
-    /* May need to change the movement feels weird */
     CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
     context.injectMouseMove(xpos - lastX,  ypos - lastY); 
 
-    lastX = xpos;
-    lastY = ypos;
 
-    btQuaternion rotation;
-    rotation.setEuler(-xoffset * 0.005, 0, 0);
-    player->rotate(rotation);
-    camera.process_mouse_movement(0, yoffset);
+        GLfloat xoffset = xpos - lastX;
+        GLfloat yoffset = lastY - ypos;
+
+        /* May need to change the movement feels weird */
+
+        lastX = xpos;
+        lastY = ypos;
+
+
+    /* If the GUI is rendering stop mouse movement for the player camera */
+    if(!GUIrendering)
+    {
+
+
+        btQuaternion rotation;
+        rotation.setEuler(-xoffset * 0.005, 0, 0);
+        player->rotate(rotation);
+        camera.process_mouse_movement(0, yoffset);
+    }
 }
 
 void scroll_callback(GLFWwindow* window, double x_offset, double y_offset)
@@ -398,4 +422,3 @@ void make_floor(PhysicsWorld* world)
 
     world->get_dynamics_world()->addRigidBody(body);
 }
-

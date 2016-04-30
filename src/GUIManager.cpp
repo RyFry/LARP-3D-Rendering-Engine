@@ -51,25 +51,68 @@ void GUIManager::_setup_resources()
 
 void GUIManager::_setup_main_menu()
 {
-	CEGUI::Window* mainSheet = _wmgr->createWindow("DefaultWindow", "CEGUIDemo/mainSheet");
+	CEGUI::Window* mainSheet = this->_wmgr->createWindow("DefaultWindow", "CEGUIDemo/mainSheet");
+
+	CEGUI::Window* addLight = this->_wmgr->createWindow("TaharezLook/Button", "Game/addLight");
+	CEGUI::Window* lightMenu = this->_wmgr->createWindow("TaharezLook/Menubar", "lightMenu");
+
+	CEGUI::Window* pointLight = this->_wmgr->createWindow("TaharezLook/MenuItem", "point");
+	CEGUI::Window* spotLight = this->_wmgr->createWindow("TaharezLook/MenuItem", "spot");
 
 
-	CEGUI::Window* start = _wmgr->createWindow("TaharezLook/Button", "Game/mainTitle");
 
 
-	start->setText("Start");
-	start->setSize(CEGUI::USize(CEGUI::UDim(0.15,0), CEGUI::UDim(0.05,0)));
-  start->setPosition(CEGUI::UVector2(CEGUI::UDim(0.4f,0),CEGUI::UDim(0.4f,0)));
+	pointLight->setText("Point Light");
+	spotLight->setText("Spotlight");
 
-  start->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::_start, this));
+  lightMenu->setPosition(CEGUI::UVector2(CEGUI::UDim(0.4f,0),CEGUI::UDim(0.4f,0)));
+  lightMenu->setSize(CEGUI::USize(CEGUI::UDim(0.15,0), CEGUI::UDim(0.05,0)));
 
-  mainSheet->addChild(start);
+  addLight->setText("Add Light...");
+  addLight->setPosition(CEGUI::UVector2(CEGUI::UDim(0.05f,0),CEGUI::UDim(0.2f,0)));
+  addLight->setSize(CEGUI::USize(CEGUI::UDim(0.10,0), CEGUI::UDim(0.05,0)));
+
+  pointLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::_add_point_light, this));
+  addLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::_add_light, this));
+
+  lightMenu->addChild(pointLight);
+  lightMenu->addChild(spotLight);
+
+
+  mainSheet->addChild(addLight);
+  // popupMenu->addChild(start);
+
+  this->_sheets.push_back(mainSheet);
+  this->_sheets.push_back(lightMenu);
 
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(mainSheet);
-   CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().show();
+  CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().show();
 }
 
-void GUIManager::_start(const CEGUI::EventArgs&)
+bool GUIManager::_get_rendering_state()
 {
-	std::cout << "I'm working!" << std::endl;
+	return this->_GUI_rendering;
 }
+
+void GUIManager::_add_light(const CEGUI::EventArgs&)
+{
+		this->_sheets.at(MAIN)->addChild(this->_sheets.at(ADDLIGHT));
+}
+
+void GUIManager::_add_point_light(const CEGUI::EventArgs&)
+{
+
+	// CEGUI::Window* = static_cast<CEGUI::WindowEventArgs *> CEGUI::EventArgs;
+	this->_sheets.at(MAIN)->removeChild("lightMenu");
+
+	this->_hide_GUI();
+
+}
+
+void GUIManager::_hide_GUI()
+{
+	this->_sheets.at(MAIN)->hide();
+	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().hide();
+	this->_GUI_rendering = false;
+}
+

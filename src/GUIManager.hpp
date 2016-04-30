@@ -5,6 +5,8 @@
 #include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
 #include <CEGUI/CEGUI.h>
 #include <iostream>
+#include <vector>
+
 
 class GUIManager
 {
@@ -12,7 +14,7 @@ class GUIManager
 		enum MenuNames
 		{
 			MAIN,
-			OPTIONS
+			ADDLIGHT
 		};
 
 	  /**
@@ -27,6 +29,10 @@ class GUIManager
 
 		// void set_GUI(string GUI_name);
 
+		bool _GUI_rendering;
+
+		bool _get_rendering_state();
+
 	private:
 
 		/**
@@ -39,6 +45,8 @@ class GUIManager
 		*/
 		CEGUI::WindowManager*   _wmgr;
 
+    std::vector<CEGUI::Window*> _sheets;
+
 		/**
 		* Setups all the resource groups that CEGUI requires.
 		*/
@@ -49,5 +57,12 @@ class GUIManager
 		*/
 		void _setup_main_menu();
 
-		void _start(const CEGUI::EventArgs&);
+		void _add_light(const CEGUI::EventArgs&);
+
+		/**
+		* Will handle adding lights to the scene 
+		*/
+		void _add_point_light(const CEGUI::EventArgs&);
+
+		void _hide_GUI();
 };
