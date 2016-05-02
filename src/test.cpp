@@ -18,7 +18,6 @@
 #include "PhysicsPlayerController.hpp"
 #include "PhysicsWorld.hpp"
 
-
 // GLM Mathemtics
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

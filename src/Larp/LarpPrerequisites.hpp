@@ -47,4 +47,11 @@ namespace Larp
     typedef SceneGraph*            const SceneGraphPtr;
     typedef SkyBox*                const SkyBoxPtr;
     typedef SpotLight*             const SpotLightPtr;
+
+    // For internal use only
+    typedef GLuint VAO;
+    typedef GLuint VBO;
+    typedef GLuint EBO;
+    typedef GLuint ShaderProgram;
+    typedef GLuint TextureID;
 }

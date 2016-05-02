@@ -13,9 +13,9 @@ namespace Larp
         const GLchar * f_shader_code = fragment_code.c_str();
         const GLchar * g_shader_code = geometry_code.c_str();
         // 2. Compile shaders
-        GLuint vertex = Shader::compile_shader(v_shader_code, GL_VERTEX_SHADER);
-        GLuint fragment = Shader::compile_shader(f_shader_code, GL_FRAGMENT_SHADER);
-        GLuint geometry = 0;
+        ShaderProgram vertex = Shader::compile_shader(v_shader_code, GL_VERTEX_SHADER);
+        ShaderProgram fragment = Shader::compile_shader(f_shader_code, GL_FRAGMENT_SHADER);
+        ShaderProgram geometry = 0;
         if (geometry_path != nullptr)
             geometry = Shader::compile_shader(g_shader_code, GL_GEOMETRY_SHADER);
         // Shader Program
@@ -74,9 +74,9 @@ namespace Larp
         return shader_code;
     }
 
-    GLuint Shader::compile_shader(const GLchar * shader_code, GLenum shader_type)
+    ShaderProgram Shader::compile_shader(const GLchar * shader_code, GLenum shader_type)
     {
-        GLuint shader;
+        ShaderProgram shader;
         GLint success;
         GLsizei length;
         GLchar infoLog[512];

@@ -11,9 +11,9 @@ namespace Larp
     class SkyBox
     {
     private:
-        GLuint _texture_id;
-        GLuint _VAO;
-        GLuint _VBO;
+        TextureID _texture_id;
+        VAO _VAO;
+        VBO _VBO;
         std::vector<glm::vec3> _vertices;
         Shader* _shader;
 
