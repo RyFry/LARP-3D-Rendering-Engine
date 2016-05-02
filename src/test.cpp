@@ -191,7 +191,9 @@ int main(void)
     while (!glfwWindowShouldClose(window))
     {
         // Set frame time
-        Time.update_time();
+        Time::update_time();
+        // Update animation system
+        AnimationHandler::update_animations();
 
         frame_rate_limiter += Time::delta_time();
         if (frame_rate_limiter > 1.0 / 60.0)
