@@ -1,3 +1,5 @@
+#pragma once
+
 #include "LarpPrerequisites.hpp"
 
 namespace Larp
@@ -10,6 +12,8 @@ namespace Larp
 		static GLfloat last_frame_time(void);
 		static void update_time(void);
 		static GLfloat lerp_scalar(GLfloat start, GLfloat duration);
-	private:
+	private:	
+		static GLfloat d_time;
+		static GLfloat lf_time;
 	};
 }

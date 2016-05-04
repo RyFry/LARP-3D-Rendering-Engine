@@ -78,7 +78,7 @@ namespace Larp
         return this->_model->get_depth();
     }
 
-    void Enity::switch_model(ModelPtr m)
+    void Entity::switch_model(ModelPtr m)
     {
         _model = m;
     }

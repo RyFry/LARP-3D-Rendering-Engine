@@ -1,8 +1,11 @@
+#pragma once
+
 #include "Entity.hpp"
 #include "Model.hpp"
+#include "Time.hpp"
 
 namespace Larp
-{
+{	
 	/*sample animation file (don't put comments or asterisks in the actual file!):
 	************
 	model.obj   //Define all model paths; the first model is the one that will be used when no animation is playing  
@@ -33,6 +36,19 @@ namespace Larp
 
 	************/
 
+	//The animation struct used to store information read from animation files
+	struct Animation {
+		//Construct with a name
+		Animation(std::string name = "New Animation")
+		{
+			_name = name;
+		}
+
+		std::string _name;					   //The name of the animation
+		std::vector<Model*> _frame_sequence; //A vector containing all keyframes of the animation in order
+		GLfloat _frame_duration;			   //The amount of time that should pass between each keyframe
+	};
+
 	/*This class handles animations on an entity. Animations are read from special files whose format
 	is described above. A LARP animation is composed of animation "frames" which are individual .obj
 	files that can be cycled in rapid succession to give the appearance of natural motion. The animation
@@ -55,9 +71,9 @@ namespace Larp
 		static void update_animations();	/*Static void used to update every animation in _active_handlers;
 											called in every cycle in the main while loop*/
 	private:
-		EntityPtr _entity;				    //The entity being handled
+		Entity* _entity;				    //The entity being handled
 
-		std::vector<ModelPtr> _frames;      //All possible frames of animation
+		std::vector<Model*> _frames;      //All possible frames of animation
 
 		std::vector<Animation> _animations; //All possible animations
 
@@ -71,7 +87,7 @@ namespace Larp
 											the animation after the current cycle, -1 means
 											loop infinitely until stop() is called externally*/
 
-		int _current_frame_index;			/*The index of the current animation frame in the current
+		unsigned int _current_frame_index;			/*The index of the current animation frame in the current
 											animation's _frame_sequence array*/
 
 		bool _animation_playing;			//Is an animation playing?
@@ -82,18 +98,5 @@ namespace Larp
 											frame in _frames?*/
 
 		static std::vector<AnimationHandler*> _active_handlers; //Static vector containing all active animation handlers
-	};
-
-	//The animation struct used to store information read from animation files
-	struct Animation {
-		//Construct with a name
-		Animation(std::string name = "New Animation")
-		{
-			string_name = name;
-		}
-
-		std::string _name;					   //The name of the animation
-		std::vector<ModelPtr> _frame_sequence; //A vector containing all keyframes of the animation in order
-		GLfloat _frame_duration;			   //The amount of time that should pass between each keyframe
 	};
 }

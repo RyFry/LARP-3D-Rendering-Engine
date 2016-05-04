@@ -1,11 +1,13 @@
-#include AnimationHandler.hpp
+#include "AnimationHandler.hpp"
 #include <cassert>
 
-#define NEXT_LINE assert(!animation_file.eof); \
+#define NEXT_LINE assert(!animation_file.eof()); \
 			      std::getline(animation_file, line);
 
 namespace Larp
 {
+	std::vector<AnimationHandler*> AnimationHandler::_active_handlers;
+
 	AnimationHandler::AnimationHandler(EntityPtr ent, std::string path)
 	{
 		_entity = ent;
@@ -14,8 +16,8 @@ namespace Larp
 
 		std::string line;
 		Animation a;
-		int animations;
-		int frames;
+		unsigned int animations;
+		unsigned int frames;
 
 		NEXT_LINE
 		while(line != "")
@@ -24,19 +26,19 @@ namespace Larp
 			NEXT_LINE
 		}
 		NEXT_LINE
-		animations = first_char_to_num(line);
+		animations = (int)(line.at(0) - '0');
 		NEXT_LINE
 		for(unsigned int i = 0; i < animations; ++i)
 		{
 			NEXT_LINE
-			a(line);
+			a = Animation(line);
 			NEXT_LINE
-			a._frame_duration = std::stop(line);
-			frames = first_char_to_num(line);
+			a._frame_duration = std::stof(line);
+			frames = (int)(line.at(0) - '0');
 			for(unsigned int j = 0; j < frames; ++j)
 			{
 				NEXT_LINE
-				a._frame_sequence.push_back(_frames[first_char_to_num(line)]);
+				a._frame_sequence.push_back(_frames[(int)(line.at(0) - '0')]);
 			}
 			NEXT_LINE
 		}
@@ -45,11 +47,6 @@ namespace Larp
 		_animation_playing = false;
 		_revert = true;
 		_active_handlers.push_back(this);
-	}
-
-	static int AnimationHandler::first_char_to_num(std::string s)
-	{
-		return s.at(0) - '0';
 	}
 
 	void AnimationHandler::play(std::string name, bool revert_at_end = true, int loop = 0)
@@ -63,14 +60,14 @@ namespace Larp
 				_animation_playing = true;
 				_revert = revert_at_end;
 				_loop = loop;
-				EntityPtr->switch_model(_current_animation._frame_sequence[_current_frame_index]);
+				_entity->switch_model(_current_animation._frame_sequence[_current_frame_index]);
 				_frame_start_time = Time::current_time();
 			}
 			std::cout << "Could not find animation" << std::endl;
 		}
 	}
 
-	void AnimationHandler::stop(bool revert = _revert)
+	void AnimationHandler::stop(bool revert = true)
 	{
 		_loop = 0;
 		_current_frame_index = -1;
@@ -78,7 +75,7 @@ namespace Larp
 		_revert = true;
 		if(revert)
 		{
-			EntityPtr->switch_model(_frames[0]);
+			_entity->switch_model(_frames[0]);
 		}
 	}
 
@@ -93,26 +90,26 @@ namespace Larp
 			}
 			else
 			{
-				if(loop != 0)
+				if(_loop != 0)
 				{
 					_current_frame_index = 0;
-					if(loop != -1)
+					if(_loop != -1)
 					{
-						--loop;
+						--_loop;
 					}
 				}
 				else
 				{
-					stop();
+					stop(_revert);
 					return;
 				}
 			}
-			EntityPtr->switch_model(_current_animation._frame_sequence[_current_frame_index]);
+			_entity->switch_model(_current_animation._frame_sequence[_current_frame_index]);
 			_frame_start_time = Time::current_time();
 		}
 	}
 
-	static void AnimationHandler::update_animations()
+	void AnimationHandler::update_animations()
 	{
 		for(unsigned int i = 0; i < _active_handlers.size(); ++i)
 		{

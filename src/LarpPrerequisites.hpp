@@ -6,7 +6,9 @@
 #include <string>
 #include <sstream>
 
-#include <GL/glew.h>    // All da OpenGL schtuff
+#define GLEW_STATIC
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 #include "Error.hpp"    // Custom error handling macro
 

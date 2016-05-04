@@ -26,7 +26,7 @@ namespace Larp
         /**
          * The Model rendered.
          */
-        ModelPtr _model;
+        Model* _model;
 
         /**
          * Default Constructor
