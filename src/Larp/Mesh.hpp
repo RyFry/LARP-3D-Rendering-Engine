@@ -49,7 +49,7 @@ namespace Larp
         /**
          * The OpenGL texture ID
          */
-        GLuint _id;
+        TextureID _id;
         /**
          * The Type of the texture. Used to determine what variable to attach the associated
          * Vertex object to in the fragment shader
@@ -107,15 +107,15 @@ namespace Larp
         /**
          * Associated OpenGL VAO
          */
-        GLuint _VAO;
+        VAO _VAO;
         /**
          * Associated OpenGL VBO
          */
-        GLuint _VBO;
+        VBO _VBO;
         /**
          * Associated OpenGL EBO
          */
-        GLuint _EBO;
+        EBO _EBO;
 
         /**
          * Sets up this Meshes VAO, VBO, and EBO, and binds the vertices, indices, and textures

@@ -15,7 +15,7 @@ namespace Larp
         /**
          * The ID of the OpenGL Program associated with this Shader
          */
-        GLuint _program;
+        ShaderProgram _program;
 
         /**
          * Constructor
