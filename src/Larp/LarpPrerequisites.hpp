@@ -39,14 +39,15 @@ namespace Larp
     typedef std::unique_ptr<SkyBox>           UniqueSkyBox;
     typedef std::unique_ptr<SpotLight>        UniqueSpot;
 
-    typedef Entity*                const EntityPtr;
-    typedef DirectionalLight*      const DirectionalLightPtr;
-    typedef Model*                 const ModelPtr;
-    typedef Node*                  const NodePtr;
-    typedef PointLight*            const PointLightPtr;
-    typedef SceneGraph*            const SceneGraphPtr;
-    typedef SkyBox*                const SkyBoxPtr;
-    typedef SpotLight*             const SpotLightPtr;
+    typedef Entity*           EntityPtr;
+    typedef DirectionalLight* DirectionalLightPtr;
+    typedef Model*            ModelPtr;
+    typedef Node*             NodePtr;
+    typedef PointLight*       PointLightPtr;
+    typedef SceneGraph*       SceneGraphPtr;
+    typedef Shader*           ShaderPtr;
+    typedef SkyBox*           SkyBoxPtr;
+    typedef SpotLight*        SpotLightPtr;
 
     // For internal use only
     typedef GLuint VAO;

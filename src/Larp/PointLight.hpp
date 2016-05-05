@@ -62,7 +62,7 @@ namespace Larp
          * @param x The new y position.
          * @param x The new z position.
          */
-    	void set_position(GLfloat x, GLfloat y, GLfloat z);
+        void set_position(GLfloat x, GLfloat y, GLfloat z);
         /**
          * Sets the linear and quadratic factors used in this PointLight's
          * attenutation calculation.

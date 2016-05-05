@@ -1,3 +1,4 @@
+#include <memory>
 #include <string>
 #include <stdexcept>
 
@@ -37,12 +38,12 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void Do_Movement();
 void error_callback(int error, const char* description);
-void make_floor(PhysicsWorld* physics_world);
+void make_floor(std::unique_ptr<PhysicsWorld>& physics_world);
 
 // Camera
 Larp::SceneGraphPtr graph = Larp::SceneGraph::singleton();
-PhysicsWorld* world;
-PhysicsPlayerController* player;
+std::unique_ptr<PhysicsWorld> world;
+std::unique_ptr<PhysicsPlayerController> player;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
@@ -97,7 +98,7 @@ int main(void)
     //glEnable(GL_MULTISAMPLE);
 
     // Setting up PhysicsWorld
-    world = new PhysicsWorld();
+    world.reset(new PhysicsWorld());
     world->init_objects();
 
     Larp::Shader level_shader("shaders/lighting.vert", "shaders/lighting.frag");
@@ -157,7 +158,7 @@ int main(void)
     node12->attach_entity(entity2);
     node12->set_scale(0.05f, 0.05f, 0.05f);
 
-    player = new PhysicsPlayerController(world, node12, glm::vec3(0, 5, 2));
+    player.reset(new PhysicsPlayerController(world.get(), node12, glm::vec3(0, 5, 2)));
     player->set_user_pointer(node12);
 
     make_floor(world);
@@ -197,11 +198,11 @@ int main(void)
         glfwPollEvents();
         Do_Movement();
 
-        player->update_movement(world);
+        player->update_movement(world.get());
 
         world->get_dynamics_world()->stepSimulation(1.0f / 120.0f);
 
-        player->step(world, 1.0f / 120.0f);
+        player->step(world.get(), 1.0f / 120.0f);
         Larp::NodePtr player_node = player->get_user_pointer();
         glm::vec3 pos = player->get_position();
         glm::quat quat = player->get_orientation();
@@ -254,7 +255,6 @@ int main(void)
 
     glfwTerminate();
 
-    delete world;
     return 0;
 }
 
@@ -332,7 +332,7 @@ void error_callback(int error, const char* description)
     fputs(description, stderr);
 }
 
-void make_floor(PhysicsWorld* world)
+void make_floor(std::unique_ptr<PhysicsWorld>& world)
 {
     btTransform trans;
     trans.setIdentity();
