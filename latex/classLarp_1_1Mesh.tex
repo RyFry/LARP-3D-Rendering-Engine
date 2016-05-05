@@ -1,62 +1,61 @@
-\hypertarget{classLarp_1_1Mesh}{\section{Larp\-:\-:Mesh Class Reference}
-\label{classLarp_1_1Mesh}\index{Larp\-::\-Mesh@{Larp\-::\-Mesh}}
-}
+\hypertarget{classLarp_1_1Mesh}{}\section{Larp\+:\+:Mesh Class Reference}
+\label{classLarp_1_1Mesh}\index{Larp\+::\+Mesh@{Larp\+::\+Mesh}}
 
 
-{\ttfamily \#include $<$Mesh.\-hpp$>$}
+{\ttfamily \#include $<$Mesh.\+hpp$>$}
 
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classLarp_1_1Mesh_ab7f7199729635bc93d6f8994d8365527}{Mesh} (std\-::vector$<$ \hyperlink{structLarp_1_1Vertex}{Vertex} $>$ \&vertices, std\-::vector$<$ G\-Luint $>$ \&indices, std\-::vector$<$ \hyperlink{classLarp_1_1Texture}{Texture} $>$ \&textures)
+\hyperlink{classLarp_1_1Mesh_ab7f7199729635bc93d6f8994d8365527}{Mesh} (std\+::vector$<$ \hyperlink{structLarp_1_1Vertex}{Vertex} $>$ \&vertices, std\+::vector$<$ G\+Luint $>$ \&indices, std\+::vector$<$ \hyperlink{classLarp_1_1Texture}{Texture} $>$ \&textures)
 \item 
 void \hyperlink{classLarp_1_1Mesh_a513ccafd9d38ec3300f4b872fc73c6e0}{draw} (\hyperlink{classLarp_1_1Shader}{Shader} \&shader)
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static G\-Lint \hyperlink{classLarp_1_1Mesh_a5841a3876b33f0f273287afc5ac631f2}{texture\-\_\-from\-\_\-file} (const char $\ast$path, std\-::string directory)
+static G\+Lint \hyperlink{classLarp_1_1Mesh_a5841a3876b33f0f273287afc5ac631f2}{texture\+\_\+from\+\_\+file} (const char $\ast$path, std\+::string directory)
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\-::vector$<$ \hyperlink{structLarp_1_1Vertex}{Vertex} $>$ \hyperlink{classLarp_1_1Mesh_af77086ebadfb8b0f4fb3c2e5f39d6a43}{\-\_\-vertices}
+std\+::vector$<$ \hyperlink{structLarp_1_1Vertex}{Vertex} $>$ \hyperlink{classLarp_1_1Mesh_af77086ebadfb8b0f4fb3c2e5f39d6a43}{\+\_\+vertices}
 \item 
-std\-::vector$<$ G\-Luint $>$ \hyperlink{classLarp_1_1Mesh_af2ef7e4f28a5454c159d1f2684008926}{\-\_\-indices}
+std\+::vector$<$ G\+Luint $>$ \hyperlink{classLarp_1_1Mesh_af2ef7e4f28a5454c159d1f2684008926}{\+\_\+indices}
 \item 
-std\-::vector$<$ \hyperlink{classLarp_1_1Texture}{Texture} $>$ \hyperlink{classLarp_1_1Mesh_a54c9edf45e99fb0261a39bfc3e8ff091}{\-\_\-textures}
+std\+::vector$<$ \hyperlink{classLarp_1_1Texture}{Texture} $>$ \hyperlink{classLarp_1_1Mesh_a54c9edf45e99fb0261a39bfc3e8ff091}{\+\_\+textures}
 \end{DoxyCompactItemize}
 \subsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{classLarp_1_1Mesh_af1c7441ca21e77717edc513865c49c93}{setup\-\_\-mesh} ()
+void \hyperlink{classLarp_1_1Mesh_af1c7441ca21e77717edc513865c49c93}{setup\+\_\+mesh} ()
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-G\-Luint \hyperlink{classLarp_1_1Mesh_acba7ec21576ff64c769df9d374ed1cc5}{\-\_\-\-V\-A\-O}
+G\+Luint \hyperlink{classLarp_1_1Mesh_acba7ec21576ff64c769df9d374ed1cc5}{\+\_\+\+V\+AO}
 \item 
-G\-Luint \hyperlink{classLarp_1_1Mesh_a72ad2a0ac19c617fc9abc4f48fd99350}{\-\_\-\-V\-B\-O}
+G\+Luint \hyperlink{classLarp_1_1Mesh_a72ad2a0ac19c617fc9abc4f48fd99350}{\+\_\+\+V\+BO}
 \item 
-G\-Luint \hyperlink{classLarp_1_1Mesh_afffcf16bfa3010c480a9a09fd43a477e}{\-\_\-\-E\-B\-O}
+G\+Luint \hyperlink{classLarp_1_1Mesh_afffcf16bfa3010c480a9a09fd43a477e}{\+\_\+\+E\+BO}
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classLarp_1_1Mesh_ab7f7199729635bc93d6f8994d8365527}{\index{Larp\-::\-Mesh@{Larp\-::\-Mesh}!Mesh@{Mesh}}
-\index{Mesh@{Mesh}!Larp::Mesh@{Larp\-::\-Mesh}}
-\subsubsection[{Mesh}]{\setlength{\rightskip}{0pt plus 5cm}Larp\-::\-Mesh\-::\-Mesh (
+\index{Larp\+::\+Mesh@{Larp\+::\+Mesh}!Mesh@{Mesh}}
+\index{Mesh@{Mesh}!Larp\+::\+Mesh@{Larp\+::\+Mesh}}
+\subsubsection[{\texorpdfstring{Mesh(std\+::vector$<$ Vertex $>$ \&vertices, std\+::vector$<$ G\+Luint $>$ \&indices, std\+::vector$<$ Texture $>$ \&textures)}{Mesh(std::vector< Vertex > &vertices, std::vector< GLuint > &indices, std::vector< Texture > &textures)}}]{\setlength{\rightskip}{0pt plus 5cm}Larp\+::\+Mesh\+::\+Mesh (
 \begin{DoxyParamCaption}
-\item[{std\-::vector$<$ {\bf Vertex} $>$ \&}]{vertices, }
-\item[{std\-::vector$<$ G\-Luint $>$ \&}]{indices, }
-\item[{std\-::vector$<$ {\bf Texture} $>$ \&}]{textures}
+\item[{std\+::vector$<$ {\bf Vertex} $>$ \&}]{vertices, }
+\item[{std\+::vector$<$ G\+Luint $>$ \&}]{indices, }
+\item[{std\+::vector$<$ {\bf Texture} $>$ \&}]{textures}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Mesh_ab7f7199729635bc93d6f8994d8365527}
+)}\hypertarget{classLarp_1_1Mesh_ab7f7199729635bc93d6f8994d8365527}{}\label{classLarp_1_1Mesh_ab7f7199729635bc93d6f8994d8365527}
 Constructor 
 \begin{DoxyParams}{Parameters}
-{\em vertices} & The list of vertices associated with this \hyperlink{classLarp_1_1Mesh}{Mesh}. Used for binding the V\-B\-O. \\
+{\em vertices} & The list of vertices associated with this \hyperlink{classLarp_1_1Mesh}{Mesh}. Used for binding the V\+BO. \\
 \hline
-{\em indices} & The list of indices associated with this \hyperlink{classLarp_1_1Mesh}{Mesh}. Used for binding the E\-B\-O. \\
+{\em indices} & The list of indices associated with this \hyperlink{classLarp_1_1Mesh}{Mesh}. Used for binding the E\+BO. \\
 \hline
 {\em textures} & The list of textures associated with this \hyperlink{classLarp_1_1Mesh}{Mesh}. Used for drawing textures. \\
 \hline
@@ -67,14 +66,14 @@ Meshes should {\bfseries not} be created directly. Instead, a \hyperlink{classLa
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classLarp_1_1Mesh_a513ccafd9d38ec3300f4b872fc73c6e0}{\index{Larp\-::\-Mesh@{Larp\-::\-Mesh}!draw@{draw}}
-\index{draw@{draw}!Larp::Mesh@{Larp\-::\-Mesh}}
-\subsubsection[{draw}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Mesh\-::draw (
+\index{Larp\+::\+Mesh@{Larp\+::\+Mesh}!draw@{draw}}
+\index{draw@{draw}!Larp\+::\+Mesh@{Larp\+::\+Mesh}}
+\subsubsection[{\texorpdfstring{draw(\+Shader \&shader)}{draw(Shader &shader)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Mesh\+::draw (
 \begin{DoxyParamCaption}
 \item[{{\bf Shader} \&}]{shader}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Mesh_a513ccafd9d38ec3300f4b872fc73c6e0}
-Draws the \hyperlink{classLarp_1_1Mesh}{Mesh} by binding the V\-A\-O's, V\-B\-O's, and E\-B\-O's associated with this \hyperlink{classLarp_1_1Mesh}{Mesh}. 
+)}\hypertarget{classLarp_1_1Mesh_a513ccafd9d38ec3300f4b872fc73c6e0}{}\label{classLarp_1_1Mesh_a513ccafd9d38ec3300f4b872fc73c6e0}
+Draws the \hyperlink{classLarp_1_1Mesh}{Mesh} by binding the V\+AO\textquotesingle{}s, V\+BO\textquotesingle{}s, and E\+BO\textquotesingle{}s associated with this \hyperlink{classLarp_1_1Mesh}{Mesh}. 
 \begin{DoxyParams}{Parameters}
 {\em shader} & The shader program to used to draw the \hyperlink{classLarp_1_1Mesh}{Mesh} \\
 \hline
@@ -82,21 +81,21 @@ Draws the \hyperlink{classLarp_1_1Mesh}{Mesh} by binding the V\-A\-O's, V\-B\-O'
 \begin{DoxyWarning}{Warning}
 This function should {\bfseries not} be called directly as it is called by the \hyperlink{classLarp_1_1Model}{Model} draw function 
 \end{DoxyWarning}
-\hypertarget{classLarp_1_1Mesh_af1c7441ca21e77717edc513865c49c93}{\index{Larp\-::\-Mesh@{Larp\-::\-Mesh}!setup\-\_\-mesh@{setup\-\_\-mesh}}
-\index{setup\-\_\-mesh@{setup\-\_\-mesh}!Larp::Mesh@{Larp\-::\-Mesh}}
-\subsubsection[{setup\-\_\-mesh}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Mesh\-::setup\-\_\-mesh (
+\index{Larp\+::\+Mesh@{Larp\+::\+Mesh}!setup\+\_\+mesh@{setup\+\_\+mesh}}
+\index{setup\+\_\+mesh@{setup\+\_\+mesh}!Larp\+::\+Mesh@{Larp\+::\+Mesh}}
+\subsubsection[{\texorpdfstring{setup\+\_\+mesh()}{setup_mesh()}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Mesh\+::setup\+\_\+mesh (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}}\label{classLarp_1_1Mesh_af1c7441ca21e77717edc513865c49c93}
-Sets up this Meshes V\-A\-O, V\-B\-O, and E\-B\-O, and binds the vertices, indices, and textures to Open\-G\-L for rendering. \hypertarget{classLarp_1_1Mesh_a5841a3876b33f0f273287afc5ac631f2}{\index{Larp\-::\-Mesh@{Larp\-::\-Mesh}!texture\-\_\-from\-\_\-file@{texture\-\_\-from\-\_\-file}}
-\index{texture\-\_\-from\-\_\-file@{texture\-\_\-from\-\_\-file}!Larp::Mesh@{Larp\-::\-Mesh}}
-\subsubsection[{texture\-\_\-from\-\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}G\-Lint Larp\-::\-Mesh\-::texture\-\_\-from\-\_\-file (
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Mesh_af1c7441ca21e77717edc513865c49c93}{}\label{classLarp_1_1Mesh_af1c7441ca21e77717edc513865c49c93}
+Sets up this Meshes V\+AO, V\+BO, and E\+BO, and binds the vertices, indices, and textures to Open\+GL for rendering. \index{Larp\+::\+Mesh@{Larp\+::\+Mesh}!texture\+\_\+from\+\_\+file@{texture\+\_\+from\+\_\+file}}
+\index{texture\+\_\+from\+\_\+file@{texture\+\_\+from\+\_\+file}!Larp\+::\+Mesh@{Larp\+::\+Mesh}}
+\subsubsection[{\texorpdfstring{texture\+\_\+from\+\_\+file(const char $\ast$path, std\+::string directory)}{texture_from_file(const char *path, std::string directory)}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lint Larp\+::\+Mesh\+::texture\+\_\+from\+\_\+file (
 \begin{DoxyParamCaption}
 \item[{const char $\ast$}]{path, }
-\item[{std\-::string}]{directory}
+\item[{std\+::string}]{directory}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [static]}}}\label{classLarp_1_1Mesh_a5841a3876b33f0f273287afc5ac631f2}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1Mesh_a5841a3876b33f0f273287afc5ac631f2}{}\label{classLarp_1_1Mesh_a5841a3876b33f0f273287afc5ac631f2}
 Loads a texture from a file. 
 \begin{DoxyParams}{Parameters}
 {\em path} & The path to the texture that should be loaded. \\
@@ -110,27 +109,27 @@ This function should {\bfseries not} be called directory.
 
 
 \subsection{Member Data Documentation}
-\hypertarget{classLarp_1_1Mesh_afffcf16bfa3010c480a9a09fd43a477e}{\index{Larp\-::\-Mesh@{Larp\-::\-Mesh}!\-\_\-\-E\-B\-O@{\-\_\-\-E\-B\-O}}
-\index{\-\_\-\-E\-B\-O@{\-\_\-\-E\-B\-O}!Larp::Mesh@{Larp\-::\-Mesh}}
-\subsubsection[{\-\_\-\-E\-B\-O}]{\setlength{\rightskip}{0pt plus 5cm}G\-Luint Larp\-::\-Mesh\-::\-\_\-\-E\-B\-O\hspace{0.3cm}{\ttfamily [private]}}}\label{classLarp_1_1Mesh_afffcf16bfa3010c480a9a09fd43a477e}
-Associated Open\-G\-L E\-B\-O \hypertarget{classLarp_1_1Mesh_af2ef7e4f28a5454c159d1f2684008926}{\index{Larp\-::\-Mesh@{Larp\-::\-Mesh}!\-\_\-indices@{\-\_\-indices}}
-\index{\-\_\-indices@{\-\_\-indices}!Larp::Mesh@{Larp\-::\-Mesh}}
-\subsubsection[{\-\_\-indices}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$G\-Luint$>$ Larp\-::\-Mesh\-::\-\_\-indices}}\label{classLarp_1_1Mesh_af2ef7e4f28a5454c159d1f2684008926}
-The list of indices associated with this \hyperlink{classLarp_1_1Mesh}{Mesh}. Used when binding the E\-B\-O. \hypertarget{classLarp_1_1Mesh_a54c9edf45e99fb0261a39bfc3e8ff091}{\index{Larp\-::\-Mesh@{Larp\-::\-Mesh}!\-\_\-textures@{\-\_\-textures}}
-\index{\-\_\-textures@{\-\_\-textures}!Larp::Mesh@{Larp\-::\-Mesh}}
-\subsubsection[{\-\_\-textures}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Texture}$>$ Larp\-::\-Mesh\-::\-\_\-textures}}\label{classLarp_1_1Mesh_a54c9edf45e99fb0261a39bfc3e8ff091}
-The list of textures associated with this \hyperlink{classLarp_1_1Mesh}{Mesh}. \hypertarget{classLarp_1_1Mesh_acba7ec21576ff64c769df9d374ed1cc5}{\index{Larp\-::\-Mesh@{Larp\-::\-Mesh}!\-\_\-\-V\-A\-O@{\-\_\-\-V\-A\-O}}
-\index{\-\_\-\-V\-A\-O@{\-\_\-\-V\-A\-O}!Larp::Mesh@{Larp\-::\-Mesh}}
-\subsubsection[{\-\_\-\-V\-A\-O}]{\setlength{\rightskip}{0pt plus 5cm}G\-Luint Larp\-::\-Mesh\-::\-\_\-\-V\-A\-O\hspace{0.3cm}{\ttfamily [private]}}}\label{classLarp_1_1Mesh_acba7ec21576ff64c769df9d374ed1cc5}
-Associated Open\-G\-L V\-A\-O \hypertarget{classLarp_1_1Mesh_a72ad2a0ac19c617fc9abc4f48fd99350}{\index{Larp\-::\-Mesh@{Larp\-::\-Mesh}!\-\_\-\-V\-B\-O@{\-\_\-\-V\-B\-O}}
-\index{\-\_\-\-V\-B\-O@{\-\_\-\-V\-B\-O}!Larp::Mesh@{Larp\-::\-Mesh}}
-\subsubsection[{\-\_\-\-V\-B\-O}]{\setlength{\rightskip}{0pt plus 5cm}G\-Luint Larp\-::\-Mesh\-::\-\_\-\-V\-B\-O\hspace{0.3cm}{\ttfamily [private]}}}\label{classLarp_1_1Mesh_a72ad2a0ac19c617fc9abc4f48fd99350}
-Associated Open\-G\-L V\-B\-O \hypertarget{classLarp_1_1Mesh_af77086ebadfb8b0f4fb3c2e5f39d6a43}{\index{Larp\-::\-Mesh@{Larp\-::\-Mesh}!\-\_\-vertices@{\-\_\-vertices}}
-\index{\-\_\-vertices@{\-\_\-vertices}!Larp::Mesh@{Larp\-::\-Mesh}}
-\subsubsection[{\-\_\-vertices}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Vertex}$>$ Larp\-::\-Mesh\-::\-\_\-vertices}}\label{classLarp_1_1Mesh_af77086ebadfb8b0f4fb3c2e5f39d6a43}
-The list of vertices associated with this \hyperlink{classLarp_1_1Mesh}{Mesh}. Used when binding the V\-B\-O. 
+\index{Larp\+::\+Mesh@{Larp\+::\+Mesh}!\+\_\+\+E\+BO@{\+\_\+\+E\+BO}}
+\index{\+\_\+\+E\+BO@{\+\_\+\+E\+BO}!Larp\+::\+Mesh@{Larp\+::\+Mesh}}
+\subsubsection[{\texorpdfstring{\+\_\+\+E\+BO}{_EBO}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint Larp\+::\+Mesh\+::\+\_\+\+E\+BO\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Mesh_afffcf16bfa3010c480a9a09fd43a477e}{}\label{classLarp_1_1Mesh_afffcf16bfa3010c480a9a09fd43a477e}
+Associated Open\+GL E\+BO \index{Larp\+::\+Mesh@{Larp\+::\+Mesh}!\+\_\+indices@{\+\_\+indices}}
+\index{\+\_\+indices@{\+\_\+indices}!Larp\+::\+Mesh@{Larp\+::\+Mesh}}
+\subsubsection[{\texorpdfstring{\+\_\+indices}{_indices}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$G\+Luint$>$ Larp\+::\+Mesh\+::\+\_\+indices}\hypertarget{classLarp_1_1Mesh_af2ef7e4f28a5454c159d1f2684008926}{}\label{classLarp_1_1Mesh_af2ef7e4f28a5454c159d1f2684008926}
+The list of indices associated with this \hyperlink{classLarp_1_1Mesh}{Mesh}. Used when binding the E\+BO. \index{Larp\+::\+Mesh@{Larp\+::\+Mesh}!\+\_\+textures@{\+\_\+textures}}
+\index{\+\_\+textures@{\+\_\+textures}!Larp\+::\+Mesh@{Larp\+::\+Mesh}}
+\subsubsection[{\texorpdfstring{\+\_\+textures}{_textures}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Texture}$>$ Larp\+::\+Mesh\+::\+\_\+textures}\hypertarget{classLarp_1_1Mesh_a54c9edf45e99fb0261a39bfc3e8ff091}{}\label{classLarp_1_1Mesh_a54c9edf45e99fb0261a39bfc3e8ff091}
+The list of textures associated with this \hyperlink{classLarp_1_1Mesh}{Mesh}. \index{Larp\+::\+Mesh@{Larp\+::\+Mesh}!\+\_\+\+V\+AO@{\+\_\+\+V\+AO}}
+\index{\+\_\+\+V\+AO@{\+\_\+\+V\+AO}!Larp\+::\+Mesh@{Larp\+::\+Mesh}}
+\subsubsection[{\texorpdfstring{\+\_\+\+V\+AO}{_VAO}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint Larp\+::\+Mesh\+::\+\_\+\+V\+AO\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Mesh_acba7ec21576ff64c769df9d374ed1cc5}{}\label{classLarp_1_1Mesh_acba7ec21576ff64c769df9d374ed1cc5}
+Associated Open\+GL V\+AO \index{Larp\+::\+Mesh@{Larp\+::\+Mesh}!\+\_\+\+V\+BO@{\+\_\+\+V\+BO}}
+\index{\+\_\+\+V\+BO@{\+\_\+\+V\+BO}!Larp\+::\+Mesh@{Larp\+::\+Mesh}}
+\subsubsection[{\texorpdfstring{\+\_\+\+V\+BO}{_VBO}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint Larp\+::\+Mesh\+::\+\_\+\+V\+BO\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Mesh_a72ad2a0ac19c617fc9abc4f48fd99350}{}\label{classLarp_1_1Mesh_a72ad2a0ac19c617fc9abc4f48fd99350}
+Associated Open\+GL V\+BO \index{Larp\+::\+Mesh@{Larp\+::\+Mesh}!\+\_\+vertices@{\+\_\+vertices}}
+\index{\+\_\+vertices@{\+\_\+vertices}!Larp\+::\+Mesh@{Larp\+::\+Mesh}}
+\subsubsection[{\texorpdfstring{\+\_\+vertices}{_vertices}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Vertex}$>$ Larp\+::\+Mesh\+::\+\_\+vertices}\hypertarget{classLarp_1_1Mesh_af77086ebadfb8b0f4fb3c2e5f39d6a43}{}\label{classLarp_1_1Mesh_af77086ebadfb8b0f4fb3c2e5f39d6a43}
+The list of vertices associated with this \hyperlink{classLarp_1_1Mesh}{Mesh}. Used when binding the V\+BO. 
 
-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-src/\hyperlink{Mesh_8hpp}{Mesh.\-hpp}\item 
-src/\hyperlink{Mesh_8cpp}{Mesh.\-cpp}\end{DoxyCompactItemize}
+src/\+Larp/\hyperlink{Mesh_8hpp}{Mesh.\+hpp}\item 
+src/\+Larp/\hyperlink{Mesh_8cpp}{Mesh.\+cpp}\end{DoxyCompactItemize}

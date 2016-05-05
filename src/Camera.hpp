@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Error.hpp" // Throwing errors
+#include "Larp/Error.hpp" // Throwing errors
 
 // Std. Includes
 #include <vector>    // vector

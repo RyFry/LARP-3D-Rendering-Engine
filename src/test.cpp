@@ -5,16 +5,18 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "LarpPrerequisites.hpp"
+#include "Larp/LarpPrerequisites.hpp"
+#include "Larp/ConfigurationLoader.hpp"
+#include "Larp/Model.hpp"
+#include "Larp/SceneGraph.hpp"
+#include "Larp/Shader.hpp"
+#include "Larp/SkyBox.hpp"
 
 #include "Camera.hpp"
-#include "ConfigurationLoader.hpp"
-#include "Model.hpp"
-#include "PhysicsMeshColliderBuilder.hpp"
-#include "PhysicsPlayerController.hpp"
-#include "PhysicsWorld.hpp"
-#include "SceneGraph.hpp"
-#include "Shader.hpp"
+
+#include "Physics/PhysicsMeshColliderBuilder.hpp"
+#include "Physics/PhysicsPlayerController.hpp"
+#include "Physics/PhysicsWorld.hpp"
 
 // GLM Mathemtics
 #include <glm/glm.hpp>
@@ -23,6 +25,8 @@
 
 // Other Libs
 #include <SOIL.h>
+#include <SDL/SDL.h>
+
 
 // Properties
 GLuint screenWidth = 800, screenHeight = 600;
@@ -39,7 +43,7 @@ void make_floor(PhysicsWorld* physics_world);
 Larp::SceneGraphPtr graph = Larp::SceneGraph::singleton();
 PhysicsWorld* world;
 PhysicsPlayerController* player;
-Camera camera(glm::vec3(0.0f, 5.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
 bool firstMouse = true;
@@ -54,18 +58,22 @@ int main(void)
     screenHeight = config.get_height();
     // Init GLFW
     if (!glfwInit())
-        throw std::runtime_error(std::string(__FILE__) + std::string(" : line ") + std::to_string(__LINE__) + std::string(" :: glfwInit() failed!"));
+    {
+        THROW_RUNTIME_ERROR("glfwInit() failed!");
+    }
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, config.is_resizable());
-    glfwWindowHint(GLFW_SAMPLES, 4);
+    //glfwWindowHint(GLFW_SAMPLES, 4);
 
     glfwSetErrorCallback(error_callback);
 
     GLFWwindow* window = glfwCreateWindow(screenWidth, screenHeight, config.get_title().c_str(), nullptr, nullptr); // Windowed
     if (window == nullptr)
-        throw std::runtime_error(std::string(__FILE__) + std::string(" : line ") + std::to_string(__LINE__) + std::string(" :: GLFWwindow* = nullptr"));
+    {
+        THROW_RUNTIME_ERROR("GLFWwindow* = nullptr");
+    }
     glfwMakeContextCurrent(window);
 
     // Set the required callback functions
@@ -85,31 +93,33 @@ int main(void)
 
     // Setup some OpenGL options
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_MULTISAMPLE);
+    glDepthFunc(GL_LESS);
+    //glEnable(GL_MULTISAMPLE);
 
     // Setting up PhysicsWorld
     world = new PhysicsWorld();
     world->init_objects();
 
     Larp::Shader level_shader("shaders/lighting.vert", "shaders/lighting.frag");
-    Larp::ModelPtr level = Larp::Model::create("assets/LEVEL.obj");
+    Larp::ModelPtr level = Larp::Model::create("assets/LEVEL/LEVEL.obj");
     Larp::EntityPtr entity = Larp::Entity::create(level_shader, level);
     Larp::DirectionalLightPtr dir_light = graph->create_directional_light();
     Larp::PointLightPtr point_light = graph->create_point_light();
 
-    point_light->set_ambient_intensity(1.0f, 1.0f, 1.0f);
-    point_light->set_position(0.0f, 5.0f, 0.0f);
+    //point_light->set_ambient_color(4.0f, 2.0f, 6.0f);
+    point_light->set_position(0.0f, 2.0f, -5.0f);
+
     //graph->remove_light(dir_light);
     Larp::NodePtr node11 = graph->create_child_node();
     Larp::NodePtr node12 = graph->create_child_node();
 
     Larp::NodePtr node21 = node11->create_child();
-//    node21->set_scale(0.1f, 0.1f, 0.1f);
+    //node21->set_scale(0.1f, 0.1f, 0.1f);
     node21->attach_entity(entity);
 
-    PhysicsMeshColliderBuilder physics_level_builder = PhysicsMeshColliderBuilder("assets/LEVEL.obj");
+    PhysicsMeshColliderBuilder physics_level_builder = PhysicsMeshColliderBuilder("assets/LEVEL/LEVEL.obj");
     physics_level_builder.set_mass(0.0);
-    physics_level_builder.set_local_inertia(btVector3(0.0, 0.0, 0.0));
+    physics_level_builder.set_local_inertia(glm::vec3(0.0, 0.0, 0.0));
     physics_level_builder.set_restitution(1);
     physics_level_builder.set_user_pointer(node21);
 
@@ -117,10 +127,8 @@ int main(void)
 
     world->get_dynamics_world()->addRigidBody(physics_level->get_rigid_body());
 
-
-
     Larp::Shader crate_shader("shaders/lighting.vert", "shaders/lighting.frag");
-    Larp::ModelPtr crate_model = Larp::Model::create("assets/crate.obj");
+    Larp::ModelPtr crate_model = Larp::Model::create("assets/crate/crate.obj");
     Larp::EntityPtr entity22 = Larp::Entity::create(crate_shader, crate_model);
     Larp::NodePtr node22 = graph->create_child_node();
     node22->attach_entity(entity22);
@@ -136,48 +144,34 @@ int main(void)
 
     // PhysicsMeshColliderPtr crate = crate_builder.build();
 
-    // world->get_dynamics_world()->addRigidBody(crate->get_rigid_body());
+    //world->get_dynamics_world()->addRigidBody(crate->get_rigid_body());
 
 
     /*******************************
      * TESTING - DELETE THIS       *
      *******************************/
     Larp::Shader shader("shaders/lighting.vert", "shaders/lighting.frag");
-    Larp::ModelPtr nanosuit = Larp::Model::create("assets/nanosuit.obj");
+    Larp::ModelPtr nanosuit = Larp::Model::create("assets/nanosuit/nanosuit.obj");
     Larp::EntityPtr entity2 = Larp::Entity::create(shader, nanosuit);
 
     node12->attach_entity(entity2);
     node12->set_scale(0.05f, 0.05f, 0.05f);
 
-    player = new PhysicsPlayerController(world, node12, btVector3(0, 5, 2));
+    player = new PhysicsPlayerController(world, node12, glm::vec3(0, 5, 2));
     player->set_user_pointer(node12);
 
     make_floor(world);
 
-    // btTransform trans;
-    // trans.setOrigin(btVector3(1.0, 5.0, 0.0));
-    // trans.setRotation(btQuaternion(0, 0, 0, 1));
-    // btScalar mass(0.2);
-    // btVector3 local_inertia(0, 0, 0);
-
-    // btCollisionShape* shape = new btSphereShape(0.5);
-    // world->get_collision_shapes().push_back(shape);
-    // btDefaultMotionState* motion_state = new btDefaultMotionState(trans);
-
-    // shape->calculateLocalInertia(mass, local_inertia);
-
-    // btRigidBody::btRigidBodyConstructionInfo body_info(mass, motion_state, shape, local_inertia);
-    // btRigidBody* body = new btRigidBody(body_info);
-    // body->setUserPointer(node12);
-    // body->setRestitution(1);
-
-    // world->get_dynamics_world()->addRigidBody(body);
-
- 
-
-    //std::cout << body->getWorldTransform().getOrigin() << std::endl;
-
-
+    // Skybox stuff
+    std::vector<const GLchar*> skybox_files;
+    skybox_files.push_back("assets/skybox/right.jpg");//assets/mp_drakeq/drakeq_rt.tga");
+    skybox_files.push_back("assets/skybox/left.jpg");
+    skybox_files.push_back("assets/skybox/top.jpg");
+    skybox_files.push_back("assets/skybox/bottom.jpg");
+    skybox_files.push_back("assets/skybox/back.jpg");
+    skybox_files.push_back("assets/skybox/front.jpg");
+    Larp::SkyBox skybox(skybox_files);
+    graph->set_skybox(&skybox);
 
 
     GLfloat frame_rate_limiter = 0.0f;
@@ -199,6 +193,10 @@ int main(void)
         else
             continue;
 
+        // Check and call events
+        glfwPollEvents();
+        Do_Movement();
+
         player->update_movement(world);
 
         world->get_dynamics_world()->stepSimulation(1.0f / 120.0f);
@@ -207,8 +205,8 @@ int main(void)
         Larp::NodePtr player_node = player->get_user_pointer();
         glm::vec3 pos = player->get_position();
         glm::quat quat = player->get_orientation();
-        player_node->set_position(glm::vec3(pos.x, pos.y, pos.z));
-        player_node->set_orientation(glm::quat(quat.w, quat.x, quat.y, quat.z));
+        player_node->set_position(pos);
+        player_node->set_orientation(quat);
         camera._position = glm::vec3(pos.x, pos.y + player_node->get_scaled_height(), pos.z);
 
         camera._yaw = player->get_yaw();
@@ -241,17 +239,9 @@ int main(void)
             }
         }
 
-        // Check and call events
-        glfwPollEvents();
-        Do_Movement();
-
         // Clear the colorbuffer
-        glClearColor(0.5f, 0.05f, 0.05f, 1.0f);
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        // node11->yaw(delta_time * 32.0);
-        // node11->pitch(delta_time * 23.0);
-        // node11->roll(delta_time * 17.0);
 
         glm::mat4 projection = glm::perspective(camera._zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
         glm::mat4 view = camera.get_view_matrix();
@@ -281,12 +271,6 @@ void Do_Movement()
     if (keys[GLFW_KEY_RIGHT])
         camera.process_keyboard(Camera::RIGHT, delta_time);
 
-
-    if (keys[GLFW_KEY_SPACE])
-        player->jump();
-    if (keys[GLFW_KEY_LEFT_SHIFT])
-        camera.process_keyboard(Camera::DOWN, delta_time);
-
     if (keys[GLFW_KEY_S])
         player->add_movement_direction(PhysicsPlayerController::PlayerDirection::BACKWARD);
     if (keys[GLFW_KEY_A])
@@ -295,6 +279,11 @@ void Do_Movement()
         player->add_movement_direction(PhysicsPlayerController::PlayerDirection::RIGHT);
     if (keys[GLFW_KEY_W])
         player->add_movement_direction(PhysicsPlayerController::PlayerDirection::FORWARD);
+
+    if (keys[GLFW_KEY_SPACE])
+        player->jump();
+    if (keys[GLFW_KEY_LEFT_SHIFT])
+        camera.process_keyboard(Camera::DOWN, delta_time);
 }
 
 // Is called whenever a key is pressed/released via GLFW
@@ -328,9 +317,8 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     lastX = xpos;
     lastY = ypos;
 
-    btQuaternion rotation;
-    rotation.setEuler(-xoffset * 0.005, 0, 0);
-    player->rotate(rotation);
+    glm::quat rotation(0, 0, 0, 1);
+    player->rotate(glm::rotate(rotation, xoffset * 0.05, glm::vec3(0, 1, 0)));
     camera.process_mouse_movement(0, yoffset);
 }
 
@@ -347,6 +335,7 @@ void error_callback(int error, const char* description)
 void make_floor(PhysicsWorld* world)
 {
     btTransform trans;
+    trans.setIdentity();
     trans.setOrigin(btVector3(0.0, -5.0, 0.0));
     btScalar mass(0.0);
     btVector3 local_inertia(0, 0, 0);

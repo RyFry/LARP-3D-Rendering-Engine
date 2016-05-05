@@ -5,6 +5,7 @@
 struct Material {
     sampler2D diffuse1;
     sampler2D specular1;
+    sampler2D reflection1;
     float shininess;
 }; 
 
@@ -40,6 +41,7 @@ uniform bool directionalLight;
 uniform PointLight pointLights[NR_POINT_LIGHTS];
 uniform int numPointLights;
 uniform Material material;
+uniform samplerCube skybox;
 
 // Function prototypes
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir);
@@ -74,7 +76,16 @@ void main()
     }
     // Phase 3: Spot light
     // result += CalcSpotLight(spotLight, norm, FragPos, viewDir);
-    color = vec4(result, 1.0f);
+
+    // Calculate reflections/refractions
+    // float reflect_intensity = texture(material.reflection1, TexCoords).r;
+    // vec3 I = normalize(FragPos - viewPos);
+    // vec3 R = reflect(I, normalize(Normal));
+    // vec3 R = refract(I, normalize(Normal), ratio);
+    // vec4 reflect_color;
+    // if (reflect_intensity > 0.1)
+    //    reflect_color = texture(skybox, R) * reflect_intensity;
+    color = vec4(result, 1.0f); // + reflect_color; //vec4(result, 1.0f);
 }
 
 // Calculates the color when using a directional light.

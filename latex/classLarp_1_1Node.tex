@@ -1,89 +1,99 @@
-\hypertarget{classLarp_1_1Node}{\section{Larp\-:\-:Node Class Reference}
-\label{classLarp_1_1Node}\index{Larp\-::\-Node@{Larp\-::\-Node}}
-}
+\hypertarget{classLarp_1_1Node}{}\section{Larp\+:\+:Node Class Reference}
+\label{classLarp_1_1Node}\index{Larp\+::\+Node@{Larp\+::\+Node}}
 
 
-{\ttfamily \#include $<$Node.\-hpp$>$}
+{\ttfamily \#include $<$Node.\+hpp$>$}
 
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{classLarp_1_1Node_a2cb8fc6e60b762b02226d73489ac5099}{Node} ()
 \item 
-void \hyperlink{classLarp_1_1Node_aa701cc59976ddbd1c232e027df0e4a9b}{draw} (glm\-::mat4 model, glm\-::mat4 \&view, glm\-::mat4 \&projection)
+void \hyperlink{classLarp_1_1Node_aca27ebdb37e7dde6ce19e8b886b01b14}{draw} (glm\+::mat4 model, glm\+::mat4 \&view, glm\+::mat4 \&projection, const glm\+::vec3 \&view\+\_\+pos, const std\+::vector$<$ \hyperlink{namespaceLarp_af87ce889468b60d51aa1479335ba19bf}{Unique\+Directional} $>$ \&directional\+\_\+lights, const std\+::vector$<$ \hyperlink{namespaceLarp_acd7cacff15535544525abc2e90e07b91}{Unique\+Point} $>$ \&point\+\_\+lights, const std\+::vector$<$ \hyperlink{namespaceLarp_a288b58c470c3ed41d3b23e764ba5b6eb}{Unique\+Spot} $>$ \&spot\+\_\+lights)
 \item 
-\hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Node\-Ptr} \hyperlink{classLarp_1_1Node_a3ad8fa3c292ce51ce8ac0922c96608f1}{create\-\_\-child} ()
+\hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Node\+Ptr} \hyperlink{classLarp_1_1Node_a3ad8fa3c292ce51ce8ac0922c96608f1}{create\+\_\+child} ()
 \item 
-\hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Node\-Ptr} \hyperlink{classLarp_1_1Node_accd1116b2d35500ae519588d07f1f30e}{remove\-\_\-child} (\hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Node\-Ptr} child)
+\hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Node\+Ptr} \hyperlink{classLarp_1_1Node_accd1116b2d35500ae519588d07f1f30e}{remove\+\_\+child} (\hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Node\+Ptr} child)
 \item 
-void \hyperlink{classLarp_1_1Node_a091f322ac9a2dcfcb81ab38bdff61399}{delete\-\_\-child} (\hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Node\-Ptr} child)
+void \hyperlink{classLarp_1_1Node_a091f322ac9a2dcfcb81ab38bdff61399}{delete\+\_\+child} (\hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Node\+Ptr} child)
 \item 
-void \hyperlink{classLarp_1_1Node_abbf90d7e84f9c8144bc5532d288ce3ae}{attach\-\_\-child} (\hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Node\-Ptr} child)
+void \hyperlink{classLarp_1_1Node_abbf90d7e84f9c8144bc5532d288ce3ae}{attach\+\_\+child} (\hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Node\+Ptr} child)
 \item 
-void \hyperlink{classLarp_1_1Node_a44070f7bb06cdca4fafbdf65f0d6118e}{set\-\_\-position} (G\-Lfloat x, G\-Lfloat y, G\-Lfloat z)
+void \hyperlink{classLarp_1_1Node_a44070f7bb06cdca4fafbdf65f0d6118e}{set\+\_\+position} (G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)
 \item 
-void \hyperlink{classLarp_1_1Node_a8eef7a9829817bfe9b2ff3bed5b0c3a8}{set\-\_\-position} (glm\-::vec3 position)
+void \hyperlink{classLarp_1_1Node_a8eef7a9829817bfe9b2ff3bed5b0c3a8}{set\+\_\+position} (glm\+::vec3 position)
 \item 
-void \hyperlink{classLarp_1_1Node_ad1b12b56ba7c708d1ce51ec0762f7476}{set\-\_\-orientation} (G\-Lfloat x, G\-Lfloat y, G\-Lfloat z, G\-Lfloat w)
+void \hyperlink{classLarp_1_1Node_ad1b12b56ba7c708d1ce51ec0762f7476}{set\+\_\+orientation} (G\+Lfloat x, G\+Lfloat y, G\+Lfloat z, G\+Lfloat w)
 \item 
-void \hyperlink{classLarp_1_1Node_a3695bdfa48908be007d751e9c05bdb0e}{set\-\_\-orientation} (glm\-::quat rotation)
+void \hyperlink{classLarp_1_1Node_a3695bdfa48908be007d751e9c05bdb0e}{set\+\_\+orientation} (glm\+::quat rotation)
 \item 
-void \hyperlink{classLarp_1_1Node_a0d5e761af674c2c547e8638b91a2a85b}{set\-\_\-orientation} (glm\-::vec3 axis, G\-Lfloat w)
+void \hyperlink{classLarp_1_1Node_a0d5e761af674c2c547e8638b91a2a85b}{set\+\_\+orientation} (glm\+::vec3 axis, G\+Lfloat w)
 \item 
-void \hyperlink{classLarp_1_1Node_a829a3cf29a5f165f7d771cc283f25053}{yaw} (G\-Lfloat yaw)
+void \hyperlink{classLarp_1_1Node_a829a3cf29a5f165f7d771cc283f25053}{yaw} (G\+Lfloat yaw)
 \item 
-void \hyperlink{classLarp_1_1Node_ad8f8390e764a96398d080538c437c7ee}{pitch} (G\-Lfloat pitch)
+void \hyperlink{classLarp_1_1Node_ad8f8390e764a96398d080538c437c7ee}{pitch} (G\+Lfloat pitch)
 \item 
-void \hyperlink{classLarp_1_1Node_a1c839a3075f1e97aa368ba8212c50ee7}{roll} (G\-Lfloat roll)
+void \hyperlink{classLarp_1_1Node_a1c839a3075f1e97aa368ba8212c50ee7}{roll} (G\+Lfloat roll)
 \item 
-void \hyperlink{classLarp_1_1Node_aa0186c5d77b58e2d7ede02dec0f2cdc4}{translate} (G\-Lfloat x, G\-Lfloat y, G\-Lfloat z)
+void \hyperlink{classLarp_1_1Node_aa0186c5d77b58e2d7ede02dec0f2cdc4}{translate} (G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)
 \item 
-void \hyperlink{classLarp_1_1Node_a7494be4e04c8f5911aedeeb41c27993b}{translate} (glm\-::vec3 vec)
+void \hyperlink{classLarp_1_1Node_a7494be4e04c8f5911aedeeb41c27993b}{translate} (glm\+::vec3 vec)
 \item 
-void \hyperlink{classLarp_1_1Node_a20048e6f1487b9e6bdb5e2f66794de65}{set\-\_\-scale} (glm\-::vec3 scale)
+void \hyperlink{classLarp_1_1Node_a20048e6f1487b9e6bdb5e2f66794de65}{set\+\_\+scale} (glm\+::vec3 scale)
 \item 
-void \hyperlink{classLarp_1_1Node_aa212fa28bc6cc6df4ded2a487fd591eb}{set\-\_\-scale} (G\-Lfloat x, G\-Lfloat y, G\-Lfloat z)
+void \hyperlink{classLarp_1_1Node_aa212fa28bc6cc6df4ded2a487fd591eb}{set\+\_\+scale} (G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)
 \item 
-void \hyperlink{classLarp_1_1Node_aa48fabf718331c31dc1b1239853cfe09}{attach\-\_\-entity} (\hyperlink{namespaceLarp_ae3ffca1f126e4263cbdc59b116ee465a}{Shared\-Entity} entity)
+glm\+::vec3 \hyperlink{classLarp_1_1Node_a396cac721eb4a2cb46b14fc63f71ae8c}{get\+\_\+scale} () const 
 \item 
-void \hyperlink{classLarp_1_1Node_a390c52314f7cb0f27244994aba34dc10}{remove\-\_\-entity} ()
+void \hyperlink{classLarp_1_1Node_a2525a02b9ad2bd24e4d2a4338cd9a8e1}{attach\+\_\+entity} (\hyperlink{namespaceLarp_a775efcc4cabb308d50168c52df343353}{Entity\+Ptr} entity)
+\item 
+void \hyperlink{classLarp_1_1Node_a390c52314f7cb0f27244994aba34dc10}{remove\+\_\+entity} ()
+\item 
+\hyperlink{namespaceLarp_a775efcc4cabb308d50168c52df343353}{Entity\+Ptr} \hyperlink{classLarp_1_1Node_af32ccf64d85fa71079fa4755648f620f}{detach\+\_\+entity} ()
+\item 
+G\+Lfloat \hyperlink{classLarp_1_1Node_a95cf3fbe1ec65bca7a90d6ef13c2e6af}{get\+\_\+scaled\+\_\+width} () const 
+\item 
+G\+Lfloat \hyperlink{classLarp_1_1Node_aae8201315932cad238f72bfea116e12f}{get\+\_\+scaled\+\_\+height} () const 
+\item 
+G\+Lfloat \hyperlink{classLarp_1_1Node_a296b152b7e35bbbd64a91b5533087e41}{get\+\_\+scaled\+\_\+depth} () const 
+\item 
+glm\+::vec3 \hyperlink{classLarp_1_1Node_a3f83d9b01243b4a9ec4402be16f16333}{get\+\_\+scaled\+\_\+bounding\+\_\+box} () const 
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{namespaceLarp_ae3ffca1f126e4263cbdc59b116ee465a}{Shared\-Entity} \hyperlink{classLarp_1_1Node_ab313f78673bfed1596bb1679aec92326}{\-\_\-entity}
+\hyperlink{namespaceLarp_ad6d203c6dc3d8ea7a5517a64e1665403}{Unique\+Entity} \hyperlink{classLarp_1_1Node_a8bdb3e4d6e3553bbf1620c1a9543292a}{\+\_\+entity}
 \item 
-\hyperlink{classLarp_1_1Node}{Node} $\ast$ \hyperlink{classLarp_1_1Node_affe541c1eca6c4d1863c4d8aca13ea86}{\-\_\-parent}
+\hyperlink{classLarp_1_1Node}{Node} $\ast$ \hyperlink{classLarp_1_1Node_affe541c1eca6c4d1863c4d8aca13ea86}{\+\_\+parent}
 \item 
-std\-::unordered\-\_\-map$<$ \hyperlink{classLarp_1_1Node}{Node} \\*
-$\ast$, \hyperlink{namespaceLarp_ad95a88bc34f8c78cefd64c9bbeb94a58}{Unique\-Node} $>$ \hyperlink{classLarp_1_1Node_a583f7c56966cb7df1759fb42116166f7}{\-\_\-children}
+std\+::unordered\+\_\+map$<$ \hyperlink{classLarp_1_1Node}{Node} $\ast$, \hyperlink{namespaceLarp_ad95a88bc34f8c78cefd64c9bbeb94a58}{Unique\+Node} $>$ \hyperlink{classLarp_1_1Node_a583f7c56966cb7df1759fb42116166f7}{\+\_\+children}
 \item 
-glm\-::vec3 \hyperlink{classLarp_1_1Node_a060f49eb175b70c9e0da515fa685f1f2}{\-\_\-position}
+glm\+::vec3 \hyperlink{classLarp_1_1Node_a060f49eb175b70c9e0da515fa685f1f2}{\+\_\+position}
 \item 
-glm\-::quat \hyperlink{classLarp_1_1Node_a3bf60bf55c2cda89031f9327fafa0d17}{\-\_\-rotation}
+glm\+::quat \hyperlink{classLarp_1_1Node_a3bf60bf55c2cda89031f9327fafa0d17}{\+\_\+rotation}
 \item 
-glm\-::vec3 \hyperlink{classLarp_1_1Node_ae295b7db9065cd5bcc1edb32af6e7987}{\-\_\-scale}
+glm\+::vec3 \hyperlink{classLarp_1_1Node_ae295b7db9065cd5bcc1edb32af6e7987}{\+\_\+scale}
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classLarp_1_1Node_a2cb8fc6e60b762b02226d73489ac5099}{\index{Larp\-::\-Node@{Larp\-::\-Node}!Node@{Node}}
-\index{Node@{Node}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{Node}]{\setlength{\rightskip}{0pt plus 5cm}Larp\-::\-Node\-::\-Node (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!Node@{Node}}
+\index{Node@{Node}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{Node()}{Node()}}]{\setlength{\rightskip}{0pt plus 5cm}Larp\+::\+Node\+::\+Node (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_a2cb8fc6e60b762b02226d73489ac5099}
-Default Constructor Initializes the \hyperlink{classLarp_1_1Node}{Node} to be at the parent's origin, unrotated relative to the parent, and to have the same scale as the parent 
+)}\hypertarget{classLarp_1_1Node_a2cb8fc6e60b762b02226d73489ac5099}{}\label{classLarp_1_1Node_a2cb8fc6e60b762b02226d73489ac5099}
+Default Constructor Initializes the \hyperlink{classLarp_1_1Node}{Node} to be at the parent\textquotesingle{}s origin, unrotated relative to the parent, and to have the same scale as the parent 
 
 \subsection{Member Function Documentation}
-\hypertarget{classLarp_1_1Node_abbf90d7e84f9c8144bc5532d288ce3ae}{\index{Larp\-::\-Node@{Larp\-::\-Node}!attach\-\_\-child@{attach\-\_\-child}}
-\index{attach\-\_\-child@{attach\-\_\-child}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{attach\-\_\-child}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Node\-::attach\-\_\-child (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!attach\+\_\+child@{attach\+\_\+child}}
+\index{attach\+\_\+child@{attach\+\_\+child}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{attach\+\_\+child(\+Node\+Ptr child)}{attach_child(NodePtr child)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Node\+::attach\+\_\+child (
 \begin{DoxyParamCaption}
-\item[{{\bf Node\-Ptr}}]{child}
+\item[{{\bf Node\+Ptr}}]{child}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_abbf90d7e84f9c8144bc5532d288ce3ae}
+)}\hypertarget{classLarp_1_1Node_abbf90d7e84f9c8144bc5532d288ce3ae}{}\label{classLarp_1_1Node_abbf90d7e84f9c8144bc5532d288ce3ae}
 Attaches child to this \hyperlink{classLarp_1_1Node}{Node}, giving it ownership of the child. 
 \begin{DoxyParams}{Parameters}
 {\em child} & The \hyperlink{classLarp_1_1Node}{Node} to make a child of this node \\
@@ -91,62 +101,125 @@ Attaches child to this \hyperlink{classLarp_1_1Node}{Node}, giving it ownership 
 \end{DoxyParams}
 
 \begin{DoxyExceptions}{Exceptions}
-{\em runtime\-\_\-error} & if this child is attached to another \hyperlink{classLarp_1_1Node}{Node}. \\
+{\em runtime\+\_\+error} & if this child is attached to another \hyperlink{classLarp_1_1Node}{Node}. \\
 \hline
 \end{DoxyExceptions}
-\hypertarget{classLarp_1_1Node_aa48fabf718331c31dc1b1239853cfe09}{\index{Larp\-::\-Node@{Larp\-::\-Node}!attach\-\_\-entity@{attach\-\_\-entity}}
-\index{attach\-\_\-entity@{attach\-\_\-entity}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{attach\-\_\-entity}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Node\-::attach\-\_\-entity (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!attach\+\_\+entity@{attach\+\_\+entity}}
+\index{attach\+\_\+entity@{attach\+\_\+entity}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{attach\+\_\+entity(\+Entity\+Ptr entity)}{attach_entity(EntityPtr entity)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Node\+::attach\+\_\+entity (
 \begin{DoxyParamCaption}
-\item[{{\bf Shared\-Entity}}]{entity}
+\item[{{\bf Entity\+Ptr}}]{entity}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_aa48fabf718331c31dc1b1239853cfe09}
-Attaches an Shared\-Entity to this object 
+)}\hypertarget{classLarp_1_1Node_a2525a02b9ad2bd24e4d2a4338cd9a8e1}{}\label{classLarp_1_1Node_a2525a02b9ad2bd24e4d2a4338cd9a8e1}
+Attaches an \hyperlink{classLarp_1_1Entity}{Entity} to this object 
 \begin{DoxyParams}{Parameters}
-{\em entity} & The Shared\-Entity to attach to this object \\
+{\em entity} & The pointer to the \hyperlink{classLarp_1_1Entity}{Entity} to attach to this object \\
 \hline
 \end{DoxyParams}
-\hypertarget{classLarp_1_1Node_a3ad8fa3c292ce51ce8ac0922c96608f1}{\index{Larp\-::\-Node@{Larp\-::\-Node}!create\-\_\-child@{create\-\_\-child}}
-\index{create\-\_\-child@{create\-\_\-child}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{create\-\_\-child}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\-Ptr} Larp\-::\-Node\-::create\-\_\-child (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!create\+\_\+child@{create\+\_\+child}}
+\index{create\+\_\+child@{create\+\_\+child}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{create\+\_\+child()}{create_child()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Ptr} Larp\+::\+Node\+::create\+\_\+child (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_a3ad8fa3c292ce51ce8ac0922c96608f1}
+)}\hypertarget{classLarp_1_1Node_a3ad8fa3c292ce51ce8ac0922c96608f1}{}\label{classLarp_1_1Node_a3ad8fa3c292ce51ce8ac0922c96608f1}
 Creates a new \hyperlink{classLarp_1_1Node}{Node} that is a child of this \hyperlink{classLarp_1_1Node}{Node}. \begin{DoxyReturn}{Returns}
 A pointer to the new \hyperlink{classLarp_1_1Node}{Node} 
 \end{DoxyReturn}
-\hypertarget{classLarp_1_1Node_a091f322ac9a2dcfcb81ab38bdff61399}{\index{Larp\-::\-Node@{Larp\-::\-Node}!delete\-\_\-child@{delete\-\_\-child}}
-\index{delete\-\_\-child@{delete\-\_\-child}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{delete\-\_\-child}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Node\-::delete\-\_\-child (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!delete\+\_\+child@{delete\+\_\+child}}
+\index{delete\+\_\+child@{delete\+\_\+child}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{delete\+\_\+child(\+Node\+Ptr child)}{delete_child(NodePtr child)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Node\+::delete\+\_\+child (
 \begin{DoxyParamCaption}
-\item[{{\bf Node\-Ptr}}]{child}
+\item[{{\bf Node\+Ptr}}]{child}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_a091f322ac9a2dcfcb81ab38bdff61399}
-Removes a given p\-Node as a child of this \hyperlink{classLarp_1_1Node}{Node} object. \begin{DoxyNote}{Note}
+)}\hypertarget{classLarp_1_1Node_a091f322ac9a2dcfcb81ab38bdff61399}{}\label{classLarp_1_1Node_a091f322ac9a2dcfcb81ab38bdff61399}
+Removes a given p\+Node as a child of this \hyperlink{classLarp_1_1Node}{Node} object. \begin{DoxyNote}{Note}
 After calling this function, child is still a valid pointer to a \hyperlink{classLarp_1_1Node}{Node}. 
 
-Use this function instead of delete\-\_\-child if you wish to attach this child to another \hyperlink{classLarp_1_1Node}{Node}. 
+Use this function instead of delete\+\_\+child if you wish to attach this child to another \hyperlink{classLarp_1_1Node}{Node}. 
 \end{DoxyNote}
-\hypertarget{classLarp_1_1Node_aa701cc59976ddbd1c232e027df0e4a9b}{\index{Larp\-::\-Node@{Larp\-::\-Node}!draw@{draw}}
-\index{draw@{draw}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{draw}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Node\-::draw (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!detach\+\_\+entity@{detach\+\_\+entity}}
+\index{detach\+\_\+entity@{detach\+\_\+entity}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{detach\+\_\+entity()}{detach_entity()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Entity\+Ptr} Larp\+::\+Node\+::detach\+\_\+entity (
 \begin{DoxyParamCaption}
-\item[{glm\-::mat4}]{model, }
-\item[{glm\-::mat4 \&}]{view, }
-\item[{glm\-::mat4 \&}]{projection}
+{}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_aa701cc59976ddbd1c232e027df0e4a9b}
-Draws the \hyperlink{classLarp_1_1Entity}{Entity} attached to this node using this \hyperlink{classLarp_1_1Node}{Node}'s derived model matrix, then recursively calls the draw method on each of this \hyperlink{classLarp_1_1Node}{Node}'s children. \begin{DoxyNote}{Note}
-the order in which the draw method is called on the \hyperlink{classLarp_1_1Node}{Node}'s children is not necessarily the order in which they were created. 
+)}\hypertarget{classLarp_1_1Node_af32ccf64d85fa71079fa4755648f620f}{}\label{classLarp_1_1Node_af32ccf64d85fa71079fa4755648f620f}
+Detaches the \hyperlink{classLarp_1_1Entity}{Entity} that this \hyperlink{classLarp_1_1Node}{Node} owns \begin{DoxyWarning}{Warning}
+This function should only be called if you are going to attach this \hyperlink{classLarp_1_1Node}{Node}\textquotesingle{}s \hyperlink{classLarp_1_1Entity}{Entity} to another \hyperlink{classLarp_1_1Node}{Node}. 
+\end{DoxyWarning}
+\index{Larp\+::\+Node@{Larp\+::\+Node}!draw@{draw}}
+\index{draw@{draw}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{draw(glm\+::mat4 model, glm\+::mat4 \&view, glm\+::mat4 \&projection, const glm\+::vec3 \&view\+\_\+pos, const std\+::vector$<$ Unique\+Directional $>$ \&directional\+\_\+lights, const std\+::vector$<$ Unique\+Point $>$ \&point\+\_\+lights, const std\+::vector$<$ Unique\+Spot $>$ \&spot\+\_\+lights)}{draw(glm::mat4 model, glm::mat4 &view, glm::mat4 &projection, const glm::vec3 &view_pos, const std::vector< UniqueDirectional > &directional_lights, const std::vector< UniquePoint > &point_lights, const std::vector< UniqueSpot > &spot_lights)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Node\+::draw (
+\begin{DoxyParamCaption}
+\item[{glm\+::mat4}]{model, }
+\item[{glm\+::mat4 \&}]{view, }
+\item[{glm\+::mat4 \&}]{projection, }
+\item[{const glm\+::vec3 \&}]{view\+\_\+pos, }
+\item[{const std\+::vector$<$ {\bf Unique\+Directional} $>$ \&}]{directional\+\_\+lights, }
+\item[{const std\+::vector$<$ {\bf Unique\+Point} $>$ \&}]{point\+\_\+lights, }
+\item[{const std\+::vector$<$ {\bf Unique\+Spot} $>$ \&}]{spot\+\_\+lights}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1Node_aca27ebdb37e7dde6ce19e8b886b01b14}{}\label{classLarp_1_1Node_aca27ebdb37e7dde6ce19e8b886b01b14}
+Draws the \hyperlink{classLarp_1_1Entity}{Entity} attached to this node using this \hyperlink{classLarp_1_1Node}{Node}\textquotesingle{}s derived model matrix, then recursively calls the draw method on each of this \hyperlink{classLarp_1_1Node}{Node}\textquotesingle{}s children. 
+\begin{DoxyParams}{Parameters}
+{\em view\+\_\+pos} & The camera view position to apply during rendering. This should be obtained from a \hyperlink{classCamera}{Camera} object and passed in via the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}. \\
+\hline
+{\em directional\+\_\+lights} & The vector of directional lights currently held by the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}. \\
+\hline
+{\em point\+\_\+lights} & The vector of point lights currently held by the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}. \\
+\hline
+{\em spot\+\_\+lights} & The vector of spot lights currently held by the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+the order in which the draw method is called on the \hyperlink{classLarp_1_1Node}{Node}\textquotesingle{}s children is not necessarily the order in which they were created. 
 \end{DoxyNote}
-\hypertarget{classLarp_1_1Node_ad8f8390e764a96398d080538c437c7ee}{\index{Larp\-::\-Node@{Larp\-::\-Node}!pitch@{pitch}}
-\index{pitch@{pitch}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{pitch}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Node\-::pitch (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!get\+\_\+scale@{get\+\_\+scale}}
+\index{get\+\_\+scale@{get\+\_\+scale}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{get\+\_\+scale() const }{get_scale() const }}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Larp\+::\+Node\+::get\+\_\+scale (
 \begin{DoxyParamCaption}
-\item[{G\-Lfloat}]{pitch}
+{}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_ad8f8390e764a96398d080538c437c7ee}
+) const}\hypertarget{classLarp_1_1Node_a396cac721eb4a2cb46b14fc63f71ae8c}{}\label{classLarp_1_1Node_a396cac721eb4a2cb46b14fc63f71ae8c}
+\begin{DoxyReturn}{Returns}
+the scale of this \hyperlink{classLarp_1_1Node}{Node} 
+\end{DoxyReturn}
+\index{Larp\+::\+Node@{Larp\+::\+Node}!get\+\_\+scaled\+\_\+bounding\+\_\+box@{get\+\_\+scaled\+\_\+bounding\+\_\+box}}
+\index{get\+\_\+scaled\+\_\+bounding\+\_\+box@{get\+\_\+scaled\+\_\+bounding\+\_\+box}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{get\+\_\+scaled\+\_\+bounding\+\_\+box() const }{get_scaled_bounding_box() const }}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Larp\+::\+Node\+::get\+\_\+scaled\+\_\+bounding\+\_\+box (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classLarp_1_1Node_a3f83d9b01243b4a9ec4402be16f16333}{}\label{classLarp_1_1Node_a3f83d9b01243b4a9ec4402be16f16333}
+\index{Larp\+::\+Node@{Larp\+::\+Node}!get\+\_\+scaled\+\_\+depth@{get\+\_\+scaled\+\_\+depth}}
+\index{get\+\_\+scaled\+\_\+depth@{get\+\_\+scaled\+\_\+depth}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{get\+\_\+scaled\+\_\+depth() const }{get_scaled_depth() const }}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Larp\+::\+Node\+::get\+\_\+scaled\+\_\+depth (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classLarp_1_1Node_a296b152b7e35bbbd64a91b5533087e41}{}\label{classLarp_1_1Node_a296b152b7e35bbbd64a91b5533087e41}
+\index{Larp\+::\+Node@{Larp\+::\+Node}!get\+\_\+scaled\+\_\+height@{get\+\_\+scaled\+\_\+height}}
+\index{get\+\_\+scaled\+\_\+height@{get\+\_\+scaled\+\_\+height}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{get\+\_\+scaled\+\_\+height() const }{get_scaled_height() const }}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Larp\+::\+Node\+::get\+\_\+scaled\+\_\+height (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classLarp_1_1Node_aae8201315932cad238f72bfea116e12f}{}\label{classLarp_1_1Node_aae8201315932cad238f72bfea116e12f}
+\index{Larp\+::\+Node@{Larp\+::\+Node}!get\+\_\+scaled\+\_\+width@{get\+\_\+scaled\+\_\+width}}
+\index{get\+\_\+scaled\+\_\+width@{get\+\_\+scaled\+\_\+width}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{get\+\_\+scaled\+\_\+width() const }{get_scaled_width() const }}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lfloat Larp\+::\+Node\+::get\+\_\+scaled\+\_\+width (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classLarp_1_1Node_a95cf3fbe1ec65bca7a90d6ef13c2e6af}{}\label{classLarp_1_1Node_a95cf3fbe1ec65bca7a90d6ef13c2e6af}
+\index{Larp\+::\+Node@{Larp\+::\+Node}!pitch@{pitch}}
+\index{pitch@{pitch}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{pitch(\+G\+Lfloat pitch)}{pitch(GLfloat pitch)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Node\+::pitch (
+\begin{DoxyParamCaption}
+\item[{G\+Lfloat}]{pitch}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1Node_ad8f8390e764a96398d080538c437c7ee}{}\label{classLarp_1_1Node_ad8f8390e764a96398d080538c437c7ee}
 Pitchs the \hyperlink{classLarp_1_1Node}{Node} 
 \begin{DoxyParams}{Parameters}
 {\em pitch} & The degrees to pitch this \hyperlink{classLarp_1_1Node}{Node} \\
@@ -157,33 +230,33 @@ This function expects pitch in degrees
 
 This function adds to any pitch amount already applied to the \hyperlink{classLarp_1_1Node}{Node} 
 \end{DoxyNote}
-\hypertarget{classLarp_1_1Node_accd1116b2d35500ae519588d07f1f30e}{\index{Larp\-::\-Node@{Larp\-::\-Node}!remove\-\_\-child@{remove\-\_\-child}}
-\index{remove\-\_\-child@{remove\-\_\-child}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{remove\-\_\-child}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\-Ptr} Larp\-::\-Node\-::remove\-\_\-child (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!remove\+\_\+child@{remove\+\_\+child}}
+\index{remove\+\_\+child@{remove\+\_\+child}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{remove\+\_\+child(\+Node\+Ptr child)}{remove_child(NodePtr child)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Ptr} Larp\+::\+Node\+::remove\+\_\+child (
 \begin{DoxyParamCaption}
-\item[{{\bf Node\-Ptr}}]{child}
+\item[{{\bf Node\+Ptr}}]{child}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_accd1116b2d35500ae519588d07f1f30e}
-Removes a given p\-Node as a child of this \hyperlink{classLarp_1_1Node}{Node} object. \begin{DoxyReturn}{Returns}
+)}\hypertarget{classLarp_1_1Node_accd1116b2d35500ae519588d07f1f30e}{}\label{classLarp_1_1Node_accd1116b2d35500ae519588d07f1f30e}
+Removes a given p\+Node as a child of this \hyperlink{classLarp_1_1Node}{Node} object. \begin{DoxyReturn}{Returns}
 A pointer to the child was removed 
 \end{DoxyReturn}
-\hypertarget{classLarp_1_1Node_a390c52314f7cb0f27244994aba34dc10}{\index{Larp\-::\-Node@{Larp\-::\-Node}!remove\-\_\-entity@{remove\-\_\-entity}}
-\index{remove\-\_\-entity@{remove\-\_\-entity}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{remove\-\_\-entity}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Node\-::remove\-\_\-entity (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!remove\+\_\+entity@{remove\+\_\+entity}}
+\index{remove\+\_\+entity@{remove\+\_\+entity}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{remove\+\_\+entity()}{remove_entity()}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Node\+::remove\+\_\+entity (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_a390c52314f7cb0f27244994aba34dc10}
-Detaches the p\-Entity from this \hyperlink{classLarp_1_1Node}{Node} \begin{DoxyWarning}{Warning}
-After this function is called, any pointers to this object's \hyperlink{classLarp_1_1Entity}{Entity} are no longer valid. 
+)}\hypertarget{classLarp_1_1Node_a390c52314f7cb0f27244994aba34dc10}{}\label{classLarp_1_1Node_a390c52314f7cb0f27244994aba34dc10}
+Deletes the \hyperlink{classLarp_1_1Entity}{Entity} that this \hyperlink{classLarp_1_1Node}{Node} owns \begin{DoxyWarning}{Warning}
+After this function is called, any pointers to this object\textquotesingle{}s \hyperlink{classLarp_1_1Entity}{Entity} are no longer valid. 
 \end{DoxyWarning}
-\hypertarget{classLarp_1_1Node_a1c839a3075f1e97aa368ba8212c50ee7}{\index{Larp\-::\-Node@{Larp\-::\-Node}!roll@{roll}}
-\index{roll@{roll}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{roll}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Node\-::roll (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!roll@{roll}}
+\index{roll@{roll}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{roll(\+G\+Lfloat roll)}{roll(GLfloat roll)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Node\+::roll (
 \begin{DoxyParamCaption}
-\item[{G\-Lfloat}]{roll}
+\item[{G\+Lfloat}]{roll}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_a1c839a3075f1e97aa368ba8212c50ee7}
+)}\hypertarget{classLarp_1_1Node_a1c839a3075f1e97aa368ba8212c50ee7}{}\label{classLarp_1_1Node_a1c839a3075f1e97aa368ba8212c50ee7}
 Rolls the \hyperlink{classLarp_1_1Node}{Node} 
 \begin{DoxyParams}{Parameters}
 {\em roll} & The degrees to roll this \hyperlink{classLarp_1_1Node}{Node} \\
@@ -194,16 +267,16 @@ This function expects roll in degrees
 
 This function adds to any roll amount already applied to the \hyperlink{classLarp_1_1Node}{Node} 
 \end{DoxyNote}
-\hypertarget{classLarp_1_1Node_ad1b12b56ba7c708d1ce51ec0762f7476}{\index{Larp\-::\-Node@{Larp\-::\-Node}!set\-\_\-orientation@{set\-\_\-orientation}}
-\index{set\-\_\-orientation@{set\-\_\-orientation}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{set\-\_\-orientation}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Node\-::set\-\_\-orientation (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!set\+\_\+orientation@{set\+\_\+orientation}}
+\index{set\+\_\+orientation@{set\+\_\+orientation}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{set\+\_\+orientation(\+G\+Lfloat x, G\+Lfloat y, G\+Lfloat z, G\+Lfloat w)}{set_orientation(GLfloat x, GLfloat y, GLfloat z, GLfloat w)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Node\+::set\+\_\+orientation (
 \begin{DoxyParamCaption}
-\item[{G\-Lfloat}]{x, }
-\item[{G\-Lfloat}]{y, }
-\item[{G\-Lfloat}]{z, }
-\item[{G\-Lfloat}]{w}
+\item[{G\+Lfloat}]{x, }
+\item[{G\+Lfloat}]{y, }
+\item[{G\+Lfloat}]{z, }
+\item[{G\+Lfloat}]{w}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_ad1b12b56ba7c708d1ce51ec0762f7476}
+)}\hypertarget{classLarp_1_1Node_ad1b12b56ba7c708d1ce51ec0762f7476}{}\label{classLarp_1_1Node_ad1b12b56ba7c708d1ce51ec0762f7476}
 Sets the orientation of this \hyperlink{classLarp_1_1Node}{Node} 
 \begin{DoxyParams}{Parameters}
 {\em x} & The x-\/direction of the axis of rotation \\
@@ -219,31 +292,31 @@ Sets the orientation of this \hyperlink{classLarp_1_1Node}{Node}
 This function expects w in degrees 
 \end{DoxyNote}
 \begin{DoxyWarning}{Warning}
-This function expects an expanded version of the (axis, angle) quaternion representation, {\bfseries not} the same 4-\/components that glm\-::quat(w, x, y, z) expect. 
+This function expects an expanded version of the (axis, angle) quaternion representation, {\bfseries not} the same 4-\/components that glm\+::quat(w, x, y, z) expect. 
 \end{DoxyWarning}
-\hypertarget{classLarp_1_1Node_a3695bdfa48908be007d751e9c05bdb0e}{\index{Larp\-::\-Node@{Larp\-::\-Node}!set\-\_\-orientation@{set\-\_\-orientation}}
-\index{set\-\_\-orientation@{set\-\_\-orientation}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{set\-\_\-orientation}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Node\-::set\-\_\-orientation (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!set\+\_\+orientation@{set\+\_\+orientation}}
+\index{set\+\_\+orientation@{set\+\_\+orientation}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{set\+\_\+orientation(glm\+::quat rotation)}{set_orientation(glm::quat rotation)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Node\+::set\+\_\+orientation (
 \begin{DoxyParamCaption}
-\item[{glm\-::quat}]{rotation}
+\item[{glm\+::quat}]{rotation}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_a3695bdfa48908be007d751e9c05bdb0e}
+)}\hypertarget{classLarp_1_1Node_a3695bdfa48908be007d751e9c05bdb0e}{}\label{classLarp_1_1Node_a3695bdfa48908be007d751e9c05bdb0e}
 Sets the orientation of this \hyperlink{classLarp_1_1Node}{Node} 
 \begin{DoxyParams}{Parameters}
 {\em rotation} & The amount to rotate this \hyperlink{classLarp_1_1Node}{Node} \\
 \hline
 \end{DoxyParams}
 \begin{DoxyWarning}{Warning}
-This function expects a properly computed glm\-::quat, such as one obtained by calling glm\-::angle\-Axis(). 
+This function expects a properly computed glm\+::quat, such as one obtained by calling glm\+::angle\+Axis(). 
 \end{DoxyWarning}
-\hypertarget{classLarp_1_1Node_a0d5e761af674c2c547e8638b91a2a85b}{\index{Larp\-::\-Node@{Larp\-::\-Node}!set\-\_\-orientation@{set\-\_\-orientation}}
-\index{set\-\_\-orientation@{set\-\_\-orientation}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{set\-\_\-orientation}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Node\-::set\-\_\-orientation (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!set\+\_\+orientation@{set\+\_\+orientation}}
+\index{set\+\_\+orientation@{set\+\_\+orientation}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{set\+\_\+orientation(glm\+::vec3 axis, G\+Lfloat w)}{set_orientation(glm::vec3 axis, GLfloat w)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Node\+::set\+\_\+orientation (
 \begin{DoxyParamCaption}
-\item[{glm\-::vec3}]{axis, }
-\item[{G\-Lfloat}]{w}
+\item[{glm\+::vec3}]{axis, }
+\item[{G\+Lfloat}]{w}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_a0d5e761af674c2c547e8638b91a2a85b}
+)}\hypertarget{classLarp_1_1Node_a0d5e761af674c2c547e8638b91a2a85b}{}\label{classLarp_1_1Node_a0d5e761af674c2c547e8638b91a2a85b}
 Sets the orientation of this \hyperlink{classLarp_1_1Node}{Node} 
 \begin{DoxyParams}{Parameters}
 {\em axis} & The axis of rotation \\
@@ -254,15 +327,15 @@ Sets the orientation of this \hyperlink{classLarp_1_1Node}{Node}
 \begin{DoxyNote}{Note}
 This function expects w in degrees 
 \end{DoxyNote}
-\hypertarget{classLarp_1_1Node_a44070f7bb06cdca4fafbdf65f0d6118e}{\index{Larp\-::\-Node@{Larp\-::\-Node}!set\-\_\-position@{set\-\_\-position}}
-\index{set\-\_\-position@{set\-\_\-position}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{set\-\_\-position}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Node\-::set\-\_\-position (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!set\+\_\+position@{set\+\_\+position}}
+\index{set\+\_\+position@{set\+\_\+position}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{set\+\_\+position(\+G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)}{set_position(GLfloat x, GLfloat y, GLfloat z)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Node\+::set\+\_\+position (
 \begin{DoxyParamCaption}
-\item[{G\-Lfloat}]{x, }
-\item[{G\-Lfloat}]{y, }
-\item[{G\-Lfloat}]{z}
+\item[{G\+Lfloat}]{x, }
+\item[{G\+Lfloat}]{y, }
+\item[{G\+Lfloat}]{z}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_a44070f7bb06cdca4fafbdf65f0d6118e}
+)}\hypertarget{classLarp_1_1Node_a44070f7bb06cdca4fafbdf65f0d6118e}{}\label{classLarp_1_1Node_a44070f7bb06cdca4fafbdf65f0d6118e}
 Sets the position of this \hyperlink{classLarp_1_1Node}{Node} 
 \begin{DoxyParams}{Parameters}
 {\em x} & The new x position. \\
@@ -272,39 +345,39 @@ Sets the position of this \hyperlink{classLarp_1_1Node}{Node}
 {\em z} & The new z position. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classLarp_1_1Node_a8eef7a9829817bfe9b2ff3bed5b0c3a8}{\index{Larp\-::\-Node@{Larp\-::\-Node}!set\-\_\-position@{set\-\_\-position}}
-\index{set\-\_\-position@{set\-\_\-position}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{set\-\_\-position}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Node\-::set\-\_\-position (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!set\+\_\+position@{set\+\_\+position}}
+\index{set\+\_\+position@{set\+\_\+position}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{set\+\_\+position(glm\+::vec3 position)}{set_position(glm::vec3 position)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Node\+::set\+\_\+position (
 \begin{DoxyParamCaption}
-\item[{glm\-::vec3}]{position}
+\item[{glm\+::vec3}]{position}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_a8eef7a9829817bfe9b2ff3bed5b0c3a8}
+)}\hypertarget{classLarp_1_1Node_a8eef7a9829817bfe9b2ff3bed5b0c3a8}{}\label{classLarp_1_1Node_a8eef7a9829817bfe9b2ff3bed5b0c3a8}
 Sets the position of this \hyperlink{classLarp_1_1Node}{Node} 
 \begin{DoxyParams}{Parameters}
 {\em position} & The new position of this \hyperlink{classLarp_1_1Node}{Node} \\
 \hline
 \end{DoxyParams}
-\hypertarget{classLarp_1_1Node_a20048e6f1487b9e6bdb5e2f66794de65}{\index{Larp\-::\-Node@{Larp\-::\-Node}!set\-\_\-scale@{set\-\_\-scale}}
-\index{set\-\_\-scale@{set\-\_\-scale}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{set\-\_\-scale}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Node\-::set\-\_\-scale (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!set\+\_\+scale@{set\+\_\+scale}}
+\index{set\+\_\+scale@{set\+\_\+scale}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{set\+\_\+scale(glm\+::vec3 scale)}{set_scale(glm::vec3 scale)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Node\+::set\+\_\+scale (
 \begin{DoxyParamCaption}
-\item[{glm\-::vec3}]{scale}
+\item[{glm\+::vec3}]{scale}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_a20048e6f1487b9e6bdb5e2f66794de65}
+)}\hypertarget{classLarp_1_1Node_a20048e6f1487b9e6bdb5e2f66794de65}{}\label{classLarp_1_1Node_a20048e6f1487b9e6bdb5e2f66794de65}
 Scales the \hyperlink{classLarp_1_1Node}{Node} 
 \begin{DoxyParams}{Parameters}
 {\em scale} & The number of units to scale this \hyperlink{classLarp_1_1Node}{Node} in the x-\/, y-\/, and z-\/directions \\
 \hline
 \end{DoxyParams}
-\hypertarget{classLarp_1_1Node_aa212fa28bc6cc6df4ded2a487fd591eb}{\index{Larp\-::\-Node@{Larp\-::\-Node}!set\-\_\-scale@{set\-\_\-scale}}
-\index{set\-\_\-scale@{set\-\_\-scale}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{set\-\_\-scale}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Node\-::set\-\_\-scale (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!set\+\_\+scale@{set\+\_\+scale}}
+\index{set\+\_\+scale@{set\+\_\+scale}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{set\+\_\+scale(\+G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)}{set_scale(GLfloat x, GLfloat y, GLfloat z)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Node\+::set\+\_\+scale (
 \begin{DoxyParamCaption}
-\item[{G\-Lfloat}]{x, }
-\item[{G\-Lfloat}]{y, }
-\item[{G\-Lfloat}]{z}
+\item[{G\+Lfloat}]{x, }
+\item[{G\+Lfloat}]{y, }
+\item[{G\+Lfloat}]{z}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_aa212fa28bc6cc6df4ded2a487fd591eb}
+)}\hypertarget{classLarp_1_1Node_aa212fa28bc6cc6df4ded2a487fd591eb}{}\label{classLarp_1_1Node_aa212fa28bc6cc6df4ded2a487fd591eb}
 Scales the \hyperlink{classLarp_1_1Node}{Node} 
 \begin{DoxyParams}{Parameters}
 {\em x} & The number of units to scale this \hyperlink{classLarp_1_1Node}{Node} in the x-\/direction \\
@@ -314,15 +387,15 @@ Scales the \hyperlink{classLarp_1_1Node}{Node}
 {\em z} & The number of units to scale this \hyperlink{classLarp_1_1Node}{Node} in the z-\/direction \\
 \hline
 \end{DoxyParams}
-\hypertarget{classLarp_1_1Node_aa0186c5d77b58e2d7ede02dec0f2cdc4}{\index{Larp\-::\-Node@{Larp\-::\-Node}!translate@{translate}}
-\index{translate@{translate}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{translate}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Node\-::translate (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!translate@{translate}}
+\index{translate@{translate}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{translate(\+G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)}{translate(GLfloat x, GLfloat y, GLfloat z)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Node\+::translate (
 \begin{DoxyParamCaption}
-\item[{G\-Lfloat}]{x, }
-\item[{G\-Lfloat}]{y, }
-\item[{G\-Lfloat}]{z}
+\item[{G\+Lfloat}]{x, }
+\item[{G\+Lfloat}]{y, }
+\item[{G\+Lfloat}]{z}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_aa0186c5d77b58e2d7ede02dec0f2cdc4}
+)}\hypertarget{classLarp_1_1Node_aa0186c5d77b58e2d7ede02dec0f2cdc4}{}\label{classLarp_1_1Node_aa0186c5d77b58e2d7ede02dec0f2cdc4}
 Translates the \hyperlink{classLarp_1_1Node}{Node} 
 \begin{DoxyParams}{Parameters}
 {\em x} & The number of units in the x-\/direction to translate this \hyperlink{classLarp_1_1Node}{Node} \\
@@ -335,13 +408,13 @@ Translates the \hyperlink{classLarp_1_1Node}{Node}
 \begin{DoxyNote}{Note}
 This function adds to any translation amount already applied to the \hyperlink{classLarp_1_1Node}{Node} 
 \end{DoxyNote}
-\hypertarget{classLarp_1_1Node_a7494be4e04c8f5911aedeeb41c27993b}{\index{Larp\-::\-Node@{Larp\-::\-Node}!translate@{translate}}
-\index{translate@{translate}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{translate}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Node\-::translate (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!translate@{translate}}
+\index{translate@{translate}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{translate(glm\+::vec3 vec)}{translate(glm::vec3 vec)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Node\+::translate (
 \begin{DoxyParamCaption}
-\item[{glm\-::vec3}]{vec}
+\item[{glm\+::vec3}]{vec}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_a7494be4e04c8f5911aedeeb41c27993b}
+)}\hypertarget{classLarp_1_1Node_a7494be4e04c8f5911aedeeb41c27993b}{}\label{classLarp_1_1Node_a7494be4e04c8f5911aedeeb41c27993b}
 Translates the \hyperlink{classLarp_1_1Node}{Node} 
 \begin{DoxyParams}{Parameters}
 {\em vec} & The number of units to translate this \hyperlink{classLarp_1_1Node}{Node} in the x-\/, y-\/, and z-\/directions \\
@@ -350,13 +423,13 @@ Translates the \hyperlink{classLarp_1_1Node}{Node}
 \begin{DoxyNote}{Note}
 This function adds to any translation amount already applied to the \hyperlink{classLarp_1_1Node}{Node} 
 \end{DoxyNote}
-\hypertarget{classLarp_1_1Node_a829a3cf29a5f165f7d771cc283f25053}{\index{Larp\-::\-Node@{Larp\-::\-Node}!yaw@{yaw}}
-\index{yaw@{yaw}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{yaw}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Node\-::yaw (
+\index{Larp\+::\+Node@{Larp\+::\+Node}!yaw@{yaw}}
+\index{yaw@{yaw}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{yaw(\+G\+Lfloat yaw)}{yaw(GLfloat yaw)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Node\+::yaw (
 \begin{DoxyParamCaption}
-\item[{G\-Lfloat}]{yaw}
+\item[{G\+Lfloat}]{yaw}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1Node_a829a3cf29a5f165f7d771cc283f25053}
+)}\hypertarget{classLarp_1_1Node_a829a3cf29a5f165f7d771cc283f25053}{}\label{classLarp_1_1Node_a829a3cf29a5f165f7d771cc283f25053}
 Yaws the \hyperlink{classLarp_1_1Node}{Node} 
 \begin{DoxyParams}{Parameters}
 {\em yaw} & The degrees to yaw this \hyperlink{classLarp_1_1Node}{Node} \\
@@ -370,27 +443,27 @@ This function adds to any yaw amount already applied to the \hyperlink{classLarp
 
 
 \subsection{Member Data Documentation}
-\hypertarget{classLarp_1_1Node_a583f7c56966cb7df1759fb42116166f7}{\index{Larp\-::\-Node@{Larp\-::\-Node}!\-\_\-children@{\-\_\-children}}
-\index{\-\_\-children@{\-\_\-children}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{\-\_\-children}]{\setlength{\rightskip}{0pt plus 5cm}std\-::unordered\-\_\-map$<${\bf Node}$\ast$, {\bf Unique\-Node}$>$ Larp\-::\-Node\-::\-\_\-children\hspace{0.3cm}{\ttfamily [private]}}}\label{classLarp_1_1Node_a583f7c56966cb7df1759fb42116166f7}
-All of this \hyperlink{classLarp_1_1Node}{Node}'s child \hyperlink{classLarp_1_1Node}{Node}'s. We use a map instead of a set because std\-::unordered\-\_\-set doesn't support non-\/const iterators \hypertarget{classLarp_1_1Node_ab313f78673bfed1596bb1679aec92326}{\index{Larp\-::\-Node@{Larp\-::\-Node}!\-\_\-entity@{\-\_\-entity}}
-\index{\-\_\-entity@{\-\_\-entity}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{\-\_\-entity}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Shared\-Entity} Larp\-::\-Node\-::\-\_\-entity\hspace{0.3cm}{\ttfamily [private]}}}\label{classLarp_1_1Node_ab313f78673bfed1596bb1679aec92326}
-The \hyperlink{classLarp_1_1Entity}{Entity} object attached to this \hyperlink{classLarp_1_1Node}{Node}. Drawn during rendering. \hypertarget{classLarp_1_1Node_affe541c1eca6c4d1863c4d8aca13ea86}{\index{Larp\-::\-Node@{Larp\-::\-Node}!\-\_\-parent@{\-\_\-parent}}
-\index{\-\_\-parent@{\-\_\-parent}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{\-\_\-parent}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node}$\ast$ Larp\-::\-Node\-::\-\_\-parent\hspace{0.3cm}{\ttfamily [private]}}}\label{classLarp_1_1Node_affe541c1eca6c4d1863c4d8aca13ea86}
-This \hyperlink{classLarp_1_1Node}{Node}'s parent \hyperlink{classLarp_1_1Node}{Node}. \hypertarget{classLarp_1_1Node_a060f49eb175b70c9e0da515fa685f1f2}{\index{Larp\-::\-Node@{Larp\-::\-Node}!\-\_\-position@{\-\_\-position}}
-\index{\-\_\-position@{\-\_\-position}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{\-\_\-position}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Larp\-::\-Node\-::\-\_\-position\hspace{0.3cm}{\ttfamily [private]}}}\label{classLarp_1_1Node_a060f49eb175b70c9e0da515fa685f1f2}
-This \hyperlink{classLarp_1_1Node}{Node}'s position \hypertarget{classLarp_1_1Node_a3bf60bf55c2cda89031f9327fafa0d17}{\index{Larp\-::\-Node@{Larp\-::\-Node}!\-\_\-rotation@{\-\_\-rotation}}
-\index{\-\_\-rotation@{\-\_\-rotation}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{\-\_\-rotation}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::quat Larp\-::\-Node\-::\-\_\-rotation\hspace{0.3cm}{\ttfamily [private]}}}\label{classLarp_1_1Node_a3bf60bf55c2cda89031f9327fafa0d17}
-This \hyperlink{classLarp_1_1Node}{Node}'s rotation \hypertarget{classLarp_1_1Node_ae295b7db9065cd5bcc1edb32af6e7987}{\index{Larp\-::\-Node@{Larp\-::\-Node}!\-\_\-scale@{\-\_\-scale}}
-\index{\-\_\-scale@{\-\_\-scale}!Larp::Node@{Larp\-::\-Node}}
-\subsubsection[{\-\_\-scale}]{\setlength{\rightskip}{0pt plus 5cm}glm\-::vec3 Larp\-::\-Node\-::\-\_\-scale\hspace{0.3cm}{\ttfamily [private]}}}\label{classLarp_1_1Node_ae295b7db9065cd5bcc1edb32af6e7987}
-This \hyperlink{classLarp_1_1Node}{Node}'s scale 
+\index{Larp\+::\+Node@{Larp\+::\+Node}!\+\_\+children@{\+\_\+children}}
+\index{\+\_\+children@{\+\_\+children}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{\+\_\+children}{_children}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unordered\+\_\+map$<${\bf Node}$\ast$, {\bf Unique\+Node}$>$ Larp\+::\+Node\+::\+\_\+children\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Node_a583f7c56966cb7df1759fb42116166f7}{}\label{classLarp_1_1Node_a583f7c56966cb7df1759fb42116166f7}
+All of this \hyperlink{classLarp_1_1Node}{Node}\textquotesingle{}s child \hyperlink{classLarp_1_1Node}{Node}\textquotesingle{}s. We use a map instead of a set because std\+::unordered\+\_\+set doesn\textquotesingle{}t support non-\/const iterators \index{Larp\+::\+Node@{Larp\+::\+Node}!\+\_\+entity@{\+\_\+entity}}
+\index{\+\_\+entity@{\+\_\+entity}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{\+\_\+entity}{_entity}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Unique\+Entity} Larp\+::\+Node\+::\+\_\+entity\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Node_a8bdb3e4d6e3553bbf1620c1a9543292a}{}\label{classLarp_1_1Node_a8bdb3e4d6e3553bbf1620c1a9543292a}
+The \hyperlink{classLarp_1_1Entity}{Entity} object attached to this \hyperlink{classLarp_1_1Node}{Node}. Drawn during rendering. \index{Larp\+::\+Node@{Larp\+::\+Node}!\+\_\+parent@{\+\_\+parent}}
+\index{\+\_\+parent@{\+\_\+parent}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{\+\_\+parent}{_parent}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node}$\ast$ Larp\+::\+Node\+::\+\_\+parent\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Node_affe541c1eca6c4d1863c4d8aca13ea86}{}\label{classLarp_1_1Node_affe541c1eca6c4d1863c4d8aca13ea86}
+This \hyperlink{classLarp_1_1Node}{Node}\textquotesingle{}s parent \hyperlink{classLarp_1_1Node}{Node}. \index{Larp\+::\+Node@{Larp\+::\+Node}!\+\_\+position@{\+\_\+position}}
+\index{\+\_\+position@{\+\_\+position}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{\+\_\+position}{_position}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Larp\+::\+Node\+::\+\_\+position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Node_a060f49eb175b70c9e0da515fa685f1f2}{}\label{classLarp_1_1Node_a060f49eb175b70c9e0da515fa685f1f2}
+This \hyperlink{classLarp_1_1Node}{Node}\textquotesingle{}s position \index{Larp\+::\+Node@{Larp\+::\+Node}!\+\_\+rotation@{\+\_\+rotation}}
+\index{\+\_\+rotation@{\+\_\+rotation}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{\+\_\+rotation}{_rotation}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::quat Larp\+::\+Node\+::\+\_\+rotation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Node_a3bf60bf55c2cda89031f9327fafa0d17}{}\label{classLarp_1_1Node_a3bf60bf55c2cda89031f9327fafa0d17}
+This \hyperlink{classLarp_1_1Node}{Node}\textquotesingle{}s rotation \index{Larp\+::\+Node@{Larp\+::\+Node}!\+\_\+scale@{\+\_\+scale}}
+\index{\+\_\+scale@{\+\_\+scale}!Larp\+::\+Node@{Larp\+::\+Node}}
+\subsubsection[{\texorpdfstring{\+\_\+scale}{_scale}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Larp\+::\+Node\+::\+\_\+scale\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Node_ae295b7db9065cd5bcc1edb32af6e7987}{}\label{classLarp_1_1Node_ae295b7db9065cd5bcc1edb32af6e7987}
+This \hyperlink{classLarp_1_1Node}{Node}\textquotesingle{}s scale 
 
-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-src/\hyperlink{Node_8hpp}{Node.\-hpp}\item 
-src/\hyperlink{Node_8cpp}{Node.\-cpp}\end{DoxyCompactItemize}
+src/\+Larp/\hyperlink{Node_8hpp}{Node.\+hpp}\item 
+src/\+Larp/\hyperlink{Node_8cpp}{Node.\+cpp}\end{DoxyCompactItemize}

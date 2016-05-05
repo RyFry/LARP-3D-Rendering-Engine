@@ -1,126 +1,330 @@
-\hypertarget{classLarp_1_1SceneGraph}{\section{Larp\-:\-:Scene\-Graph Class Reference}
-\label{classLarp_1_1SceneGraph}\index{Larp\-::\-Scene\-Graph@{Larp\-::\-Scene\-Graph}}
-}
+\hypertarget{classLarp_1_1SceneGraph}{}\section{Larp\+:\+:Scene\+Graph Class Reference}
+\label{classLarp_1_1SceneGraph}\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
 
 
-{\ttfamily \#include $<$Scene\-Graph.\-hpp$>$}
+{\ttfamily \#include $<$Scene\+Graph.\+hpp$>$}
 
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Node\-Ptr} \hyperlink{classLarp_1_1SceneGraph_abd2f09bea39c3e15a4c5cd2d9ee7e6a3}{create\-\_\-child\-\_\-node} ()
+\hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Node\+Ptr} \hyperlink{classLarp_1_1SceneGraph_abd2f09bea39c3e15a4c5cd2d9ee7e6a3}{create\+\_\+child\+\_\+node} ()
 \item 
 void \hyperlink{classLarp_1_1SceneGraph_a21ef2624b18a0e9a0df2ee52db762447}{clear} ()
 \item 
-void \hyperlink{classLarp_1_1SceneGraph_a8113f5f330d20c966c5f2403e1e6386b}{draw} (glm\-::mat4 \&view, glm\-::mat4 \&projection)
+void \hyperlink{classLarp_1_1SceneGraph_a128e99a53cc4d30fd3f8f7722194029c}{draw} (glm\+::mat4 \&view, glm\+::mat4 \&projection, const glm\+::vec3 \&view\+\_\+pos)
 \item 
-void \hyperlink{classLarp_1_1SceneGraph_a3b99e07a52de26cb627e4f6e908a2299}{set\-\_\-ambient\-\_\-light} (glm\-::vec3 color)
+\hyperlink{namespaceLarp_a38725e08be7b2ebb94f5f71eb0f0c692}{Directional\+Light\+Ptr} \hyperlink{classLarp_1_1SceneGraph_a2ea4b90cad2ede8c1be6c01515779706}{create\+\_\+directional\+\_\+light} (glm\+::vec3 direction=glm\+::vec3(0.\+0f,-\/1.\+0f, 0.\+0f))
+\item 
+\hyperlink{namespaceLarp_a38725e08be7b2ebb94f5f71eb0f0c692}{Directional\+Light\+Ptr} \hyperlink{classLarp_1_1SceneGraph_a899003e8ceeafd20527d88b0bc08a668}{create\+\_\+directional\+\_\+light} (G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)
+\item 
+\hyperlink{namespaceLarp_a07215808e8e3c5229ca8549c5450e3e5}{Point\+Light\+Ptr} \hyperlink{classLarp_1_1SceneGraph_ad1fbe775246af5c803396419bd2ea92c}{create\+\_\+point\+\_\+light} (glm\+::vec3 position=glm\+::vec3(0.\+0f))
+\item 
+\hyperlink{namespaceLarp_a07215808e8e3c5229ca8549c5450e3e5}{Point\+Light\+Ptr} \hyperlink{classLarp_1_1SceneGraph_a5813e7764c57bdbf8395bc4e26b689e1}{create\+\_\+point\+\_\+light} (G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)
+\item 
+\hyperlink{namespaceLarp_a5366be98946441fcea9b8a155bc52d95}{Spot\+Light\+Ptr} \hyperlink{classLarp_1_1SceneGraph_a4ccb8a5962aec36423c0b1e70a7b8b02}{create\+\_\+spot\+\_\+light} (glm\+::vec3 position=glm\+::vec3(0.\+0f))
+\item 
+\hyperlink{namespaceLarp_a5366be98946441fcea9b8a155bc52d95}{Spot\+Light\+Ptr} \hyperlink{classLarp_1_1SceneGraph_a0e50592fb802862fca698b058783d4c1}{create\+\_\+spot\+\_\+light} (G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)
+\item 
+void \hyperlink{classLarp_1_1SceneGraph_af8d0d4ad89158d2ac8bbbba5ad4df763}{remove\+\_\+light} (\hyperlink{namespaceLarp_a38725e08be7b2ebb94f5f71eb0f0c692}{Directional\+Light\+Ptr} light)
+\item 
+void \hyperlink{classLarp_1_1SceneGraph_a86e77fb45d38becb474c641db68ac8a7}{remove\+\_\+light} (\hyperlink{namespaceLarp_a07215808e8e3c5229ca8549c5450e3e5}{Point\+Light\+Ptr} light)
+\item 
+void \hyperlink{classLarp_1_1SceneGraph_a8076428919fdcee0b0b68525dc3ec9e6}{remove\+\_\+light} (\hyperlink{namespaceLarp_a5366be98946441fcea9b8a155bc52d95}{Spot\+Light\+Ptr} light)
+\item 
+void \hyperlink{classLarp_1_1SceneGraph_ac0165b41ce86e4aed2f5c8acd9d4dc27}{set\+\_\+skybox} (\hyperlink{classLarp_1_1SkyBox}{Sky\+Box} $\ast$skybox)
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static \hyperlink{namespaceLarp_acf02d81e4b52238dcd17cb6249eadadc}{Scene\-Graph\-Ptr} \hyperlink{classLarp_1_1SceneGraph_a569504ef263e392f9376bd50bb09a912}{singleton} ()
+static \hyperlink{namespaceLarp_acf02d81e4b52238dcd17cb6249eadadc}{Scene\+Graph\+Ptr} \hyperlink{classLarp_1_1SceneGraph_a569504ef263e392f9376bd50bb09a912}{singleton} ()
 \end{DoxyCompactItemize}
 \subsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classLarp_1_1SceneGraph_a256e0ff974a0f905a848a99f18b7ffc4}{Scene\-Graph} ()
+\hyperlink{classLarp_1_1SceneGraph_a256e0ff974a0f905a848a99f18b7ffc4}{Scene\+Graph} ()
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{namespaceLarp_ad95a88bc34f8c78cefd64c9bbeb94a58}{Unique\-Node} \hyperlink{classLarp_1_1SceneGraph_a88a58f51a6937827ae1d814d0b44a0d7}{\-\_\-root}
+\hyperlink{namespaceLarp_ad95a88bc34f8c78cefd64c9bbeb94a58}{Unique\+Node} \hyperlink{classLarp_1_1SceneGraph_a88a58f51a6937827ae1d814d0b44a0d7}{\+\_\+root}
+\item 
+std\+::vector$<$ \hyperlink{namespaceLarp_af87ce889468b60d51aa1479335ba19bf}{Unique\+Directional} $>$ \hyperlink{classLarp_1_1SceneGraph_adda3dc8da15f0923afd44ff73e47a21c}{\+\_\+directional\+\_\+lights}
+\item 
+std\+::vector$<$ \hyperlink{namespaceLarp_acd7cacff15535544525abc2e90e07b91}{Unique\+Point} $>$ \hyperlink{classLarp_1_1SceneGraph_a1b72e08d2d1edbf959b9fcad65a8241d}{\+\_\+point\+\_\+lights}
+\item 
+std\+::vector$<$ \hyperlink{namespaceLarp_a288b58c470c3ed41d3b23e764ba5b6eb}{Unique\+Spot} $>$ \hyperlink{classLarp_1_1SceneGraph_a7abcb3d4cfaa7b4d92d30cbbeeeb275f}{\+\_\+spot\+\_\+lights}
+\item 
+\hyperlink{classLarp_1_1SkyBox}{Sky\+Box} $\ast$ \hyperlink{classLarp_1_1SceneGraph_a5821f205cc6238c6855a08e1016ac768}{\+\_\+skybox}
 \end{DoxyCompactItemize}
 \subsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static \hyperlink{namespaceLarp_a81a0d129ec1fc8f1f9fa231fbba6b19b}{Unique\-Scene\-Graph} \hyperlink{classLarp_1_1SceneGraph_a93181088bdc8610fb5d56904b588426f}{\-\_\-singleton}
+static \hyperlink{namespaceLarp_a81a0d129ec1fc8f1f9fa231fbba6b19b}{Unique\+Scene\+Graph} \hyperlink{classLarp_1_1SceneGraph_a93181088bdc8610fb5d56904b588426f}{\+\_\+singleton}
+\item 
+static const size\+\_\+t \hyperlink{classLarp_1_1SceneGraph_aabaeceb65dc86a8f0b84c4a1a099e3d7}{\+\_\+max\+\_\+directional\+\_\+lights} = 1
+\item 
+static const size\+\_\+t \hyperlink{classLarp_1_1SceneGraph_a1bf0c7f3098c5edfe843d310a4c88f70}{\+\_\+max\+\_\+point\+\_\+lights} = 9
+\item 
+static const size\+\_\+t \hyperlink{classLarp_1_1SceneGraph_a3f308c89413969e78b25014dcaedab1f}{\+\_\+max\+\_\+spot\+\_\+lights} = 0
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classLarp_1_1SceneGraph_a256e0ff974a0f905a848a99f18b7ffc4}{\index{Larp\-::\-Scene\-Graph@{Larp\-::\-Scene\-Graph}!Scene\-Graph@{Scene\-Graph}}
-\index{Scene\-Graph@{Scene\-Graph}!Larp::SceneGraph@{Larp\-::\-Scene\-Graph}}
-\subsubsection[{Scene\-Graph}]{\setlength{\rightskip}{0pt plus 5cm}Larp\-::\-Scene\-Graph\-::\-Scene\-Graph (
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!Scene\+Graph@{Scene\+Graph}}
+\index{Scene\+Graph@{Scene\+Graph}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{Scene\+Graph()}{SceneGraph()}}]{\setlength{\rightskip}{0pt plus 5cm}Larp\+::\+Scene\+Graph\+::\+Scene\+Graph (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}}\label{classLarp_1_1SceneGraph_a256e0ff974a0f905a848a99f18b7ffc4}
-Default constructor. Made private to avoid having multiple \hyperlink{classLarp_1_1SceneGraph}{Scene\-Graph}'s per program. 
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1SceneGraph_a256e0ff974a0f905a848a99f18b7ffc4}{}\label{classLarp_1_1SceneGraph_a256e0ff974a0f905a848a99f18b7ffc4}
+Default constructor. Made private to avoid having multiple \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}\textquotesingle{}s per program. 
 
 \subsection{Member Function Documentation}
-\hypertarget{classLarp_1_1SceneGraph_a21ef2624b18a0e9a0df2ee52db762447}{\index{Larp\-::\-Scene\-Graph@{Larp\-::\-Scene\-Graph}!clear@{clear}}
-\index{clear@{clear}!Larp::SceneGraph@{Larp\-::\-Scene\-Graph}}
-\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Scene\-Graph\-::clear (
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!clear@{clear}}
+\index{clear@{clear}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{clear()}{clear()}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Scene\+Graph\+::clear (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1SceneGraph_a21ef2624b18a0e9a0df2ee52db762447}
-Clears all Nodes from the \hyperlink{classLarp_1_1SceneGraph}{Scene\-Graph} \hypertarget{classLarp_1_1SceneGraph_abd2f09bea39c3e15a4c5cd2d9ee7e6a3}{\index{Larp\-::\-Scene\-Graph@{Larp\-::\-Scene\-Graph}!create\-\_\-child\-\_\-node@{create\-\_\-child\-\_\-node}}
-\index{create\-\_\-child\-\_\-node@{create\-\_\-child\-\_\-node}!Larp::SceneGraph@{Larp\-::\-Scene\-Graph}}
-\subsubsection[{create\-\_\-child\-\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\-Ptr} Larp\-::\-Scene\-Graph\-::create\-\_\-child\-\_\-node (
+)}\hypertarget{classLarp_1_1SceneGraph_a21ef2624b18a0e9a0df2ee52db762447}{}\label{classLarp_1_1SceneGraph_a21ef2624b18a0e9a0df2ee52db762447}
+Clears all Nodes from the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} \index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!create\+\_\+child\+\_\+node@{create\+\_\+child\+\_\+node}}
+\index{create\+\_\+child\+\_\+node@{create\+\_\+child\+\_\+node}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{create\+\_\+child\+\_\+node()}{create_child_node()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Ptr} Larp\+::\+Scene\+Graph\+::create\+\_\+child\+\_\+node (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1SceneGraph_abd2f09bea39c3e15a4c5cd2d9ee7e6a3}
-Creates a new child on the root \hyperlink{classLarp_1_1Node}{Node} of the \hyperlink{classLarp_1_1SceneGraph}{Scene\-Graph} \begin{DoxyReturn}{Returns}
+)}\hypertarget{classLarp_1_1SceneGraph_abd2f09bea39c3e15a4c5cd2d9ee7e6a3}{}\label{classLarp_1_1SceneGraph_abd2f09bea39c3e15a4c5cd2d9ee7e6a3}
+Creates a new child on the root \hyperlink{classLarp_1_1Node}{Node} of the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} \begin{DoxyReturn}{Returns}
 The new child node attached to the root 
 \end{DoxyReturn}
 \begin{DoxyNote}{Note}
 The new child may not come before the other children during rendering 
 \end{DoxyNote}
-\hypertarget{classLarp_1_1SceneGraph_a8113f5f330d20c966c5f2403e1e6386b}{\index{Larp\-::\-Scene\-Graph@{Larp\-::\-Scene\-Graph}!draw@{draw}}
-\index{draw@{draw}!Larp::SceneGraph@{Larp\-::\-Scene\-Graph}}
-\subsubsection[{draw}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Scene\-Graph\-::draw (
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!create\+\_\+directional\+\_\+light@{create\+\_\+directional\+\_\+light}}
+\index{create\+\_\+directional\+\_\+light@{create\+\_\+directional\+\_\+light}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{create\+\_\+directional\+\_\+light(glm\+::vec3 direction=glm\+::vec3(0.\+0f,-\/1.\+0f, 0.\+0f))}{create_directional_light(glm::vec3 direction=glm::vec3(0.0f,-1.0f, 0.0f))}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Directional\+Light\+Ptr} Larp\+::\+Scene\+Graph\+::create\+\_\+directional\+\_\+light (
 \begin{DoxyParamCaption}
-\item[{glm\-::mat4 \&}]{view, }
-\item[{glm\-::mat4 \&}]{projection}
+\item[{glm\+::vec3}]{direction = {\ttfamily glm\+:\+:vec3(0.0f,~-\/1.0f,~0.0f)}}
 \end{DoxyParamCaption}
-)}}\label{classLarp_1_1SceneGraph_a8113f5f330d20c966c5f2403e1e6386b}
-Draws out every node in the \hyperlink{classLarp_1_1SceneGraph}{Scene\-Graph} by performing a depth-\/first traversal on each \hyperlink{classLarp_1_1Node}{Node}. 
+)}\hypertarget{classLarp_1_1SceneGraph_a2ea4b90cad2ede8c1be6c01515779706}{}\label{classLarp_1_1SceneGraph_a2ea4b90cad2ede8c1be6c01515779706}
+Creates a directional light that faces downwards by default and adds the light to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}\textquotesingle{}s vector of directional lights. 
 \begin{DoxyParams}{Parameters}
-{\em view} & The view matrix provided by the camera to be passed to each \hyperlink{classLarp_1_1Node}{Node}'s shader program. \\
-\hline
-{\em projection} & The project matrix determined by the field of view to be passed to each \hyperlink{classLarp_1_1Node}{Node}'s shader program. \\
+{\em direction} & The direction the light should be facing. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classLarp_1_1SceneGraph_a3b99e07a52de26cb627e4f6e908a2299}{\index{Larp\-::\-Scene\-Graph@{Larp\-::\-Scene\-Graph}!set\-\_\-ambient\-\_\-light@{set\-\_\-ambient\-\_\-light}}
-\index{set\-\_\-ambient\-\_\-light@{set\-\_\-ambient\-\_\-light}!Larp::SceneGraph@{Larp\-::\-Scene\-Graph}}
-\subsubsection[{set\-\_\-ambient\-\_\-light}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\-::\-Scene\-Graph\-::set\-\_\-ambient\-\_\-light (
-\begin{DoxyParamCaption}
-\item[{glm\-::vec3}]{color}
-\end{DoxyParamCaption}
-)}}\label{classLarp_1_1SceneGraph_a3b99e07a52de26cb627e4f6e908a2299}
-Sets ambient lighting 
-\begin{DoxyParams}{Parameters}
-{\em color} & The color to set the ambient lighting to. \\
-\hline
-\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a const \hyperlink{structLarp_1_1DirectionalLight}{Directional\+Light} pointer that may be used to change lighting parameters. 
+\end{DoxyReturn}
 \begin{DoxyWarning}{Warning}
-This function is currently unimplemented and does nothing. {\bfseries Do not call this function!} 
+Do not add this type of light if \hyperlink{classLarp_1_1Entity}{Entity} specified shaders do not support them. 
 \end{DoxyWarning}
-\hypertarget{classLarp_1_1SceneGraph_a569504ef263e392f9376bd50bb09a912}{\index{Larp\-::\-Scene\-Graph@{Larp\-::\-Scene\-Graph}!singleton@{singleton}}
-\index{singleton@{singleton}!Larp::SceneGraph@{Larp\-::\-Scene\-Graph}}
-\subsubsection[{singleton}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scene\-Graph\-Ptr} Larp\-::\-Scene\-Graph\-::singleton (
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!create\+\_\+directional\+\_\+light@{create\+\_\+directional\+\_\+light}}
+\index{create\+\_\+directional\+\_\+light@{create\+\_\+directional\+\_\+light}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{create\+\_\+directional\+\_\+light(\+G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)}{create_directional_light(GLfloat x, GLfloat y, GLfloat z)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Directional\+Light\+Ptr} Larp\+::\+Scene\+Graph\+::create\+\_\+directional\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{G\+Lfloat}]{x, }
+\item[{G\+Lfloat}]{y, }
+\item[{G\+Lfloat}]{z}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1SceneGraph_a899003e8ceeafd20527d88b0bc08a668}{}\label{classLarp_1_1SceneGraph_a899003e8ceeafd20527d88b0bc08a668}
+Creates a directional light that faces downwards by default and adds the light to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}\textquotesingle{}s vector of directional lights. 
+\begin{DoxyParams}{Parameters}
+{\em x} & The x direction the light should be facing. \\
+\hline
+{\em y} & The y direction the light should be facing. \\
+\hline
+{\em z} & The z direction the light should be facing. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a const \hyperlink{structLarp_1_1DirectionalLight}{Directional\+Light} pointer that may be used to change lighting parameters. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Do not add this type of light if \hyperlink{classLarp_1_1Entity}{Entity} specified shaders do not support them. 
+\end{DoxyWarning}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!create\+\_\+point\+\_\+light@{create\+\_\+point\+\_\+light}}
+\index{create\+\_\+point\+\_\+light@{create\+\_\+point\+\_\+light}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{create\+\_\+point\+\_\+light(glm\+::vec3 position=glm\+::vec3(0.\+0f))}{create_point_light(glm::vec3 position=glm::vec3(0.0f))}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Point\+Light\+Ptr} Larp\+::\+Scene\+Graph\+::create\+\_\+point\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{glm\+::vec3}]{position = {\ttfamily glm\+:\+:vec3(0.0f)}}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1SceneGraph_ad1fbe775246af5c803396419bd2ea92c}{}\label{classLarp_1_1SceneGraph_ad1fbe775246af5c803396419bd2ea92c}
+Creates a point light that is positioned at (0, 0, 0) by default and adds the light to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}\textquotesingle{}s vector of point lights. 
+\begin{DoxyParams}{Parameters}
+{\em position} & The starting position of the light. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a const \hyperlink{structLarp_1_1PointLight}{Point\+Light} pointer that may be used to change lighting parameters. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Do not add this type of light if \hyperlink{classLarp_1_1Entity}{Entity} specified shaders do not support them. 
+\end{DoxyWarning}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!create\+\_\+point\+\_\+light@{create\+\_\+point\+\_\+light}}
+\index{create\+\_\+point\+\_\+light@{create\+\_\+point\+\_\+light}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{create\+\_\+point\+\_\+light(\+G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)}{create_point_light(GLfloat x, GLfloat y, GLfloat z)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Point\+Light\+Ptr} Larp\+::\+Scene\+Graph\+::create\+\_\+point\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{G\+Lfloat}]{x, }
+\item[{G\+Lfloat}]{y, }
+\item[{G\+Lfloat}]{z}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1SceneGraph_a5813e7764c57bdbf8395bc4e26b689e1}{}\label{classLarp_1_1SceneGraph_a5813e7764c57bdbf8395bc4e26b689e1}
+Creates a point light that is positioned at (0, 0, 0) by default and adds the light to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}\textquotesingle{}s vector of point lights. 
+\begin{DoxyParams}{Parameters}
+{\em position} & The starting position of the light. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a const \hyperlink{structLarp_1_1PointLight}{Point\+Light} pointer that may be used to change lighting parameters. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Do not add this type of light if \hyperlink{classLarp_1_1Entity}{Entity} specified shaders do not support them. 
+\end{DoxyWarning}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!create\+\_\+spot\+\_\+light@{create\+\_\+spot\+\_\+light}}
+\index{create\+\_\+spot\+\_\+light@{create\+\_\+spot\+\_\+light}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{create\+\_\+spot\+\_\+light(glm\+::vec3 position=glm\+::vec3(0.\+0f))}{create_spot_light(glm::vec3 position=glm::vec3(0.0f))}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Spot\+Light\+Ptr} Larp\+::\+Scene\+Graph\+::create\+\_\+spot\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{glm\+::vec3}]{position = {\ttfamily glm\+:\+:vec3(0.0f)}}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1SceneGraph_a4ccb8a5962aec36423c0b1e70a7b8b02}{}\label{classLarp_1_1SceneGraph_a4ccb8a5962aec36423c0b1e70a7b8b02}
+Creates a spot light that is positioned at (0, 0, 0) by default and adds the light to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}\textquotesingle{}s vector of spot lights. 
+\begin{DoxyParams}{Parameters}
+{\em position} & The starting position of the light. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a const \hyperlink{structLarp_1_1SpotLight}{Spot\+Light} pointer that may be used to change lighting parameters. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Do not add this type of light if \hyperlink{classLarp_1_1Entity}{Entity} specified shaders do not support them. 
+\end{DoxyWarning}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!create\+\_\+spot\+\_\+light@{create\+\_\+spot\+\_\+light}}
+\index{create\+\_\+spot\+\_\+light@{create\+\_\+spot\+\_\+light}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{create\+\_\+spot\+\_\+light(\+G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)}{create_spot_light(GLfloat x, GLfloat y, GLfloat z)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Spot\+Light\+Ptr} Larp\+::\+Scene\+Graph\+::create\+\_\+spot\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{G\+Lfloat}]{x, }
+\item[{G\+Lfloat}]{y, }
+\item[{G\+Lfloat}]{z}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1SceneGraph_a0e50592fb802862fca698b058783d4c1}{}\label{classLarp_1_1SceneGraph_a0e50592fb802862fca698b058783d4c1}
+Creates a spot light that is positioned at (0, 0, 0) by default and adds the light to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}\textquotesingle{}s vector of spot lights. 
+\begin{DoxyParams}{Parameters}
+{\em position} & The starting position of the light. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a const \hyperlink{structLarp_1_1SpotLight}{Spot\+Light} pointer that may be used to change lighting parameters. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Do not add this type of light if \hyperlink{classLarp_1_1Entity}{Entity} specified shaders do not support them. 
+\end{DoxyWarning}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!draw@{draw}}
+\index{draw@{draw}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{draw(glm\+::mat4 \&view, glm\+::mat4 \&projection, const glm\+::vec3 \&view\+\_\+pos)}{draw(glm::mat4 &view, glm::mat4 &projection, const glm::vec3 &view_pos)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Scene\+Graph\+::draw (
+\begin{DoxyParamCaption}
+\item[{glm\+::mat4 \&}]{view, }
+\item[{glm\+::mat4 \&}]{projection, }
+\item[{const glm\+::vec3 \&}]{view\+\_\+pos}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1SceneGraph_a128e99a53cc4d30fd3f8f7722194029c}{}\label{classLarp_1_1SceneGraph_a128e99a53cc4d30fd3f8f7722194029c}
+Draws out every node in the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} by performing a depth-\/first traversal on each \hyperlink{classLarp_1_1Node}{Node}. 
+\begin{DoxyParams}{Parameters}
+{\em view} & The view matrix provided by the camera to be passed to each \hyperlink{classLarp_1_1Node}{Node}\textquotesingle{}s shader program. \\
+\hline
+{\em projection} & The project matrix determined by the field of view to be passed to each \hyperlink{classLarp_1_1Node}{Node}\textquotesingle{}s shader program. \\
+\hline
+{\em view\+\_\+pos} & The camera view position to apply during rendering. This should be obtained from a \hyperlink{classCamera}{Camera} object. \\
+\hline
+\end{DoxyParams}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!remove\+\_\+light@{remove\+\_\+light}}
+\index{remove\+\_\+light@{remove\+\_\+light}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{remove\+\_\+light(\+Directional\+Light\+Ptr light)}{remove_light(DirectionalLightPtr light)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Scene\+Graph\+::remove\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{{\bf Directional\+Light\+Ptr}}]{light}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1SceneGraph_af8d0d4ad89158d2ac8bbbba5ad4df763}{}\label{classLarp_1_1SceneGraph_af8d0d4ad89158d2ac8bbbba5ad4df763}
+Removes the specified light from the respective light\textquotesingle{}s vector in the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} 
+\begin{DoxyParams}{Parameters}
+{\em A} & constant directional light pointer that will be used to remove the light from the vector. \\
+\hline
+\end{DoxyParams}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!remove\+\_\+light@{remove\+\_\+light}}
+\index{remove\+\_\+light@{remove\+\_\+light}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{remove\+\_\+light(\+Point\+Light\+Ptr light)}{remove_light(PointLightPtr light)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Scene\+Graph\+::remove\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{{\bf Point\+Light\+Ptr}}]{light}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1SceneGraph_a86e77fb45d38becb474c641db68ac8a7}{}\label{classLarp_1_1SceneGraph_a86e77fb45d38becb474c641db68ac8a7}
+Removes the specified light from the respective light\textquotesingle{}s vector in the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} 
+\begin{DoxyParams}{Parameters}
+{\em A} & constant point light pointer that will be used to remove the light from the vector. \\
+\hline
+\end{DoxyParams}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!remove\+\_\+light@{remove\+\_\+light}}
+\index{remove\+\_\+light@{remove\+\_\+light}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{remove\+\_\+light(\+Spot\+Light\+Ptr light)}{remove_light(SpotLightPtr light)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Scene\+Graph\+::remove\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{{\bf Spot\+Light\+Ptr}}]{light}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1SceneGraph_a8076428919fdcee0b0b68525dc3ec9e6}{}\label{classLarp_1_1SceneGraph_a8076428919fdcee0b0b68525dc3ec9e6}
+Removes the specified light from the respective light\textquotesingle{}s vector in the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} 
+\begin{DoxyParams}{Parameters}
+{\em A} & constant spot light pointer that will be used to remove the light from the vector. \\
+\hline
+\end{DoxyParams}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!set\+\_\+skybox@{set\+\_\+skybox}}
+\index{set\+\_\+skybox@{set\+\_\+skybox}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{set\+\_\+skybox(\+Sky\+Box $\ast$skybox)}{set_skybox(SkyBox *skybox)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Scene\+Graph\+::set\+\_\+skybox (
+\begin{DoxyParamCaption}
+\item[{{\bf Sky\+Box} $\ast$}]{skybox}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1SceneGraph_ac0165b41ce86e4aed2f5c8acd9d4dc27}{}\label{classLarp_1_1SceneGraph_ac0165b41ce86e4aed2f5c8acd9d4dc27}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!singleton@{singleton}}
+\index{singleton@{singleton}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{singleton()}{singleton()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scene\+Graph\+Ptr} Larp\+::\+Scene\+Graph\+::singleton (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [static]}}}\label{classLarp_1_1SceneGraph_a569504ef263e392f9376bd50bb09a912}
-Returns the single instance of \hyperlink{classLarp_1_1SceneGraph}{Scene\-Graph} \begin{DoxyReturn}{Returns}
-The singleton instance of \hyperlink{classLarp_1_1SceneGraph}{Scene\-Graph} 
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1SceneGraph_a569504ef263e392f9376bd50bb09a912}{}\label{classLarp_1_1SceneGraph_a569504ef263e392f9376bd50bb09a912}
+Returns the single instance of \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} \begin{DoxyReturn}{Returns}
+The singleton instance of \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} 
 \end{DoxyReturn}
 
 
 \subsection{Member Data Documentation}
-\hypertarget{classLarp_1_1SceneGraph_a88a58f51a6937827ae1d814d0b44a0d7}{\index{Larp\-::\-Scene\-Graph@{Larp\-::\-Scene\-Graph}!\-\_\-root@{\-\_\-root}}
-\index{\-\_\-root@{\-\_\-root}!Larp::SceneGraph@{Larp\-::\-Scene\-Graph}}
-\subsubsection[{\-\_\-root}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Unique\-Node} Larp\-::\-Scene\-Graph\-::\-\_\-root\hspace{0.3cm}{\ttfamily [private]}}}\label{classLarp_1_1SceneGraph_a88a58f51a6937827ae1d814d0b44a0d7}
-The root p\-Node of this \hyperlink{classLarp_1_1SceneGraph}{Scene\-Graph} \hypertarget{classLarp_1_1SceneGraph_a93181088bdc8610fb5d56904b588426f}{\index{Larp\-::\-Scene\-Graph@{Larp\-::\-Scene\-Graph}!\-\_\-singleton@{\-\_\-singleton}}
-\index{\-\_\-singleton@{\-\_\-singleton}!Larp::SceneGraph@{Larp\-::\-Scene\-Graph}}
-\subsubsection[{\-\_\-singleton}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Unique\-Scene\-Graph} Larp\-::\-Scene\-Graph\-::\-\_\-singleton\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{classLarp_1_1SceneGraph_a93181088bdc8610fb5d56904b588426f}
-A Singleton instance of the \hyperlink{classLarp_1_1SceneGraph}{Scene\-Graph} class that prevents users from making more than one \hyperlink{classLarp_1_1SceneGraph}{Scene\-Graph}. 
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!\+\_\+directional\+\_\+lights@{\+\_\+directional\+\_\+lights}}
+\index{\+\_\+directional\+\_\+lights@{\+\_\+directional\+\_\+lights}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{\+\_\+directional\+\_\+lights}{_directional_lights}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Unique\+Directional}$>$ Larp\+::\+Scene\+Graph\+::\+\_\+directional\+\_\+lights\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1SceneGraph_adda3dc8da15f0923afd44ff73e47a21c}{}\label{classLarp_1_1SceneGraph_adda3dc8da15f0923afd44ff73e47a21c}
+The vector of directional lights currently held by the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}. If the vector is not empty, these will eventually be incorporated in the lighting calculations after they are passed from the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} to the Node(s) and eventually and \hyperlink{classLarp_1_1Entity}{Entity}. \index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!\+\_\+max\+\_\+directional\+\_\+lights@{\+\_\+max\+\_\+directional\+\_\+lights}}
+\index{\+\_\+max\+\_\+directional\+\_\+lights@{\+\_\+max\+\_\+directional\+\_\+lights}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{\+\_\+max\+\_\+directional\+\_\+lights}{_max_directional_lights}}]{\setlength{\rightskip}{0pt plus 5cm}const size\+\_\+t Larp\+::\+Scene\+Graph\+::\+\_\+max\+\_\+directional\+\_\+lights = 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1SceneGraph_aabaeceb65dc86a8f0b84c4a1a099e3d7}{}\label{classLarp_1_1SceneGraph_aabaeceb65dc86a8f0b84c4a1a099e3d7}
+This is the maximum number of directional lights that may be added to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} \index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!\+\_\+max\+\_\+point\+\_\+lights@{\+\_\+max\+\_\+point\+\_\+lights}}
+\index{\+\_\+max\+\_\+point\+\_\+lights@{\+\_\+max\+\_\+point\+\_\+lights}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{\+\_\+max\+\_\+point\+\_\+lights}{_max_point_lights}}]{\setlength{\rightskip}{0pt plus 5cm}const size\+\_\+t Larp\+::\+Scene\+Graph\+::\+\_\+max\+\_\+point\+\_\+lights = 9\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1SceneGraph_a1bf0c7f3098c5edfe843d310a4c88f70}{}\label{classLarp_1_1SceneGraph_a1bf0c7f3098c5edfe843d310a4c88f70}
+This is the maximum number of point lights that may be added to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} \index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!\+\_\+max\+\_\+spot\+\_\+lights@{\+\_\+max\+\_\+spot\+\_\+lights}}
+\index{\+\_\+max\+\_\+spot\+\_\+lights@{\+\_\+max\+\_\+spot\+\_\+lights}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{\+\_\+max\+\_\+spot\+\_\+lights}{_max_spot_lights}}]{\setlength{\rightskip}{0pt plus 5cm}const size\+\_\+t Larp\+::\+Scene\+Graph\+::\+\_\+max\+\_\+spot\+\_\+lights = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1SceneGraph_a3f308c89413969e78b25014dcaedab1f}{}\label{classLarp_1_1SceneGraph_a3f308c89413969e78b25014dcaedab1f}
+This is the maximum number of spot lights that may be added to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} \begin{DoxyWarning}{Warning}
+Spot\+Lights are not currently supported. 
+\end{DoxyWarning}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!\+\_\+point\+\_\+lights@{\+\_\+point\+\_\+lights}}
+\index{\+\_\+point\+\_\+lights@{\+\_\+point\+\_\+lights}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{\+\_\+point\+\_\+lights}{_point_lights}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Unique\+Point}$>$ Larp\+::\+Scene\+Graph\+::\+\_\+point\+\_\+lights\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1SceneGraph_a1b72e08d2d1edbf959b9fcad65a8241d}{}\label{classLarp_1_1SceneGraph_a1b72e08d2d1edbf959b9fcad65a8241d}
+The vector of point lights currently held by the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}. If the vector is not empty, these will eventually be incorporated in the lighting calculations after they are passed from the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} to the Node(s) and eventually and \hyperlink{classLarp_1_1Entity}{Entity}. \index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!\+\_\+root@{\+\_\+root}}
+\index{\+\_\+root@{\+\_\+root}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{\+\_\+root}{_root}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Unique\+Node} Larp\+::\+Scene\+Graph\+::\+\_\+root\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1SceneGraph_a88a58f51a6937827ae1d814d0b44a0d7}{}\label{classLarp_1_1SceneGraph_a88a58f51a6937827ae1d814d0b44a0d7}
+The root p\+Node of this \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} \index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!\+\_\+singleton@{\+\_\+singleton}}
+\index{\+\_\+singleton@{\+\_\+singleton}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{\+\_\+singleton}{_singleton}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Unique\+Scene\+Graph} Larp\+::\+Scene\+Graph\+::\+\_\+singleton\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1SceneGraph_a93181088bdc8610fb5d56904b588426f}{}\label{classLarp_1_1SceneGraph_a93181088bdc8610fb5d56904b588426f}
+A Singleton instance of the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} class that prevents users from making more than one \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}. \index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!\+\_\+skybox@{\+\_\+skybox}}
+\index{\+\_\+skybox@{\+\_\+skybox}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{\+\_\+skybox}{_skybox}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sky\+Box}$\ast$ Larp\+::\+Scene\+Graph\+::\+\_\+skybox\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1SceneGraph_a5821f205cc6238c6855a08e1016ac768}{}\label{classLarp_1_1SceneGraph_a5821f205cc6238c6855a08e1016ac768}
+\index{Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}!\+\_\+spot\+\_\+lights@{\+\_\+spot\+\_\+lights}}
+\index{\+\_\+spot\+\_\+lights@{\+\_\+spot\+\_\+lights}!Larp\+::\+Scene\+Graph@{Larp\+::\+Scene\+Graph}}
+\subsubsection[{\texorpdfstring{\+\_\+spot\+\_\+lights}{_spot_lights}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Unique\+Spot}$>$ Larp\+::\+Scene\+Graph\+::\+\_\+spot\+\_\+lights\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1SceneGraph_a7abcb3d4cfaa7b4d92d30cbbeeeb275f}{}\label{classLarp_1_1SceneGraph_a7abcb3d4cfaa7b4d92d30cbbeeeb275f}
+The vector of spot lights currently held by the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}. If the vector is not empty, these will eventually be incorporated in the lighting calculations after they are passed from the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} to the Node(s) and eventually and \hyperlink{classLarp_1_1Entity}{Entity}. 
 
-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-src/\hyperlink{SceneGraph_8hpp}{Scene\-Graph.\-hpp}\item 
-src/\hyperlink{SceneGraph_8cpp}{Scene\-Graph.\-cpp}\end{DoxyCompactItemize}
+src/\+Larp/\hyperlink{SceneGraph_8hpp}{Scene\+Graph.\+hpp}\item 
+src/\+Larp/\hyperlink{SceneGraph_8cpp}{Scene\+Graph.\+cpp}\end{DoxyCompactItemize}
