@@ -18,4 +18,4 @@ public:
     btRigidBody* get_rigid_body() const;
 };
 
-typedef PhysicsMeshCollider* const PhysicsMeshColliderPtr;
+typedef PhysicsMeshCollider* PhysicsMeshColliderPtr;
