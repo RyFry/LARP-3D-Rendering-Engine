@@ -5,6 +5,7 @@ OPTFLAG       = -O1
 CXXFLAGS      = -std=c++11 -Wall
 INCLUDES      = -I$(shell pwd)/include
 INCLUDES     += -I/usr/include/bullet
+INCLUDES     += -I./src
 STATIC_FLAGS  = -L$(shell pwd)/lib
 STATIC_LIBS   = -lSOIL
 DYNAMIC_FLAGS = -Wl,-rpath $(shell pwd)/lib

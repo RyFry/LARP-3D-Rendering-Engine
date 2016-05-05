@@ -14,9 +14,9 @@
 
 #include "Camera.hpp"
 
-#include "PhysicsMeshColliderBuilder.hpp"
-#include "PhysicsPlayerController.hpp"
-#include "PhysicsWorld.hpp"
+#include "Physics/PhysicsMeshColliderBuilder.hpp"
+#include "Physics/PhysicsPlayerController.hpp"
+#include "Physics/PhysicsWorld.hpp"
 
 
 // GLM Mathemtics
@@ -58,7 +58,6 @@ int main(void)
     screenWidth = config.get_width();
     screenHeight = config.get_height();
     // Init GLFW
-    int dumb ;
     if (!glfwInit())
     {
         THROW_RUNTIME_ERROR("glfwInit() failed!");
