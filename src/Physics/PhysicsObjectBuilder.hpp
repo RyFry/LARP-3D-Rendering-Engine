@@ -1,53 +1,19 @@
 #pragma once
 
-#include <string>
+#include "PhysicsObject.hpp"
 
-#include "Larp/LarpPrerequisites.hpp"
-#include "Larp/Model.hpp"
-
-#include "PhysicsMeshCollider.hpp"
-
-class PhysicsMeshColliderBuilder
+class PhysicsObjectBuilder
 {
 private:
-    /**
-     * The Model that this mesh collider will be built from.
-     */
-    Larp::ModelPtr _model;
-    /**
-     * The orientation of the Mesh collider that will be built.
-     */
     glm::quat _orientation;
-    /**
-     * The position of the Mesh collider that will be built.
-     */
     glm::vec3 _position;
-    /**
-     * The mas of the Mesh collider that will be built.
-     */
     GLfloat _mass;
-    /**
-     * The local intertia of the Mesh collider that will be built.
-     */
     glm::vec3 _local_inertia;
-    /**
-     * The restitution of the Mesh collider that will be built.
-     * A value of 1.0 will have perfect bouncing, and a value of 0.0
-     * will have no bouncing.
-     */
     GLfloat _restitution;
-    /**
-     * The data pointer of this Mesh collider. This should be initialized
-     * to the Larp::NodePtr that is attached to the Model provided
-     * to the Mesh collider.
-     */
     Larp::NodePtr _user_pointer;
+
 public:
-    /**
-     * Constructor
-     * @param path The path to the Model to build a MeshCollider off of
-     */
-    PhysicsMeshColliderBuilder(std::string path);
+    PhysicsObjectBuilder();
     /**
      * Set the orientation for the MeshCollider to be built by this object
      * @param orientation The orientation amount
@@ -86,5 +52,6 @@ public:
      * @default nullptr
      */
     void set_user_pointer(Larp::NodePtr user_pointer);
-    PhysicsMeshColliderPtr build();
+    PhysicsObjectPtr build();
 };
+

@@ -16,6 +16,7 @@
 #include "Camera.hpp"
 
 #include "Physics/PhysicsMeshColliderBuilder.hpp"
+#include "Physics/PhysicsObjectBuilder.hpp"
 #include "Physics/PhysicsPlayerController.hpp"
 #include "Physics/PhysicsWorld.hpp"
 
@@ -120,8 +121,7 @@ int main(void)
 
     PhysicsMeshColliderBuilder physics_level_builder = PhysicsMeshColliderBuilder("assets/LEVEL/LEVEL.obj");
     physics_level_builder.set_mass(0.0);
-    physics_level_builder.set_local_inertia(glm::vec3(0.0, 0.0, 0.0));
-    physics_level_builder.set_restitution(1);
+    physics_level_builder.set_restitution(1.0);
     physics_level_builder.set_user_pointer(node21);
 
     PhysicsMeshColliderPtr physics_level = physics_level_builder.build();
@@ -135,6 +135,16 @@ int main(void)
     node22->attach_entity(entity22);
     node22->set_scale(0.4, 0.4, 0.4);
     node22->set_position(0.0, 4.0, 0.0);
+
+    PhysicsObjectBuilder crate_builder = PhysicsObjectBuilder();
+    crate_builder.set_position(glm::vec3(0.0, 4.0, 0.0));
+    crate_builder.set_mass(1.0);
+    crate_builder.set_restitution(0.0);
+    crate_builder.set_user_pointer(node22);
+
+    PhysicsObjectPtr crate_collider = crate_builder.build();
+
+    world->get_dynamics_world()->addRigidBody(crate_collider->get_rigid_body());
     /// Can't add mesh collider for crate. It's too big.
     // PhysicsMeshColliderBuilder crate_builder = PhysicsMeshColliderBuilder("assets/crate.obj");
     // crate_builder.set_mass(1.0);
@@ -186,9 +196,9 @@ int main(void)
         last_frame = current_frame;
 
         frame_rate_limiter += delta_time;
-        if (frame_rate_limiter > 1.0 / 120.0)
+        if (frame_rate_limiter > 1.0 / 60.0)
         {
-            frame_rate_limiter -= 1.0 / 120.0;
+            frame_rate_limiter -= 1.0 / 60.0;
             ++iteration_number;
         }
         else
@@ -200,9 +210,9 @@ int main(void)
 
         player->update_movement(world.get());
 
-        world->get_dynamics_world()->stepSimulation(1.0f / 120.0f);
+        world->get_dynamics_world()->stepSimulation(1.0f / 60.0f, 10);
 
-        player->step(world.get(), 1.0f / 120.0f);
+        player->step(world.get(), 1.0f / 60.0f);
         Larp::NodePtr player_node = player->get_user_pointer();
         glm::vec3 pos = player->get_position();
         glm::quat quat = player->get_orientation();

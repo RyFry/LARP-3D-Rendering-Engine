@@ -29,7 +29,7 @@ PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, co
 
     // Setup the character controller and add it to the physics world
     this->_char_controller =
-        new btKinematicCharacterController(this->_ghost_object, player_shape, 1.0);
+        new btKinematicCharacterController(this->_ghost_object, player_shape, 0.0);
     this->_char_controller->setGravity(4.9);
     this->_char_controller->setMaxSlope(max_slope);
     this->_char_controller->setJumpSpeed(jump_speed);
@@ -81,7 +81,7 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world)
 
     if (this->_directions == PlayerDirection::STOP && this->_char_controller->onGround())
     {
-        this->_char_controller->setGravity(0);
+        this->_char_controller->setGravity(0.0);
         // this->_char_controller->setWalkDirection(movement_direction);
         // return;
     }

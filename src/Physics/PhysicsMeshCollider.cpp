@@ -24,9 +24,9 @@ PhysicsMeshCollider::PhysicsMeshCollider(Larp::ModelPtr model, glm::quat rotatio
             const Larp::Vertex& v3 = mesh._vertices.at(mesh._indices.at(i + 2));
 
             triangle_mesh->addTriangle(
-                btVector3(v1._position.x, v1._position.y, v1._position.z) * scale.x,
-                btVector3(v2._position.x, v2._position.y, v2._position.z) * scale.y,
-                btVector3(v3._position.x, v3._position.y, v3._position.z) * scale.z);
+                btVector3(v1._position.x * scale.x, v1._position.y * scale.y, v1._position.z * scale.z),
+                btVector3(v2._position.x * scale.x, v2._position.y * scale.y, v2._position.z * scale.z),
+                btVector3(v3._position.x * scale.x, v3._position.y * scale.y, v3._position.z * scale.z));
         }
     }
 
