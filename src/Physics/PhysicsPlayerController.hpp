@@ -80,6 +80,7 @@ public:
      * @return The position of this PlayerController in the PhysicsWorld
      */
     glm::vec3 get_position() const;
+    void set_position(glm::vec3 position);
     /**
      * @return The orientation of this PlayerController in the PhysicsWorld
      */

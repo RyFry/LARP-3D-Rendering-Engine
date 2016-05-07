@@ -2,6 +2,7 @@
 
 #include "PhysicsObject.hpp"
 
+template <typename T>
 class PhysicsObjectBuilder
 {
 private:
@@ -52,6 +53,6 @@ public:
      * @default nullptr
      */
     void set_user_pointer(Larp::NodePtr user_pointer);
-    PhysicsObjectPtr build();
+    PhysicsObject<T>* build();
 };
 

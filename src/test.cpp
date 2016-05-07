@@ -136,13 +136,13 @@ int main(void)
     node22->set_scale(0.4, 0.4, 0.4);
     node22->set_position(0.0, 4.0, 0.0);
 
-    PhysicsObjectBuilder crate_builder = PhysicsObjectBuilder();
+    PhysicsObjectBuilder<btBoxShape> crate_builder = PhysicsObjectBuilder<btBoxShape>();
     crate_builder.set_position(glm::vec3(0.0, 4.0, 0.0));
     crate_builder.set_mass(1.0);
     crate_builder.set_restitution(0.0);
     crate_builder.set_user_pointer(node22);
 
-    PhysicsObjectPtr crate_collider = crate_builder.build();
+    PhysicsBoxPtr crate_collider = crate_builder.build();
 
     world->get_dynamics_world()->addRigidBody(crate_collider->get_rigid_body());
     /// Can't add mesh collider for crate. It's too big.
@@ -294,6 +294,9 @@ void Do_Movement()
         player->jump();
     if (keys[GLFW_KEY_LEFT_SHIFT])
         camera.process_keyboard(Camera::DOWN, delta_time);
+
+    if (keys[GLFW_KEY_R])
+        player->set_position(glm::vec3(0.0, 7.0, 0.0));
 }
 
 // Is called whenever a key is pressed/released via GLFW
