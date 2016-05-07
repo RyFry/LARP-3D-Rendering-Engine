@@ -1,4 +1,5 @@
 #include "SceneGraph.hpp"
+
 namespace Larp
 {
     const size_t SceneGraph::_max_directional_lights = 1;
@@ -43,7 +44,8 @@ namespace Larp
         glm::mat4 identity;
         this->_root->draw(identity, view, projection, view_pos, this->_directional_lights,
                           this->_point_lights, this->_spot_lights);
-        this->_skybox->draw(view, projection);
+        if (this->_skybox != nullptr)
+            this->_skybox->draw(view, projection);
     }
 
     DirectionalLightPtr SceneGraph::create_directional_light(glm::vec3 direction)

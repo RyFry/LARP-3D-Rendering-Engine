@@ -138,13 +138,34 @@ int main(void)
 
     PhysicsObjectBuilder crate_builder = PhysicsObjectBuilder();
     crate_builder.set_position(glm::vec3(0.0, 4.0, 0.0));
-    crate_builder.set_mass(1.0);
+    crate_builder.set_mass(10.0);
     crate_builder.set_restitution(0.0);
     crate_builder.set_user_pointer(node22);
 
     PhysicsObjectPtr crate_collider = crate_builder.build();
 
     world->get_dynamics_world()->addRigidBody(crate_collider->get_rigid_body());
+
+    Larp::Shader p90_shader("shaders/lighting.vert", "shaders/lighting.frag");
+    Larp::ModelPtr p90_model = Larp::Model::create("assets/P90/P90.obj");
+    Larp::EntityPtr p90_entity = Larp::Entity::create(p90_shader, p90_model);
+    Larp::NodePtr p90_node = graph->create_child_node();
+    p90_node->attach_entity(p90_entity);
+    p90_node->set_scale(0.01, 0.01, 0.01);
+    p90_node->set_position(3.0, 7.0, 0.0);
+
+    PhysicsObjectBuilder p90_builder = PhysicsObjectBuilder();
+    glm::quat p90_rot;
+    p90_rot = glm::rotate(p90_rot, 90.0, glm::vec3(1, 0, 0));
+    p90_builder.set_orientation(p90_rot);
+    p90_builder.set_position(glm::vec3(3.0, 7.0, 0.0));
+    p90_builder.set_mass(1.0);
+    p90_builder.set_restitution(0.0);
+    p90_builder.set_user_pointer(p90_node);
+
+    PhysicsObjectPtr p90_collider = p90_builder.build();
+
+    world->get_dynamics_world()->addRigidBody(p90_collider->get_rigid_body());
     /// Can't add mesh collider for crate. It's too big.
     // PhysicsMeshColliderBuilder crate_builder = PhysicsMeshColliderBuilder("assets/crate.obj");
     // crate_builder.set_mass(1.0);
@@ -182,7 +203,7 @@ int main(void)
     skybox_files.push_back("assets/skybox/back.jpg");
     skybox_files.push_back("assets/skybox/front.jpg");
     Larp::SkyBox skybox(skybox_files);
-    graph->set_skybox(&skybox);
+//    graph->set_skybox(&skybox);
 
 
     GLfloat frame_rate_limiter = 0.0f;
@@ -251,7 +272,7 @@ int main(void)
         }
 
         // Clear the colorbuffer
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glClearColor(0.1f, 0.8f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glm::mat4 projection = glm::perspective(camera._zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
