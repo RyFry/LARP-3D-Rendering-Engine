@@ -107,8 +107,6 @@ void GUIManager::setup_menus()
   pointLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_point_light, this));
   spotLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_spot_light, this));
   directionalLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_directional_light, this));
-  pushTest1->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
-  pushTest2->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
 
   quit->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::quit, this));
 
@@ -116,7 +114,7 @@ void GUIManager::setup_menus()
   lightMenu->addChild(spotLight);
   lightMenu->addChild(directionalLight);
 
-
+  this->populate_light_list(lightList);
 
   mainSheet->addChild(addLight);
   mainSheet->addChild(quit);
@@ -132,6 +130,67 @@ void GUIManager::setup_menus()
 
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(mainSheet);
   CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().show();
+}
+
+void GUIManager::populate_light_list(CEGUI::Window* lightList)
+{
+	// /* Create buttons for each directional light */
+	// CEGUI::Window* temp;
+	// std::string tempName;
+	// for(uint n = 0; n < LightFactory::_directional_lights.size(); ++n)
+	// {
+	// 	tempName = "directionalLight" + n;
+
+	// 	/*setups the window button */
+	// 	temp = this->_wmgr->createWindow("TaharezLook/Button", tempName);
+	// 	temp->setText(tempName);
+	// 	temp->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
+	// 	temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
+	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
+
+	// 	/*Adds the button to the light list and maps the name of the light to the directional light */
+	// 	lightList->addChild(temp);
+	// 	this->_light_list.push_back(temp);
+	// 	this->_direct_map.emplace(tempName, LightFactor::_directional_lights.at(n));
+	// 	this->yPos += 0.05;
+	// }
+
+	// /* Create buttons for each point lights */
+	// for(n = 0; n < LightFactory::_point_lights.size(); ++n)
+	// {
+	// 	tempName = "pointLight" + n;
+
+	// 	/*setups the window button */
+	// 	temp = this->_wmgr->createWindow("TaharezLook/Button", tempName);
+	// 	temp->setText(tempName);
+	// 	temp->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
+	// 	temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
+	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
+
+	// 	/*Adds the button to the light list and maps the name of the light to the directional light */
+	// 	lightList->addChild(temp);
+	// 	this->_light_list.push_back(temp);
+	// 	this->_point_map.emplace(tempName, LightFactor::_point_lights.at(n));
+	// 	this->yPos += 0.05;
+	// }
+	// /*Create buttons for each spot light */
+	// for(n = 0; n < LightFactory::_spot_lights.size(); ++n)
+	// {
+	// 	tempName = "spotLight" + n;
+
+	// 	/*setups the window button */
+	// 	temp = this->_wmgr->createWindow("TaharezLook/Button", tempName);
+	// 	temp->setText(tempName);
+	// 	temp->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
+	// 	temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
+	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
+
+	// 	/*Adds the button to the light list and maps the name of the light to the directional light */
+	// 	lightList->addChild(temp);
+	// 	this->_light_list.push_back(temp);
+	// 	this->_point_map.emplace(tempName, LightFactor::_spot_lights.at(n));
+	// 	this->yPos += 0.05;
+	// }
 }
 
 bool GUIManager::get_rendering_state()
@@ -193,7 +252,7 @@ void GUIManager::push_test(const CEGUI::EventArgs&)
 	{
 		if(this->_light_list.at(i)->isCapturedByThis())
 		{
-			std::cout << this->_light_list.at(i)->getText() << std::endl;
+			
 		}
 	}
 }

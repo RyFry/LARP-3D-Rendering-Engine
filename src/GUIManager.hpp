@@ -30,7 +30,8 @@ class GUIManager
 		enum MenuNames
 		{
 			MAIN,
-			ADDLIGHT
+			ADDLIGHT,
+			LIGHTLIST
 		};
 
 	  /**
@@ -88,6 +89,8 @@ class GUIManager
     */
     std::vector<CEGUI::Window*> _light_list;
 
+    std::vector<CEGUI::Window*> _light_edit;
+
     /* 
     * CEGUI window times will be tied to a Pointlightptr
     */
@@ -96,6 +99,8 @@ class GUIManager
     std::map<std::string, Larp::SpotLightPtr> _spotMap;
 
     std::map<std::string, Larp::DirectionalLightPtr> _directMap;
+
+    float _yPos = 0.0f;
 
 		/*
 		* Setups all the resource groups that CEGUI requires.
@@ -106,6 +111,8 @@ class GUIManager
 		* Setups up all the menus for use
 		*/
 		void setup_menus();
+
+		void populate_light_list(CEGUI::Window* lightList);
 
 		void add_light(const CEGUI::EventArgs&);
 
