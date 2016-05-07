@@ -38,6 +38,7 @@ PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, co
         btBroadphaseProxy::CharacterFilter,
         btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter);
     physics_world->get_dynamics_world()->addAction(this->_char_controller);
+    _ghost_object->setUserPointer(nullptr);
 }
 
 void PhysicsPlayerController::add_movement_direction(PhysicsPlayerController::PlayerDirection direction)

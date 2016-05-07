@@ -41,7 +41,7 @@ $(OBJS): $(OBJDIR)/$(RELEASE_DIR)/%.o: $(SRCDIR)/%.cpp
 	@$(CXX) $(OPTFLAG) $(INCLUDES) $(CXXFLAGS) -c $< -o $@
 
 $(DEBUG_OBJS): $(OBJDIR)/$(DEBUG_DIR)/%.o: $(SRCDIR)/%.cpp
-	@mkdir -p $(OBJDIR)/$(DEBUG_DIR)
+	@mkdir -p $(@D)
 	@echo -e [CXX] '\t' $@
 	@$(CXX) $(OPTFLAG) $(INCLUDES) $(CXXFLAGS) -c $< -o $@
 

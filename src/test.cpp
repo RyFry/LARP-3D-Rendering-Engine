@@ -136,7 +136,7 @@ int main(void)
     node22->set_scale(0.4, 0.4, 0.4);
     node22->set_position(0.0, 4.0, 0.0);
 
-    PhysicsObjectBuilder<btBoxShape> crate_builder = PhysicsObjectBuilder<btBoxShape>();
+    PhysicsObjectBuilder<btBoxShape> crate_builder;
     crate_builder.set_position(glm::vec3(0.0, 4.0, 0.0));
     crate_builder.set_mass(10.0);
     crate_builder.set_restitution(0.0);
@@ -147,23 +147,24 @@ int main(void)
     world->get_dynamics_world()->addRigidBody(crate_collider->get_rigid_body());
 
     Larp::Shader p90_shader("shaders/lighting.vert", "shaders/lighting.frag");
-    Larp::ModelPtr p90_model = Larp::Model::create("assets/P90/P90.obj");
+    Larp::ModelPtr p90_model = Larp::Model::create("assets/testgun/testgun.obj");
     Larp::EntityPtr p90_entity = Larp::Entity::create(p90_shader, p90_model);
     Larp::NodePtr p90_node = graph->create_child_node();
     p90_node->attach_entity(p90_entity);
-    p90_node->set_scale(0.01, 0.01, 0.01);
-    p90_node->set_position(3.0, 7.0, 0.0);
+    p90_node->set_scale(0.1, 0.1, 0.1);
+    p90_node->set_position(3.0, 9.0, 0.0);
 
-    PhysicsObjectBuilder p90_builder = PhysicsObjectBuilder();
-    glm::quat p90_rot;
-    p90_rot = glm::rotate(p90_rot, 90.0, glm::vec3(1, 0, 0));
+    PhysicsObjectBuilder<btBoxShape> p90_builder;
+    glm::quat p90_rot(0, 0, 0, 1);
+    p90_rot = glm::rotate(p90_rot, 90.0, glm::vec3(0, 0, 1));
+    p90_node->set_orientation(p90_rot);
     p90_builder.set_orientation(p90_rot);
-    p90_builder.set_position(glm::vec3(3.0, 7.0, 0.0));
+    p90_builder.set_position(glm::vec3(3.0, 9.0, 0.0));
     p90_builder.set_mass(1.0);
     p90_builder.set_restitution(0.0);
     p90_builder.set_user_pointer(p90_node);
 
-    PhysicsObjectPtr p90_collider = p90_builder.build();
+    PhysicsBoxPtr p90_collider = p90_builder.build();
 
     world->get_dynamics_world()->addRigidBody(p90_collider->get_rigid_body());
     /// Can't add mesh collider for crate. It's too big.
@@ -189,7 +190,7 @@ int main(void)
     node12->attach_entity(entity2);
     node12->set_scale(0.05f, 0.05f, 0.05f);
 
-    player.reset(new PhysicsPlayerController(world.get(), node12, glm::vec3(0, 5, 2)));
+    player.reset(new PhysicsPlayerController(world.get(), node12, glm::vec3(0, 5.0, 2.0)));
     player->set_user_pointer(node12);
 
     make_floor(world);
@@ -255,7 +256,7 @@ int main(void)
                 body->getMotionState()->getWorldTransform(trans);
                 void* user_pointer = body->getUserPointer();
 
-                if (user_pointer)
+                if (user_pointer != nullptr)
                 {
                     btQuaternion orientation = trans.getRotation();
                     Larp::NodePtr user_node = static_cast<Larp::NodePtr>(user_pointer);

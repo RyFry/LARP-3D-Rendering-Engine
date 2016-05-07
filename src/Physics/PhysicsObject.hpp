@@ -6,7 +6,7 @@
 #include "Larp/Node.hpp"
 #include "PhysicsWorld.hpp"
 
-template <typename T>
+template <typename BulletShape>
 class PhysicsObject
 {
 private:

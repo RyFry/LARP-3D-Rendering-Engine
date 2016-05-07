@@ -1,7 +1,7 @@
 #include "PhysicsObjectBuilder.hpp"
 
-template <typename T>
-PhysicsObjectBuilder<T>::PhysicsObjectBuilder()
+template <typename BulletShape>
+PhysicsObjectBuilder<BulletShape>::PhysicsObjectBuilder()
     : _orientation(0.0, 0.0, 0.0, 1.0),
       _position(0.0, 0.0, 0.0),
       _mass(0.0),
@@ -11,8 +11,8 @@ PhysicsObjectBuilder<T>::PhysicsObjectBuilder()
 {
 }
 
-template <typename T>
-void PhysicsObjectBuilder<T>::set_orientation(glm::quat orientation)
+template <typename BulletShape>
+void PhysicsObjectBuilder<BulletShape>::set_orientation(glm::quat orientation)
 {
     this->_orientation.x = orientation.x;
     this->_orientation.y = orientation.y;
@@ -20,45 +20,45 @@ void PhysicsObjectBuilder<T>::set_orientation(glm::quat orientation)
     this->_orientation.w = orientation.w;
 }
 
-template <typename T>
-void PhysicsObjectBuilder<T>::set_position(glm::vec3 position)
+template <typename BulletShape>
+void PhysicsObjectBuilder<BulletShape>::set_position(glm::vec3 position)
 {
     this->_position.x = position.x;
     this->_position.y = position.y;
     this->_position.z = position.z;
 }
 
-template <typename T>
-void PhysicsObjectBuilder<T>::set_mass(GLfloat mass)
+template <typename BulletShape>
+void PhysicsObjectBuilder<BulletShape>::set_mass(GLfloat mass)
 {
     this->_mass = mass;
 }
 
-template <typename T>
-void PhysicsObjectBuilder<T>::set_local_inertia(glm::vec3 local_inertia)
+template <typename BulletShape>
+void PhysicsObjectBuilder<BulletShape>::set_local_inertia(glm::vec3 local_inertia)
 {
     this->_local_inertia.x = local_inertia.x;
     this->_local_inertia.y = local_inertia.y;
     this->_local_inertia.z = local_inertia.z;
 }
 
-template <typename T>
-void PhysicsObjectBuilder<T>::set_restitution(GLfloat restitution)
+template <typename BulletShape>
+void PhysicsObjectBuilder<BulletShape>::set_restitution(GLfloat restitution)
 {
     this->_restitution = restitution;
 }
 
-template <typename T>
-void PhysicsObjectBuilder<T>::set_user_pointer(Larp::NodePtr user_pointer)
+template <typename BulletShape>
+void PhysicsObjectBuilder<BulletShape>::set_user_pointer(Larp::NodePtr user_pointer)
 {
     this->_user_pointer = user_pointer;
 }
 
-template <typename T>
-PhysicsObject<T>* PhysicsObjectBuilder<T>::build()
+template <typename BulletShape>
+PhysicsObject<BulletShape>* PhysicsObjectBuilder<BulletShape>::build()
 {
-    return new PhysicsObject<T>(_orientation, _position, _mass, _local_inertia,
-                                _restitution, _user_pointer);
+    return new PhysicsObject<BulletShape>(_orientation, _position, _mass, _local_inertia,
+                                          _restitution, _user_pointer);
 }
 
 template class PhysicsObjectBuilder<btBoxShape>;

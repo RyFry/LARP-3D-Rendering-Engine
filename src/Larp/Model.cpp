@@ -54,7 +54,7 @@ namespace Larp
     {
         this->load_model(path);
 
-        // Calculate the width, height and depth of the mesh
+        // Calculate the width, height and depth of the model
         GLfloat min_x = FLT_MAX;
         GLfloat min_y = FLT_MAX;
         GLfloat min_z = FLT_MAX;
@@ -84,6 +84,7 @@ namespace Larp
         this->_width = max_x - min_x;
         this->_height = max_y - min_y;
         this->_depth = max_z - min_z;
+        std::cout << this->_width << ',' << this->_height << ',' << this->_depth << std::endl;
     }
 
     void Model::load_model(std::string path)
