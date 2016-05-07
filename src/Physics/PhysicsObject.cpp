@@ -1,6 +1,7 @@
 #include "PhysicsObject.hpp"
 
-PhysicsObject::PhysicsObject(glm::quat rotation, glm::vec3 position,
+template <typename T>
+PhysicsObject<T>::PhysicsObject(glm::quat rotation, glm::vec3 position,
                              GLfloat mass, glm::vec3 local_inertia, GLfloat restitution,
                              Larp::NodePtr user_pointer)
 {
@@ -11,9 +12,9 @@ PhysicsObject::PhysicsObject(glm::quat rotation, glm::vec3 position,
     btScalar bt_mass(mass);
     btVector3 inertia(local_inertia.x, local_inertia.y, local_inertia.z);
 
-    btCollisionShape* shape = new btBoxShape(btVector3(0.5f * user_pointer->get_scaled_width(),
-                                                       0.5f * user_pointer->get_scaled_height(),
-                                                       0.5f * user_pointer->get_scaled_depth()));
+    btCollisionShape* shape = new T(btVector3(0.5f * user_pointer->get_scaled_width(),
+                                              0.5f * user_pointer->get_scaled_height(),
+                                              0.5f * user_pointer->get_scaled_depth()));
     btDefaultMotionState* motion_state = new btDefaultMotionState(transform);
 
     shape->calculateLocalInertia(bt_mass, inertia);
@@ -25,7 +26,12 @@ PhysicsObject::PhysicsObject(glm::quat rotation, glm::vec3 position,
     this->_rigid_body->setUserPointer(user_pointer);
 }
 
-btRigidBody* PhysicsObject::get_rigid_body() const
+template <typename T>
+btRigidBody* PhysicsObject<T>::get_rigid_body() const
 {
     return this->_rigid_body;
 }
+
+template class PhysicsObject<btBoxShape>;
+//template class PhysicsObject<btCapsuleShape>;
+template class PhysicsObject<btCylinderShape>;

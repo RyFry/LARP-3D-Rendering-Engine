@@ -12,9 +12,9 @@ PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, co
       _directions(0)
 {
     // Create player shape
-    btCylinderShape* player_shape = new btCylinderShape(btVector3(0.5f * node->get_scaled_width(),
-                                                                  0.5f * node->get_scaled_height(),
-                                                                  0.5f * node->get_scaled_depth()));
+    btScalar radius((node->get_scaled_width() + node->get_scaled_depth()) / 4.0);
+    btScalar height(node->get_scaled_height());
+    btCapsuleShape* player_shape = new btCapsuleShape(radius, height);
 
     // Init player ghost object
     this->_ghost_object = new btPairCachingGhostObject();
@@ -158,6 +158,13 @@ glm::vec3 PhysicsPlayerController::get_position() const
 {
     btVector3 vec(this->_ghost_object->getWorldTransform().getOrigin());
     return glm::vec3(vec.x(), vec.y(), vec.z());
+}
+
+void PhysicsPlayerController::set_position(glm::vec3 position)
+{
+    btTransform trans(this->_ghost_object->getWorldTransform());
+    trans.setOrigin(btVector3(position.x, position.y, position.z));
+    this->_ghost_object->setWorldTransform(trans);
 }
 
 glm::quat PhysicsPlayerController::get_orientation() const
