@@ -82,9 +82,9 @@ class GUIManager
 		void setup_resources();
 
 		/**
-		* Setups up the main menu for use
+		* Setups up all the menus for use
 		*/
-		void setup_main_menu();
+		void setup_menus();
 
 		void add_light(const CEGUI::EventArgs&);
 

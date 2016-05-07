@@ -32,12 +32,14 @@ GLuint screenWidth = 800, screenHeight = 600;
 
 // Function prototypes
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+void char_callback(GLFWwindow* window, unsigned int codepoint);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 void Do_Movement();
 void error_callback(int error, const char* description);
 void make_floor(PhysicsWorld* physics_world);
+unsigned int GlfwToCeguiKey(int glfwKey);
 
 // Camera
 Larp::SceneGraphPtr graph = Larp::SceneGraph::singleton();
@@ -84,6 +86,7 @@ int main(void)
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
+    glfwSetCharCallback(window, char_callback);
 
     // Options
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
@@ -196,9 +199,6 @@ int main(void)
 
 
 
-
-
-
     GLfloat frame_rate_limiter = 0.0f;
     uint64_t iteration_number = 0;
     /* Loop until the user closes the window */
@@ -264,7 +264,8 @@ int main(void)
 
         // Check and call events
         glfwPollEvents();
-        Do_Movement();
+        if(!GUIrendering)
+            Do_Movement();
 
         // Clear the colorbuffer
         glClearColor(0.5f, 0.05f, 0.05f, 1.0f);
@@ -332,10 +333,30 @@ void Do_Movement()
 
 // Is called whenever a key is pressed/released via GLFW
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
-{
+{   
+    CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+
+    /*Inject keys for CEGUI. Mainly pressing down on one */
+    if(action == GLFW_PRESS)
+    {
+
+        if(GlfwToCeguiKey(key) != 0)
+        {
+            context.injectKeyDown((CEGUI::Key::Scan)GlfwToCeguiKey(key));
+            /*If I don't add this the arrow keys start putting in weird character codes */
+            if(key == GLFW_KEY_BACKSPACE)
+                context.injectChar((CEGUI::Key::Scan)GlfwToCeguiKey(key));
+        }
+        else 
+            context.injectKeyDown((CEGUI::Key::Scan)key);
+    }
+    /* Inject keys for CEGUI. For releasing a key */
+    else if(action == GLFW_RELEASE)
+        context.injectKeyUp((CEGUI::Key::Scan)key);
+
     if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
-    else if(key == GLFW_KEY_M && action == GLFW_PRESS)
+    else if(key == GLFW_KEY_F1 && action == GLFW_PRESS)
         GUIMan->show_main();
     // We don't want people to actually clear the graph
     // if (key == GLFW_KEY_C)
@@ -345,6 +366,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         keys[key] = true;
     else if(action == GLFW_RELEASE)
         keys[key] = false;
+}
+/* GLFW has two keyboard related call backs.
+ * One for the physical keyboard and one for the Unicode for the keys 
+ */
+void char_callback(GLFWwindow* window, unsigned int codepoint)
+{
+    CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+    context.injectChar(codepoint);
 }
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
@@ -420,4 +449,19 @@ void make_floor(PhysicsWorld* world)
     body->setRestitution(0);
 
     world->get_dynamics_world()->addRigidBody(body);
+}
+
+
+unsigned int GlfwToCeguiKey(int glfwKey)
+{
+    switch(glfwKey)
+    {
+        case GLFW_KEY_UNKNOWN   : return 0;
+        case GLFW_KEY_UP        : return CEGUI::Key::ArrowUp;
+        case GLFW_KEY_DOWN      : return CEGUI::Key::ArrowDown;
+        case GLFW_KEY_LEFT      : return CEGUI::Key::ArrowLeft;
+        case GLFW_KEY_RIGHT     : return CEGUI::Key::ArrowRight;
+        case GLFW_KEY_BACKSPACE : return CEGUI::Key::Backspace;
+        default         : return 0;
+    }
 }

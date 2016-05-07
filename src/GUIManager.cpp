@@ -12,7 +12,7 @@ _graph(g), _window(window)
 	// this->_renderer->enableExtraStateSettings(true);
 
 	this->setup_resources();
-	this->setup_main_menu();
+	this->setup_menus();
 }
 
 GUIManager::~GUIManager()
@@ -26,12 +26,12 @@ void GUIManager::setup_resources()
    (CEGUI::System::getSingleton().getResourceProvider());
 
 
-  rp->setResourceGroupDirectory("schemes", "assets/schemes/");
-	rp->setResourceGroupDirectory("imagesets", "assets/imagesets/");
-	rp->setResourceGroupDirectory("fonts", "assets/fonts/");
-	rp->setResourceGroupDirectory("layouts", "assets/layouts/");
-	rp->setResourceGroupDirectory("looknfeels", "assets/looknfeel/");
-	rp->setResourceGroupDirectory("lua_scripts", "assets/lua_scripts/");
+  rp->setResourceGroupDirectory("schemes", "assets/CEGUI/schemes/");
+	rp->setResourceGroupDirectory("imagesets", "assets/CEGUI/imagesets/");
+	rp->setResourceGroupDirectory("fonts", "assets/CEGUI/fonts/");
+	rp->setResourceGroupDirectory("layouts", "assets/CEGUI/layouts/");
+	rp->setResourceGroupDirectory("looknfeels", "assets/CEGUI/looknfeel/");
+	rp->setResourceGroupDirectory("lua_scripts", "assets/CEGUI/lua_scripts/");
 
 	/* Setups all the resources */
 	CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
@@ -49,22 +49,40 @@ void GUIManager::setup_resources()
 
 }
 
-void GUIManager::setup_main_menu()
+void GUIManager::setup_menus()
 {
+	/* Main menu sheet */
 	CEGUI::Window* mainSheet = this->_wmgr->createWindow("DefaultWindow", "mainSheet");
 
+	/* The Add light button and the menu bar that holds all the add light buttons */
 	CEGUI::Window* addLight = this->_wmgr->createWindow("TaharezLook/Button", "addLight");
 	CEGUI::Window* lightMenu = this->_wmgr->createWindow("TaharezLook/Menubar", "lightMenu");
 
+	/* All the add light buttons */
 	CEGUI::Window* pointLight = this->_wmgr->createWindow("TaharezLook/MenuItem", "point");
 	CEGUI::Window* spotLight = this->_wmgr->createWindow("TaharezLook/MenuItem", "spot");
 	CEGUI::Window* directionalLight = this->_wmgr->createWindow("TaharezLook/MenuItem", "directional");
 
-
+	/* This is the quit button*/
 	CEGUI::Window* quit = this->_wmgr->createWindow("TaharezLook/Button", "quit");
 
+	CEGUI::MultiColumnList* test = static_cast<CEGUI::MultiColumnList *>(this->_wmgr->createWindow("TaharezLook/MultiColumnList", "list"));
 
 
+	// CEGUI::ListboxTextItem* testItem = new CEGUI::ListboxTextItem("My dickkkk", 25);
+	// // testItem->setSelectionBrushImage("TaharezLook", "MultiListSelectionBrush");
+
+
+	// test->setPosition(CEGUI::UVector2(CEGUI::UDim(0.4f,0),CEGUI::UDim(0.4f,0)));
+	// test->setSize(CEGUI::USize(CEGUI::UDim(0.25,0), CEGUI::UDim(0.15,0)));
+	// test->setSelectionMode(CEGUI::MultiColumnList::SelectionMode::RowMultiple);
+	// test->addColumn("Column1", 0, CEGUI::UDim(0.15,0));
+	// test->addRow(testItem, 0, 0);
+
+	CEGUI::MultiLineEditbox* test2 = static_cast<CEGUI::MultiLineEditbox*>(this->_wmgr->createWindow("TaharezLook/MultiLineEditbox", "test2"));
+	test2->setText("Something sometihnf dick");
+	test2->setReadOnly(false);
+	test2->setWordWrapping(true);
 
 	pointLight->setText("Point Light");
 	spotLight->setText("Spotlight");
@@ -86,6 +104,8 @@ void GUIManager::setup_main_menu()
   addLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_light, this));
   pointLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_point_light, this));
   spotLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_spot_light, this));
+  directionalLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_directional_light, this));
+
   quit->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::quit, this));
 
   lightMenu->addChild(pointLight);
@@ -93,9 +113,10 @@ void GUIManager::setup_main_menu()
   lightMenu->addChild(directionalLight);
 
 
+
   mainSheet->addChild(addLight);
   mainSheet->addChild(quit);
-  // popupMenu->addChild(start);
+  mainSheet->addChild(test2);
 
   this->_sheets.push_back(mainSheet);
   this->_sheets.push_back(lightMenu);
