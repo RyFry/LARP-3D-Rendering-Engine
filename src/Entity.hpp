@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "LarpPrerequisites.hpp"
+#include "ConfigurationLoader.hpp"
 #include "Model.hpp"
 #include "Shader.hpp"
 

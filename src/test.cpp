@@ -95,12 +95,15 @@ int main(void)
     // Larp::Shader level_shader("shaders/lighting.vert", "shaders/lighting.frag");
     Larp::ModelPtr level = Larp::Model::create("assets/LEVEL.obj");
     Larp::EntityPtr entity = Larp::Entity::create(level);
+    entity->set_directional_shadows(true);
+
+    // Create lights
     Larp::DirectionalLightPtr dir_light = Larp::LightFactory::create_directional_light();
     Larp::PointLightPtr point_light = Larp::LightFactory::create_point_light();
-
     point_light->set_ambient_intensity(1.0f, 1.0f, 1.0f);
     point_light->set_position(0.0f, 5.0f, 0.0f);
     //graph->remove_light(dir_light);
+
     Larp::NodePtr node11 = graph->create_child_node();
     Larp::NodePtr node12 = graph->create_child_node();
 
@@ -121,6 +124,8 @@ int main(void)
     // Larp::Shader crate_shader("shaders/lighting.vert", "shaders/lighting.frag");
     Larp::ModelPtr crate_model = Larp::Model::create("assets/crate.obj");
     Larp::EntityPtr entity22 = Larp::Entity::create(crate_model);
+    // entity22->set_directional_shadows(true);
+
     Larp::NodePtr node22 = graph->create_child_node();
     node22->attach_entity(entity22);
     node22->set_scale(0.4, 0.4, 0.4);
@@ -144,6 +149,7 @@ int main(void)
     // Larp::Shader shader("shaders/lighting.vert", "shaders/lighting.frag");
     Larp::ModelPtr nanosuit = Larp::Model::create("assets/nanosuit.obj");
     Larp::EntityPtr entity2 = Larp::Entity::create(nanosuit);
+    // entity2->set_directional_shadows(true);
 
     node12->attach_entity(entity2);
     node12->set_scale(0.1f, 0.1f, 0.1f);

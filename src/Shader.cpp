@@ -7,6 +7,9 @@ namespace Larp
     GLuint Shader::_depth_map_texture;
     bool Shader::_depth_map_configured = false;
 
+    const GLuint Shader::SHADOW_WIDTH = 1024;
+    const GLuint Shader::SHADOW_HEIGHT = 1024;
+
     // ----------------
     // Public functions
     // ----------------
@@ -37,7 +40,6 @@ namespace Larp
     {
         if (!_depth_map_configured)
         {
-            const GLuint SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
             // Configure depth map FBO
             glGenFramebuffers(1, &_depth_map_FBO);
             // - Create depth texture
@@ -63,7 +65,7 @@ namespace Larp
 
     Shader* Shader::get_shadow_map_shader()
     {
-        return create("shaders/shadow_mapping.vert", "shaders/shadow_mapping.frag");
+        return create("shaders/my_shadow_mapping.vert", "shaders/my_shadow_mapping.frag");
     }
 
     Shader* Shader::get_default_shader()
@@ -124,6 +126,42 @@ namespace Larp
           glUniform1f(glGetUniformLocation(this->_program, ("pointLights[" + std::to_string(i) + "].linear").c_str()), lights[i]->_linear);
           glUniform1f(glGetUniformLocation(this->_program, ("pointLights[" + std::to_string(i) + "].quadratic").c_str()), lights[i]->_quadratic);
         }
+    }
+
+    glm::mat4 Shader::calculate_light_space_matrix(glm::vec3 light_pos)
+    {
+        glm::mat4 light_projection, light_view;
+        glm::mat4 light_space_matrix;
+        GLfloat near_plane = 1.0f, far_plane = 7.5f;
+        light_projection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
+        //light_projection = glm::perspective(45.0f, (GLfloat)SHADOW_WIDTH / (GLfloat)SHADOW_HEIGHT, near_plane, far_plane); // Note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene.
+        light_view = glm::lookAt(light_pos, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
+        light_space_matrix = light_projection * light_view;
+        return light_space_matrix;
+    }
+
+    void Shader::set_light_space_matrix(const glm::mat4& light_space_matrix)
+    {
+        glUniformMatrix4fv(glGetUniformLocation(this->_program, "lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(light_space_matrix));
+    }
+
+    void Shader::prepare_depth_map()
+    {
+        glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+        glBindFramebuffer(GL_FRAMEBUFFER, _depth_map_FBO);
+        glClear(GL_DEPTH_BUFFER_BIT);
+    }
+
+    void Shader::set_dir_light_position(glm::vec3 light_pos)
+    {
+        glUniform3fv(glGetUniformLocation(this->_program, "lightPos"), 1, glm::value_ptr(light_pos));
+    }
+
+    void Shader::enable_shadow_texture()
+    {
+        glUniform1i(glGetUniformLocation(this->_program, "shadowMap"), 0);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, _depth_map_texture);
     }
 
     // -----------------

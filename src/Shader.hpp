@@ -47,9 +47,17 @@ namespace Larp
 
         void set_mvp(const glm::mat4& model, const glm::mat4& view, const glm::mat4& projection);
 
+        // TODO: move this functionality into light factory
         void set_directional_lights();
-
+        // TODO: move this functionality into light factory
         void set_point_lights();
+
+        // The default value for light position should not by in the same axis as the up vector in the lookat function
+        glm::mat4 calculate_light_space_matrix(glm::vec3 light_pos = glm::vec3(0.0f, 10.0f, 30.0f));
+        void set_light_space_matrix(const glm::mat4& light_space_matrix);
+        void prepare_depth_map();
+        void set_dir_light_position(glm::vec3 light_pos = glm::vec3(0.0f, 10.0f, 0.1f));
+        void enable_shadow_texture();
     private:
         /**
          * A cache of compiled Shaders.
@@ -67,6 +75,9 @@ namespace Larp
          * A 2D texture that is used as the framebuffer's depth buffer
          */
         static GLuint _depth_map_texture;
+
+        static const GLuint SHADOW_WIDTH;
+        static const GLuint SHADOW_HEIGHT;
         /**
          * Constructor
          * @param vertex_path   The path to the desired vertex shader.
