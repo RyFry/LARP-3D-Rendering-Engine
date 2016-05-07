@@ -73,7 +73,6 @@ int main(void)
     glfwWindowHint(GLFW_RESIZABLE, config.is_resizable());
     glfwWindowHint(GLFW_SAMPLES, 4);
 
-
     glfwSetErrorCallback(error_callback);
 
     GLFWwindow* window = glfwCreateWindow(screenWidth, screenHeight, config.get_title().c_str(), nullptr, nullptr); // Windowed
@@ -284,9 +283,8 @@ int main(void)
         {
             glDisable(GL_DEPTH_TEST);
             CEGUI::System::getSingleton().renderAllGUIContexts();
-        }
-        else
             glEnable(GL_DEPTH_TEST);
+        }
 
         // Swap the buffers
         glfwSwapBuffers(window);

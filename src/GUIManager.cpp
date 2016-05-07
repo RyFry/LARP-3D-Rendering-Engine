@@ -67,22 +67,24 @@ void GUIManager::setup_menus()
 	CEGUI::Window* quit = this->_wmgr->createWindow("TaharezLook/Button", "quit");
 
 
-	CEGUI::Window* test3 = this->_wmgr->createWindow("TaharezLook/ScrollablePane", "scroll");
+	CEGUI::Window* lightList = this->_wmgr->createWindow("TaharezLook/ScrollablePane", "lightList");
 
 	CEGUI::Window* pushTest1 = this->_wmgr->createWindow("TaharezLook/Button", "txt");
 	CEGUI::Window* pushTest2 = this->_wmgr->createWindow("TaharezLook/Button", "txt2");
 
-	test3->setSize(CEGUI::USize(CEGUI::UDim(0.75,0), CEGUI::UDim(0.45,0)));
-	test3->setPosition(CEGUI::UVector2(CEGUI::UDim(0.35f,0),CEGUI::UDim(0.4f,0)));
+	CEGUI::Window* lightEdit = this->_wmgr->createWindow("TaharezLook/ScrollablePane", "lightEdit");
+
+	lightList->setSize(CEGUI::USize(CEGUI::UDim(0.75,0), CEGUI::UDim(0.45,0)));
+	lightList->setPosition(CEGUI::UVector2(CEGUI::UDim(0.35f,0),CEGUI::UDim(0.4f,0)));
 
 	pushTest1->setText("Hi thar");
 	pushTest1->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
 	pushTest2->setText("Das Kampfer");
 	pushTest2->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
-	pushTest2->setPosition(CEGUI::UVector2(CEGUI::UDim(0.1f,0),CEGUI::UDim(0.1f,0)));
+	pushTest2->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(0.05f,0)));
 
-	test3->addChild(pushTest1);
-	test3->addChild(pushTest2);
+	lightList->addChild(pushTest1);
+	lightList->addChild(pushTest2);
 
 	pointLight->setText("Point Light");
 	spotLight->setText("Spotlight");
@@ -118,13 +120,14 @@ void GUIManager::setup_menus()
 
   mainSheet->addChild(addLight);
   mainSheet->addChild(quit);
-  mainSheet->addChild(test3);
+  mainSheet->addChild(lightList);
 
   this->_sheets.push_back(mainSheet);
   this->_sheets.push_back(lightMenu);
+  this->_sheets.push_back(lightList);
 
   this->_light_list.push_back(pushTest1);
-   this->_light_list.push_back(pushTest2);
+  this->_light_list.push_back(pushTest2);
 
 
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(mainSheet);
@@ -183,7 +186,7 @@ void GUIManager::quit(const CEGUI::EventArgs&)
 {
 	glfwSetWindowShouldClose(this->_window, GL_TRUE);
 }
-
+	
 void GUIManager::push_test(const CEGUI::EventArgs&)
 {
 	for(uint i = 0; i < this->_light_list.size(); ++i)

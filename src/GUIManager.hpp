@@ -66,6 +66,8 @@ class GUIManager
 
 		GLFWwindow* _window;
 
+		GLFWwindow* _off_screen;
+
 		/**
 		* CEGUI renderer that is required when using OpenGL3
 		*/ 
@@ -76,13 +78,26 @@ class GUIManager
 		*/
 		CEGUI::WindowManager*   _wmgr;
 
+		/*
+		* Vector that holds all the GUI sheets
+		*/
     std::vector<CEGUI::Window*> _sheets;
 
+    /* 
+    * Vector that will contain all the windows that represent lights in the light menu
+    */
     std::vector<CEGUI::Window*> _light_list;
 
+    /* 
+    * CEGUI window times will be tied to a Pointlightptr
+    */
     std::map<std::string, Larp::PointLightPtr> _pointMap;
 
-		/**
+    std::map<std::string, Larp::SpotLightPtr> _spotMap;
+
+    std::map<std::string, Larp::DirectionalLightPtr> _directMap;
+
+		/*
 		* Setups all the resource groups that CEGUI requires.
 		*/
 		void setup_resources();
