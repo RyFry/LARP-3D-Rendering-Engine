@@ -4,7 +4,9 @@
 #include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
 #include <CEGUI/CEGUI.h>
 #include <iostream>
+#include <string>
 #include <vector>
+#include <map>
 
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -76,6 +78,10 @@ class GUIManager
 
     std::vector<CEGUI::Window*> _sheets;
 
+    std::vector<CEGUI::Window*> _light_list;
+
+    std::map<std::string, Larp::PointLightPtr> _pointMap;
+
 		/**
 		* Setups all the resource groups that CEGUI requires.
 		*/
@@ -98,6 +104,8 @@ class GUIManager
 		void add_directional_light(const CEGUI::EventArgs&);
 
 		void quit(const CEGUI::EventArgs&);
+
+		void push_test(const CEGUI::EventArgs&);
 
 		/**
 		* Hides the current GUI sheet and mouse

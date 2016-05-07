@@ -369,6 +369,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 }
 /* GLFW has two keyboard related call backs.
  * One for the physical keyboard and one for the Unicode for the keys 
+ * This one is for the Unicode
  */
 void char_callback(GLFWwindow* window, unsigned int codepoint)
 {
@@ -396,7 +397,6 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 
         lastX = xpos;
         lastY = ypos;
-
 
     /* If the GUI is rendering stop mouse movement for the player camera */
     if(!GUIrendering)

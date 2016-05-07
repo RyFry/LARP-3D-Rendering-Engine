@@ -66,23 +66,23 @@ void GUIManager::setup_menus()
 	/* This is the quit button*/
 	CEGUI::Window* quit = this->_wmgr->createWindow("TaharezLook/Button", "quit");
 
-	CEGUI::MultiColumnList* test = static_cast<CEGUI::MultiColumnList *>(this->_wmgr->createWindow("TaharezLook/MultiColumnList", "list"));
 
+	CEGUI::Window* test3 = this->_wmgr->createWindow("TaharezLook/ScrollablePane", "scroll");
 
-	// CEGUI::ListboxTextItem* testItem = new CEGUI::ListboxTextItem("My dickkkk", 25);
-	// // testItem->setSelectionBrushImage("TaharezLook", "MultiListSelectionBrush");
+	CEGUI::Window* pushTest1 = this->_wmgr->createWindow("TaharezLook/Button", "txt");
+	CEGUI::Window* pushTest2 = this->_wmgr->createWindow("TaharezLook/Button", "txt2");
 
+	test3->setSize(CEGUI::USize(CEGUI::UDim(0.75,0), CEGUI::UDim(0.45,0)));
+	test3->setPosition(CEGUI::UVector2(CEGUI::UDim(0.35f,0),CEGUI::UDim(0.4f,0)));
 
-	// test->setPosition(CEGUI::UVector2(CEGUI::UDim(0.4f,0),CEGUI::UDim(0.4f,0)));
-	// test->setSize(CEGUI::USize(CEGUI::UDim(0.25,0), CEGUI::UDim(0.15,0)));
-	// test->setSelectionMode(CEGUI::MultiColumnList::SelectionMode::RowMultiple);
-	// test->addColumn("Column1", 0, CEGUI::UDim(0.15,0));
-	// test->addRow(testItem, 0, 0);
+	pushTest1->setText("Hi thar");
+	pushTest1->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
+	pushTest2->setText("Das Kampfer");
+	pushTest2->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
+	pushTest2->setPosition(CEGUI::UVector2(CEGUI::UDim(0.1f,0),CEGUI::UDim(0.1f,0)));
 
-	CEGUI::MultiLineEditbox* test2 = static_cast<CEGUI::MultiLineEditbox*>(this->_wmgr->createWindow("TaharezLook/MultiLineEditbox", "test2"));
-	test2->setText("Something sometihnf dick");
-	test2->setReadOnly(false);
-	test2->setWordWrapping(true);
+	test3->addChild(pushTest1);
+	test3->addChild(pushTest2);
 
 	pointLight->setText("Point Light");
 	spotLight->setText("Spotlight");
@@ -105,6 +105,8 @@ void GUIManager::setup_menus()
   pointLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_point_light, this));
   spotLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_spot_light, this));
   directionalLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_directional_light, this));
+  pushTest1->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
+  pushTest2->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
 
   quit->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::quit, this));
 
@@ -116,10 +118,14 @@ void GUIManager::setup_menus()
 
   mainSheet->addChild(addLight);
   mainSheet->addChild(quit);
-  mainSheet->addChild(test2);
+  mainSheet->addChild(test3);
 
   this->_sheets.push_back(mainSheet);
   this->_sheets.push_back(lightMenu);
+
+  this->_light_list.push_back(pushTest1);
+   this->_light_list.push_back(pushTest2);
+
 
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(mainSheet);
   CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().show();
@@ -176,6 +182,17 @@ void GUIManager::add_directional_light(const CEGUI::EventArgs&)
 void GUIManager::quit(const CEGUI::EventArgs&)
 {
 	glfwSetWindowShouldClose(this->_window, GL_TRUE);
+}
+
+void GUIManager::push_test(const CEGUI::EventArgs&)
+{
+	for(uint i = 0; i < this->_light_list.size(); ++i)
+	{
+		if(this->_light_list.at(i)->isCapturedByThis())
+		{
+			std::cout << this->_light_list.at(i)->getText() << std::endl;
+		}
+	}
 }
 
 void GUIManager::hide_GUI()
