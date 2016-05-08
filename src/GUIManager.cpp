@@ -74,6 +74,38 @@ void GUIManager::setup_menus()
 
 	CEGUI::Window* lightEdit = this->_wmgr->createWindow("TaharezLook/ScrollablePane", "lightEdit");
 
+	CEGUI::Spinner* testSpinner = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "spinner"));
+
+	/* Color for the lights */
+	CEGUI::Spinner* redSpinner = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "red"));
+	CEGUI::Spinner* greenSpinner = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "green"));
+	CEGUI::Spinner* blueSpinner = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "blue"));
+
+	redSpinner->setTextInputMode(CEGUI::Spinner::FloatingPoint);
+	redSpinner->setMinimumValue(0.0f);
+	redSpinner->setMaximumValue(255.0f);
+	redSpinner->setStepSize(10.0f);
+	redSpinner->setCurrentValue(10.0f);
+	redSpinner->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(0.0f,0)));
+
+	greenSpinner->setTextInputMode(CEGUI::Spinner::FloatingPoint);
+	greenSpinner->setMinimumValue(0.0f);
+	greenSpinner->setMaximumValue(255.0f);
+	greenSpinner->setStepSize(10.0f);
+	greenSpinner->setCurrentValue(10.0f);
+	greenSpinner->setPosition(CEGUI::UVector2(CEGUI::UDim(0.12f,0),CEGUI::UDim(0.0f,0)));
+
+	blueSpinner->setTextInputMode(CEGUI::Spinner::FloatingPoint);
+	blueSpinner->setMinimumValue(0.0f);
+	blueSpinner->setMaximumValue(255.0f);
+	blueSpinner->setStepSize(10.0f);
+	blueSpinner->setCurrentValue(10.0f);
+	blueSpinner->setPosition(CEGUI::UVector2(CEGUI::UDim(0.24f,0),CEGUI::UDim(0.0f,0)));
+
+
+	lightEdit->setSize(CEGUI::USize(CEGUI::UDim(0.75,0), CEGUI::UDim(0.45,0)));
+	lightEdit->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5,0),CEGUI::UDim(0.4f,0)));
+
 	lightList->setSize(CEGUI::USize(CEGUI::UDim(0.75,0), CEGUI::UDim(0.45,0)));
 	lightList->setPosition(CEGUI::UVector2(CEGUI::UDim(0.35f,0),CEGUI::UDim(0.4f,0)));
 
@@ -85,6 +117,16 @@ void GUIManager::setup_menus()
 
 	lightList->addChild(pushTest1);
 	lightList->addChild(pushTest2);
+
+	lightEdit->addChild(redSpinner);
+	lightEdit->addChild(greenSpinner);
+	lightEdit->addChild(blueSpinner);
+
+	this->_light_edit.push_back(redSpinner);
+	this->_light_edit.push_back(greenSpinner);
+	this->_light_edit.push_back(blueSpinner);
+
+
 
 	pointLight->setText("Point Light");
 	spotLight->setText("Spotlight");
@@ -107,6 +149,9 @@ void GUIManager::setup_menus()
   pointLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_point_light, this));
   spotLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_spot_light, this));
   directionalLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_directional_light, this));
+  pushTest1->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
+  pushTest2->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
+
 
   quit->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::quit, this));
 
@@ -119,10 +164,12 @@ void GUIManager::setup_menus()
   mainSheet->addChild(addLight);
   mainSheet->addChild(quit);
   mainSheet->addChild(lightList);
+  // mainSheet->addChild(testSpinner);
 
   this->_sheets.push_back(mainSheet);
   this->_sheets.push_back(lightMenu);
   this->_sheets.push_back(lightList);
+  this->_sheets.push_back(lightEdit);
 
   this->_light_list.push_back(pushTest1);
   this->_light_list.push_back(pushTest2);
@@ -252,7 +299,7 @@ void GUIManager::push_test(const CEGUI::EventArgs&)
 	{
 		if(this->_light_list.at(i)->isCapturedByThis())
 		{
-			
+			this->_sheets.at(MAIN)->addChild(this->_sheets.at(LIGHTEDIT));
 		}
 	}
 }

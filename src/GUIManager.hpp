@@ -31,7 +31,8 @@ class GUIManager
 		{
 			MAIN,
 			ADDLIGHT,
-			LIGHTLIST
+			LIGHTLIST,
+			LIGHTEDIT
 		};
 
 	  /**
