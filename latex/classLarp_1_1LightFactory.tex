@@ -1,0 +1,232 @@
+\hypertarget{classLarp_1_1LightFactory}{}\section{Larp\+:\+:Light\+Factory Class Reference}
+\label{classLarp_1_1LightFactory}\index{Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}}
+
+
+{\ttfamily \#include $<$Light\+Factory.\+hpp$>$}
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{namespaceLarp_a38725e08be7b2ebb94f5f71eb0f0c692}{Directional\+Light\+Ptr} \hyperlink{classLarp_1_1LightFactory_abae642e8bb0ea62f4a3f44af5b4535eb}{create\+\_\+directional\+\_\+light} (glm\+::vec3 direction=glm\+::vec3(0.\+0f,-\/1.\+0f, 0.\+0f))
+\item 
+static \hyperlink{namespaceLarp_a38725e08be7b2ebb94f5f71eb0f0c692}{Directional\+Light\+Ptr} \hyperlink{classLarp_1_1LightFactory_a31fe8a6adc8034a116b75cc88e083ccc}{create\+\_\+directional\+\_\+light} (G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)
+\item 
+static \hyperlink{namespaceLarp_a07215808e8e3c5229ca8549c5450e3e5}{Point\+Light\+Ptr} \hyperlink{classLarp_1_1LightFactory_a51bb3fa16d3856a5e5da229d204ae8b7}{create\+\_\+point\+\_\+light} (glm\+::vec3 position=glm\+::vec3(0.\+0f))
+\item 
+static \hyperlink{namespaceLarp_a07215808e8e3c5229ca8549c5450e3e5}{Point\+Light\+Ptr} \hyperlink{classLarp_1_1LightFactory_a1bb5b1f0a1d3bc202509b9f45c2a1ae7}{create\+\_\+point\+\_\+light} (G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)
+\item 
+static \hyperlink{namespaceLarp_a5366be98946441fcea9b8a155bc52d95}{Spot\+Light\+Ptr} \hyperlink{classLarp_1_1LightFactory_a676f08c73203b6f3353f72bc00b2cf07}{create\+\_\+spot\+\_\+light} (glm\+::vec3 position=glm\+::vec3(0.\+0f))
+\item 
+static \hyperlink{namespaceLarp_a5366be98946441fcea9b8a155bc52d95}{Spot\+Light\+Ptr} \hyperlink{classLarp_1_1LightFactory_a3f8e8e6da8b310d5a575be3730850185}{create\+\_\+spot\+\_\+light} (G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)
+\item 
+static void \hyperlink{classLarp_1_1LightFactory_a41f54895861743c5a4e4b075d5d30c1a}{remove\+\_\+light} (\hyperlink{namespaceLarp_a38725e08be7b2ebb94f5f71eb0f0c692}{Directional\+Light\+Ptr} light)
+\item 
+static void \hyperlink{classLarp_1_1LightFactory_a5cf3d96ac55349dc728059e39ced3621}{remove\+\_\+light} (\hyperlink{namespaceLarp_a07215808e8e3c5229ca8549c5450e3e5}{Point\+Light\+Ptr} light)
+\item 
+static void \hyperlink{classLarp_1_1LightFactory_a3408665c94e20ca205f04d1bf4d26ba3}{remove\+\_\+light} (\hyperlink{namespaceLarp_a5366be98946441fcea9b8a155bc52d95}{Spot\+Light\+Ptr} light)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \hyperlink{namespaceLarp_af87ce889468b60d51aa1479335ba19bf}{Unique\+Directional} $>$ \hyperlink{classLarp_1_1LightFactory_a2f091bbcfd52ef24817028890ae834f8}{\+\_\+directional\+\_\+lights}
+\item 
+static std\+::vector$<$ \hyperlink{namespaceLarp_acd7cacff15535544525abc2e90e07b91}{Unique\+Point} $>$ \hyperlink{classLarp_1_1LightFactory_a753c553436a0a8418f9bdc8a96a5ec77}{\+\_\+point\+\_\+lights}
+\item 
+static std\+::vector$<$ \hyperlink{namespaceLarp_a288b58c470c3ed41d3b23e764ba5b6eb}{Unique\+Spot} $>$ \hyperlink{classLarp_1_1LightFactory_a137f1ae8f92113b5bf59601dc47db5c9}{\+\_\+spot\+\_\+lights}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const size\+\_\+t \hyperlink{classLarp_1_1LightFactory_a1da82e298c3bedab4b00dbea82639736}{\+\_\+max\+\_\+directional\+\_\+lights} = 1
+\item 
+static const size\+\_\+t \hyperlink{classLarp_1_1LightFactory_a5e8f45cac917f264a710251979df9484}{\+\_\+max\+\_\+point\+\_\+lights} = 9
+\item 
+static const size\+\_\+t \hyperlink{classLarp_1_1LightFactory_a81a05e25aac303788b4fe569824263c9}{\+\_\+max\+\_\+spot\+\_\+lights} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}!create\+\_\+directional\+\_\+light@{create\+\_\+directional\+\_\+light}}
+\index{create\+\_\+directional\+\_\+light@{create\+\_\+directional\+\_\+light}!Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}}
+\subsubsection[{\texorpdfstring{create\+\_\+directional\+\_\+light(glm\+::vec3 direction=glm\+::vec3(0.\+0f,-\/1.\+0f, 0.\+0f))}{create_directional_light(glm::vec3 direction=glm::vec3(0.0f,-1.0f, 0.0f))}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Directional\+Light\+Ptr} Larp\+::\+Light\+Factory\+::create\+\_\+directional\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{glm\+::vec3}]{direction = {\ttfamily glm\+:\+:vec3(0.0f,~-\/1.0f,~0.0f)}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1LightFactory_abae642e8bb0ea62f4a3f44af5b4535eb}{}\label{classLarp_1_1LightFactory_abae642e8bb0ea62f4a3f44af5b4535eb}
+Creates a directional light that faces downwards by default and adds the light to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}\textquotesingle{}s vector of directional lights. 
+\begin{DoxyParams}{Parameters}
+{\em direction} & The direction the light should be facing. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a const \hyperlink{structLarp_1_1DirectionalLight}{Directional\+Light} pointer that may be used to change lighting parameters. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Do not add this type of light if \hyperlink{classLarp_1_1Entity}{Entity} specified shaders do not support them. 
+\end{DoxyWarning}
+\index{Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}!create\+\_\+directional\+\_\+light@{create\+\_\+directional\+\_\+light}}
+\index{create\+\_\+directional\+\_\+light@{create\+\_\+directional\+\_\+light}!Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}}
+\subsubsection[{\texorpdfstring{create\+\_\+directional\+\_\+light(\+G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)}{create_directional_light(GLfloat x, GLfloat y, GLfloat z)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Directional\+Light\+Ptr} Larp\+::\+Light\+Factory\+::create\+\_\+directional\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{G\+Lfloat}]{x, }
+\item[{G\+Lfloat}]{y, }
+\item[{G\+Lfloat}]{z}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1LightFactory_a31fe8a6adc8034a116b75cc88e083ccc}{}\label{classLarp_1_1LightFactory_a31fe8a6adc8034a116b75cc88e083ccc}
+Creates a directional light that faces downwards by default and adds the light to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}\textquotesingle{}s vector of directional lights. 
+\begin{DoxyParams}{Parameters}
+{\em x} & The x direction the light should be facing. \\
+\hline
+{\em y} & The y direction the light should be facing. \\
+\hline
+{\em z} & The z direction the light should be facing. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a const \hyperlink{structLarp_1_1DirectionalLight}{Directional\+Light} pointer that may be used to change lighting parameters. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Do not add this type of light if \hyperlink{classLarp_1_1Entity}{Entity} specified shaders do not support them. 
+\end{DoxyWarning}
+\index{Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}!create\+\_\+point\+\_\+light@{create\+\_\+point\+\_\+light}}
+\index{create\+\_\+point\+\_\+light@{create\+\_\+point\+\_\+light}!Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}}
+\subsubsection[{\texorpdfstring{create\+\_\+point\+\_\+light(glm\+::vec3 position=glm\+::vec3(0.\+0f))}{create_point_light(glm::vec3 position=glm::vec3(0.0f))}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Point\+Light\+Ptr} Larp\+::\+Light\+Factory\+::create\+\_\+point\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{glm\+::vec3}]{position = {\ttfamily glm\+:\+:vec3(0.0f)}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1LightFactory_a51bb3fa16d3856a5e5da229d204ae8b7}{}\label{classLarp_1_1LightFactory_a51bb3fa16d3856a5e5da229d204ae8b7}
+Creates a point light that is positioned at (0, 0, 0) by default and adds the light to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}\textquotesingle{}s vector of point lights. 
+\begin{DoxyParams}{Parameters}
+{\em position} & The starting position of the light. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a const \hyperlink{structLarp_1_1PointLight}{Point\+Light} pointer that may be used to change lighting parameters. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Do not add this type of light if \hyperlink{classLarp_1_1Entity}{Entity} specified shaders do not support them. 
+\end{DoxyWarning}
+\index{Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}!create\+\_\+point\+\_\+light@{create\+\_\+point\+\_\+light}}
+\index{create\+\_\+point\+\_\+light@{create\+\_\+point\+\_\+light}!Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}}
+\subsubsection[{\texorpdfstring{create\+\_\+point\+\_\+light(\+G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)}{create_point_light(GLfloat x, GLfloat y, GLfloat z)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Point\+Light\+Ptr} Larp\+::\+Light\+Factory\+::create\+\_\+point\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{G\+Lfloat}]{x, }
+\item[{G\+Lfloat}]{y, }
+\item[{G\+Lfloat}]{z}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1LightFactory_a1bb5b1f0a1d3bc202509b9f45c2a1ae7}{}\label{classLarp_1_1LightFactory_a1bb5b1f0a1d3bc202509b9f45c2a1ae7}
+Creates a point light that is positioned at (0, 0, 0) by default and adds the light to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}\textquotesingle{}s vector of point lights. 
+\begin{DoxyParams}{Parameters}
+{\em position} & The starting position of the light. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a const \hyperlink{structLarp_1_1PointLight}{Point\+Light} pointer that may be used to change lighting parameters. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Do not add this type of light if \hyperlink{classLarp_1_1Entity}{Entity} specified shaders do not support them. 
+\end{DoxyWarning}
+\index{Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}!create\+\_\+spot\+\_\+light@{create\+\_\+spot\+\_\+light}}
+\index{create\+\_\+spot\+\_\+light@{create\+\_\+spot\+\_\+light}!Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}}
+\subsubsection[{\texorpdfstring{create\+\_\+spot\+\_\+light(glm\+::vec3 position=glm\+::vec3(0.\+0f))}{create_spot_light(glm::vec3 position=glm::vec3(0.0f))}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Spot\+Light\+Ptr} Larp\+::\+Light\+Factory\+::create\+\_\+spot\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{glm\+::vec3}]{position = {\ttfamily glm\+:\+:vec3(0.0f)}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1LightFactory_a676f08c73203b6f3353f72bc00b2cf07}{}\label{classLarp_1_1LightFactory_a676f08c73203b6f3353f72bc00b2cf07}
+Creates a spot light that is positioned at (0, 0, 0) by default and adds the light to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}\textquotesingle{}s vector of spot lights. 
+\begin{DoxyParams}{Parameters}
+{\em position} & The starting position of the light. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a const \hyperlink{structLarp_1_1SpotLight}{Spot\+Light} pointer that may be used to change lighting parameters. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Do not add this type of light if \hyperlink{classLarp_1_1Entity}{Entity} specified shaders do not support them. 
+\end{DoxyWarning}
+\index{Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}!create\+\_\+spot\+\_\+light@{create\+\_\+spot\+\_\+light}}
+\index{create\+\_\+spot\+\_\+light@{create\+\_\+spot\+\_\+light}!Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}}
+\subsubsection[{\texorpdfstring{create\+\_\+spot\+\_\+light(\+G\+Lfloat x, G\+Lfloat y, G\+Lfloat z)}{create_spot_light(GLfloat x, GLfloat y, GLfloat z)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Spot\+Light\+Ptr} Larp\+::\+Light\+Factory\+::create\+\_\+spot\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{G\+Lfloat}]{x, }
+\item[{G\+Lfloat}]{y, }
+\item[{G\+Lfloat}]{z}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1LightFactory_a3f8e8e6da8b310d5a575be3730850185}{}\label{classLarp_1_1LightFactory_a3f8e8e6da8b310d5a575be3730850185}
+Creates a spot light that is positioned at (0, 0, 0) by default and adds the light to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}\textquotesingle{}s vector of spot lights. 
+\begin{DoxyParams}{Parameters}
+{\em position} & The starting position of the light. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a const \hyperlink{structLarp_1_1SpotLight}{Spot\+Light} pointer that may be used to change lighting parameters. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Do not add this type of light if \hyperlink{classLarp_1_1Entity}{Entity} specified shaders do not support them. 
+\end{DoxyWarning}
+\index{Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}!remove\+\_\+light@{remove\+\_\+light}}
+\index{remove\+\_\+light@{remove\+\_\+light}!Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}}
+\subsubsection[{\texorpdfstring{remove\+\_\+light(\+Directional\+Light\+Ptr light)}{remove_light(DirectionalLightPtr light)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Light\+Factory\+::remove\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{{\bf Directional\+Light\+Ptr}}]{light}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1LightFactory_a41f54895861743c5a4e4b075d5d30c1a}{}\label{classLarp_1_1LightFactory_a41f54895861743c5a4e4b075d5d30c1a}
+Removes the specified light from the respective light\textquotesingle{}s vector in the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} 
+\begin{DoxyParams}{Parameters}
+{\em A} & constant directional light pointer that will be used to remove the light from the vector. \\
+\hline
+\end{DoxyParams}
+\index{Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}!remove\+\_\+light@{remove\+\_\+light}}
+\index{remove\+\_\+light@{remove\+\_\+light}!Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}}
+\subsubsection[{\texorpdfstring{remove\+\_\+light(\+Point\+Light\+Ptr light)}{remove_light(PointLightPtr light)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Light\+Factory\+::remove\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{{\bf Point\+Light\+Ptr}}]{light}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1LightFactory_a5cf3d96ac55349dc728059e39ced3621}{}\label{classLarp_1_1LightFactory_a5cf3d96ac55349dc728059e39ced3621}
+Removes the specified light from the respective light\textquotesingle{}s vector in the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} 
+\begin{DoxyParams}{Parameters}
+{\em A} & constant point light pointer that will be used to remove the light from the vector. \\
+\hline
+\end{DoxyParams}
+\index{Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}!remove\+\_\+light@{remove\+\_\+light}}
+\index{remove\+\_\+light@{remove\+\_\+light}!Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}}
+\subsubsection[{\texorpdfstring{remove\+\_\+light(\+Spot\+Light\+Ptr light)}{remove_light(SpotLightPtr light)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Light\+Factory\+::remove\+\_\+light (
+\begin{DoxyParamCaption}
+\item[{{\bf Spot\+Light\+Ptr}}]{light}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1LightFactory_a3408665c94e20ca205f04d1bf4d26ba3}{}\label{classLarp_1_1LightFactory_a3408665c94e20ca205f04d1bf4d26ba3}
+Removes the specified light from the respective light\textquotesingle{}s vector in the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} 
+\begin{DoxyParams}{Parameters}
+{\em A} & constant spot light pointer that will be used to remove the light from the vector. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}!\+\_\+directional\+\_\+lights@{\+\_\+directional\+\_\+lights}}
+\index{\+\_\+directional\+\_\+lights@{\+\_\+directional\+\_\+lights}!Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}}
+\subsubsection[{\texorpdfstring{\+\_\+directional\+\_\+lights}{_directional_lights}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf Unique\+Directional} $>$ Larp\+::\+Light\+Factory\+::\+\_\+directional\+\_\+lights\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1LightFactory_a2f091bbcfd52ef24817028890ae834f8}{}\label{classLarp_1_1LightFactory_a2f091bbcfd52ef24817028890ae834f8}
+The vector of directional lights currently held by the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}. If the vector is not empty, these will eventually be incorporated in the lighting calculations after they are passed from the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} to the Node(s) and eventually and \hyperlink{classLarp_1_1Entity}{Entity}. \index{Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}!\+\_\+max\+\_\+directional\+\_\+lights@{\+\_\+max\+\_\+directional\+\_\+lights}}
+\index{\+\_\+max\+\_\+directional\+\_\+lights@{\+\_\+max\+\_\+directional\+\_\+lights}!Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}}
+\subsubsection[{\texorpdfstring{\+\_\+max\+\_\+directional\+\_\+lights}{_max_directional_lights}}]{\setlength{\rightskip}{0pt plus 5cm}const size\+\_\+t Larp\+::\+Light\+Factory\+::\+\_\+max\+\_\+directional\+\_\+lights = 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1LightFactory_a1da82e298c3bedab4b00dbea82639736}{}\label{classLarp_1_1LightFactory_a1da82e298c3bedab4b00dbea82639736}
+This is the maximum number of directional lights that may be added to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} \index{Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}!\+\_\+max\+\_\+point\+\_\+lights@{\+\_\+max\+\_\+point\+\_\+lights}}
+\index{\+\_\+max\+\_\+point\+\_\+lights@{\+\_\+max\+\_\+point\+\_\+lights}!Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}}
+\subsubsection[{\texorpdfstring{\+\_\+max\+\_\+point\+\_\+lights}{_max_point_lights}}]{\setlength{\rightskip}{0pt plus 5cm}const size\+\_\+t Larp\+::\+Light\+Factory\+::\+\_\+max\+\_\+point\+\_\+lights = 9\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1LightFactory_a5e8f45cac917f264a710251979df9484}{}\label{classLarp_1_1LightFactory_a5e8f45cac917f264a710251979df9484}
+This is the maximum number of point lights that may be added to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} \index{Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}!\+\_\+max\+\_\+spot\+\_\+lights@{\+\_\+max\+\_\+spot\+\_\+lights}}
+\index{\+\_\+max\+\_\+spot\+\_\+lights@{\+\_\+max\+\_\+spot\+\_\+lights}!Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}}
+\subsubsection[{\texorpdfstring{\+\_\+max\+\_\+spot\+\_\+lights}{_max_spot_lights}}]{\setlength{\rightskip}{0pt plus 5cm}const size\+\_\+t Larp\+::\+Light\+Factory\+::\+\_\+max\+\_\+spot\+\_\+lights = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1LightFactory_a81a05e25aac303788b4fe569824263c9}{}\label{classLarp_1_1LightFactory_a81a05e25aac303788b4fe569824263c9}
+This is the maximum number of spot lights that may be added to the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} \begin{DoxyWarning}{Warning}
+Spot\+Lights are not currently supported. 
+\end{DoxyWarning}
+\index{Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}!\+\_\+point\+\_\+lights@{\+\_\+point\+\_\+lights}}
+\index{\+\_\+point\+\_\+lights@{\+\_\+point\+\_\+lights}!Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}}
+\subsubsection[{\texorpdfstring{\+\_\+point\+\_\+lights}{_point_lights}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf Unique\+Point} $>$ Larp\+::\+Light\+Factory\+::\+\_\+point\+\_\+lights\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1LightFactory_a753c553436a0a8418f9bdc8a96a5ec77}{}\label{classLarp_1_1LightFactory_a753c553436a0a8418f9bdc8a96a5ec77}
+The vector of point lights currently held by the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}. If the vector is not empty, these will eventually be incorporated in the lighting calculations after they are passed from the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} to the Node(s) and eventually and \hyperlink{classLarp_1_1Entity}{Entity}. \index{Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}!\+\_\+spot\+\_\+lights@{\+\_\+spot\+\_\+lights}}
+\index{\+\_\+spot\+\_\+lights@{\+\_\+spot\+\_\+lights}!Larp\+::\+Light\+Factory@{Larp\+::\+Light\+Factory}}
+\subsubsection[{\texorpdfstring{\+\_\+spot\+\_\+lights}{_spot_lights}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf Unique\+Spot} $>$ Larp\+::\+Light\+Factory\+::\+\_\+spot\+\_\+lights\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1LightFactory_a137f1ae8f92113b5bf59601dc47db5c9}{}\label{classLarp_1_1LightFactory_a137f1ae8f92113b5bf59601dc47db5c9}
+The vector of spot lights currently held by the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph}. If the vector is not empty, these will eventually be incorporated in the lighting calculations after they are passed from the \hyperlink{classLarp_1_1SceneGraph}{Scene\+Graph} to the Node(s) and eventually and \hyperlink{classLarp_1_1Entity}{Entity}. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{LightFactory_8hpp}{Light\+Factory.\+hpp}\item 
+src/\hyperlink{LightFactory_8cpp}{Light\+Factory.\+cpp}\end{DoxyCompactItemize}

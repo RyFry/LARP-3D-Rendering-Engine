@@ -1,0 +1,106 @@
+\hypertarget{classLarp_1_1SkyBox}{}\section{Larp\+:\+:Sky\+Box Class Reference}
+\label{classLarp_1_1SkyBox}\index{Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}}
+
+
+{\ttfamily \#include $<$Sky\+Box.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLarp_1_1SkyBox_a61ce9716a72990425379dffe8a905031}{Sky\+Box} (std\+::string pos\+\_\+x, std\+::string neg\+\_\+x, std\+::string pos\+\_\+y, std\+::string neg\+\_\+y, std\+::string pos\+\_\+z, std\+::string neg\+\_\+z)
+\item 
+\hyperlink{classLarp_1_1SkyBox_a9e8363e97b142013cad3cca5e4b830da}{Sky\+Box} (std\+::vector$<$ const G\+Lchar $\ast$ $>$ faces)
+\item 
+void \hyperlink{classLarp_1_1SkyBox_a6afa95d42fb5796a0583753ab0c4ea50}{draw} (const glm\+::mat4 \&view, const glm\+::mat4 \&projection)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classLarp_1_1SkyBox_a5fd9c148aabb7a66bbb9e93ec424da0c}{setup\+\_\+skybox} (std\+::vector$<$ const G\+Lchar $\ast$ $>$ faces)
+\item 
+void \hyperlink{classLarp_1_1SkyBox_a2760c45ebde25cf706ee84ba5bd867bd}{add\+\_\+vertices} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceLarp_a74839f089efb43154cba04bae031c942}{Texture\+ID} \hyperlink{classLarp_1_1SkyBox_a9e087238b347e4f12fec0798559b3aed}{\+\_\+texture\+\_\+id}
+\item 
+\hyperlink{namespaceLarp_a459edfbf6a0def594cfeb6ecaa5d702e}{V\+AO} \hyperlink{classLarp_1_1SkyBox_aece3fc2f885d9b9f429f5829378f5720}{\+\_\+\+V\+AO}
+\item 
+\hyperlink{namespaceLarp_ac6c5fe9357b92190f95c04109eb8c4f1}{V\+BO} \hyperlink{classLarp_1_1SkyBox_ac9a81bf07d8722a4707479883ec0394a}{\+\_\+\+V\+BO}
+\item 
+std\+::vector$<$ glm\+::vec3 $>$ \hyperlink{classLarp_1_1SkyBox_ab4174c418ecd405b91f6c3ee70edf1f7}{\+\_\+vertices}
+\item 
+\hyperlink{classLarp_1_1Shader}{Shader} $\ast$ \hyperlink{classLarp_1_1SkyBox_a6ade008779816dcf2bacacf0d5c228a1}{\+\_\+shader}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}!Sky\+Box@{Sky\+Box}}
+\index{Sky\+Box@{Sky\+Box}!Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}}
+\subsubsection[{\texorpdfstring{Sky\+Box(std\+::string pos\+\_\+x, std\+::string neg\+\_\+x, std\+::string pos\+\_\+y, std\+::string neg\+\_\+y, std\+::string pos\+\_\+z, std\+::string neg\+\_\+z)}{SkyBox(std::string pos_x, std::string neg_x, std::string pos_y, std::string neg_y, std::string pos_z, std::string neg_z)}}]{\setlength{\rightskip}{0pt plus 5cm}Larp\+::\+Sky\+Box\+::\+Sky\+Box (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{pos\+\_\+x, }
+\item[{std\+::string}]{neg\+\_\+x, }
+\item[{std\+::string}]{pos\+\_\+y, }
+\item[{std\+::string}]{neg\+\_\+y, }
+\item[{std\+::string}]{pos\+\_\+z, }
+\item[{std\+::string}]{neg\+\_\+z}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1SkyBox_a61ce9716a72990425379dffe8a905031}{}\label{classLarp_1_1SkyBox_a61ce9716a72990425379dffe8a905031}
+\index{Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}!Sky\+Box@{Sky\+Box}}
+\index{Sky\+Box@{Sky\+Box}!Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}}
+\subsubsection[{\texorpdfstring{Sky\+Box(std\+::vector$<$ const G\+Lchar $\ast$ $>$ faces)}{SkyBox(std::vector< const GLchar * > faces)}}]{\setlength{\rightskip}{0pt plus 5cm}Larp\+::\+Sky\+Box\+::\+Sky\+Box (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ const G\+Lchar $\ast$ $>$}]{faces}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1SkyBox_a9e8363e97b142013cad3cca5e4b830da}{}\label{classLarp_1_1SkyBox_a9e8363e97b142013cad3cca5e4b830da}
+
+
+\subsection{Member Function Documentation}
+\index{Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}!add\+\_\+vertices@{add\+\_\+vertices}}
+\index{add\+\_\+vertices@{add\+\_\+vertices}!Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}}
+\subsubsection[{\texorpdfstring{add\+\_\+vertices()}{add_vertices()}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Sky\+Box\+::add\+\_\+vertices (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1SkyBox_a2760c45ebde25cf706ee84ba5bd867bd}{}\label{classLarp_1_1SkyBox_a2760c45ebde25cf706ee84ba5bd867bd}
+\index{Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}!draw@{draw}}
+\index{draw@{draw}!Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}}
+\subsubsection[{\texorpdfstring{draw(const glm\+::mat4 \&view, const glm\+::mat4 \&projection)}{draw(const glm::mat4 &view, const glm::mat4 &projection)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Sky\+Box\+::draw (
+\begin{DoxyParamCaption}
+\item[{const glm\+::mat4 \&}]{view, }
+\item[{const glm\+::mat4 \&}]{projection}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1SkyBox_a6afa95d42fb5796a0583753ab0c4ea50}{}\label{classLarp_1_1SkyBox_a6afa95d42fb5796a0583753ab0c4ea50}
+\index{Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}!setup\+\_\+skybox@{setup\+\_\+skybox}}
+\index{setup\+\_\+skybox@{setup\+\_\+skybox}!Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}}
+\subsubsection[{\texorpdfstring{setup\+\_\+skybox(std\+::vector$<$ const G\+Lchar $\ast$ $>$ faces)}{setup_skybox(std::vector< const GLchar * > faces)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Sky\+Box\+::setup\+\_\+skybox (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ const G\+Lchar $\ast$ $>$}]{faces}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1SkyBox_a5fd9c148aabb7a66bbb9e93ec424da0c}{}\label{classLarp_1_1SkyBox_a5fd9c148aabb7a66bbb9e93ec424da0c}
+
+
+\subsection{Member Data Documentation}
+\index{Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}!\+\_\+shader@{\+\_\+shader}}
+\index{\+\_\+shader@{\+\_\+shader}!Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}}
+\subsubsection[{\texorpdfstring{\+\_\+shader}{_shader}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Shader}$\ast$ Larp\+::\+Sky\+Box\+::\+\_\+shader\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1SkyBox_a6ade008779816dcf2bacacf0d5c228a1}{}\label{classLarp_1_1SkyBox_a6ade008779816dcf2bacacf0d5c228a1}
+\index{Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}!\+\_\+texture\+\_\+id@{\+\_\+texture\+\_\+id}}
+\index{\+\_\+texture\+\_\+id@{\+\_\+texture\+\_\+id}!Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}}
+\subsubsection[{\texorpdfstring{\+\_\+texture\+\_\+id}{_texture_id}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Texture\+ID} Larp\+::\+Sky\+Box\+::\+\_\+texture\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1SkyBox_a9e087238b347e4f12fec0798559b3aed}{}\label{classLarp_1_1SkyBox_a9e087238b347e4f12fec0798559b3aed}
+\index{Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}!\+\_\+\+V\+AO@{\+\_\+\+V\+AO}}
+\index{\+\_\+\+V\+AO@{\+\_\+\+V\+AO}!Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}}
+\subsubsection[{\texorpdfstring{\+\_\+\+V\+AO}{_VAO}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf V\+AO} Larp\+::\+Sky\+Box\+::\+\_\+\+V\+AO\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1SkyBox_aece3fc2f885d9b9f429f5829378f5720}{}\label{classLarp_1_1SkyBox_aece3fc2f885d9b9f429f5829378f5720}
+\index{Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}!\+\_\+\+V\+BO@{\+\_\+\+V\+BO}}
+\index{\+\_\+\+V\+BO@{\+\_\+\+V\+BO}!Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}}
+\subsubsection[{\texorpdfstring{\+\_\+\+V\+BO}{_VBO}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf V\+BO} Larp\+::\+Sky\+Box\+::\+\_\+\+V\+BO\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1SkyBox_ac9a81bf07d8722a4707479883ec0394a}{}\label{classLarp_1_1SkyBox_ac9a81bf07d8722a4707479883ec0394a}
+\index{Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}!\+\_\+vertices@{\+\_\+vertices}}
+\index{\+\_\+vertices@{\+\_\+vertices}!Larp\+::\+Sky\+Box@{Larp\+::\+Sky\+Box}}
+\subsubsection[{\texorpdfstring{\+\_\+vertices}{_vertices}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$glm\+::vec3$>$ Larp\+::\+Sky\+Box\+::\+\_\+vertices\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1SkyBox_ab4174c418ecd405b91f6c3ee70edf1f7}{}\label{classLarp_1_1SkyBox_ab4174c418ecd405b91f6c3ee70edf1f7}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Larp/\hyperlink{SkyBox_8hpp}{Sky\+Box.\+hpp}\item 
+src/\+Larp/\hyperlink{SkyBox_8cpp}{Sky\+Box.\+cpp}\end{DoxyCompactItemize}

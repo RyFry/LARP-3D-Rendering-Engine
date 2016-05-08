@@ -46,7 +46,6 @@ void PhysicsPlayerController::add_movement_direction(PhysicsPlayerController::Pl
     this->_directions |= direction;
 }
 
-int num = 0;
 void PhysicsPlayerController::update_movement(PhysicsWorld* world)
 {
     // For finding movement vectors:

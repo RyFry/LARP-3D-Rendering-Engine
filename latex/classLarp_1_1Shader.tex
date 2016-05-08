@@ -1,0 +1,307 @@
+\hypertarget{classLarp_1_1Shader}{}\section{Larp\+:\+:Shader Class Reference}
+\label{classLarp_1_1Shader}\index{Larp\+::\+Shader@{Larp\+::\+Shader}}
+
+
+{\ttfamily \#include $<$Shader.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classLarp_1_1Shader_a781750e2455007153ea226c0928bc24a}{use} ()
+\item 
+void \hyperlink{classLarp_1_1Shader_ac86be28506c5c4c9da5186aa664e21e0}{set\+\_\+shininess} (const G\+Lfloat shininess)
+\item 
+void \hyperlink{classLarp_1_1Shader_a50e11c955b724208e80923592a73578d}{set\+\_\+view\+\_\+position} (const glm\+::vec3 \&view\+\_\+pos)
+\item 
+void \hyperlink{classLarp_1_1Shader_abb398986a0f14e38aab17605ceec5a21}{set\+\_\+mvp} (const glm\+::mat4 \&model, const glm\+::mat4 \&view, const glm\+::mat4 \&projection)
+\item 
+void \hyperlink{classLarp_1_1Shader_a9059d7e6cd40b9e3ba9cd944e76d92cc}{set\+\_\+directional\+\_\+lights} ()
+\item 
+void \hyperlink{classLarp_1_1Shader_aa2897e4d25995a05081d258780fa4ced}{set\+\_\+point\+\_\+lights} ()
+\item 
+void \hyperlink{classLarp_1_1Shader_a248f491bd88a8e675988e9c97d2ab2c4}{set\+\_\+light\+\_\+space\+\_\+matrix} (const glm\+::mat4 \&light\+\_\+space\+\_\+matrix)
+\item 
+void \hyperlink{classLarp_1_1Shader_abbe0c7e5cb2384c1469ad83395265641}{set\+\_\+dir\+\_\+light\+\_\+position} (glm\+::vec3 light\+\_\+pos=glm\+::vec3(0.\+0f, 10.\+0f, 0.\+1f))
+\item 
+void \hyperlink{classLarp_1_1Shader_a2945f4259d55a7a41f49d7a76cb87a1e}{enable\+\_\+shadow\+\_\+texture} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classLarp_1_1Shader}{Shader} $\ast$ \hyperlink{classLarp_1_1Shader_a3ab41a2fce5930bccd49b16fd8ed78e6}{create} (const G\+Lchar $\ast$vertex\+\_\+path, const G\+Lchar $\ast$fragment\+\_\+path, const G\+Lchar $\ast$geometry\+\_\+path=nullptr)
+\item 
+static \hyperlink{classLarp_1_1Shader}{Shader} $\ast$ \hyperlink{classLarp_1_1Shader_a33e1a8ceb4d842f133b2ed8b7483ab0d}{get\+\_\+depth\+\_\+map\+\_\+shader} ()
+\item 
+static \hyperlink{classLarp_1_1Shader}{Shader} $\ast$ \hyperlink{classLarp_1_1Shader_addbcdb32c69a7d86ed6a2e05bfd9f7e7}{get\+\_\+shadow\+\_\+map\+\_\+shader} ()
+\item 
+static \hyperlink{classLarp_1_1Shader}{Shader} $\ast$ \hyperlink{classLarp_1_1Shader_a413331f3e3f59cf9acc669cede815796}{get\+\_\+default\+\_\+shader} ()
+\item 
+static \hyperlink{classLarp_1_1Shader}{Shader} $\ast$ \hyperlink{classLarp_1_1Shader_af758bd48a5fa70b43b185b338ea229e5}{get\+\_\+skybox\+\_\+shader} ()
+\item 
+static glm\+::mat4 \hyperlink{classLarp_1_1Shader_ae96429003c78a449f8e65934e4467e06}{calculate\+\_\+light\+\_\+space\+\_\+matrix} (glm\+::vec3 light\+\_\+pos=glm\+::vec3(0.\+0f, 10.\+0f, 1.\+0f))
+\item 
+static void \hyperlink{classLarp_1_1Shader_a864996032f94b7fb73920360946abe31}{prepare\+\_\+depth\+\_\+map} ()
+\item 
+static void \hyperlink{classLarp_1_1Shader_a9becae99130655c5c0b25397330cfe98}{unbind\+\_\+depth\+\_\+map} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceLarp_a9b24f5785486fc97891b6c8148d80953}{Shader\+Program} \hyperlink{classLarp_1_1Shader_a52ce34a36709f400ddf50c4398d6f0ed}{\+\_\+program}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classLarp_1_1Shader}{Shader} $\ast$ \hyperlink{classLarp_1_1Shader_ae3c817c27c61ba0bf96215cf91c7df4f}{\+\_\+shadow\+\_\+shader} = nullptr
+\item 
+static glm\+::mat4 \hyperlink{classLarp_1_1Shader_ac69a7f559f52fa6cda07a0f782608af7}{\+\_\+light\+\_\+space\+\_\+matrix}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLarp_1_1Shader_a02cd13e09037075d62c3566e2fc797ab}{Shader} (const G\+Lchar $\ast$vertex\+\_\+path, const G\+Lchar $\ast$fragment\+\_\+path, const G\+Lchar $\ast$geometry\+\_\+path=nullptr)
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \hyperlink{classLarp_1_1Shader_abf92153766512f9180d0d85062625446}{load\+\_\+shader} (const G\+Lchar $\ast$shader\+\_\+path)
+\item 
+static G\+Luint \hyperlink{classLarp_1_1Shader_a2fc91576272847f5cd5b9f424677a9cb}{compile\+\_\+shader} (const G\+Lchar $\ast$shader\+\_\+code, G\+Lenum shader\+\_\+type)
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unordered\+\_\+map$<$ std\+::string, \hyperlink{namespaceLarp_a0e50ce889dd41e1be4ced22511b7f80a}{Unique\+Shader} $>$ \hyperlink{classLarp_1_1Shader_ae703958195907f241cbeeee4f590557d}{\+\_\+compiled\+\_\+shaders}
+\item 
+static bool \hyperlink{classLarp_1_1Shader_a4cbaff7764a508ced1df527b2bb084c0}{\+\_\+depth\+\_\+map\+\_\+configured} = false
+\item 
+static G\+Luint \hyperlink{classLarp_1_1Shader_ac5489cdb566ed9b675d5544f4d849510}{\+\_\+depth\+\_\+map\+\_\+\+F\+BO}
+\item 
+static G\+Luint \hyperlink{classLarp_1_1Shader_a456655b265e1c69c671d20bd9c26d470}{\+\_\+depth\+\_\+map\+\_\+texture}
+\item 
+static const G\+Luint \hyperlink{classLarp_1_1Shader_a330453400ea364bfcf40f0f4f881b64e}{S\+H\+A\+D\+O\+W\+\_\+\+W\+I\+D\+TH} = 1024
+\item 
+static const G\+Luint \hyperlink{classLarp_1_1Shader_aa37c97ad8e4b8e9bff61dc3c3c170155}{S\+H\+A\+D\+O\+W\+\_\+\+H\+E\+I\+G\+HT} = 1024
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!Shader@{Shader}}
+\index{Shader@{Shader}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{Shader(const G\+Lchar $\ast$vertex\+\_\+path, const G\+Lchar $\ast$fragment\+\_\+path, const G\+Lchar $\ast$geometry\+\_\+path=nullptr)}{Shader(const GLchar *vertex_path, const GLchar *fragment_path, const GLchar *geometry_path=nullptr)}}]{\setlength{\rightskip}{0pt plus 5cm}Larp\+::\+Shader\+::\+Shader (
+\begin{DoxyParamCaption}
+\item[{const G\+Lchar $\ast$}]{vertex\+\_\+path, }
+\item[{const G\+Lchar $\ast$}]{fragment\+\_\+path, }
+\item[{const G\+Lchar $\ast$}]{geometry\+\_\+path = {\ttfamily nullptr}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLarp_1_1Shader_a02cd13e09037075d62c3566e2fc797ab}{}\label{classLarp_1_1Shader_a02cd13e09037075d62c3566e2fc797ab}
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em vertex\+\_\+path} & The path to the desired vertex shader. \\
+\hline
+{\em fragment\+\_\+path} & The path to the desired fragment shader. \\
+\hline
+{\em geometry\+\_\+path} & The path to the desired geometry shader. If not provided, the default Open\+GL geometry shader will be used (Recommended except when needed). \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!calculate\+\_\+light\+\_\+space\+\_\+matrix@{calculate\+\_\+light\+\_\+space\+\_\+matrix}}
+\index{calculate\+\_\+light\+\_\+space\+\_\+matrix@{calculate\+\_\+light\+\_\+space\+\_\+matrix}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{calculate\+\_\+light\+\_\+space\+\_\+matrix(glm\+::vec3 light\+\_\+pos=glm\+::vec3(0.\+0f, 10.\+0f, 1.\+0f))}{calculate_light_space_matrix(glm::vec3 light_pos=glm::vec3(0.0f, 10.0f, 1.0f))}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::mat4 Larp\+::\+Shader\+::calculate\+\_\+light\+\_\+space\+\_\+matrix (
+\begin{DoxyParamCaption}
+\item[{glm\+::vec3}]{light\+\_\+pos = {\ttfamily glm\+:\+:vec3(0.0f,~10.0f,~1.0f)}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1Shader_ae96429003c78a449f8e65934e4467e06}{}\label{classLarp_1_1Shader_ae96429003c78a449f8e65934e4467e06}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!compile\+\_\+shader@{compile\+\_\+shader}}
+\index{compile\+\_\+shader@{compile\+\_\+shader}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{compile\+\_\+shader(const G\+Lchar $\ast$shader\+\_\+code, G\+Lenum shader\+\_\+type)}{compile_shader(const GLchar *shader_code, GLenum shader_type)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Shader\+Program} Larp\+::\+Shader\+::compile\+\_\+shader (
+\begin{DoxyParamCaption}
+\item[{const G\+Lchar $\ast$}]{shader\+\_\+code, }
+\item[{G\+Lenum}]{shader\+\_\+type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1Shader_a2fc91576272847f5cd5b9f424677a9cb}{}\label{classLarp_1_1Shader_a2fc91576272847f5cd5b9f424677a9cb}
+Compiles a loaded shader program 
+\begin{DoxyParams}{Parameters}
+{\em shader\+\_\+code} & The text version of the shader program as an Open\+GL string. \\
+\hline
+{\em shader\+\_\+type} & The type of shader to compile. Must be one of G\+L\+\_\+\+V\+E\+R\+T\+E\+X\+\_\+\+S\+H\+A\+D\+ER, G\+L\+\_\+\+F\+R\+A\+G\+M\+E\+N\+T\+\_\+\+S\+H\+A\+D\+ER, or G\+L\+\_\+\+F\+R\+A\+G\+M\+E\+N\+T\+\_\+\+S\+H\+A\+D\+ER. Other valid shader types are defined; however, only the former 3 are currently supported. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\href{https://www.opengl.org/sdk/docs/man/docbook4/xhtml/glCreateShader.xml}{\tt https\+://www.\+opengl.\+org/sdk/docs/man/docbook4/xhtml/gl\+Create\+Shader.\+xml} for other valid shader types. 
+\end{DoxySeeAlso}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!create@{create}}
+\index{create@{create}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{create(const G\+Lchar $\ast$vertex\+\_\+path, const G\+Lchar $\ast$fragment\+\_\+path, const G\+Lchar $\ast$geometry\+\_\+path=nullptr)}{create(const GLchar *vertex_path, const GLchar *fragment_path, const GLchar *geometry_path=nullptr)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Shader} $\ast$ Larp\+::\+Shader\+::create (
+\begin{DoxyParamCaption}
+\item[{const G\+Lchar $\ast$}]{vertex\+\_\+path, }
+\item[{const G\+Lchar $\ast$}]{fragment\+\_\+path, }
+\item[{const G\+Lchar $\ast$}]{geometry\+\_\+path = {\ttfamily nullptr}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1Shader_a3ab41a2fce5930bccd49b16fd8ed78e6}{}\label{classLarp_1_1Shader_a3ab41a2fce5930bccd49b16fd8ed78e6}
+If the model at path is not already loaded, then it will be loaded and cached. 
+\begin{DoxyParams}{Parameters}
+{\em vertex\+\_\+path} & The path to the desired vertex shader. \\
+\hline
+{\em fragment\+\_\+path} & The path to the desired fragment shader. \\
+\hline
+{\em geometry\+\_\+path} & The path to the desired geometry shader. If not provided, the default Open\+GL geometry shader will be used (Recommended except when needed). \\
+\hline
+\end{DoxyParams}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!enable\+\_\+shadow\+\_\+texture@{enable\+\_\+shadow\+\_\+texture}}
+\index{enable\+\_\+shadow\+\_\+texture@{enable\+\_\+shadow\+\_\+texture}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{enable\+\_\+shadow\+\_\+texture()}{enable_shadow_texture()}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Shader\+::enable\+\_\+shadow\+\_\+texture (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1Shader_a2945f4259d55a7a41f49d7a76cb87a1e}{}\label{classLarp_1_1Shader_a2945f4259d55a7a41f49d7a76cb87a1e}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!get\+\_\+default\+\_\+shader@{get\+\_\+default\+\_\+shader}}
+\index{get\+\_\+default\+\_\+shader@{get\+\_\+default\+\_\+shader}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{get\+\_\+default\+\_\+shader()}{get_default_shader()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Shader} $\ast$ Larp\+::\+Shader\+::get\+\_\+default\+\_\+shader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1Shader_a413331f3e3f59cf9acc669cede815796}{}\label{classLarp_1_1Shader_a413331f3e3f59cf9acc669cede815796}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!get\+\_\+depth\+\_\+map\+\_\+shader@{get\+\_\+depth\+\_\+map\+\_\+shader}}
+\index{get\+\_\+depth\+\_\+map\+\_\+shader@{get\+\_\+depth\+\_\+map\+\_\+shader}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{get\+\_\+depth\+\_\+map\+\_\+shader()}{get_depth_map_shader()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Shader} $\ast$ Larp\+::\+Shader\+::get\+\_\+depth\+\_\+map\+\_\+shader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1Shader_a33e1a8ceb4d842f133b2ed8b7483ab0d}{}\label{classLarp_1_1Shader_a33e1a8ceb4d842f133b2ed8b7483ab0d}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!get\+\_\+shadow\+\_\+map\+\_\+shader@{get\+\_\+shadow\+\_\+map\+\_\+shader}}
+\index{get\+\_\+shadow\+\_\+map\+\_\+shader@{get\+\_\+shadow\+\_\+map\+\_\+shader}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{get\+\_\+shadow\+\_\+map\+\_\+shader()}{get_shadow_map_shader()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Shader} $\ast$ Larp\+::\+Shader\+::get\+\_\+shadow\+\_\+map\+\_\+shader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1Shader_addbcdb32c69a7d86ed6a2e05bfd9f7e7}{}\label{classLarp_1_1Shader_addbcdb32c69a7d86ed6a2e05bfd9f7e7}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!get\+\_\+skybox\+\_\+shader@{get\+\_\+skybox\+\_\+shader}}
+\index{get\+\_\+skybox\+\_\+shader@{get\+\_\+skybox\+\_\+shader}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{get\+\_\+skybox\+\_\+shader()}{get_skybox_shader()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Shader} $\ast$ Larp\+::\+Shader\+::get\+\_\+skybox\+\_\+shader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1Shader_af758bd48a5fa70b43b185b338ea229e5}{}\label{classLarp_1_1Shader_af758bd48a5fa70b43b185b338ea229e5}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!load\+\_\+shader@{load\+\_\+shader}}
+\index{load\+\_\+shader@{load\+\_\+shader}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{load\+\_\+shader(const G\+Lchar $\ast$shader\+\_\+path)}{load_shader(const GLchar *shader_path)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Larp\+::\+Shader\+::load\+\_\+shader (
+\begin{DoxyParamCaption}
+\item[{const G\+Lchar $\ast$}]{shader\+\_\+path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1Shader_abf92153766512f9180d0d85062625446}{}\label{classLarp_1_1Shader_abf92153766512f9180d0d85062625446}
+Loads a shader given its path relative to where the program is being run 
+\begin{DoxyParams}{Parameters}
+{\em shader\+\_\+path} & The path to the shader program to be loaded \\
+\hline
+\end{DoxyParams}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!prepare\+\_\+depth\+\_\+map@{prepare\+\_\+depth\+\_\+map}}
+\index{prepare\+\_\+depth\+\_\+map@{prepare\+\_\+depth\+\_\+map}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{prepare\+\_\+depth\+\_\+map()}{prepare_depth_map()}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Shader\+::prepare\+\_\+depth\+\_\+map (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1Shader_a864996032f94b7fb73920360946abe31}{}\label{classLarp_1_1Shader_a864996032f94b7fb73920360946abe31}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!set\+\_\+dir\+\_\+light\+\_\+position@{set\+\_\+dir\+\_\+light\+\_\+position}}
+\index{set\+\_\+dir\+\_\+light\+\_\+position@{set\+\_\+dir\+\_\+light\+\_\+position}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{set\+\_\+dir\+\_\+light\+\_\+position(glm\+::vec3 light\+\_\+pos=glm\+::vec3(0.\+0f, 10.\+0f, 0.\+1f))}{set_dir_light_position(glm::vec3 light_pos=glm::vec3(0.0f, 10.0f, 0.1f))}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Shader\+::set\+\_\+dir\+\_\+light\+\_\+position (
+\begin{DoxyParamCaption}
+\item[{glm\+::vec3}]{light\+\_\+pos = {\ttfamily glm\+:\+:vec3(0.0f,~10.0f,~0.1f)}}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1Shader_abbe0c7e5cb2384c1469ad83395265641}{}\label{classLarp_1_1Shader_abbe0c7e5cb2384c1469ad83395265641}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!set\+\_\+directional\+\_\+lights@{set\+\_\+directional\+\_\+lights}}
+\index{set\+\_\+directional\+\_\+lights@{set\+\_\+directional\+\_\+lights}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{set\+\_\+directional\+\_\+lights()}{set_directional_lights()}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Shader\+::set\+\_\+directional\+\_\+lights (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1Shader_a9059d7e6cd40b9e3ba9cd944e76d92cc}{}\label{classLarp_1_1Shader_a9059d7e6cd40b9e3ba9cd944e76d92cc}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!set\+\_\+light\+\_\+space\+\_\+matrix@{set\+\_\+light\+\_\+space\+\_\+matrix}}
+\index{set\+\_\+light\+\_\+space\+\_\+matrix@{set\+\_\+light\+\_\+space\+\_\+matrix}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{set\+\_\+light\+\_\+space\+\_\+matrix(const glm\+::mat4 \&light\+\_\+space\+\_\+matrix)}{set_light_space_matrix(const glm::mat4 &light_space_matrix)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Shader\+::set\+\_\+light\+\_\+space\+\_\+matrix (
+\begin{DoxyParamCaption}
+\item[{const glm\+::mat4 \&}]{light\+\_\+space\+\_\+matrix}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1Shader_a248f491bd88a8e675988e9c97d2ab2c4}{}\label{classLarp_1_1Shader_a248f491bd88a8e675988e9c97d2ab2c4}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!set\+\_\+mvp@{set\+\_\+mvp}}
+\index{set\+\_\+mvp@{set\+\_\+mvp}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{set\+\_\+mvp(const glm\+::mat4 \&model, const glm\+::mat4 \&view, const glm\+::mat4 \&projection)}{set_mvp(const glm::mat4 &model, const glm::mat4 &view, const glm::mat4 &projection)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Shader\+::set\+\_\+mvp (
+\begin{DoxyParamCaption}
+\item[{const glm\+::mat4 \&}]{model, }
+\item[{const glm\+::mat4 \&}]{view, }
+\item[{const glm\+::mat4 \&}]{projection}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1Shader_abb398986a0f14e38aab17605ceec5a21}{}\label{classLarp_1_1Shader_abb398986a0f14e38aab17605ceec5a21}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!set\+\_\+point\+\_\+lights@{set\+\_\+point\+\_\+lights}}
+\index{set\+\_\+point\+\_\+lights@{set\+\_\+point\+\_\+lights}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{set\+\_\+point\+\_\+lights()}{set_point_lights()}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Shader\+::set\+\_\+point\+\_\+lights (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1Shader_aa2897e4d25995a05081d258780fa4ced}{}\label{classLarp_1_1Shader_aa2897e4d25995a05081d258780fa4ced}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!set\+\_\+shininess@{set\+\_\+shininess}}
+\index{set\+\_\+shininess@{set\+\_\+shininess}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{set\+\_\+shininess(const G\+Lfloat shininess)}{set_shininess(const GLfloat shininess)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Shader\+::set\+\_\+shininess (
+\begin{DoxyParamCaption}
+\item[{const G\+Lfloat}]{shininess}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1Shader_ac86be28506c5c4c9da5186aa664e21e0}{}\label{classLarp_1_1Shader_ac86be28506c5c4c9da5186aa664e21e0}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!set\+\_\+view\+\_\+position@{set\+\_\+view\+\_\+position}}
+\index{set\+\_\+view\+\_\+position@{set\+\_\+view\+\_\+position}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{set\+\_\+view\+\_\+position(const glm\+::vec3 \&view\+\_\+pos)}{set_view_position(const glm::vec3 &view_pos)}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Shader\+::set\+\_\+view\+\_\+position (
+\begin{DoxyParamCaption}
+\item[{const glm\+::vec3 \&}]{view\+\_\+pos}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1Shader_a50e11c955b724208e80923592a73578d}{}\label{classLarp_1_1Shader_a50e11c955b724208e80923592a73578d}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!unbind\+\_\+depth\+\_\+map@{unbind\+\_\+depth\+\_\+map}}
+\index{unbind\+\_\+depth\+\_\+map@{unbind\+\_\+depth\+\_\+map}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{unbind\+\_\+depth\+\_\+map()}{unbind_depth_map()}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Shader\+::unbind\+\_\+depth\+\_\+map (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1Shader_a9becae99130655c5c0b25397330cfe98}{}\label{classLarp_1_1Shader_a9becae99130655c5c0b25397330cfe98}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!use@{use}}
+\index{use@{use}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{use()}{use()}}]{\setlength{\rightskip}{0pt plus 5cm}void Larp\+::\+Shader\+::use (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLarp_1_1Shader_a781750e2455007153ea226c0928bc24a}{}\label{classLarp_1_1Shader_a781750e2455007153ea226c0928bc24a}
+Tells Open\+GL to use this \hyperlink{classLarp_1_1Shader}{Shader}\textquotesingle{}s compiled shader program 
+
+\subsection{Member Data Documentation}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!\+\_\+compiled\+\_\+shaders@{\+\_\+compiled\+\_\+shaders}}
+\index{\+\_\+compiled\+\_\+shaders@{\+\_\+compiled\+\_\+shaders}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{\+\_\+compiled\+\_\+shaders}{_compiled_shaders}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unordered\+\_\+map$<$ std\+::string, {\bf Unique\+Shader} $>$ Larp\+::\+Shader\+::\+\_\+compiled\+\_\+shaders\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1Shader_ae703958195907f241cbeeee4f590557d}{}\label{classLarp_1_1Shader_ae703958195907f241cbeeee4f590557d}
+A cache of compiled Shaders. \index{Larp\+::\+Shader@{Larp\+::\+Shader}!\+\_\+depth\+\_\+map\+\_\+configured@{\+\_\+depth\+\_\+map\+\_\+configured}}
+\index{\+\_\+depth\+\_\+map\+\_\+configured@{\+\_\+depth\+\_\+map\+\_\+configured}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{\+\_\+depth\+\_\+map\+\_\+configured}{_depth_map_configured}}]{\setlength{\rightskip}{0pt plus 5cm}bool Larp\+::\+Shader\+::\+\_\+depth\+\_\+map\+\_\+configured = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1Shader_a4cbaff7764a508ced1df527b2bb084c0}{}\label{classLarp_1_1Shader_a4cbaff7764a508ced1df527b2bb084c0}
+Checks if the Open\+GL code has been called to configure the depth map \index{Larp\+::\+Shader@{Larp\+::\+Shader}!\+\_\+depth\+\_\+map\+\_\+\+F\+BO@{\+\_\+depth\+\_\+map\+\_\+\+F\+BO}}
+\index{\+\_\+depth\+\_\+map\+\_\+\+F\+BO@{\+\_\+depth\+\_\+map\+\_\+\+F\+BO}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{\+\_\+depth\+\_\+map\+\_\+\+F\+BO}{_depth_map_FBO}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint Larp\+::\+Shader\+::\+\_\+depth\+\_\+map\+\_\+\+F\+BO\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1Shader_ac5489cdb566ed9b675d5544f4d849510}{}\label{classLarp_1_1Shader_ac5489cdb566ed9b675d5544f4d849510}
+A framebuffer object for rendering the depth map \index{Larp\+::\+Shader@{Larp\+::\+Shader}!\+\_\+depth\+\_\+map\+\_\+texture@{\+\_\+depth\+\_\+map\+\_\+texture}}
+\index{\+\_\+depth\+\_\+map\+\_\+texture@{\+\_\+depth\+\_\+map\+\_\+texture}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{\+\_\+depth\+\_\+map\+\_\+texture}{_depth_map_texture}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint Larp\+::\+Shader\+::\+\_\+depth\+\_\+map\+\_\+texture\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1Shader_a456655b265e1c69c671d20bd9c26d470}{}\label{classLarp_1_1Shader_a456655b265e1c69c671d20bd9c26d470}
+A 2D texture that is used as the framebuffer\textquotesingle{}s depth buffer \index{Larp\+::\+Shader@{Larp\+::\+Shader}!\+\_\+light\+\_\+space\+\_\+matrix@{\+\_\+light\+\_\+space\+\_\+matrix}}
+\index{\+\_\+light\+\_\+space\+\_\+matrix@{\+\_\+light\+\_\+space\+\_\+matrix}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{\+\_\+light\+\_\+space\+\_\+matrix}{_light_space_matrix}}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::mat4 Larp\+::\+Shader\+::\+\_\+light\+\_\+space\+\_\+matrix\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1Shader_ac69a7f559f52fa6cda07a0f782608af7}{}\label{classLarp_1_1Shader_ac69a7f559f52fa6cda07a0f782608af7}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!\+\_\+program@{\+\_\+program}}
+\index{\+\_\+program@{\+\_\+program}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{\+\_\+program}{_program}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Shader\+Program} Larp\+::\+Shader\+::\+\_\+program}\hypertarget{classLarp_1_1Shader_a52ce34a36709f400ddf50c4398d6f0ed}{}\label{classLarp_1_1Shader_a52ce34a36709f400ddf50c4398d6f0ed}
+The ID of the Open\+GL Program associated with this \hyperlink{classLarp_1_1Shader}{Shader} \index{Larp\+::\+Shader@{Larp\+::\+Shader}!\+\_\+shadow\+\_\+shader@{\+\_\+shadow\+\_\+shader}}
+\index{\+\_\+shadow\+\_\+shader@{\+\_\+shadow\+\_\+shader}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{\+\_\+shadow\+\_\+shader}{_shadow_shader}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Shader} $\ast$ Larp\+::\+Shader\+::\+\_\+shadow\+\_\+shader = nullptr\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLarp_1_1Shader_ae3c817c27c61ba0bf96215cf91c7df4f}{}\label{classLarp_1_1Shader_ae3c817c27c61ba0bf96215cf91c7df4f}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!S\+H\+A\+D\+O\+W\+\_\+\+H\+E\+I\+G\+HT@{S\+H\+A\+D\+O\+W\+\_\+\+H\+E\+I\+G\+HT}}
+\index{S\+H\+A\+D\+O\+W\+\_\+\+H\+E\+I\+G\+HT@{S\+H\+A\+D\+O\+W\+\_\+\+H\+E\+I\+G\+HT}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{S\+H\+A\+D\+O\+W\+\_\+\+H\+E\+I\+G\+HT}{SHADOW_HEIGHT}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Luint Larp\+::\+Shader\+::\+S\+H\+A\+D\+O\+W\+\_\+\+H\+E\+I\+G\+HT = 1024\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1Shader_aa37c97ad8e4b8e9bff61dc3c3c170155}{}\label{classLarp_1_1Shader_aa37c97ad8e4b8e9bff61dc3c3c170155}
+\index{Larp\+::\+Shader@{Larp\+::\+Shader}!S\+H\+A\+D\+O\+W\+\_\+\+W\+I\+D\+TH@{S\+H\+A\+D\+O\+W\+\_\+\+W\+I\+D\+TH}}
+\index{S\+H\+A\+D\+O\+W\+\_\+\+W\+I\+D\+TH@{S\+H\+A\+D\+O\+W\+\_\+\+W\+I\+D\+TH}!Larp\+::\+Shader@{Larp\+::\+Shader}}
+\subsubsection[{\texorpdfstring{S\+H\+A\+D\+O\+W\+\_\+\+W\+I\+D\+TH}{SHADOW_WIDTH}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Luint Larp\+::\+Shader\+::\+S\+H\+A\+D\+O\+W\+\_\+\+W\+I\+D\+TH = 1024\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLarp_1_1Shader_a330453400ea364bfcf40f0f4f881b64e}{}\label{classLarp_1_1Shader_a330453400ea364bfcf40f0f4f881b64e}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Larp/\hyperlink{Shader_8hpp}{Shader.\+hpp}\item 
+src/\+Larp/\hyperlink{Shader_8cpp}{Shader.\+cpp}\end{DoxyCompactItemize}

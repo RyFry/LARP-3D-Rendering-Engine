@@ -1,0 +1,159 @@
+\hypertarget{classPhysicsObjectBuilder}{}\section{Physics\+Object\+Builder$<$ Bullet\+Shape $>$ Class Template Reference}
+\label{classPhysicsObjectBuilder}\index{Physics\+Object\+Builder$<$ Bullet\+Shape $>$@{Physics\+Object\+Builder$<$ Bullet\+Shape $>$}}
+
+
+{\ttfamily \#include $<$Physics\+Object\+Builder.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPhysicsObjectBuilder_a7643a50273d8bc9f35445d737f6bbbd7}{Physics\+Object\+Builder} ()
+\item 
+void \hyperlink{classPhysicsObjectBuilder_aaac658742fa2404fc252d5d769745442}{set\+\_\+orientation} (glm\+::quat orientation)
+\item 
+void \hyperlink{classPhysicsObjectBuilder_ad3ec72085f235c3f2099d349954ffa61}{set\+\_\+position} (glm\+::vec3 position)
+\item 
+void \hyperlink{classPhysicsObjectBuilder_a00d22a66a0b763ff480c9d0ce472f2a1}{set\+\_\+mass} (G\+Lfloat mass)
+\item 
+void \hyperlink{classPhysicsObjectBuilder_a9e7a8e1b775077f30109d89a1a842092}{set\+\_\+local\+\_\+inertia} (glm\+::vec3 local\+\_\+inertia)
+\item 
+void \hyperlink{classPhysicsObjectBuilder_a2ef538015ea6cc911a322ca32167a4e8}{set\+\_\+restitution} (G\+Lfloat restitution)
+\item 
+void \hyperlink{classPhysicsObjectBuilder_a58cf14b9022621049a79f4095c3e70e2}{set\+\_\+user\+\_\+pointer} (\hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Larp\+::\+Node\+Ptr} user\+\_\+pointer)
+\item 
+\hyperlink{classPhysicsObject}{Physics\+Object}$<$ Bullet\+Shape $>$ $\ast$ \hyperlink{classPhysicsObjectBuilder_ae482a7d48205dd69ae8d750c60ea96ce}{build} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+glm\+::quat \hyperlink{classPhysicsObjectBuilder_a2ae872b2cecfc395683f1d014ed00865}{\+\_\+orientation}
+\item 
+glm\+::vec3 \hyperlink{classPhysicsObjectBuilder_a76712f3e56a0c25ffcc9c304b87fe2f5}{\+\_\+position}
+\item 
+G\+Lfloat \hyperlink{classPhysicsObjectBuilder_a38eb44605d0752f21f0b26560e0c9510}{\+\_\+mass}
+\item 
+glm\+::vec3 \hyperlink{classPhysicsObjectBuilder_a53c4ffd0318b4e3f0ec72f0dd528536a}{\+\_\+local\+\_\+inertia}
+\item 
+G\+Lfloat \hyperlink{classPhysicsObjectBuilder_a9858423d054afb6e73b95de7ec5aa565}{\+\_\+restitution}
+\item 
+\hyperlink{classLarp_1_1Node}{Larp\+::\+Node} $\ast$ \hyperlink{classPhysicsObjectBuilder_abed841349d737d4ba25b825d200c9452}{\+\_\+user\+\_\+pointer}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Physics\+Object\+Builder@{Physics\+Object\+Builder}!Physics\+Object\+Builder@{Physics\+Object\+Builder}}
+\index{Physics\+Object\+Builder@{Physics\+Object\+Builder}!Physics\+Object\+Builder@{Physics\+Object\+Builder}}
+\subsubsection[{\texorpdfstring{Physics\+Object\+Builder()}{PhysicsObjectBuilder()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Bullet\+Shape $>$ {\bf Physics\+Object\+Builder}$<$ Bullet\+Shape $>$\+::{\bf Physics\+Object\+Builder} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObjectBuilder_a7643a50273d8bc9f35445d737f6bbbd7}{}\label{classPhysicsObjectBuilder_a7643a50273d8bc9f35445d737f6bbbd7}
+
+
+\subsection{Member Function Documentation}
+\index{Physics\+Object\+Builder@{Physics\+Object\+Builder}!build@{build}}
+\index{build@{build}!Physics\+Object\+Builder@{Physics\+Object\+Builder}}
+\subsubsection[{\texorpdfstring{build()}{build()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Bullet\+Shape $>$ {\bf Physics\+Object}$<$ Bullet\+Shape $>$ $\ast$ {\bf Physics\+Object\+Builder}$<$ Bullet\+Shape $>$\+::build (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObjectBuilder_ae482a7d48205dd69ae8d750c60ea96ce}{}\label{classPhysicsObjectBuilder_ae482a7d48205dd69ae8d750c60ea96ce}
+\index{Physics\+Object\+Builder@{Physics\+Object\+Builder}!set\+\_\+local\+\_\+inertia@{set\+\_\+local\+\_\+inertia}}
+\index{set\+\_\+local\+\_\+inertia@{set\+\_\+local\+\_\+inertia}!Physics\+Object\+Builder@{Physics\+Object\+Builder}}
+\subsubsection[{\texorpdfstring{set\+\_\+local\+\_\+inertia(glm\+::vec3 local\+\_\+inertia)}{set_local_inertia(glm::vec3 local_inertia)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Bullet\+Shape $>$ void {\bf Physics\+Object\+Builder}$<$ Bullet\+Shape $>$\+::set\+\_\+local\+\_\+inertia (
+\begin{DoxyParamCaption}
+\item[{glm\+::vec3}]{local\+\_\+inertia}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObjectBuilder_a9e7a8e1b775077f30109d89a1a842092}{}\label{classPhysicsObjectBuilder_a9e7a8e1b775077f30109d89a1a842092}
+Set the local inertia for the Mesh\+Collider to be built by this object 
+\begin{DoxyParams}{Parameters}
+{\em local} & inertia The local inertia amount  (0, 0, 0) \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object\+Builder@{Physics\+Object\+Builder}!set\+\_\+mass@{set\+\_\+mass}}
+\index{set\+\_\+mass@{set\+\_\+mass}!Physics\+Object\+Builder@{Physics\+Object\+Builder}}
+\subsubsection[{\texorpdfstring{set\+\_\+mass(\+G\+Lfloat mass)}{set_mass(GLfloat mass)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Bullet\+Shape $>$ void {\bf Physics\+Object\+Builder}$<$ Bullet\+Shape $>$\+::set\+\_\+mass (
+\begin{DoxyParamCaption}
+\item[{G\+Lfloat}]{mass}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObjectBuilder_a00d22a66a0b763ff480c9d0ce472f2a1}{}\label{classPhysicsObjectBuilder_a00d22a66a0b763ff480c9d0ce472f2a1}
+Set the mass for the Mesh\+Collider to be built by this object A mass of 0.\+0 means that this object will not move or be affected by gravity 
+\begin{DoxyParams}{Parameters}
+{\em mass} & The mass amount  0.\+0 \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object\+Builder@{Physics\+Object\+Builder}!set\+\_\+orientation@{set\+\_\+orientation}}
+\index{set\+\_\+orientation@{set\+\_\+orientation}!Physics\+Object\+Builder@{Physics\+Object\+Builder}}
+\subsubsection[{\texorpdfstring{set\+\_\+orientation(glm\+::quat orientation)}{set_orientation(glm::quat orientation)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Bullet\+Shape $>$ void {\bf Physics\+Object\+Builder}$<$ Bullet\+Shape $>$\+::set\+\_\+orientation (
+\begin{DoxyParamCaption}
+\item[{glm\+::quat}]{orientation}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObjectBuilder_aaac658742fa2404fc252d5d769745442}{}\label{classPhysicsObjectBuilder_aaac658742fa2404fc252d5d769745442}
+Set the orientation for the Mesh\+Collider to be built by this object 
+\begin{DoxyParams}{Parameters}
+{\em orientation} & The orientation amount  (0, 0, 0, 1) \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object\+Builder@{Physics\+Object\+Builder}!set\+\_\+position@{set\+\_\+position}}
+\index{set\+\_\+position@{set\+\_\+position}!Physics\+Object\+Builder@{Physics\+Object\+Builder}}
+\subsubsection[{\texorpdfstring{set\+\_\+position(glm\+::vec3 position)}{set_position(glm::vec3 position)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Bullet\+Shape $>$ void {\bf Physics\+Object\+Builder}$<$ Bullet\+Shape $>$\+::set\+\_\+position (
+\begin{DoxyParamCaption}
+\item[{glm\+::vec3}]{position}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObjectBuilder_ad3ec72085f235c3f2099d349954ffa61}{}\label{classPhysicsObjectBuilder_ad3ec72085f235c3f2099d349954ffa61}
+Set the position for the Mesh\+Collider to be built by this object 
+\begin{DoxyParams}{Parameters}
+{\em position} & The position amount  (0, 0, 0) \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object\+Builder@{Physics\+Object\+Builder}!set\+\_\+restitution@{set\+\_\+restitution}}
+\index{set\+\_\+restitution@{set\+\_\+restitution}!Physics\+Object\+Builder@{Physics\+Object\+Builder}}
+\subsubsection[{\texorpdfstring{set\+\_\+restitution(\+G\+Lfloat restitution)}{set_restitution(GLfloat restitution)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Bullet\+Shape $>$ void {\bf Physics\+Object\+Builder}$<$ Bullet\+Shape $>$\+::set\+\_\+restitution (
+\begin{DoxyParamCaption}
+\item[{G\+Lfloat}]{restitution}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObjectBuilder_a2ef538015ea6cc911a322ca32167a4e8}{}\label{classPhysicsObjectBuilder_a2ef538015ea6cc911a322ca32167a4e8}
+Set the restitution for the Mesh\+Collider to be built by this object 
+\begin{DoxyParams}{Parameters}
+{\em restitution} & The restitution amount  0.\+0 \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object\+Builder@{Physics\+Object\+Builder}!set\+\_\+user\+\_\+pointer@{set\+\_\+user\+\_\+pointer}}
+\index{set\+\_\+user\+\_\+pointer@{set\+\_\+user\+\_\+pointer}!Physics\+Object\+Builder@{Physics\+Object\+Builder}}
+\subsubsection[{\texorpdfstring{set\+\_\+user\+\_\+pointer(\+Larp\+::\+Node\+Ptr user\+\_\+pointer)}{set_user_pointer(Larp::NodePtr user_pointer)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Bullet\+Shape $>$ void {\bf Physics\+Object\+Builder}$<$ Bullet\+Shape $>$\+::set\+\_\+user\+\_\+pointer (
+\begin{DoxyParamCaption}
+\item[{{\bf Larp\+::\+Node\+Ptr}}]{user\+\_\+pointer}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObjectBuilder_a58cf14b9022621049a79f4095c3e70e2}{}\label{classPhysicsObjectBuilder_a58cf14b9022621049a79f4095c3e70e2}
+Set the user pointer for the Mesh\+Collider to be built by this object 
+\begin{DoxyParams}{Parameters}
+{\em user\+\_\+pointer} & The user pointer amount  nullptr \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Physics\+Object\+Builder@{Physics\+Object\+Builder}!\+\_\+local\+\_\+inertia@{\+\_\+local\+\_\+inertia}}
+\index{\+\_\+local\+\_\+inertia@{\+\_\+local\+\_\+inertia}!Physics\+Object\+Builder@{Physics\+Object\+Builder}}
+\subsubsection[{\texorpdfstring{\+\_\+local\+\_\+inertia}{_local_inertia}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Bullet\+Shape $>$ glm\+::vec3 {\bf Physics\+Object\+Builder}$<$ Bullet\+Shape $>$\+::\+\_\+local\+\_\+inertia\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObjectBuilder_a53c4ffd0318b4e3f0ec72f0dd528536a}{}\label{classPhysicsObjectBuilder_a53c4ffd0318b4e3f0ec72f0dd528536a}
+\index{Physics\+Object\+Builder@{Physics\+Object\+Builder}!\+\_\+mass@{\+\_\+mass}}
+\index{\+\_\+mass@{\+\_\+mass}!Physics\+Object\+Builder@{Physics\+Object\+Builder}}
+\subsubsection[{\texorpdfstring{\+\_\+mass}{_mass}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Bullet\+Shape $>$ G\+Lfloat {\bf Physics\+Object\+Builder}$<$ Bullet\+Shape $>$\+::\+\_\+mass\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObjectBuilder_a38eb44605d0752f21f0b26560e0c9510}{}\label{classPhysicsObjectBuilder_a38eb44605d0752f21f0b26560e0c9510}
+\index{Physics\+Object\+Builder@{Physics\+Object\+Builder}!\+\_\+orientation@{\+\_\+orientation}}
+\index{\+\_\+orientation@{\+\_\+orientation}!Physics\+Object\+Builder@{Physics\+Object\+Builder}}
+\subsubsection[{\texorpdfstring{\+\_\+orientation}{_orientation}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Bullet\+Shape $>$ glm\+::quat {\bf Physics\+Object\+Builder}$<$ Bullet\+Shape $>$\+::\+\_\+orientation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObjectBuilder_a2ae872b2cecfc395683f1d014ed00865}{}\label{classPhysicsObjectBuilder_a2ae872b2cecfc395683f1d014ed00865}
+\index{Physics\+Object\+Builder@{Physics\+Object\+Builder}!\+\_\+position@{\+\_\+position}}
+\index{\+\_\+position@{\+\_\+position}!Physics\+Object\+Builder@{Physics\+Object\+Builder}}
+\subsubsection[{\texorpdfstring{\+\_\+position}{_position}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Bullet\+Shape $>$ glm\+::vec3 {\bf Physics\+Object\+Builder}$<$ Bullet\+Shape $>$\+::\+\_\+position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObjectBuilder_a76712f3e56a0c25ffcc9c304b87fe2f5}{}\label{classPhysicsObjectBuilder_a76712f3e56a0c25ffcc9c304b87fe2f5}
+\index{Physics\+Object\+Builder@{Physics\+Object\+Builder}!\+\_\+restitution@{\+\_\+restitution}}
+\index{\+\_\+restitution@{\+\_\+restitution}!Physics\+Object\+Builder@{Physics\+Object\+Builder}}
+\subsubsection[{\texorpdfstring{\+\_\+restitution}{_restitution}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Bullet\+Shape $>$ G\+Lfloat {\bf Physics\+Object\+Builder}$<$ Bullet\+Shape $>$\+::\+\_\+restitution\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObjectBuilder_a9858423d054afb6e73b95de7ec5aa565}{}\label{classPhysicsObjectBuilder_a9858423d054afb6e73b95de7ec5aa565}
+\index{Physics\+Object\+Builder@{Physics\+Object\+Builder}!\+\_\+user\+\_\+pointer@{\+\_\+user\+\_\+pointer}}
+\index{\+\_\+user\+\_\+pointer@{\+\_\+user\+\_\+pointer}!Physics\+Object\+Builder@{Physics\+Object\+Builder}}
+\subsubsection[{\texorpdfstring{\+\_\+user\+\_\+pointer}{_user_pointer}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Bullet\+Shape $>$ {\bf Larp\+::\+Node}$\ast$ {\bf Physics\+Object\+Builder}$<$ Bullet\+Shape $>$\+::\+\_\+user\+\_\+pointer\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObjectBuilder_abed841349d737d4ba25b825d200c9452}{}\label{classPhysicsObjectBuilder_abed841349d737d4ba25b825d200c9452}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Physics/\hyperlink{PhysicsObjectBuilder_8hpp}{Physics\+Object\+Builder.\+hpp}\item 
+src/\+Physics/\hyperlink{PhysicsObjectBuilder_8cpp}{Physics\+Object\+Builder.\+cpp}\end{DoxyCompactItemize}

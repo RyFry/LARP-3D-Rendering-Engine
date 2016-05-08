@@ -1,0 +1,56 @@
+\hypertarget{classPhysicsMeshCollider}{}\section{Physics\+Mesh\+Collider Class Reference}
+\label{classPhysicsMeshCollider}\index{Physics\+Mesh\+Collider@{Physics\+Mesh\+Collider}}
+
+
+{\ttfamily \#include $<$Physics\+Mesh\+Collider.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPhysicsMeshCollider_a01693b5b41b6bce02cab01cab3ebb9d5}{Physics\+Mesh\+Collider} (\hyperlink{namespaceLarp_a1fbc1dec59f7a571dc06e152b1e7d38c}{Larp\+::\+Model\+Ptr} model, glm\+::quat rotation, glm\+::vec3 position, G\+Lfloat mass, glm\+::vec3 local\+\_\+inertia, G\+Lfloat restitution, \hyperlink{namespaceLarp_a171c1dc8b70cfb441b15d7386780db23}{Larp\+::\+Node\+Ptr} user\+\_\+pointer)
+\item 
+bt\+Rigid\+Body $\ast$ \hyperlink{classPhysicsMeshCollider_a2518cb2798d507046a1f8e356f8a6f56}{get\+\_\+rigid\+\_\+body} () const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bt\+Rigid\+Body $\ast$ \hyperlink{classPhysicsMeshCollider_a79bf728a386ac89b63c4ded82af6762b}{\+\_\+rigid\+\_\+body}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Physics\+Mesh\+Collider@{Physics\+Mesh\+Collider}!Physics\+Mesh\+Collider@{Physics\+Mesh\+Collider}}
+\index{Physics\+Mesh\+Collider@{Physics\+Mesh\+Collider}!Physics\+Mesh\+Collider@{Physics\+Mesh\+Collider}}
+\subsubsection[{\texorpdfstring{Physics\+Mesh\+Collider(\+Larp\+::\+Model\+Ptr model, glm\+::quat rotation, glm\+::vec3 position, G\+Lfloat mass, glm\+::vec3 local\+\_\+inertia, G\+Lfloat restitution, Larp\+::\+Node\+Ptr user\+\_\+pointer)}{PhysicsMeshCollider(Larp::ModelPtr model, glm::quat rotation, glm::vec3 position, GLfloat mass, glm::vec3 local_inertia, GLfloat restitution, Larp::NodePtr user_pointer)}}]{\setlength{\rightskip}{0pt plus 5cm}Physics\+Mesh\+Collider\+::\+Physics\+Mesh\+Collider (
+\begin{DoxyParamCaption}
+\item[{{\bf Larp\+::\+Model\+Ptr}}]{model, }
+\item[{glm\+::quat}]{rotation, }
+\item[{glm\+::vec3}]{position, }
+\item[{G\+Lfloat}]{mass, }
+\item[{glm\+::vec3}]{local\+\_\+inertia, }
+\item[{G\+Lfloat}]{restitution, }
+\item[{{\bf Larp\+::\+Node\+Ptr}}]{user\+\_\+pointer}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsMeshCollider_a01693b5b41b6bce02cab01cab3ebb9d5}{}\label{classPhysicsMeshCollider_a01693b5b41b6bce02cab01cab3ebb9d5}
+For each mesh in the model, we need to grab each face in that mesh. The faces are defined in mesh.\+\_\+indices, which has a face defined for every 3 indices, and each of the indices point to a Vertex in mesh.\+\_\+vertices
+
+\subsection{Member Function Documentation}
+\index{Physics\+Mesh\+Collider@{Physics\+Mesh\+Collider}!get\+\_\+rigid\+\_\+body@{get\+\_\+rigid\+\_\+body}}
+\index{get\+\_\+rigid\+\_\+body@{get\+\_\+rigid\+\_\+body}!Physics\+Mesh\+Collider@{Physics\+Mesh\+Collider}}
+\subsubsection[{\texorpdfstring{get\+\_\+rigid\+\_\+body() const }{get_rigid_body() const }}]{\setlength{\rightskip}{0pt plus 5cm}bt\+Rigid\+Body $\ast$ Physics\+Mesh\+Collider\+::get\+\_\+rigid\+\_\+body (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsMeshCollider_a2518cb2798d507046a1f8e356f8a6f56}{}\label{classPhysicsMeshCollider_a2518cb2798d507046a1f8e356f8a6f56}
+
+
+\subsection{Member Data Documentation}
+\index{Physics\+Mesh\+Collider@{Physics\+Mesh\+Collider}!\+\_\+rigid\+\_\+body@{\+\_\+rigid\+\_\+body}}
+\index{\+\_\+rigid\+\_\+body@{\+\_\+rigid\+\_\+body}!Physics\+Mesh\+Collider@{Physics\+Mesh\+Collider}}
+\subsubsection[{\texorpdfstring{\+\_\+rigid\+\_\+body}{_rigid_body}}]{\setlength{\rightskip}{0pt plus 5cm}bt\+Rigid\+Body$\ast$ Physics\+Mesh\+Collider\+::\+\_\+rigid\+\_\+body\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsMeshCollider_a79bf728a386ac89b63c4ded82af6762b}{}\label{classPhysicsMeshCollider_a79bf728a386ac89b63c4ded82af6762b}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Physics/\hyperlink{PhysicsMeshCollider_8hpp}{Physics\+Mesh\+Collider.\+hpp}\item 
+src/\+Physics/\hyperlink{PhysicsMeshCollider_8cpp}{Physics\+Mesh\+Collider.\+cpp}\end{DoxyCompactItemize}
