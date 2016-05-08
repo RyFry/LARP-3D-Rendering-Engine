@@ -20,6 +20,20 @@ namespace Larp
             it.second->draw(my_model, view, projection, view_pos);
     }
 
+    void Node::draw_shadows(const glm::mat4& model)
+    {
+        glm::mat4 tmp_model = glm::translate(glm::mat4(), this->_position);
+        glm::mat4 rotation = glm::toMat4(this->_rotation);
+        tmp_model = tmp_model * rotation;
+        tmp_model = glm::scale(tmp_model, this->_scale);
+        glm::mat4 my_model = model * tmp_model;
+
+        if (this->_entity != nullptr)
+            this->_entity->draw_shadows(my_model);
+        for (auto& it : this->_children)
+            it.second->draw_shadows(my_model);
+    }
+
     NodePtr Node::create_child()
     {
         Node* tmp = new Node();

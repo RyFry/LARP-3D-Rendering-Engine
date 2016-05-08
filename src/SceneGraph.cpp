@@ -37,6 +37,21 @@ namespace Larp
     void SceneGraph::draw(glm::mat4& view, glm::mat4& projection, const glm::vec3& view_pos)
     {
         glm::mat4 identity;
+        
+        std::vector<UniqueDirectional>& dir_lights = LightFactory::_directional_lights;
+        if (Shader::_shadow_shader && !dir_lights.empty())
+        {
+            Shader::_light_space_matrix = Shader::calculate_light_space_matrix(dir_lights[0]->_direction);
+            Shader::_shadow_shader->use();
+            Shader::_shadow_shader->set_light_space_matrix(Shader::_light_space_matrix);
+
+            Shader::prepare_depth_map();
+            this->_root->draw_shadows(identity);
+            Shader::unbind_depth_map();
+        }
+        // ... draw the actual scene...
+
+        identity = glm::mat4();
         this->_root->draw(identity, view, projection, view_pos);
     }
 }

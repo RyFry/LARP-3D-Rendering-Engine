@@ -13,6 +13,8 @@
 #include <iostream>
 #include <unordered_map>
 
+#include "ConfigurationLoader.hpp"
+
 namespace Larp
 {
     class Shader
@@ -22,6 +24,10 @@ namespace Larp
          * The ID of the OpenGL Program associated with this Shader
          */
         GLuint _program;
+
+        static Shader* _shadow_shader;
+
+        static glm::mat4 _light_space_matrix;
 
         /**
          * If the model at path is not already loaded, then it will be loaded and cached.
@@ -53,9 +59,10 @@ namespace Larp
         void set_point_lights();
 
         // The default value for light position should not by in the same axis as the up vector in the lookat function
-        glm::mat4 calculate_light_space_matrix(glm::vec3 light_pos = glm::vec3(0.0f, 10.0f, 30.0f));
+        static glm::mat4 calculate_light_space_matrix(glm::vec3 light_pos = glm::vec3(0.0f, 10.0f, 1.0f));
         void set_light_space_matrix(const glm::mat4& light_space_matrix);
-        void prepare_depth_map();
+        static void prepare_depth_map();
+        static void unbind_depth_map();
         void set_dir_light_position(glm::vec3 light_pos = glm::vec3(0.0f, 10.0f, 0.1f));
         void enable_shadow_texture();
     private:

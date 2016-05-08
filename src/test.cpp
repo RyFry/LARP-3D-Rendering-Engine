@@ -98,7 +98,7 @@ int main(void)
     entity->set_directional_shadows(true);
 
     // Create lights
-    Larp::DirectionalLightPtr dir_light = Larp::LightFactory::create_directional_light();
+    Larp::DirectionalLightPtr dir_light = Larp::LightFactory::create_directional_light(-1.0f, -1.0f, 0.0f);
     Larp::PointLightPtr point_light = Larp::LightFactory::create_point_light();
     point_light->set_ambient_intensity(1.0f, 1.0f, 1.0f);
     point_light->set_position(0.0f, 5.0f, 0.0f);
@@ -124,7 +124,7 @@ int main(void)
     // Larp::Shader crate_shader("shaders/lighting.vert", "shaders/lighting.frag");
     Larp::ModelPtr crate_model = Larp::Model::create("assets/crate.obj");
     Larp::EntityPtr entity22 = Larp::Entity::create(crate_model);
-    // entity22->set_directional_shadows(true);
+    entity22->set_directional_shadows(true);
 
     Larp::NodePtr node22 = graph->create_child_node();
     node22->attach_entity(entity22);
@@ -149,7 +149,7 @@ int main(void)
     // Larp::Shader shader("shaders/lighting.vert", "shaders/lighting.frag");
     Larp::ModelPtr nanosuit = Larp::Model::create("assets/nanosuit.obj");
     Larp::EntityPtr entity2 = Larp::Entity::create(nanosuit);
-    // entity2->set_directional_shadows(true);
+    entity2->set_directional_shadows(true);
 
     node12->attach_entity(entity2);
     node12->set_scale(0.1f, 0.1f, 0.1f);
@@ -356,6 +356,7 @@ void error_callback(int error, const char* description)
 void make_floor(PhysicsWorld* world)
 {
     btTransform trans;
+    trans.setIdentity();
     trans.setOrigin(btVector3(0.0, -5.0, 0.0));
     btScalar mass(0.0);
     btVector3 local_inertia(0, 0, 0);

@@ -2,6 +2,8 @@
 
 namespace Larp
 {
+    Shader* Shader::_shadow_shader = nullptr;
+    glm::mat4 Shader::_light_space_matrix;
     std::unordered_map<std::string, UniqueShader> Shader::_compiled_shaders;
     GLuint Shader::_depth_map_FBO;
     GLuint Shader::_depth_map_texture;
@@ -60,7 +62,8 @@ namespace Larp
             glReadBuffer(GL_NONE);
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
         }
-        return create("shaders/shadow_mapping_depth.vert", "shaders/shadow_mapping_depth.frag");
+        _shadow_shader = create("shaders/shadow_mapping_depth.vert", "shaders/shadow_mapping_depth.frag");
+        return _shadow_shader;
     }
 
     Shader* Shader::get_shadow_map_shader()
@@ -132,10 +135,10 @@ namespace Larp
     {
         glm::mat4 light_projection, light_view;
         glm::mat4 light_space_matrix;
-        GLfloat near_plane = 1.0f, far_plane = 7.5f;
-        light_projection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
+        GLfloat near_plane = 0.1f, far_plane = 100.0f;
+        light_projection = glm::ortho(-15.0f, 15.0f, -15.0f, 15.0f, near_plane, far_plane);
         //light_projection = glm::perspective(45.0f, (GLfloat)SHADOW_WIDTH / (GLfloat)SHADOW_HEIGHT, near_plane, far_plane); // Note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene.
-        light_view = glm::lookAt(light_pos, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
+        light_view = glm::lookAt(-light_pos * 20.0f, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.000001584f));
         light_space_matrix = light_projection * light_view;
         return light_space_matrix;
     }
@@ -150,6 +153,15 @@ namespace Larp
         glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
         glBindFramebuffer(GL_FRAMEBUFFER, _depth_map_FBO);
         glClear(GL_DEPTH_BUFFER_BIT);
+    }
+
+    void Shader::unbind_depth_map()
+    {
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        // move this into a function
+        Larp::ConfigurationLoader config("larp.cfg");
+        glViewport(0, 0, config.get_width(), config.get_height()); // need to make these values a variable, possibly in larp prereqs
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
     void Shader::set_dir_light_position(glm::vec3 light_pos)

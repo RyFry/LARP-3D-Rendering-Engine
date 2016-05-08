@@ -71,7 +71,7 @@ void main()
     {
         result = CalcDirLight(dirLight, norm, viewDir);
     }
-    // // Phase 2: Point lights
+    // Phase 2: Point lights
     // for (int i = 0; i < numPointLights; i++)
     // {
     //     result += CalcPointLight(pointLights[i], norm, FragPos, viewDir);    
@@ -88,8 +88,8 @@ void main()
 // Calculates the color when using a directional light.
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 {
-    // vec3 lightDir = normalize(-light.direction);
-    vec3 lightDir = normalize(lightPos - FragPos);
+    vec3 lightDir = normalize(-light.direction * 20.0f);
+    // vec3 lightDir = normalize(light.direction - FragPos);
     // Diffuse shading
     float diff = max(dot(normal, lightDir), 0.0);
     // Specular shading

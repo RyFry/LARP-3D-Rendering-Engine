@@ -68,6 +68,7 @@ namespace Larp
          *       not necessarily the order in which they were created.
          */
         void draw(glm::mat4 model, glm::mat4& view, glm::mat4& projection, const glm::vec3& view_pos);
+        void draw_shadows(const glm::mat4& model);
         /**
          * Creates a new Node that is a child of this Node.
          * @return A pointer to the new Node

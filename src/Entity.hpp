@@ -7,7 +7,6 @@
 #include <vector>
 
 #include "LarpPrerequisites.hpp"
-#include "ConfigurationLoader.hpp"
 #include "Model.hpp"
 #include "Shader.hpp"
 
@@ -74,6 +73,7 @@ namespace Larp
          *          variables matching those specified in the method.
          */
         void draw(const glm::mat4& model, const glm::mat4& view, const glm::mat4& projection, const glm::vec3& view_pos);
+        void draw_shadows(const glm::mat4& model);
         GLfloat get_width() const;
         GLfloat get_height() const;
         GLfloat get_depth() const;
