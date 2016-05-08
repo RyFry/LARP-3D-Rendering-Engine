@@ -67,8 +67,8 @@ test: debug_all
 clean:
 	rm -f $(PROD)
 	rm -f $(DEBUG_PROD)
-	rm -f $(OBJDIR)/$(RELEASE_DIR)/*.o
-	rm -f $(OBJDIR)/$(DEBUG_DIR)/*.o
+	rm -rf $(OBJDIR)/$(RELEASE_DIR)/
+	rm -rf $(OBJDIR)/$(DEBUG_DIR)/
 	@echo Clean done.
 
 docs: Doxyfile

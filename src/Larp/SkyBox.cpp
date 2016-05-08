@@ -30,7 +30,7 @@ namespace Larp
         this->add_vertices();
 
         // Get the shader
-        this->_shader = new Shader("shaders/skybox.vert", "shaders/skybox.frag");
+        this->_shader = Shader::get_skybox_shader();
 
         // Setup the VAO
         glGenVertexArrays(1, &this->_VAO);

@@ -46,6 +46,7 @@ namespace Larp
         static Shader* get_depth_map_shader();
         static Shader* get_shadow_map_shader();
         static Shader* get_default_shader();
+        static Shader* get_skybox_shader();
 
         void set_shininess(const GLfloat shininess);
 

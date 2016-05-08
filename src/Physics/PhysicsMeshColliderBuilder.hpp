@@ -41,7 +41,7 @@ private:
      * to the Larp::NodePtr that is attached to the Model provided
      * to the Mesh collider.
      */
-    Larp::NodePtr _user_pointer;
+    Larp::Node* _user_pointer;
 public:
     /**
      * Constructor

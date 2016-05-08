@@ -76,6 +76,11 @@ namespace Larp
         return create("shaders/lighting.vert", "shaders/lighting.frag");
     }
 
+    Shader* Shader::get_skybox_shader()
+    {
+        return create("shaders/skybox.vert", "shaders/skybox.frag");
+    }
+
     void Shader::set_shininess(const GLfloat shininess)
     {
         glUniform1f(glGetUniformLocation(this->_program, "material.shininess"), shininess);
