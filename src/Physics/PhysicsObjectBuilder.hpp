@@ -11,7 +11,7 @@ private:
     GLfloat _mass;
     glm::vec3 _local_inertia;
     GLfloat _restitution;
-    Larp::NodePtr _user_pointer;
+    Larp::Node* _user_pointer;
 
 public:
     PhysicsObjectBuilder();
