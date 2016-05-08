@@ -3,64 +3,61 @@
 
 namespace Larp
 {
-    Entity::Entity(const Shader& shader, ModelPtr model)
-        : _shader(shader),
-          _model(model)
-    {}
-
-    EntityPtr Entity::create(const Shader& shader, ModelPtr model)
+    Entity::Entity(ModelPtr model)
+        : _shadow_shader(nullptr),
+        _shader(Shader::get_default_shader()),
+        _model(model)
     {
-        return new Entity(shader, model);
     }
 
-    void Entity::draw(const glm::mat4& model, const glm::mat4& view, const glm::mat4& projection,
-                      const glm::vec3& view_pos,
-                      const std::vector<UniqueDirectional>& directional_lights,
-                      const std::vector<UniquePoint>& point_lights,
-                      const std::vector<UniqueSpot>& spot_lights)
+    EntityPtr Entity::create(ModelPtr model)
     {
-        this->_shader.use();
+        return new Entity(model);
+    }
 
-        glUniform3f(glGetUniformLocation(this->_shader._program, "viewPos"), view_pos.x, view_pos.y, view_pos.z);
-        glUniform1f(glGetUniformLocation(this->_shader._program, "material.shininess"), 32.0f);
-
-        bool use_directional_lighting = !directional_lights.empty();
-        glUniform1i(glGetUniformLocation(this->_shader._program, "directionalLight"), use_directional_lighting);
-
-        // Directional light
-        if (use_directional_lighting)
+    void Entity::draw(const glm::mat4& model, const glm::mat4& view, const glm::mat4& projection, const glm::vec3& view_pos)
+    {
+        // If not shadows or NOT
+        this->_shader->use();
+        // If shadows
+        if (_shadow_shader)
         {
-          glUniform3f(glGetUniformLocation(this->_shader._program, "dirLight.direction"), directional_lights[0]->_direction.x, directional_lights[0]->_direction.y, directional_lights[0]->_direction.z);
-          glUniform3f(glGetUniformLocation(this->_shader._program, "dirLight.ambient"), directional_lights[0]->_ambient.x, directional_lights[0]->_ambient.y, directional_lights[0]->_ambient.z);
-          glUniform3f(glGetUniformLocation(this->_shader._program, "dirLight.diffuse"), directional_lights[0]->_diffuse.x, directional_lights[0]->_diffuse.y, directional_lights[0]->_diffuse.z);
-          glUniform3f(glGetUniformLocation(this->_shader._program, "dirLight.specular"), directional_lights[0]->_specular.x, directional_lights[0]->_specular.y, directional_lights[0]->_specular.z);
+            // Set light uniforms
+            this->_shader->set_light_space_matrix(Shader::_light_space_matrix);
+            this->_shader->set_dir_light_position(); // not created
+            // need depth map texture function
+            this->_shader->enable_shadow_texture();
         }
 
-        int num_point_lights = point_lights.size();
-        glUniform1i(glGetUniformLocation(this->_shader._program, "numPointLights"), num_point_lights);
-        
-        // Point lights
-        for (int i = 0; i < num_point_lights; ++i)
-        {
-          glUniform3f(glGetUniformLocation(this->_shader._program, ("pointLights[" + std::to_string(i) + "].position").c_str()), point_lights[i]->_position.x, point_lights[i]->_position.y, point_lights[i]->_position.z);
-          glUniform3f(glGetUniformLocation(this->_shader._program, ("pointLights[" + std::to_string(i) + "].ambient").c_str()), point_lights[i]->_ambient.x, point_lights[i]->_ambient.y, point_lights[i]->_ambient.z);
-          glUniform3f(glGetUniformLocation(this->_shader._program, ("pointLights[" + std::to_string(i) + "].diffuse").c_str()), point_lights[i]->_diffuse.x, point_lights[i]->_diffuse.y, point_lights[i]->_diffuse.z);
-          glUniform3f(glGetUniformLocation(this->_shader._program, ("pointLights[" + std::to_string(i) + "].specular").c_str()), point_lights[i]->_specular.x, point_lights[i]->_specular.y, point_lights[i]->_specular.z);
-          glUniform1f(glGetUniformLocation(this->_shader._program, ("pointLights[" + std::to_string(i) + "].constant").c_str()), point_lights[i]->_constant);
-          glUniform1f(glGetUniformLocation(this->_shader._program, ("pointLights[" + std::to_string(i) + "].linear").c_str()), point_lights[i]->_linear);
-          glUniform1f(glGetUniformLocation(this->_shader._program, ("pointLights[" + std::to_string(i) + "].quadratic").c_str()), point_lights[i]->_quadratic);
-        }
+        // NOT SHADOWS
+        // when is this optional?
+        this->_shader->set_view_position(view_pos);
+
+        // if specular
+        this->_shader->set_shininess(32.0f);
+
+        // if directional light is being used
+        this->_shader->set_directional_lights();
+
+        // if point lighting is enabled
+        this->_shader->set_point_lights();
+
         // Spot lights
         // ...
 
-        glUniformMatrix4fv(glGetUniformLocation(this->_shader._program, "projection"), 1, GL_FALSE,
-                           glm::value_ptr(projection));
-        glUniformMatrix4fv(glGetUniformLocation(this->_shader._program, "view"), 1, GL_FALSE,
-                           glm::value_ptr(view));
-        glUniformMatrix4fv(glGetUniformLocation(this->_shader._program, "model"), 1, GL_FALSE,
-                           glm::value_ptr(model));
+        this->_shader->set_mvp(model, view, projection);
 
-        this->_model->draw(this->_shader);
+        this->_model->draw(*_shader);
+    }
+
+    void Entity::draw_shadows(const glm::mat4& model)
+    {
+        if (_shadow_shader)
+        {
+            glUniformMatrix4fv(glGetUniformLocation(this->_shadow_shader->_program, "model"), 1, GL_FALSE,
+                           glm::value_ptr(model));
+            this->_model->draw(*_shadow_shader); // draw onto the frame buffer
+        }
     }
 
     GLfloat Entity::get_width() const
@@ -76,5 +73,19 @@ namespace Larp
     GLfloat Entity::get_depth() const
     {
         return this->_model->get_depth();
+    }
+
+    void Entity::set_directional_shadows(bool value)
+    {
+        if (value)
+        {
+            this->_shadow_shader = Shader::get_depth_map_shader();
+            this->_shader = Shader::get_shadow_map_shader();
+        }
+        else
+        {
+            this->_shadow_shader = nullptr;
+            this->_shader = Shader::get_default_shader();
+        }
     }
 }

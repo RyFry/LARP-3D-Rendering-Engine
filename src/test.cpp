@@ -27,7 +27,6 @@
 
 // Other Libs
 #include <SOIL.h>
-#include <SDL/SDL.h>
 
 
 // Properties
@@ -102,14 +101,15 @@ int main(void)
     world.reset(new PhysicsWorld());
     world->init_objects();
 
-    Larp::Shader level_shader("shaders/lighting.vert", "shaders/lighting.frag");
     Larp::ModelPtr level = Larp::Model::create("assets/LEVEL/LEVEL.obj");
-    Larp::EntityPtr entity = Larp::Entity::create(level_shader, level);
-    Larp::DirectionalLightPtr dir_light = graph->create_directional_light();
-    Larp::PointLightPtr point_light = graph->create_point_light();
+    Larp::EntityPtr entity = Larp::Entity::create(level);
+    entity->set_directional_shadows(true);
+    Larp::DirectionalLightPtr dir_light = Larp::LightFactory::create_directional_light(0.5, -1.0, 1.0);
+    dir_light->set_ambient_intensity(0.2, 0.2, 0.2);
+    //Larp::PointLightPtr point_light = Larp::LightFactory::create_point_light();
 
     //point_light->set_ambient_color(4.0f, 2.0f, 6.0f);
-    point_light->set_position(0.0f, 2.0f, -5.0f);
+    //point_light->set_position(0.0f, 2.0f, -5.0f);
 
     //graph->remove_light(dir_light);
     Larp::NodePtr node11 = graph->create_child_node();
@@ -128,9 +128,9 @@ int main(void)
 
     world->get_dynamics_world()->addRigidBody(physics_level->get_rigid_body());
 
-    Larp::Shader crate_shader("shaders/lighting.vert", "shaders/lighting.frag");
     Larp::ModelPtr crate_model = Larp::Model::create("assets/crate/crate.obj");
-    Larp::EntityPtr entity22 = Larp::Entity::create(crate_shader, crate_model);
+    Larp::EntityPtr entity22 = Larp::Entity::create(crate_model);
+    entity22->set_directional_shadows(true);
     Larp::NodePtr node22 = graph->create_child_node();
     node22->attach_entity(entity22);
     node22->set_scale(0.4, 0.4, 0.4);
@@ -146,9 +146,9 @@ int main(void)
 
     world->get_dynamics_world()->addRigidBody(crate_collider->get_rigid_body());
 
-    Larp::Shader p90_shader("shaders/lighting.vert", "shaders/lighting.frag");
     Larp::ModelPtr p90_model = Larp::Model::create("assets/testgun/testgun.obj");
-    Larp::EntityPtr p90_entity = Larp::Entity::create(p90_shader, p90_model);
+    Larp::EntityPtr p90_entity = Larp::Entity::create(p90_model);
+    p90_entity->set_directional_shadows(true);
     Larp::NodePtr p90_node = graph->create_child_node();
     p90_node->attach_entity(p90_entity);
     p90_node->set_scale(0.1, 0.1, 0.1);
@@ -183,9 +183,8 @@ int main(void)
     /*******************************
      * TESTING - DELETE THIS       *
      *******************************/
-    Larp::Shader shader("shaders/lighting.vert", "shaders/lighting.frag");
     Larp::ModelPtr nanosuit = Larp::Model::create("assets/nanosuit/nanosuit.obj");
-    Larp::EntityPtr entity2 = Larp::Entity::create(shader, nanosuit);
+    Larp::EntityPtr entity2 = Larp::Entity::create(nanosuit);
 
     node12->attach_entity(entity2);
     node12->set_scale(0.05f, 0.05f, 0.05f);
@@ -204,7 +203,7 @@ int main(void)
     skybox_files.push_back("assets/skybox/back.jpg");
     skybox_files.push_back("assets/skybox/front.jpg");
     Larp::SkyBox skybox(skybox_files);
-//    graph->set_skybox(&skybox);
+    graph->set_skybox(&skybox);
 
 
     GLfloat frame_rate_limiter = 0.0f;
@@ -272,9 +271,17 @@ int main(void)
             }
         }
 
+        // Check and call events
+        glfwPollEvents();
+        Do_Movement();
+
         // Clear the colorbuffer
         glClearColor(0.1f, 0.8f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        // node11->yaw(delta_time * 32.0);
+        // node11->pitch(delta_time * 23.0);
+        // node11->roll(delta_time * 17.0);
 
         glm::mat4 projection = glm::perspective(camera._zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
         glm::mat4 view = camera.get_view_matrix();

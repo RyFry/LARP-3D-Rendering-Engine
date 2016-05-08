@@ -4,8 +4,8 @@
 #include <vector>
 
 #include "Larp/LarpPrerequisites.hpp"
-#include "Node.hpp"
-#include "SkyBox.hpp"
+#include "Larp/Node.hpp"
+#include "Larp/SkyBox.hpp"
 
 namespace Larp
 {
@@ -91,78 +91,6 @@ namespace Larp
          *                 This should be obtained from a Camera object.
          */
         void draw(glm::mat4& view, glm::mat4& projection, const glm::vec3& view_pos);
-        /**
-         * Creates a directional light that faces downwards by default and adds the light
-         * to the SceneGraph's vector of directional lights.
-         * @param direction The direction the light should be facing.
-         * @returns Returns a const DirectionalLight pointer that may be used to change
-         *          lighting parameters.
-         * @warning Do not add this type of light if Entity specified shaders do not support them.
-         */
-        DirectionalLightPtr create_directional_light(glm::vec3 direction = glm::vec3(0.0f, -1.0f, 0.0f));
-        /**
-         * Creates a directional light that faces downwards by default and adds the light
-         * to the SceneGraph's vector of directional lights.
-         * @param x The x direction the light should be facing.
-         * @param y The y direction the light should be facing.
-         * @param z The z direction the light should be facing.
-         * @returns Returns a const DirectionalLight pointer that may be used to change
-         *          lighting parameters.
-         * @warning Do not add this type of light if Entity specified shaders do not support them.
-         */
-        DirectionalLightPtr create_directional_light(GLfloat x, GLfloat y, GLfloat z);
-        /**
-         * Creates a point light that is positioned at (0, 0, 0) by default and adds the light
-         * to the SceneGraph's vector of point lights.
-         * @param position The starting position of the light.
-         * @returns Returns a const PointLight pointer that may be used to change
-         *          lighting parameters.
-         * @warning Do not add this type of light if Entity specified shaders do not support them.
-         */
-        PointLightPtr create_point_light(glm::vec3 position = glm::vec3(0.0f));
-        /**
-         * Creates a point light that is positioned at (0, 0, 0) by default and adds the light
-         * to the SceneGraph's vector of point lights.
-         * @param position The starting position of the light.
-         * @returns Returns a const PointLight pointer that may be used to change
-         *          lighting parameters.
-         * @warning Do not add this type of light if Entity specified shaders do not support them.
-         */
-        PointLightPtr create_point_light(GLfloat x, GLfloat y, GLfloat z);
-        /**
-         * Creates a spot light that is positioned at (0, 0, 0) by default and adds the light
-         * to the SceneGraph's vector of spot lights.
-         * @param position The starting position of the light.
-
-         * @returns Returns a const SpotLight pointer that may be used to change
-         *          lighting parameters.
-         * @warning Do not add this type of light if Entity specified shaders do not support them.
-         */
-        SpotLightPtr create_spot_light(glm::vec3 position = glm::vec3(0.0f));
-        /**
-         * Creates a spot light that is positioned at (0, 0, 0) by default and adds the light
-         * to the SceneGraph's vector of spot lights.
-         * @param position The starting position of the light.
-         * @returns Returns a const SpotLight pointer that may be used to change
-         *          lighting parameters.
-         * @warning Do not add this type of light if Entity specified shaders do not support them.
-         */
-        SpotLightPtr create_spot_light(GLfloat x, GLfloat y, GLfloat z);
-        /**
-         * Removes the specified light from the respective light's vector in the SceneGraph
-         * @param A constant directional light pointer that will be used to remove the light from the vector.
-         */
-        void remove_light(DirectionalLightPtr light);
-        /**
-         * Removes the specified light from the respective light's vector in the SceneGraph
-         * @param A constant point light pointer that will be used to remove the light from the vector.
-         */
-        void remove_light(PointLightPtr light);
-        /**
-         * Removes the specified light from the respective light's vector in the SceneGraph
-         * @param A constant spot light pointer that will be used to remove the light from the vector.
-         */
-        void remove_light(SpotLightPtr light);
 
         void set_skybox(SkyBox* skybox);
     };

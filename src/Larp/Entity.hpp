@@ -9,9 +9,7 @@
 #include "LarpPrerequisites.hpp"
 #include "Model.hpp"
 #include "Shader.hpp"
-#include "DirectionalLight.hpp"
-#include "PointLight.hpp"
-#include "SpotLight.hpp"
+
 
 namespace Larp
 {
@@ -22,12 +20,16 @@ namespace Larp
          * The Shader used during rendering of the Model attached
          * to this Entity.
          */
-        Shader _shader;
+        Shader* _shadow_shader;
+        /**
+         * The Shader used during rendering of the Model attached
+         * to this Entity.
+         */
+        Shader* _shader;
         /**
          * The Model rendered.
          */
         ModelPtr _model;
-
         /**
          * Default Constructor
          */
@@ -37,8 +39,7 @@ namespace Larp
          * @param shader A Shader object used during rendering
          * @param model The Model to draw during rendering
          */
-        Entity(const Shader& shader, ModelPtr model);
-
+        Entity(ModelPtr model);
     public:
         /**
          * Creates a EntityPtr
@@ -46,7 +47,7 @@ namespace Larp
          * @param model The Model to draw during rendering
          * @return The EntityPtr with the same shader and model passed as parameters
          */
-        static EntityPtr create(const Shader& shader, ModelPtr model);
+        static EntityPtr create(ModelPtr model);
         /**
          * Draws the model atteched to this entity using the
          * associated shader
@@ -71,13 +72,18 @@ namespace Larp
          * @warning This method assumes that each model has provided shaders with
          *          variables matching those specified in the method.
          */
-        void draw(const glm::mat4& model, const glm::mat4& view, const glm::mat4& projection,
-                  const glm::vec3& view_pos,
-                  const std::vector<UniqueDirectional>& directional_lights,
-                  const std::vector<UniquePoint>& point_lights,
-                  const std::vector<UniqueSpot>& spot_lights);
+        void draw(const glm::mat4& model, const glm::mat4& view, const glm::mat4& projection, const glm::vec3& view_pos);
+        void draw_shadows(const glm::mat4& model);
         GLfloat get_width() const;
         GLfloat get_height() const;
         GLfloat get_depth() const;
+
+        void set_directional_shadows(bool value);
+        // void set_wireframe(bool value);
+        
+        // void set_ambient(bool value);
+        // void set_diffuse(bool value);
+        // void set_specular(bool value);
+        // void set_emmisive(bool value);
     };
 }

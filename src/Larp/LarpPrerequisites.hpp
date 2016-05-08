@@ -29,6 +29,8 @@ namespace Larp
     class Shader;
     class SkyBox;
     class SpotLight;
+    class Texture;
+    class Vertex;
 
     typedef std::unique_ptr<DirectionalLight> UniqueDirectional;
     typedef std::unique_ptr<Entity>           UniqueEntity;
@@ -36,18 +38,17 @@ namespace Larp
     typedef std::unique_ptr<Node>             UniqueNode;
     typedef std::unique_ptr<PointLight>       UniquePoint;
     typedef std::unique_ptr<SceneGraph>       UniqueSceneGraph;
+    typedef std::unique_ptr<Shader>           UniqueShader;
     typedef std::unique_ptr<SkyBox>           UniqueSkyBox;
     typedef std::unique_ptr<SpotLight>        UniqueSpot;
 
-    typedef Entity*           EntityPtr;
-    typedef DirectionalLight* DirectionalLightPtr;
-    typedef Model*            ModelPtr;
-    typedef Node*             NodePtr;
-    typedef PointLight*       PointLightPtr;
-    typedef SceneGraph*       SceneGraphPtr;
-    typedef Shader*           ShaderPtr;
-    typedef SkyBox*           SkyBoxPtr;
-    typedef SpotLight*        SpotLightPtr;
+    typedef Entity*                const EntityPtr;
+    typedef DirectionalLight*      const DirectionalLightPtr;
+    typedef Model*                 const ModelPtr;
+    typedef Node*                  const NodePtr;
+    typedef PointLight*            const PointLightPtr;
+    typedef SceneGraph*            const SceneGraphPtr;
+    typedef SpotLight*             const SpotLightPtr;
 
     // For internal use only
     typedef GLuint VAO;

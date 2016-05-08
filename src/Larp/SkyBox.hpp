@@ -15,7 +15,7 @@ namespace Larp
         VAO _VAO;
         VBO _VBO;
         std::vector<glm::vec3> _vertices;
-        ShaderPtr _shader;
+        Shader* _shader;
 
         void setup_skybox(std::vector<const GLchar*> faces);
         void add_vertices();
