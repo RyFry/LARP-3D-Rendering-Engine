@@ -28,6 +28,7 @@
 // Other Libs
 #include <SOIL.h>
 
+#define FRAME_RATE 60.0f
 
 // Properties
 GLuint screenWidth = 800, screenHeight = 600;
@@ -217,9 +218,9 @@ int main(void)
         last_frame = current_frame;
 
         frame_rate_limiter += delta_time;
-        if (frame_rate_limiter > 1.0 / 60.0)
+        if (frame_rate_limiter > 1.0 / FRAME_RATE)
         {
-            frame_rate_limiter -= 1.0 / 60.0;
+            frame_rate_limiter -= 1.0 / FRAME_RATE;
             ++iteration_number;
         }
         else
@@ -231,16 +232,15 @@ int main(void)
 
         player->update_movement(world.get());
 
-        world->get_dynamics_world()->stepSimulation(1.0f / 60.0f, 10);
+        world->get_dynamics_world()->stepSimulation(1.0f / FRAME_RATE, 10);
 
-        player->step(world.get(), 1.0f / 60.0f);
+        player->step(world.get(), 1.0f / FRAME_RATE);
         Larp::NodePtr player_node = player->get_user_pointer();
         glm::vec3 pos = player->get_position();
         glm::quat quat = player->get_orientation();
         player_node->set_position(pos);
         player_node->set_orientation(quat);
         camera._position = glm::vec3(pos.x, pos.y + player_node->get_scaled_height(), pos.z);
-
         camera._yaw = player->get_yaw();
 
         for (size_t i = 0; i < world->get_collision_object_count(); ++i)
