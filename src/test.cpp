@@ -155,7 +155,7 @@ int main(void)
 
     PhysicsObjectBuilder<btBoxShape> crate_builder;
     crate_builder.set_position(glm::vec3(0.0, 4.0, 0.0));
-    crate_builder.set_mass(1.0);
+    crate_builder.set_mass(0.2);
     crate_builder.set_restitution(0.0);
     crate_builder.set_user_pointer(crate_node);
 
