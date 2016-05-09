@@ -3,10 +3,10 @@
 namespace Larp
 {
     Shader* Shader::_shadow_shader = nullptr;
-    glm::mat4 Shader::_light_space_matrix;
+    std::vector<glm::mat4> Shader::_light_space_matrix (NUM_SHADOW_MAPS);
     std::unordered_map<std::string, UniqueShader> Shader::_compiled_shaders;
     GLuint Shader::_depth_map_FBO;
-    GLuint Shader::_depth_map_texture;
+    std::vector<GLuint> Shader::_depth_map_texture (NUM_SHADOW_MAPS);
     bool Shader::_depth_map_configured = false;
 
     const GLuint Shader::SHADOW_WIDTH = 1024;
@@ -44,20 +44,22 @@ namespace Larp
         {
             // Configure depth map FBO
             glGenFramebuffers(1, &_depth_map_FBO);
-            // - Create depth texture
-            glGenTextures(1, &_depth_map_texture);
-            glBindTexture(GL_TEXTURE_2D, _depth_map_texture);
+            // The closest shadow map must have the highest resolution which is determined by the index to the power of 2
+            for (GLuint i = NUM_SHADOW_MAPS - 1; i >= 0; --i)
+            {
+                // - Create depth textures
+                glGenTextures(1, &_depth_map_texture.at(i));
+                glBindTexture(GL_TEXTURE_2D, _depth_map_texture.at(i));
 
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER); 
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-            GLfloat borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
-            glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
-
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, glm::pow(SHADOW_WIDTH, i), glm::pow(SHADOW_HEIGHT, i), 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER); 
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+                GLfloat borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
+                glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+            }
             glBindFramebuffer(GL_FRAMEBUFFER, _depth_map_FBO);
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, _depth_map_texture, 0);
             glDrawBuffer(GL_NONE);
             glReadBuffer(GL_NONE);
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -136,11 +138,10 @@ namespace Larp
         }
     }
 
-    glm::mat4 Shader::calculate_light_space_matrix(glm::vec3 light_pos)
+    glm::mat4 Shader::calculate_light_space_matrix(glm::vec3 light_pos, GLfloat near_plane, GLfloat far_plane)
     {
         glm::mat4 light_projection, light_view;
         glm::mat4 light_space_matrix;
-        GLfloat near_plane = 0.1f, far_plane = 100.0f;
         light_projection = glm::ortho(-15.0f, 15.0f, -15.0f, 15.0f, near_plane, far_plane);
         //light_projection = glm::perspective(45.0f, (GLfloat)SHADOW_WIDTH / (GLfloat)SHADOW_HEIGHT, near_plane, far_plane); // Note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene.
         light_view = glm::lookAt(-light_pos * 20.0f, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.000001584f));
@@ -148,15 +149,16 @@ namespace Larp
         return light_space_matrix;
     }
 
-    void Shader::set_light_space_matrix(const glm::mat4& light_space_matrix)
+    void Shader::set_light_space_matrix(const glm::mat4& light_space_matrix, GLuint index)
     {
-        glUniformMatrix4fv(glGetUniformLocation(this->_program, "lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(light_space_matrix));
+        glUniformMatrix4fv(glGetUniformLocation(this->_program, ("lightSpaceMatrix[" + std::to_string(index) + "]").c_str()), 1, GL_FALSE, glm::value_ptr(light_space_matrix));
     }
 
-    void Shader::prepare_depth_map()
+    void Shader::prepare_depth_map(GLuint index)
     {
-        glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+        glViewport(0, 0, SHADOW_WIDTH * glm::exp2(index), SHADOW_HEIGHT * glm::exp2(index));
         glBindFramebuffer(GL_FRAMEBUFFER, _depth_map_FBO);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, _depth_map_texture.at(index), 0);
         glClear(GL_DEPTH_BUFFER_BIT);
     }
 
@@ -174,11 +176,11 @@ namespace Larp
         glUniform3fv(glGetUniformLocation(this->_program, "lightPos"), 1, glm::value_ptr(light_pos));
     }
 
-    void Shader::enable_shadow_texture()
+    void Shader::enable_shadow_texture(GLuint index)
     {
-        glUniform1i(glGetUniformLocation(this->_program, "shadowMap"), 0);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, _depth_map_texture);
+        glUniform1i(glGetUniformLocation(this->_program, ("shadowMap[" + std::to_string(index) + "]").c_str()), index);
+        glActiveTexture(GL_TEXTURE0 + index);
+        glBindTexture(GL_TEXTURE_2D, _depth_map_texture.at(index));
     }
 
     // -----------------

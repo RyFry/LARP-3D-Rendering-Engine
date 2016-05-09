@@ -42,20 +42,31 @@ namespace Larp
     void SceneGraph::draw(glm::mat4& view, glm::mat4& projection, const glm::vec3& view_pos)
     {
         glm::mat4 identity;
+
         std::vector<UniqueDirectional>& dir_lights = LightFactory::_directional_lights;
         if (Shader::_shadow_shader && !dir_lights.empty())
         {
-            Shader::_light_space_matrix = Shader::calculate_light_space_matrix(dir_lights[0]->_direction);
-            Shader::_shadow_shader->use();
-            Shader::_shadow_shader->set_light_space_matrix(Shader::_light_space_matrix);
+            GLfloat near_plane = 0.1f; 
+            GLfloat far_plane_change = 100.0f / NUM_SHADOW_MAPS;
+            GLfloat cur_far_plane = 0.0f;
 
-            Shader::prepare_depth_map();
-            this->_root->draw_shadows(identity);
-            Shader::unbind_depth_map();
+            // The closest shadow map must have the highest resolution which is determined by the index to the power of 2
+            for (GLuint i = NUM_SHADOW_MAPS - 1; i >= 0; --i)
+            {
+                cur_far_plane += far_plane_change;
+
+                Shader::_light_space_matrix.at(i) = Shader::calculate_light_space_matrix(dir_lights[0]->_direction, near_plane, cur_far_plane);
+                Shader::_shadow_shader->use();
+                Shader::_shadow_shader->set_light_space_matrix(Shader::_light_space_matrix.at(i), i);
+
+                Shader::prepare_depth_map(i);
+                this->_root->draw_shadows(identity);
+                Shader::unbind_depth_map();
+
+                identity = glm::mat4();
+            }
         }
         // ... draw the actual scene...
-
-        identity = glm::mat4();
         this->_root->draw(identity, view, projection, view_pos);
 
         if (this->_skybox != nullptr)

@@ -16,6 +16,8 @@
 
 #include "Error.hpp"    // Custom error handling macro
 
+#define NUM_SHADOW_MAPS 3
+
 namespace Larp
 {
     class ConfigurationLoader;

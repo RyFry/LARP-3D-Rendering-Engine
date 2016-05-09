@@ -36,7 +36,7 @@ namespace Larp
         GLuint reflectionNr = 1;
         for (GLuint i = 0; i < this->_textures.size(); ++i)
         {
-            glActiveTexture(GL_TEXTURE1 + i); // Activate the proper texture unit before binding
+            glActiveTexture(GL_TEXTURE0 + i + NUM_SHADOW_MAPS - 1); // Activate the proper texture unit before binding
             // Retrieve the texture number (diffuseN or specularN)
             std::stringstream ss;
             std::string number;
@@ -54,10 +54,10 @@ namespace Larp
             }
             number = ss.str();
 
-            glUniform1i(glGetUniformLocation(shader._program, ("material." + name + number).c_str()), i + 1);
+            glUniform1i(glGetUniformLocation(shader._program, ("material." + name + number).c_str()), i + NUM_SHADOW_MAPS - 1);
             glBindTexture(GL_TEXTURE_2D, this->_textures.at(i)._id);
         }
-        glActiveTexture(GL_TEXTURE1);
+        glActiveTexture(GL_TEXTURE0);
 
         // Draw mesh
         glBindVertexArray(this->_VAO);

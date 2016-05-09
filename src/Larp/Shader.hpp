@@ -27,7 +27,7 @@ namespace Larp
 
         static Shader* _shadow_shader;
 
-        static glm::mat4 _light_space_matrix;
+        static std::vector<glm::mat4> _light_space_matrix;
 
         /**
          * If the model at path is not already loaded, then it will be loaded and cached.
@@ -60,12 +60,12 @@ namespace Larp
         void set_point_lights();
 
         // The default value for light position should not by in the same axis as the up vector in the lookat function
-        static glm::mat4 calculate_light_space_matrix(glm::vec3 light_pos = glm::vec3(0.0f, 10.0f, 1.0f));
-        void set_light_space_matrix(const glm::mat4& light_space_matrix);
-        static void prepare_depth_map();
+        static glm::mat4 calculate_light_space_matrix(glm::vec3 light_pos = glm::vec3(0.0f, 10.0f, 1.0f), GLfloat near_plane = 0.1f, GLfloat far_plane = 100.0f);
+        void set_light_space_matrix(const glm::mat4& light_space_matrix, GLuint index);
+        static void prepare_depth_map(GLuint index);
         static void unbind_depth_map();
         void set_dir_light_position(glm::vec3 light_pos = glm::vec3(0.0f, 10.0f, 0.1f));
-        void enable_shadow_texture();
+        void enable_shadow_texture(GLuint index);
     private:
         /**
          * A cache of compiled Shaders.
@@ -82,7 +82,7 @@ namespace Larp
         /**
          * A 2D texture that is used as the framebuffer's depth buffer
          */
-        static GLuint _depth_map_texture;
+        static std::vector<GLuint> _depth_map_texture;
 
         static const GLuint SHADOW_WIDTH;
         static const GLuint SHADOW_HEIGHT;
