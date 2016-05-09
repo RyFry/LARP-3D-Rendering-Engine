@@ -32,7 +32,10 @@ class GUIManager
 			MAIN,
 			ADDLIGHT,
 			LIGHTLIST,
-			LIGHTEDIT
+			LIGHTEDIT,
+			AMBINT,
+			DIFINT,
+			SPECINT
 		};
 
 	  /**
@@ -129,6 +132,8 @@ class GUIManager
 		void quit(const CEGUI::EventArgs&);
 
 		void push_test(const CEGUI::EventArgs&);
+
+		void spinner_switch(const CEGUI::EventArgs&);
 
 		/**
 		* Hides the current GUI sheet and mouse

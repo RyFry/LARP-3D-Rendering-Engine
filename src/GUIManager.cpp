@@ -69,38 +69,183 @@ void GUIManager::setup_menus()
 
 	CEGUI::Window* lightList = this->_wmgr->createWindow("TaharezLook/ScrollablePane", "lightList");
 
+
+
+
+
+
 	CEGUI::Window* pushTest1 = this->_wmgr->createWindow("TaharezLook/Button", "txt");
 	CEGUI::Window* pushTest2 = this->_wmgr->createWindow("TaharezLook/Button", "txt2");
 
+	/* Light edit is the menu used for modifing properties of the lights */
 	CEGUI::Window* lightEdit = this->_wmgr->createWindow("TaharezLook/ScrollablePane", "lightEdit");
 
-	CEGUI::Spinner* testSpinner = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "spinner"));
 
-	/* Color for the lights */
-	CEGUI::Spinner* redSpinner = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "red"));
-	CEGUI::Spinner* greenSpinner = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "green"));
-	CEGUI::Spinner* blueSpinner = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "blue"));
 
-	redSpinner->setTextInputMode(CEGUI::Spinner::FloatingPoint);
-	redSpinner->setMinimumValue(0.0f);
-	redSpinner->setMaximumValue(255.0f);
-	redSpinner->setStepSize(10.0f);
-	redSpinner->setCurrentValue(10.0f);
-	redSpinner->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(0.0f,0)));
+	/* Is a child of Light Edit (It will be used to switch between ambient, specular, and diffuse intensity sliders) */
+	CEGUI::Window* ambientIntensity = this->_wmgr->createWindow("DefaultWindow", "ambientIntensity");
 
-	greenSpinner->setTextInputMode(CEGUI::Spinner::FloatingPoint);
-	greenSpinner->setMinimumValue(0.0f);
-	greenSpinner->setMaximumValue(255.0f);
-	greenSpinner->setStepSize(10.0f);
-	greenSpinner->setCurrentValue(10.0f);
-	greenSpinner->setPosition(CEGUI::UVector2(CEGUI::UDim(0.12f,0),CEGUI::UDim(0.0f,0)));
+	/* Ambient RGB for the light */
+	CEGUI::Spinner* redSpinnerAmbient   = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "redAmb"));
+	CEGUI::Spinner* greenSpinnerAmbient = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "greenAmb"));
+	CEGUI::Spinner* blueSpinnerAmbient  = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "blueAmb"));
 
-	blueSpinner->setTextInputMode(CEGUI::Spinner::FloatingPoint);
-	blueSpinner->setMinimumValue(0.0f);
-	blueSpinner->setMaximumValue(255.0f);
-	blueSpinner->setStepSize(10.0f);
-	blueSpinner->setCurrentValue(10.0f);
-	blueSpinner->setPosition(CEGUI::UVector2(CEGUI::UDim(0.24f,0),CEGUI::UDim(0.0f,0)));
+	redSpinnerAmbient->setTextInputMode(CEGUI::Spinner::FloatingPoint);
+	redSpinnerAmbient->setMinimumValue(0.0f);
+	redSpinnerAmbient->setMaximumValue(255.0f);
+	redSpinnerAmbient->setStepSize(10.0f);
+	redSpinnerAmbient->setCurrentValue(10.0f);
+	redSpinnerAmbient->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(0.0f,0)));
+
+	greenSpinnerAmbient->setTextInputMode(CEGUI::Spinner::FloatingPoint);
+	greenSpinnerAmbient->setMinimumValue(0.0f);
+	greenSpinnerAmbient->setMaximumValue(255.0f);
+	greenSpinnerAmbient->setStepSize(10.0f);
+	greenSpinnerAmbient->setCurrentValue(10.0f);
+	greenSpinnerAmbient->setPosition(CEGUI::UVector2(CEGUI::UDim(0.12f,0),CEGUI::UDim(0.0f,0)));
+
+	blueSpinnerAmbient->setTextInputMode(CEGUI::Spinner::FloatingPoint);
+	blueSpinnerAmbient->setMinimumValue(0.0f);
+	blueSpinnerAmbient->setMaximumValue(255.0f);
+	blueSpinnerAmbient->setStepSize(10.0f);
+	blueSpinnerAmbient->setCurrentValue(10.0f);
+	blueSpinnerAmbient->setPosition(CEGUI::UVector2(CEGUI::UDim(0.24f,0),CEGUI::UDim(0.0f,0)));
+
+
+	ambientIntensity->addChild(redSpinnerAmbient);
+	ambientIntensity->addChild(greenSpinnerAmbient);
+	ambientIntensity->addChild(blueSpinnerAmbient);
+
+
+
+
+	/* Is a child of Light Edit (It will be used to switch between ambient, specular, and diffuse intensity sliders) */
+	CEGUI::Window* diffuseIntensity = this->_wmgr->createWindow("DefaultWindow", "diffusetIntensity");
+
+	/* Ambient RGB for the light */
+	CEGUI::Spinner* redSpinnerDiffuse   = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "redDif"));
+	CEGUI::Spinner* greenSpinnerDiffuse = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "greenDif"));
+	CEGUI::Spinner* blueSpinnerDiffuse  = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "blueDif"));
+
+	redSpinnerDiffuse->setTextInputMode(CEGUI::Spinner::FloatingPoint);
+	redSpinnerDiffuse->setMinimumValue(0.0f);
+	redSpinnerDiffuse->setMaximumValue(255.0f);
+	redSpinnerDiffuse->setStepSize(10.0f);
+	redSpinnerDiffuse->setCurrentValue(10.0f);
+	redSpinnerDiffuse->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(0.0f,0)));
+
+	greenSpinnerDiffuse->setTextInputMode(CEGUI::Spinner::FloatingPoint);
+	greenSpinnerDiffuse->setMinimumValue(0.0f);
+	greenSpinnerDiffuse->setMaximumValue(255.0f);
+	greenSpinnerDiffuse->setStepSize(10.0f);
+	greenSpinnerDiffuse->setCurrentValue(10.0f);
+	greenSpinnerDiffuse->setPosition(CEGUI::UVector2(CEGUI::UDim(0.12f,0),CEGUI::UDim(0.0f,0)));
+
+	blueSpinnerDiffuse->setTextInputMode(CEGUI::Spinner::FloatingPoint);
+	blueSpinnerDiffuse->setMinimumValue(0.0f);
+	blueSpinnerDiffuse->setMaximumValue(255.0f);
+	blueSpinnerDiffuse->setStepSize(10.0f);
+	blueSpinnerDiffuse->setCurrentValue(10.0f);
+	blueSpinnerDiffuse->setPosition(CEGUI::UVector2(CEGUI::UDim(0.24f,0),CEGUI::UDim(0.0f,0)));
+
+
+	diffuseIntensity->addChild(redSpinnerDiffuse);
+	diffuseIntensity->addChild(greenSpinnerDiffuse);
+	diffuseIntensity->addChild(blueSpinnerDiffuse);
+
+
+	/* Is a child of Light Edit (It will be used to switch between ambient, specular, and diffuse intensity sliders) */
+	CEGUI::Window* specularIntensity = this->_wmgr->createWindow("DefaultWindow", "specularIntensity");
+
+	/* Ambient RGB for the light */
+	CEGUI::Spinner* redSpinnerSpecular   = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "redSpec"));
+	CEGUI::Spinner* greenSpinnerSpecular = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "greenSpec"));
+	CEGUI::Spinner* blueSpinnerSpecular  = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "blueSpec"));
+
+	redSpinnerSpecular->setTextInputMode(CEGUI::Spinner::FloatingPoint);
+	redSpinnerSpecular->setMinimumValue(0.0f);
+	redSpinnerSpecular->setMaximumValue(255.0f);
+	redSpinnerSpecular->setStepSize(10.0f);
+	redSpinnerSpecular->setCurrentValue(10.0f);
+	redSpinnerSpecular->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(0.0f,0)));
+
+	greenSpinnerSpecular->setTextInputMode(CEGUI::Spinner::FloatingPoint);
+	greenSpinnerSpecular->setMinimumValue(0.0f);
+	greenSpinnerSpecular->setMaximumValue(255.0f);
+	greenSpinnerSpecular->setStepSize(10.0f);
+	greenSpinnerSpecular->setCurrentValue(10.0f);
+	greenSpinnerSpecular->setPosition(CEGUI::UVector2(CEGUI::UDim(0.12f,0),CEGUI::UDim(0.0f,0)));
+
+	blueSpinnerSpecular->setTextInputMode(CEGUI::Spinner::FloatingPoint);
+	blueSpinnerSpecular->setMinimumValue(0.0f);
+	blueSpinnerSpecular->setMaximumValue(255.0f);
+	blueSpinnerSpecular->setStepSize(10.0f);
+	blueSpinnerSpecular->setCurrentValue(10.0f);
+	blueSpinnerSpecular->setPosition(CEGUI::UVector2(CEGUI::UDim(0.24f,0),CEGUI::UDim(0.0f,0)));
+
+
+	specularIntensity->addChild(redSpinnerSpecular);
+	specularIntensity->addChild(greenSpinnerSpecular);
+	specularIntensity->addChild(blueSpinnerSpecular);
+
+
+
+	/* Setup the buttons that will be used to change between ambient, diffuse, and specular intensity spinners */
+	CEGUI::Window* ambSwitch = this->_wmgr->createWindow("TaharezLook/Button", "ambSwitch");
+	CEGUI::Window* difSwitch = this->_wmgr->createWindow("TaharezLook/Button", "difSwitch");
+	CEGUI::Window* specSwitch = this->_wmgr->createWindow("TaharezLook/Button", "specSwitch");
+
+	ambSwitch->setText("Ambient");
+	ambSwitch->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
+	ambSwitch->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(0.05f,0)));
+
+	difSwitch->setText("Diffuse");
+	difSwitch->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
+	difSwitch->setPosition(CEGUI::UVector2(CEGUI::UDim(0.12f,0),CEGUI::UDim(0.05f,0)));
+
+	specSwitch->setText("Specular");
+	specSwitch->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
+	specSwitch->setPosition(CEGUI::UVector2(CEGUI::UDim(0.24f,0),CEGUI::UDim(0.05f,0)));
+
+
+
+
+
+
+
+	/* Setup for direction for spotlights and Directional */
+
+
+
+
+	/* This are the sheets for the spinners for different intensities */
+	lightEdit->addChild(ambientIntensity);
+	lightEdit->addChild(diffuseIntensity);
+	lightEdit->addChild(specularIntensity);
+
+	lightEdit->addChild(ambSwitch);
+	lightEdit->addChild(difSwitch);
+	lightEdit->addChild(specSwitch);
+
+	this->_light_edit.push_back(redSpinnerAmbient);
+	this->_light_edit.push_back(greenSpinnerAmbient);
+	this->_light_edit.push_back(blueSpinnerAmbient);
+
+	this->_light_edit.push_back(redSpinnerDiffuse);
+	this->_light_edit.push_back(greenSpinnerDiffuse);
+	this->_light_edit.push_back(blueSpinnerDiffuse);
+
+	this->_light_edit.push_back(redSpinnerSpecular);
+	this->_light_edit.push_back(greenSpinnerSpecular);
+	this->_light_edit.push_back(blueSpinnerSpecular);
+
+	this->_light_edit.push_back(ambSwitch);
+	this->_light_edit.push_back(difSwitch);
+	this->_light_edit.push_back(specSwitch);
+
+
+
+
 
 
 	lightEdit->setSize(CEGUI::USize(CEGUI::UDim(0.75,0), CEGUI::UDim(0.45,0)));
@@ -118,13 +263,6 @@ void GUIManager::setup_menus()
 	lightList->addChild(pushTest1);
 	lightList->addChild(pushTest2);
 
-	lightEdit->addChild(redSpinner);
-	lightEdit->addChild(greenSpinner);
-	lightEdit->addChild(blueSpinner);
-
-	this->_light_edit.push_back(redSpinner);
-	this->_light_edit.push_back(greenSpinner);
-	this->_light_edit.push_back(blueSpinner);
 
 
 
@@ -152,7 +290,10 @@ void GUIManager::setup_menus()
   pushTest1->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
   pushTest2->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
 
-
+  ambSwitch->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
+  difSwitch->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
+  specSwitch->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
+  
   quit->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::quit, this));
 
   lightMenu->addChild(pointLight);
@@ -164,12 +305,14 @@ void GUIManager::setup_menus()
   mainSheet->addChild(addLight);
   mainSheet->addChild(quit);
   mainSheet->addChild(lightList);
-  // mainSheet->addChild(testSpinner);
 
   this->_sheets.push_back(mainSheet);
   this->_sheets.push_back(lightMenu);
   this->_sheets.push_back(lightList);
   this->_sheets.push_back(lightEdit);
+  this->_sheets.push_back(ambientIntensity);
+  this->_sheets.push_back(diffuseIntensity);	
+  this->_sheets.push_back(specularIntensity);
 
   this->_light_list.push_back(pushTest1);
   this->_light_list.push_back(pushTest2);
@@ -291,6 +434,32 @@ void GUIManager::add_directional_light(const CEGUI::EventArgs&)
 void GUIManager::quit(const CEGUI::EventArgs&)
 {
 	glfwSetWindowShouldClose(this->_window, GL_TRUE);
+}
+
+
+void GUIManager::spinner_switch(const CEGUI::EventArgs&)
+{
+ 	if(this->_light_list.at(AMBINT)->isCapturedByThis())
+ 	{
+ 		this->_light_list.at(AMBINT).show();
+ 		this->_light_list.at(DIFINT).hide();
+ 		this->_light_list.at(AMBINT).hide();
+
+ 	}
+
+ 	else if(this->_light_list.at(DIFINT)->isCapturedByThis())
+ 	{
+ 		this->_light_list.at(AMBINT).hide();
+ 		this->_light_list.at(DIFINT).show();
+ 		this->_light_list.at(AMBINT).hide();
+ 	}
+
+ 	else if(this->_light_list.at(SPECINT)->isCapturedByThis())
+ 	{
+ 		this->_light_list.at(AMBINT).hide();
+ 		this->_light_list.at(DIFINT).hide();
+ 		this->_light_list.at(AMBINT).show();
+ 	}
 }
 	
 void GUIManager::push_test(const CEGUI::EventArgs&)
