@@ -118,6 +118,10 @@ namespace Larp
          */
         void set_position(glm::vec3 position);
         /**
+         * @return This Node's position relative to its parent
+         */
+        glm::vec3 get_position();
+        /**
          * Sets the orientation of this Node
          * @param x The x-direction of the axis of rotation
          * @param y The y-direction of the axis of rotation

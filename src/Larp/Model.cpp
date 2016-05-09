@@ -84,7 +84,8 @@ namespace Larp
         this->_width = max_x - min_x;
         this->_height = max_y - min_y;
         this->_depth = max_z - min_z;
-        std::cout << this->_width << ',' << this->_height << ',' << this->_depth << std::endl;
+        std::cout << "Dimensions of " << path << ": ("
+                  << this->_width << ", " << this->_height << ", " << this->_depth << ')' << std::endl;
     }
 
     void Model::load_model(std::string path)

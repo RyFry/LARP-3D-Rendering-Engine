@@ -148,6 +148,7 @@ int main(void)
     Larp::NodePtr crate_node = graph->create_child_node();
     crate_node->attach_entity(entity22);
     crate_node->set_scale(0.4, 0.4, 0.4);
+    std::cout << "Scaled dimensions of crate: (" << crate_node->get_scaled_width() << ", " << crate_node->get_scaled_height() << ", " << crate_node->get_scaled_depth() << ')' << std::endl;
     crate_node->set_position(0.0, 4.0, 0.0);
 
     destructable_items.insert(crate_node);
@@ -416,8 +417,6 @@ void attempt_to_pick_up_weapon()
     btVector3 bt_from(pos.x, pos.y, pos.z);
     bt_from += bt_to;
     bt_to *= 20;
-    std::cout << bt_from << std::endl;
-    std::cout << bt_to << std::endl;
     btCollisionWorld::ClosestRayResultCallback result(bt_from, bt_to);
     world->get_dynamics_world()->rayTest(bt_from, bt_to, result);
 
@@ -429,7 +428,6 @@ void attempt_to_pick_up_weapon()
         {
             world->get_dynamics_world()->removeRigidBody(const_cast<btRigidBody*>(collided));
             user_pointer->detach_this_from_parent();
-            std::cout << user_pointer << std::endl;
             static_cast<Larp::NodePtr>(player->get_user_pointer())->attach_child(user_pointer);
             user_pointer->translate(0, 5.0, 5.0);
             glm::vec3 player_scale = static_cast<Larp::NodePtr>(player->get_user_pointer())->get_scale();
@@ -455,25 +453,42 @@ void attempt_to_spawn_bullet()
         glm::vec3 pos = camera._position;
 
         btScalar xz_len = cos(glm::radians(pitch));
-        btVector3 bt_to(xz_len * cos(glm::radians(yaw)), sin(glm::radians(pitch)), xz_len * sin(glm::radians(yaw)));
-        btVector3 bt_from(pos.x, pos.y, pos.z);
-        bt_from += bt_to;
-        bt_to *= 100;
+        btVector3 direction(xz_len * cos(glm::radians(yaw)), sin(glm::radians(pitch)), xz_len * sin(glm::radians(yaw)));
 
-        btCollisionWorld::ClosestRayResultCallback result(bt_from, bt_to);
-        world->get_dynamics_world()->rayTest(bt_from, bt_to, result);
+        Larp::ModelPtr crate_model = Larp::Model::create("assets/crate/crate.obj");
+        Larp::EntityPtr crate_entity = Larp::Entity::create(crate_model);
+        Larp::NodePtr crate_node = graph->create_child_node();
+        crate_node->attach_entity(crate_entity);
+        crate_node->set_scale(0.02, 0.02, 0.02);
+        crate_node->set_position(pos);
 
-        if (result.hasHit())
-        {
-            std::cout << "HIT" << std::endl;
-            btRigidBody* collided = btRigidBody::upcast(const_cast<btCollisionObject*>(result.m_collisionObject));
-            Larp::NodePtr user_pointer = static_cast<Larp::NodePtr>(collided->getUserPointer());
-            if (user_pointer != nullptr && destructable_items.find(user_pointer) != destructable_items.end())
-            {
-                std::cout << "setting velocity" << std::endl;
-                collided->setLinearVelocity(btVector3(0, 10000000, 0));
-            }
-        }
+        PhysicsObjectBuilder<btBoxShape> crate_builder;
+        crate_builder.set_position(pos);
+        crate_builder.set_mass(0.2);
+        crate_builder.set_restitution(0.0);
+        crate_builder.set_user_pointer(crate_node);
+
+        PhysicsBoxPtr crate_collider = crate_builder.build();
+
+        crate_collider->get_rigid_body()->setLinearVelocity(direction * 100);
+        world->get_dynamics_world()->addRigidBody(crate_collider->get_rigid_body());
+
+        // btVector3 bt_from(pos.x, pos.y, pos.z);
+        // bt_from += bt_to;
+        // bt_to *= 100;
+
+        // btCollisionWorld::ClosestRayResultCallback result(bt_from, bt_to);
+        // world->get_dynamics_world()->rayTest(bt_from, bt_to, result);
+
+        // if (result.hasHit())
+        // {
+        //     btRigidBody* collided = btRigidBody::upcast(const_cast<btCollisionObject*>(result.m_collisionObject));
+        //     Larp::NodePtr user_pointer = static_cast<Larp::NodePtr>(collided->getUserPointer());
+        //     if (user_pointer != nullptr && destructable_items.find(user_pointer) != destructable_items.end())
+        //     {
+        //         collided->setLinearVelocity(btVector3(0, 10000000, 0));
+        //     }
+        // }
     }
 }
 

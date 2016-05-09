@@ -76,9 +76,7 @@ namespace Larp
         }
 
         Node* tmp = child;
-        std::cout << "Old size: " << this->_children.size() << std::endl;
         this->_children[tmp] = UniqueNode(tmp);
-        std::cout << "New size: " << this->_children.size() << std::endl;
         tmp->_parent = this;
     }
 
@@ -114,6 +112,11 @@ namespace Larp
     void Node::set_position(glm::vec3 position)
     {
         this->_position = position;
+    }
+
+    glm::vec3 Node::get_position()
+    {
+        return this->_position;
     }
 
     void Node::set_orientation(GLfloat x, GLfloat y, GLfloat z, GLfloat w)

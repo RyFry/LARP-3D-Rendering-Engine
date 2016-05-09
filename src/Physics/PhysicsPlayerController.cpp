@@ -61,20 +61,19 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world)
       https://www.opengl.org/discussion_boards/showthread.php/175515-Get-Direction-from-Transformation-Matrix-or-Quat
     */
     btVector3 btFrom = this->_ghost_object->getWorldTransform().getOrigin();
-    btVector3 btTo(btFrom.x(), -0.001f, btFrom.z());
+    btVector3 btTo(btFrom.x(), btFrom.y() - 5.0f, btFrom.z());
     btCollisionWorld::ClosestRayResultCallback res(btFrom, btTo);
 
     world->get_dynamics_world()->rayTest(btFrom, btTo, res); // m_btWorld is btDiscreteDynamicsWorld
-    /*
-     * 0.485 is the magic number for detecting whether the player has hit one of the slopes
-     */
-    if(res.hasHit() && btFrom.y() - res.m_hitPointWorld.y() > 0.55f)
+
+    // Raycast so that we can prevent sliding when on slopes
+    if(res.hasHit() && (btFrom.y() - res.m_hitPointWorld.y()) < 0.55f)
     {
-        this->_char_controller->setGravity(4.9);
+        this->_char_controller->setGravity(0.0);
     }
     else
     {
-        this->_char_controller->setGravity(0);
+        this->_char_controller->setGravity(4.9);
     }
 
     btVector3 movement_direction(0.0f, 0.0f, 0.0f);
