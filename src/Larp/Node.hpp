@@ -75,15 +75,14 @@ namespace Larp
          */
         NodePtr create_child();
         /**
-         * Removes a given pNode as a child of this Node object.
-         * @return A pointer to the child was removed
-         */
-        NodePtr remove_child(NodePtr child);
-        /**
-         * Removes a given pNode as a child of this Node object.
+         * Removes a given Node as a child of this Node object.
          * @note After calling this function, child is still a valid pointer to a Node.
          * @note Use this function instead of delete_child if you wish to attach this
          *       child to another Node.
+         */
+        NodePtr remove_child(NodePtr child);
+        /**
+         * Removes and deletes a given Node that is a child of this Node object.
          */
         void delete_child(NodePtr child);
         /**

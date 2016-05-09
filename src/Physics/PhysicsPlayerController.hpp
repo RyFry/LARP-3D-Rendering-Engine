@@ -12,6 +12,9 @@
 class PhysicsPlayerController
 {
 private:
+    GLfloat _width;
+    GLfloat _height;
+    GLfloat _depth;
     btPairCachingGhostObject* _ghost_object;
     btKinematicCharacterController* _char_controller;
     GLfloat _forward_speed;
@@ -31,6 +34,7 @@ public:
     };
 
     PhysicsPlayerController(PhysicsWorld* physics_world, const Larp::NodePtr node,
+                            GLfloat width, GLfloat height, GLfloat depth,
                             glm::vec3 initial_position = glm::vec3(0, 0, 0),
                             GLfloat forward_speed = .03,
                             GLfloat backward_speed = .01, GLfloat strafe_speed = .02,
@@ -103,4 +107,10 @@ public:
      * @warning This function may not work
      */
     GLfloat get_roll() const;
+    /**
+     * @return The width of this Player's btRigidBody
+     */
+    GLfloat get_width() const;
+    GLfloat get_height() const;
+    GLfloat get_depth() const;
 };
