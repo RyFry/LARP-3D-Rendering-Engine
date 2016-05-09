@@ -92,6 +92,7 @@ namespace Larp
          * @throws runtime_error if this child is attached to another Node.
          */
         void attach_child(NodePtr child);
+        void detach_this_from_parent();
         /**
          * Sets the position of this Node
          * @param x The new x position.

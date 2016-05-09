@@ -76,8 +76,21 @@ namespace Larp
         }
 
         Node* tmp = child;
+        std::cout << "Old size: " << this->_children.size() << std::endl;
         this->_children[tmp] = UniqueNode(tmp);
+        std::cout << "New size: " << this->_children.size() << std::endl;
         tmp->_parent = this;
+    }
+
+    void Node::detach_this_from_parent()
+    {
+        if (this->_parent == nullptr)
+        {
+            PRINT_ERROR("This child is not attached to a Node. Ignoring.");
+            return;
+        }
+
+        this->_parent->remove_child(this);
     }
 
     void Node::set_position(GLfloat x, GLfloat y, GLfloat z)

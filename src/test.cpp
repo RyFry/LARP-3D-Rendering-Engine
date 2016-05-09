@@ -1,6 +1,7 @@
 #include <memory>
 #include <string>
 #include <stdexcept>
+#include <unordered_set>
 
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -25,6 +26,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+// Bullet
+#include <btBulletDynamicsCommon.h>
+
 // Other Libs
 #include <SOIL.h>
 
@@ -37,8 +41,10 @@ GLuint screenWidth = 800, screenHeight = 600;
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 void Do_Movement();
 void error_callback(int error, const char* description);
+void attempt_to_pick_up_weapon();
 void make_floor(std::unique_ptr<PhysicsWorld>& physics_world);
 
 // Camera
@@ -47,11 +53,15 @@ std::unique_ptr<PhysicsWorld> world;
 std::unique_ptr<PhysicsPlayerController> player;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 bool keys[1024];
+bool buttons[3];
 GLfloat lastX = 400, lastY = 300;
 bool firstMouse = true;
 
 GLfloat delta_time = 0.0f;
 GLfloat last_frame = 0.0f;
+
+std::unordered_set<Larp::Node*> pickupable_items;
+Larp::Node* player_held_item = nullptr;
 
 int main(void)
 {
@@ -81,6 +91,7 @@ int main(void)
     // Set the required callback functions
     glfwSetKeyCallback(window, key_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
     glfwSetScrollCallback(window, scroll_callback);
 
     // Options
@@ -147,39 +158,29 @@ int main(void)
 
     world->get_dynamics_world()->addRigidBody(crate_collider->get_rigid_body());
 
-    Larp::ModelPtr p90_model = Larp::Model::create("assets/testgun/testgun.obj");
-    Larp::EntityPtr p90_entity = Larp::Entity::create(p90_model);
-    p90_entity->set_directional_shadows(true);
-    Larp::NodePtr p90_node = graph->create_child_node();
-    p90_node->attach_entity(p90_entity);
-    p90_node->set_scale(0.1, 0.1, 0.1);
-    p90_node->set_position(3.0, 9.0, 0.0);
+    Larp::ModelPtr test_gun_model = Larp::Model::create("assets/testgun/testgun.obj");
+    Larp::EntityPtr test_gun_entity = Larp::Entity::create(test_gun_model);
+    test_gun_entity->set_directional_shadows(true);
+    Larp::NodePtr test_gun_node = graph->create_child_node();
+    test_gun_node->attach_entity(test_gun_entity);
+    test_gun_node->set_scale(0.1, 0.1, 0.1);
+    test_gun_node->set_position(3.0, 9.0, 0.0);
 
-    PhysicsObjectBuilder<btBoxShape> p90_builder;
-    glm::quat p90_rot(0, 0, 0, 1);
-    p90_rot = glm::rotate(p90_rot, 90.0, glm::vec3(0, 0, 1));
-    p90_node->set_orientation(p90_rot);
-    p90_builder.set_orientation(p90_rot);
-    p90_builder.set_position(glm::vec3(3.0, 9.0, 0.0));
-    p90_builder.set_mass(1.0);
-    p90_builder.set_restitution(0.0);
-    p90_builder.set_user_pointer(p90_node);
+    PhysicsObjectBuilder<btBoxShape> test_gun_builder;
+    glm::quat test_gun_rot(0, 0, 0, 1);
+    test_gun_rot = glm::rotate(test_gun_rot, 90.0, glm::vec3(0, 0, 1));
+    test_gun_node->set_orientation(test_gun_rot);
+    test_gun_builder.set_orientation(test_gun_rot);
+    test_gun_builder.set_position(glm::vec3(3.0, 9.0, 0.0));
+    test_gun_builder.set_mass(1.0);
+    test_gun_builder.set_restitution(0.0);
+    test_gun_builder.set_user_pointer(test_gun_node);
 
-    PhysicsBoxPtr p90_collider = p90_builder.build();
+    PhysicsBoxPtr test_gun_collider = test_gun_builder.build();
 
-    world->get_dynamics_world()->addRigidBody(p90_collider->get_rigid_body());
-    /// Can't add mesh collider for crate. It's too big.
-    // PhysicsMeshColliderBuilder crate_builder = PhysicsMeshColliderBuilder("assets/crate.obj");
-    // crate_builder.set_mass(1.0);
-    // crate_builder.set_position(btVector3(0.0, 5.0, 2.0));
-    // crate_builder.set_local_inertia(btVector3(0.0, 0.0, 0.0));
-    // crate_builder.set_restitution(1);
-    // crate_builder.set_user_pointer(node22);
+    world->get_dynamics_world()->addRigidBody(test_gun_collider->get_rigid_body());
 
-    // PhysicsMeshColliderPtr crate = crate_builder.build();
-
-    //world->get_dynamics_world()->addRigidBody(crate->get_rigid_body());
-
+    pickupable_items.insert(test_gun_node);
 
     /*******************************
      * TESTING - DELETE THIS       *
@@ -192,6 +193,15 @@ int main(void)
 
     player.reset(new PhysicsPlayerController(world.get(), node12, glm::vec3(0, 5.0, 2.0)));
     player->set_user_pointer(node12);
+
+    Larp::NodePtr player_child = node12->create_child();
+    Larp::ModelPtr p90_model = Larp::Model::create("assets/P90/P90.obj");
+    Larp::EntityPtr p90_entity = Larp::Entity::create(p90_model);
+    p90_entity->set_directional_shadows(true);
+    player_child->attach_entity(p90_entity);
+    player_child->translate(-3.0, 4.0, 6.0);
+    player_child->set_scale(0.2, 0.2, 0.2);
+
 
     make_floor(world);
 
@@ -342,6 +352,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         keys[key] = true;
     else if(action == GLFW_RELEASE)
         keys[key] = false;
+
+    // Have the player attempt to pick up a weapon
+    if (keys[GLFW_KEY_E])
+        attempt_to_pick_up_weapon();
 }
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
@@ -364,6 +378,12 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     camera.process_mouse_movement(0, yoffset);
 }
 
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+        std::cout << "shooting" << std::endl;
+}
+
 void scroll_callback(GLFWwindow* window, double x_offset, double y_offset)
 {
     camera.process_mouse_scroll(y_offset);
@@ -372,6 +392,47 @@ void scroll_callback(GLFWwindow* window, double x_offset, double y_offset)
 void error_callback(int error, const char* description)
 {
     fputs(description, stderr);
+}
+
+/**
+ * We attempt to have the player pick up a gun by raycasting to whatever the player is
+ * looking at, and then if we hit something in the raycast, we check the distance,
+ * and then we have to determine whether or not it's a gun.
+ */
+void attempt_to_pick_up_weapon()
+{
+    GLfloat yaw = camera._yaw;
+    GLfloat pitch = camera._pitch;
+    glm::vec3 pos = camera._position;
+
+    btScalar xz_len = cos(glm::radians(pitch));
+    btVector3 bt_to(xz_len * cos(glm::radians(yaw)), sin(glm::radians(pitch)), xz_len * sin(glm::radians(yaw)));
+    btVector3 bt_from(pos.x, pos.y, pos.z);
+    bt_from += bt_to;
+    std::cout << bt_from << std::endl;
+    std::cout << bt_to << std::endl;
+    btCollisionWorld::ClosestRayResultCallback result(bt_from, bt_to);
+    world->get_dynamics_world()->rayTest(bt_from, bt_to, result);
+
+    if (result.hasHit() && (bt_from - result.m_hitPointWorld).length() < 5.0)
+    {
+        btRigidBody* collided = const_cast<btRigidBody*>(static_cast<const btRigidBody*>(result.m_collisionObject));
+        collided->applyForce(btVector3(0.0, 10.0, 0.0), bt_from);
+        Larp::NodePtr user_pointer = static_cast<Larp::NodePtr>(collided->getUserPointer());
+        if (user_pointer != nullptr && pickupable_items.find(user_pointer) != pickupable_items.end())
+        {
+            world->get_dynamics_world()->removeRigidBody(const_cast<btRigidBody*>(collided));
+            user_pointer->detach_this_from_parent();
+            std::cout << user_pointer << std::endl;
+            static_cast<Larp::NodePtr>(player->get_user_pointer())->attach_child(user_pointer);
+            user_pointer->translate(0, 2.0, 5.0);
+            glm::vec3 player_scale = static_cast<Larp::NodePtr>(player->get_user_pointer())->get_scale();
+            glm::vec3 user_pointer_scale = user_pointer->get_scale();
+            user_pointer->set_scale(user_pointer_scale.x / player_scale.x,
+                                    user_pointer_scale.y / player_scale.y,
+                                    user_pointer_scale.z / player_scale.z);
+        }
+    }
 }
 
 void make_floor(std::unique_ptr<PhysicsWorld>& world)
