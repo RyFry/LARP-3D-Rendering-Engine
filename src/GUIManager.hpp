@@ -82,26 +82,26 @@ class GUIManager
 
 		/*
 		* Vector that holds all the GUI sheets
-		*/
-    std::vector<CEGUI::Window*> _sheets;
+			*/
+	    std::vector<CEGUI::Window*> _sheets;
 
-    /* 
-    * Vector that will contain all the windows that represent lights in the light menu
-    */
-    std::vector<CEGUI::Window*> _light_list;
+	    /* 
+	    * Vector that will contain all the windows that represent lights in the light menu
+	    */
+	    std::vector<CEGUI::Window*> _light_list;
 
-    std::vector<CEGUI::Window*> _light_edit;
+	    std::vector<CEGUI::Window*> _light_edit;
 
-    /* 
-    * CEGUI window times will be tied to a Pointlightptr
-    */
-    std::map<std::string, Larp::PointLightPtr> _pointMap;
+	    /* 
+	    * CEGUI window times will be tied to a Pointlightptr
+	    */
+	    std::map<std::string, Larp::PointLightPtr> _pointMap;
 
-    std::map<std::string, Larp::SpotLightPtr> _spotMap;
+	    std::map<std::string, Larp::SpotLightPtr> _spotMap;
 
-    std::map<std::string, Larp::DirectionalLightPtr> _directMap;
+	    std::map<std::string, Larp::DirectionalLightPtr> _directMap;
 
-    float _yPos = 0.0f;
+  		float _yPos = 0.0f;
 
 		/*
 		* Setups all the resource groups that CEGUI requires.
