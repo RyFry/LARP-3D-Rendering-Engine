@@ -2,8 +2,8 @@
 
 template <typename BulletShape>
 PhysicsObject<BulletShape>::PhysicsObject(glm::quat rotation, glm::vec3 position,
-                             GLfloat mass, glm::vec3 local_inertia, GLfloat restitution,
-                             Larp::NodePtr user_pointer)
+                                          GLfloat mass, glm::vec3 local_inertia, GLfloat restitution,
+                                          Larp::NodePtr user_pointer)
 {
     btTransform transform;
     transform.setOrigin(btVector3(position.x, position.y, position.z));

@@ -92,7 +92,19 @@ namespace Larp
          * @throws runtime_error if this child is attached to another Node.
          */
         void attach_child(NodePtr child);
+        /**
+         * Detaches this Node from its parent, but does not delete it, so that
+         * it may be reattached elsewhere.
+         * @warning If this node is not needed elsewhere, please use Node::delete_this_from_scene
+         */
         void detach_this_from_parent();
+        /**
+         * Detaches this Node from its parent, deleting it in the process
+         * @warning Any pointer to this Node after this is called is no longer valid
+         * @warning If you intend to reattech this Node somewhere else in the SceneGraph,
+         *          please use Node::detach_this_from_parent
+         */
+        void delete_this_from_scene();
         /**
          * Sets the position of this Node
          * @param x The new x position.

@@ -45,6 +45,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 void Do_Movement();
 void error_callback(int error, const char* description);
 void attempt_to_pick_up_weapon();
+void attempt_to_spawn_bullet();
 void make_floor(std::unique_ptr<PhysicsWorld>& physics_world);
 
 // Camera
@@ -61,6 +62,7 @@ GLfloat delta_time = 0.0f;
 GLfloat last_frame = 0.0f;
 
 std::unordered_set<Larp::Node*> pickupable_items;
+std::unordered_set<Larp::Node*> destructable_items;
 Larp::Node* player_held_item = nullptr;
 
 int main(void)
@@ -143,16 +145,18 @@ int main(void)
     Larp::ModelPtr crate_model = Larp::Model::create("assets/crate/crate.obj");
     Larp::EntityPtr entity22 = Larp::Entity::create(crate_model);
     entity22->set_directional_shadows(true);
-    Larp::NodePtr node22 = graph->create_child_node();
-    node22->attach_entity(entity22);
-    node22->set_scale(0.4, 0.4, 0.4);
-    node22->set_position(0.0, 4.0, 0.0);
+    Larp::NodePtr crate_node = graph->create_child_node();
+    crate_node->attach_entity(entity22);
+    crate_node->set_scale(0.4, 0.4, 0.4);
+    crate_node->set_position(0.0, 4.0, 0.0);
+
+    destructable_items.insert(crate_node);
 
     PhysicsObjectBuilder<btBoxShape> crate_builder;
     crate_builder.set_position(glm::vec3(0.0, 4.0, 0.0));
-    crate_builder.set_mass(10.0);
+    crate_builder.set_mass(1.0);
     crate_builder.set_restitution(0.0);
-    crate_builder.set_user_pointer(node22);
+    crate_builder.set_user_pointer(crate_node);
 
     PhysicsBoxPtr crate_collider = crate_builder.build();
 
@@ -194,13 +198,13 @@ int main(void)
     player.reset(new PhysicsPlayerController(world.get(), node12, glm::vec3(0, 5.0, 2.0)));
     player->set_user_pointer(node12);
 
-    Larp::NodePtr player_child = node12->create_child();
-    Larp::ModelPtr p90_model = Larp::Model::create("assets/P90/P90.obj");
-    Larp::EntityPtr p90_entity = Larp::Entity::create(p90_model);
-    p90_entity->set_directional_shadows(true);
-    player_child->attach_entity(p90_entity);
-    player_child->translate(-3.0, 4.0, 6.0);
-    player_child->set_scale(0.2, 0.2, 0.2);
+    // Larp::NodePtr player_child = node12->create_child();
+    // Larp::ModelPtr p90_model = Larp::Model::create("assets/P90/P90.obj");
+    // Larp::EntityPtr p90_entity = Larp::Entity::create(p90_model);
+    // p90_entity->set_directional_shadows(true);
+    // player_child->attach_entity(p90_entity);
+    // player_child->translate(-3.0, 4.0, 6.0);
+    // player_child->set_scale(0.2, 0.2, 0.2);
 
 
     make_floor(world);
@@ -381,7 +385,9 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-        std::cout << "shooting" << std::endl;
+    {
+        attempt_to_spawn_bullet();
+    }
 }
 
 void scroll_callback(GLFWwindow* window, double x_offset, double y_offset)
@@ -409,15 +415,15 @@ void attempt_to_pick_up_weapon()
     btVector3 bt_to(xz_len * cos(glm::radians(yaw)), sin(glm::radians(pitch)), xz_len * sin(glm::radians(yaw)));
     btVector3 bt_from(pos.x, pos.y, pos.z);
     bt_from += bt_to;
+    bt_to *= 20;
     std::cout << bt_from << std::endl;
     std::cout << bt_to << std::endl;
     btCollisionWorld::ClosestRayResultCallback result(bt_from, bt_to);
     world->get_dynamics_world()->rayTest(bt_from, bt_to, result);
 
-    if (result.hasHit() && (bt_from - result.m_hitPointWorld).length() < 5.0)
+    if (result.hasHit() && (bt_from - result.m_hitPointWorld).length() < 0.5)
     {
         btRigidBody* collided = const_cast<btRigidBody*>(static_cast<const btRigidBody*>(result.m_collisionObject));
-        collided->applyForce(btVector3(0.0, 10.0, 0.0), bt_from);
         Larp::NodePtr user_pointer = static_cast<Larp::NodePtr>(collided->getUserPointer());
         if (user_pointer != nullptr && pickupable_items.find(user_pointer) != pickupable_items.end())
         {
@@ -425,12 +431,48 @@ void attempt_to_pick_up_weapon()
             user_pointer->detach_this_from_parent();
             std::cout << user_pointer << std::endl;
             static_cast<Larp::NodePtr>(player->get_user_pointer())->attach_child(user_pointer);
-            user_pointer->translate(0, 2.0, 5.0);
+            user_pointer->translate(0, 5.0, 5.0);
             glm::vec3 player_scale = static_cast<Larp::NodePtr>(player->get_user_pointer())->get_scale();
             glm::vec3 user_pointer_scale = user_pointer->get_scale();
             user_pointer->set_scale(user_pointer_scale.x / player_scale.x,
                                     user_pointer_scale.y / player_scale.y,
                                     user_pointer_scale.z / player_scale.z);
+            user_pointer->yaw(90.0);
+
+            // Finally, update our player_held_item to denote that we are actually holding something
+            player_held_item = user_pointer;
+        }
+    }
+}
+
+void attempt_to_spawn_bullet()
+{
+    // Only attempt to shoot  a bullet if the user is holding a gun
+    if (player_held_item != nullptr)
+    {
+        GLfloat yaw = camera._yaw;
+        GLfloat pitch = camera._pitch;
+        glm::vec3 pos = camera._position;
+
+        btScalar xz_len = cos(glm::radians(pitch));
+        btVector3 bt_to(xz_len * cos(glm::radians(yaw)), sin(glm::radians(pitch)), xz_len * sin(glm::radians(yaw)));
+        btVector3 bt_from(pos.x, pos.y, pos.z);
+        bt_from += bt_to;
+        bt_to *= 100;
+
+        btCollisionWorld::ClosestRayResultCallback result(bt_from, bt_to);
+        world->get_dynamics_world()->rayTest(bt_from, bt_to, result);
+
+        if (result.hasHit())
+        {
+            std::cout << "HIT" << std::endl;
+            btRigidBody* collided = btRigidBody::upcast(const_cast<btCollisionObject*>(result.m_collisionObject));
+            Larp::NodePtr user_pointer = static_cast<Larp::NodePtr>(collided->getUserPointer());
+            if (user_pointer != nullptr && destructable_items.find(user_pointer) != destructable_items.end())
+            {
+                std::cout << "setting velocity" << std::endl;
+                collided->setLinearVelocity(btVector3(0, 10000000, 0));
+            }
         }
     }
 }

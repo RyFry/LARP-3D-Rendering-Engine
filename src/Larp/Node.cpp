@@ -93,6 +93,17 @@ namespace Larp
         this->_parent->remove_child(this);
     }
 
+    void Node::delete_this_from_scene()
+    {
+        if (this->_parent == nullptr)
+        {
+            PRINT_ERROR("This child is not attached to a Node. Ignoring.");
+            return;
+        }
+
+        this->_parent->delete_child(this);
+    }
+
     void Node::set_position(GLfloat x, GLfloat y, GLfloat z)
     {
         this->_position.x = x;
