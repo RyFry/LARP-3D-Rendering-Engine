@@ -155,7 +155,7 @@ int main(void)
 
     PhysicsObjectBuilder<btBoxShape> crate_builder;
     crate_builder.set_position(glm::vec3(0.0, 4.0, 0.0));
-    crate_builder.set_mass(0.2);
+    crate_builder.set_mass(0.6);
     crate_builder.set_restitution(0.0);
     crate_builder.set_user_pointer(crate_node);
 
@@ -247,7 +247,7 @@ int main(void)
 
         player->update_movement(world.get());
 
-        world->get_dynamics_world()->stepSimulation(1.0f / FRAME_RATE, 10);
+        world->get_dynamics_world()->stepSimulation(1.0f / FRAME_RATE, 20);
 
         player->step(world.get(), 1.0f / FRAME_RATE);
         Larp::NodePtr player_node = player->get_user_pointer();
