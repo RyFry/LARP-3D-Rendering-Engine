@@ -400,7 +400,7 @@ void GUIManager::setup_menus()
   lightMenu->addChild(spotLight);
   lightMenu->addChild(directionalLight);
 
-  this->populate_light_list(lightList);
+  this->populate_light_list();
 
   mainSheet->addChild(addLight);
   mainSheet->addChild(quit);
@@ -426,7 +426,7 @@ void GUIManager::setup_menus()
   CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().show();
 }
 
-void GUIManager::populate_light_list(CEGUI::Window* lightList)
+void GUIManager::populate_light_list()
 {
 	// /* Create buttons for each directional light */
 	// CEGUI::Window* temp;
@@ -443,7 +443,7 @@ void GUIManager::populate_light_list(CEGUI::Window* lightList)
 	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
 
 	// 	/*Adds the button to the light list and maps the name of the light to the directional light */
-	// 	lightList->addChild(temp);
+	// 	this->_sheets.at(LIGHTLIST)->addChild(temp);
 	// 	this->_light_list.push_back(temp);
 	// 	this->_direct_map.emplace(tempName, LightFactor::_directional_lights.at(n));
 	// 	this->yPos += 0.05;
@@ -462,7 +462,7 @@ void GUIManager::populate_light_list(CEGUI::Window* lightList)
 	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
 
 	// 	/*Adds the button to the light list and maps the name of the light to the directional light */
-	// 	lightList->addChild(temp);
+	// 	this->_sheets.at(LIGHTLIST)->addChild(temp);
 	// 	this->_light_list.push_back(temp);
 	// 	this->_point_map.emplace(tempName, LightFactor::_point_lights.at(n));
 	// 	this->yPos += 0.05;
@@ -480,7 +480,7 @@ void GUIManager::populate_light_list(CEGUI::Window* lightList)
 	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
 
 	// 	/*Adds the button to the light list and maps the name of the light to the directional light */
-	// 	lightList->addChild(temp);
+	// 	this->_sheets.at(LIGHTLIST)->addChild(temp);
 	// 	this->_light_list.push_back(temp);
 	// 	this->_point_map.emplace(tempName, LightFactor::_spot_lights.at(n));
 	// 	this->yPos += 0.05;
@@ -494,7 +494,7 @@ bool GUIManager::get_rendering_state()
 
 void GUIManager::add_light(const CEGUI::EventArgs&)
 {
-		this->_sheets.at(MAIN)->addChild(this->_sheets.at(ADDLIGHT));
+	this->_sheets.at(MAIN)->addChild(this->_sheets.at(ADDLIGHT));
 }
 
 void GUIManager::add_point_light(const CEGUI::EventArgs&)
@@ -504,20 +504,29 @@ void GUIManager::add_point_light(const CEGUI::EventArgs&)
 	this->hide_GUI();
 	Larp::PointLightPtr point_light = this->_graph->create_point_light();
 
-	point_light->set_ambient_intensity(0.0f, 1.0f, 0.0f);
-  point_light->set_position(0.0f, 2.0f, 0.0f);
-
 
   /* NEED TO CHANGE FOR LATER USE */
-  CEGUI::Window* temp = this->_wmgr->createWindow("TaharezLook/Button", "pointLight1");
-  temp->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
-  temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(0.1f,0)));
-  temp->setText("pointLight1");
+	// std::string tempName("pointLight" + LightFactory::_point_lights.size());
+	static int n = 1;
+  CEGUI::Window* temp = this->_wmgr->createWindow("TaharezLook/Button", "pointLight" + n);
+  
+  //  CEGUI::Window* temp = this->_wmgr->createWindow("TaharezLook/Button", tempNAme);
+  temp->setSize(CEGUI::USize(CEGUI::UDim(0.3,0), CEGUI::UDim(0.05,0)));
+  temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->_yPos,0)));
+  this->_yPos += .05;
+  // temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
+  
+  // temp->setText(tempName);
+  std::string tempName ("pointLight" + std::to_string(n));
+  std::cout << "Point light name: " << tempName << std::endl;
+  temp->setText(tempName);
   this->_light_list.push_back(temp);
   this->_sheets.at(LIGHTLIST)->addChild(temp);
   temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
 
-  this->_point_map.emplace("pointLight1", point_light);
+  ++n;
+  this->_point_map.emplace(tempName, point_light);
+  //this->_point_map.emplace(tempName, point_light)
 
 
 }
@@ -533,6 +542,19 @@ void GUIManager::add_spot_light(const CEGUI::EventArgs&)
 	spot_light->set_ambient_intensity(0.0f, 1.0f, 0.0f);
  	spot_light->set_position(0.0f, 2.0f, 0.0f);
 
+ 	 /* NEED TO CHANGE FOR LATER USE */
+	// std::string tempName("spotLight" + LightFactory::_spot_lights.size());
+  //  CEGUI::Window* temp = this->_wmgr->createWindow("TaharezLook/Button", tempNAme);
+  // temp->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
+  // temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
+  
+  // temp->setText(tempName);
+  // this->_light_list.push_back(temp);
+  // this->_sheets.at(LIGHTLIST)->addChild(temp);
+  // temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
+
+  //this->_spot_map.emplace(tempName, spot_light)
+
 
 }
 
@@ -543,6 +565,20 @@ void GUIManager::add_directional_light(const CEGUI::EventArgs&)
 	this->hide_GUI();
 
 	Larp::DirectionalLightPtr directional_light = this->_graph->create_directional_light();
+
+
+	 	 /* NEED TO CHANGE FOR LATER USE */
+	// std::string tempName("directionalLight" + LightFactory::_spot_lights.size());
+  //  CEGUI::Window* temp = this->_wmgr->createWindow("TaharezLook/Button", tempNAme);
+  // temp->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
+  // temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
+  
+  // temp->setText(tempName);
+  // this->_light_list.push_back(temp);
+  // this->_sheets.at(LIGHTLIST)->addChild(temp);
+  // temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
+
+  //this->_direct_map.emplace(tempName, direct_light)
 
 	// directional_light->set_ambient_intensity(0.0f, 1.0f, 0.0f);
  // 	directional_light->set_position(0.0f, 2.0f, 0.0f);
@@ -625,16 +661,64 @@ void GUIManager::edit_finish(const CEGUI::EventArgs&)
 	if(this->_point_map.find(tempName) != this->_point_map.end())
 	{
 		this->_point_map.at(tempName)->set_ambient_intensity((static_cast<CEGUI::Spinner*> (this->_light_edit.at(1)))->getCurrentValue(), 
-																															(static_cast<CEGUI::Spinner*> (this->_light_edit.at(2)))->getCurrentValue(),
-																																	(static_cast<CEGUI::Spinner*> (this->_light_edit.at(3)))->getCurrentValue());
+																								(static_cast<CEGUI::Spinner*> (this->_light_edit.at(2)))->getCurrentValue(),
+																									(static_cast<CEGUI::Spinner*> (this->_light_edit.at(3)))->getCurrentValue());
+
+		this->_point_map.at(tempName)->set_diffuse_intensity((static_cast<CEGUI::Spinner*> (this->_light_edit.at(4)))->getCurrentValue(), 
+																								(static_cast<CEGUI::Spinner*> (this->_light_edit.at(5)))->getCurrentValue(),
+																									(static_cast<CEGUI::Spinner*> (this->_light_edit.at(6)))->getCurrentValue());
+
+		this->_point_map.at(tempName)->set_specular_intensity((static_cast<CEGUI::Spinner*> (this->_light_edit.at(7)))->getCurrentValue(), 
+																								(static_cast<CEGUI::Spinner*> (this->_light_edit.at(8)))->getCurrentValue(),
+																									(static_cast<CEGUI::Spinner*> (this->_light_edit.at(9)))->getCurrentValue());
+
+		this->_point_map.at(tempName)->set_position((static_cast<CEGUI::Spinner*> (this->_light_edit.at(10)))->getCurrentValue(), 
+																								(static_cast<CEGUI::Spinner*> (this->_light_edit.at(11)))->getCurrentValue(),
+																									(static_cast<CEGUI::Spinner*> (this->_light_edit.at(12)))->getCurrentValue());
 	}
 	else if(this->_direct_map.find(tempName) != this->_direct_map.end())
 	{
+		this->_direct_map.at(tempName)->set_ambient_intensity((static_cast<CEGUI::Spinner*> (this->_light_edit.at(1)))->getCurrentValue(), 
+																								(static_cast<CEGUI::Spinner*> (this->_light_edit.at(2)))->getCurrentValue(),
+																									(static_cast<CEGUI::Spinner*> (this->_light_edit.at(3)))->getCurrentValue());
 
+		this->_direct_map.at(tempName)->set_diffuse_intensity((static_cast<CEGUI::Spinner*> (this->_light_edit.at(4)))->getCurrentValue(), 
+																								(static_cast<CEGUI::Spinner*> (this->_light_edit.at(5)))->getCurrentValue(),
+																									(static_cast<CEGUI::Spinner*> (this->_light_edit.at(6)))->getCurrentValue());
+
+		this->_direct_map.at(tempName)->set_specular_intensity((static_cast<CEGUI::Spinner*> (this->_light_edit.at(7)))->getCurrentValue(), 
+																								(static_cast<CEGUI::Spinner*> (this->_light_edit.at(8)))->getCurrentValue(),
+																									(static_cast<CEGUI::Spinner*> (this->_light_edit.at(9)))->getCurrentValue());
+
+		// this->_direct_map.at(tempName)->set_position((static_cast<CEGUI::Spinner*> (this->_light_edit.at(10)))->getCurrentValue(), 
+																								// (static_cast<CEGUI::Spinner*> (this->_light_edit.at(11)))->getCurrentValue(),
+																									// (static_cast<CEGUI::Spinner*> (this->_light_edit.at(12)))->getCurrentValue());
+
+		this->_direct_map.at(tempName)->set_direction((static_cast<CEGUI::Spinner*> (this->_light_edit.at(13)))->getCurrentValue(), 
+																								(static_cast<CEGUI::Spinner*> (this->_light_edit.at(14)))->getCurrentValue(),
+																									(static_cast<CEGUI::Spinner*> (this->_light_edit.at(15)))->getCurrentValue());
 	}
 	else if(this->_spot_map.find(tempName) != this->_spot_map.end())
 	{
+		this->_spot_map.at(tempName)->set_ambient_intensity((static_cast<CEGUI::Spinner*> (this->_light_edit.at(1)))->getCurrentValue(), 
+																								(static_cast<CEGUI::Spinner*> (this->_light_edit.at(2)))->getCurrentValue(),
+																									(static_cast<CEGUI::Spinner*> (this->_light_edit.at(3)))->getCurrentValue());
 
+		this->_spot_map.at(tempName)->set_diffuse_intensity((static_cast<CEGUI::Spinner*> (this->_light_edit.at(4)))->getCurrentValue(), 
+																								(static_cast<CEGUI::Spinner*> (this->_light_edit.at(5)))->getCurrentValue(),
+																									(static_cast<CEGUI::Spinner*> (this->_light_edit.at(6)))->getCurrentValue());
+
+		this->_spot_map.at(tempName)->set_specular_intensity((static_cast<CEGUI::Spinner*> (this->_light_edit.at(7)))->getCurrentValue(), 
+																								(static_cast<CEGUI::Spinner*> (this->_light_edit.at(8)))->getCurrentValue(),
+																									(static_cast<CEGUI::Spinner*> (this->_light_edit.at(9)))->getCurrentValue());
+
+		this->_spot_map.at(tempName)->set_position((static_cast<CEGUI::Spinner*> (this->_light_edit.at(10)))->getCurrentValue(), 
+																								(static_cast<CEGUI::Spinner*> (this->_light_edit.at(11)))->getCurrentValue(),
+																									(static_cast<CEGUI::Spinner*> (this->_light_edit.at(12)))->getCurrentValue());
+
+		this->_spot_map.at(tempName)->set_direction((static_cast<CEGUI::Spinner*> (this->_light_edit.at(13)))->getCurrentValue(), 
+																								(static_cast<CEGUI::Spinner*> (this->_light_edit.at(14)))->getCurrentValue(),
+																									(static_cast<CEGUI::Spinner*> (this->_light_edit.at(15)))->getCurrentValue());
 	}
 	else
 		assert(false);
@@ -643,13 +727,20 @@ void GUIManager::edit_finish(const CEGUI::EventArgs&)
 void GUIManager::populate_spinners(const char* name)
 {
 	std::string tempName(name);
+
+	glm::vec3 amb;
+	glm::vec3 dif;
+	glm::vec3 spec;
+	glm::vec3 pos;
+	glm::vec3 direct;
+
 	/*The light is a point light */
 	if(this->_point_map.find(tempName) != this->_point_map.end())
 	{
-		glm::vec3 pos = this->_point_map.at(tempName)->_position;
-		glm::vec3 amb = this->_point_map.at(tempName)->_ambient;
-		glm::vec3 dif = this->_point_map.at(tempName)->_diffuse;
-		glm::vec3 spec = this->_point_map.at(tempName)->_specular;
+		amb = this->_point_map.at(tempName)->_ambient;
+		dif = this->_point_map.at(tempName)->_diffuse;
+		spec = this->_point_map.at(tempName)->_specular;
+		pos = this->_point_map.at(tempName)->_position;
 
 		/*Set as the ambient int to the spinner */
 		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(1)))->setCurrentValue(amb.x);
@@ -674,12 +765,70 @@ void GUIManager::populate_spinners(const char* name)
 	/* The light is a directional light */
 	else if(this->_direct_map.find(tempName) != this->_direct_map.end())
 	{
+		amb = this->_direct_map.at(tempName)->_ambient;
+		dif = this->_direct_map.at(tempName)->_diffuse;
+		spec = this->_direct_map.at(tempName)->_specular;
+		// pos = this->_direct_map.at(tempName)->_position;
+		direct = this->_direct_map.at(tempName)->_direction;
+
+		/*Set as the ambient int to the spinner */
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(1)))->setCurrentValue(amb.x);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(2)))->setCurrentValue(amb.y);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(3)))->setCurrentValue(amb.z);
+
+		/*Sets the diffuse int to the spinner */
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(4)))->setCurrentValue(dif.x);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(5)))->setCurrentValue(dif.y);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(6)))->setCurrentValue(dif.z);
+
+		/*Sets the specular int to the spinner */
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(7)))->setCurrentValue(spec.x);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(8)))->setCurrentValue(spec.y);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(9)))->setCurrentValue(spec.z);
+
+		// /*Sets the position to the spinner */
+		// (static_cast<CEGUI::Spinner*> (this->_light_edit.at(10)))->setCurrentValue(pos.x);
+		// (static_cast<CEGUI::Spinner*> (this->_light_edit.at(11)))->setCurrentValue(pos.y);
+		// (static_cast<CEGUI::Spinner*> (this->_light_edit.at(12)))->setCurrentValue(pos.z);
+
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(13)))->setCurrentValue(direct.x);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(14)))->setCurrentValue(direct.y);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(15)))->setCurrentValue(direct.z);
+
 
 	}
 	/* The light is a spotlight */
 	else if(this->_spot_map.find(tempName) != this->_spot_map.end())
 	{
+		amb = this->_spot_map.at(tempName)->_ambient;
+		dif = this->_spot_map.at(tempName)->_diffuse;
+		spec = this->_spot_map.at(tempName)->_specular;
+		pos = this->_spot_map.at(tempName)->_position;
+		direct = this->_spot_map.at(tempName)->_direction;
 
+		/*Set as the ambient int to the spinner */
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(1)))->setCurrentValue(amb.x);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(2)))->setCurrentValue(amb.y);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(3)))->setCurrentValue(amb.z);
+
+		/*Sets the diffuse int to the spinner */
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(4)))->setCurrentValue(dif.x);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(5)))->setCurrentValue(dif.y);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(6)))->setCurrentValue(dif.z);
+
+		/*Sets the specular int to the spinner */
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(7)))->setCurrentValue(spec.x);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(8)))->setCurrentValue(spec.y);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(9)))->setCurrentValue(spec.z);
+
+		/*Sets the position to the spinner */
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(10)))->setCurrentValue(pos.x);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(11)))->setCurrentValue(pos.y);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(12)))->setCurrentValue(pos.z);
+
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(13)))->setCurrentValue(direct.x);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(14)))->setCurrentValue(direct.y);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(15)))->setCurrentValue(direct.z);
 	}
 	/*This means the light wasn't any type of light this should never happen*/
 	else

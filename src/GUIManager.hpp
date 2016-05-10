@@ -121,7 +121,7 @@ class GUIManager
 		*/
 		void setup_menus();
 
-		void populate_light_list(CEGUI::Window* lightList);
+		void populate_light_list();
 
 		void add_light(const CEGUI::EventArgs&);
 
