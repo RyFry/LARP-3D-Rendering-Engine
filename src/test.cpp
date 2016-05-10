@@ -55,7 +55,6 @@ bool GUIrendering;
 GLfloat delta_time = 0.0f;
 GLfloat last_frame = 0.0f;
 
-SoundManager* soundMan;
 GUIManager* GUIMan;
 
 int main(void)
@@ -94,7 +93,7 @@ int main(void)
     glewExperimental = GL_TRUE;
     glewInit();
 
-   soundMan = new SoundManager();
+   // soundMan = new SoundManager();
    GUIMan = new GUIManager(graph, window);
    GUIrendering = true;
 

@@ -27,6 +27,7 @@
 class GUIManager
 {
 	public:
+		/* These enums act as indexs into _sheets vector */
 		enum MenuNames
 		{
 			MAIN,
@@ -35,7 +36,8 @@ class GUIManager
 			LIGHTEDIT,
 			AMBINT,
 			DIFINT,
-			SPECINT
+			SPECINT,
+			SWITCH
 		};
 
 	  /**

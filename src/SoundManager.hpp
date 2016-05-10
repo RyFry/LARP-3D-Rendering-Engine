@@ -4,7 +4,7 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include <string.h>
-#include <map.h>
+#include <map>
 
 #include "LarpPrerequisites.hpp"
 #include "SDL/SDL.h"
@@ -33,13 +33,14 @@ class SoundManager
 
 		private:
 			
-			Mix_Music* _background_music;
+						
+			static Mix_Music* _background_music;
 
-			std::map<std::string, Mix_Chunk*> _sound_effects;
+			static std::map<std::string, Mix_Chunk*> _sound_effects;
 
-			float _effect_volume;
-			float _music_volume;
+			static float _effect_volume;
+			
+			static float _music_volume;
 
 
 };
-
