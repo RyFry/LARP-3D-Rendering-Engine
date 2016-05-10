@@ -6,7 +6,7 @@
 #include <unordered_map>        // std::unordered_map
 #include <cfloat>               // FLT_MAX, FLT_MIN
 #include <cmath>                // abs, exp
-
+ 
 #include "LarpPrerequisites.hpp"
 #include "Mesh.hpp"
 
@@ -33,7 +33,7 @@ namespace Larp
         GLfloat get_width() const;
         GLfloat get_height() const;
         GLfloat get_depth() const;
-    private:
+    protected:
         /**
          * A cache of loaded Models.
          */

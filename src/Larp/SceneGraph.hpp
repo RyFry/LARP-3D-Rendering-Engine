@@ -77,6 +77,10 @@ namespace Larp
          */
         NodePtr create_child_node();
         /**
+         * @return The root Node of the SceneGraph
+         */
+        NodePtr get_root_node();
+        /**
          * Clears all Nodes from the SceneGraph
          */
         void clear();

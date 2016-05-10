@@ -29,7 +29,8 @@ namespace Larp
         /**
          * The Model rendered.
          */
-        ModelPtr _model;
+        Model* _model;
+
         /**
          * Default Constructor
          */
@@ -79,6 +80,7 @@ namespace Larp
         GLfloat get_depth() const;
 
         void set_directional_shadows(bool value);
+        void switch_model(ModelPtr m);
         // void set_wireframe(bool value);
         
         // void set_ambient(bool value);

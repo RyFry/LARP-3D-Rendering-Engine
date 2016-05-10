@@ -80,6 +80,28 @@ namespace Larp
         tmp->_parent = this;
     }
 
+    void Node::detach_this_from_parent()
+    {
+        if (this->_parent == nullptr)
+        {
+            PRINT_ERROR("This child is not attached to a Node. Ignoring.");
+            return;
+        }
+
+        this->_parent->remove_child(this);
+    }
+
+    void Node::delete_this_from_scene()
+    {
+        if (this->_parent == nullptr)
+        {
+            PRINT_ERROR("This child is not attached to a Node. Ignoring.");
+            return;
+        }
+
+        this->_parent->delete_child(this);
+    }
+
     void Node::set_position(GLfloat x, GLfloat y, GLfloat z)
     {
         this->_position.x = x;
@@ -90,6 +112,11 @@ namespace Larp
     void Node::set_position(glm::vec3 position)
     {
         this->_position = position;
+    }
+
+    glm::vec3 Node::get_position()
+    {
+        return this->_position;
     }
 
     void Node::set_orientation(GLfloat x, GLfloat y, GLfloat z, GLfloat w)

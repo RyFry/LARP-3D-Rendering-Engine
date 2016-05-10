@@ -2,6 +2,7 @@
 
 #include <memory>       // shared_ptr, weak_ptr
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <sstream>
 
@@ -9,6 +10,7 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include <GL/glew.h>    // All da OpenGL schtuff
+#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -18,6 +20,7 @@
 
 namespace Larp
 {
+    class AnimationHandler;
     class ConfigurationLoader;
     class DirectionalLight;
     class Entity;
@@ -30,6 +33,7 @@ namespace Larp
     class SkyBox;
     class SpotLight;
     class Texture;
+    class Time;
     class Vertex;
 
     typedef std::unique_ptr<DirectionalLight> UniqueDirectional;

@@ -75,15 +75,14 @@ namespace Larp
          */
         NodePtr create_child();
         /**
-         * Removes a given pNode as a child of this Node object.
-         * @return A pointer to the child was removed
-         */
-        NodePtr remove_child(NodePtr child);
-        /**
-         * Removes a given pNode as a child of this Node object.
+         * Removes a given Node as a child of this Node object.
          * @note After calling this function, child is still a valid pointer to a Node.
          * @note Use this function instead of delete_child if you wish to attach this
          *       child to another Node.
+         */
+        NodePtr remove_child(NodePtr child);
+        /**
+         * Removes and deletes a given Node that is a child of this Node object.
          */
         void delete_child(NodePtr child);
         /**
@@ -92,6 +91,19 @@ namespace Larp
          * @throws runtime_error if this child is attached to another Node.
          */
         void attach_child(NodePtr child);
+        /**
+         * Detaches this Node from its parent, but does not delete it, so that
+         * it may be reattached elsewhere.
+         * @warning If this node is not needed elsewhere, please use Node::delete_this_from_scene
+         */
+        void detach_this_from_parent();
+        /**
+         * Detaches this Node from its parent, deleting it in the process
+         * @warning Any pointer to this Node after this is called is no longer valid
+         * @warning If you intend to reattech this Node somewhere else in the SceneGraph,
+         *          please use Node::detach_this_from_parent
+         */
+        void delete_this_from_scene();
         /**
          * Sets the position of this Node
          * @param x The new x position.
@@ -104,6 +116,10 @@ namespace Larp
          * @param position The new position of this Node
          */
         void set_position(glm::vec3 position);
+        /**
+         * @return This Node's position relative to its parent
+         */
+        glm::vec3 get_position();
         /**
          * Sets the orientation of this Node
          * @param x The x-direction of the axis of rotation

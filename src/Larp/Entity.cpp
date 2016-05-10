@@ -88,4 +88,9 @@ namespace Larp
             this->_shader = Shader::get_default_shader();
         }
     }
+
+    void Entity::switch_model(ModelPtr m)
+    {
+        _model = m;
+    }
 }

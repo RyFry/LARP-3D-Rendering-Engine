@@ -24,7 +24,12 @@ namespace Larp
 
     NodePtr SceneGraph::create_child_node()
     {
-        return _root->create_child();
+        return this->_root->create_child();
+    }
+
+    NodePtr SceneGraph::get_root_node()
+    {
+        return this->_root.get();
     }
 
     void SceneGraph::clear()
