@@ -37,7 +37,7 @@ class GUIManager
 			AMBINT,
 			DIFINT,
 			SPECINT,
-			SWITCH
+			POSINT
 		};
 
 	  /**
@@ -131,6 +131,9 @@ class GUIManager
 
 		void add_directional_light(const CEGUI::EventArgs&);
 
+		/**
+		* Closes the window
+		*/
 		void quit(const CEGUI::EventArgs&);
 
 		void push_test(const CEGUI::EventArgs&);
