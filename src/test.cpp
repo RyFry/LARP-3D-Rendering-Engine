@@ -1,6 +1,7 @@
 #include <memory>
 #include <string>
 #include <stdexcept>
+#include <time.h>
 #include <unordered_set>
 
 #define GLEW_STATIC
@@ -16,6 +17,8 @@
 
 #include "Larp/AnimationHandler.hpp"
 #include "Camera.hpp"
+#include "GUIManager.hpp"
+#include "SoundManager.hpp"
 
 #include "Physics/PhysicsMeshColliderBuilder.hpp"
 #include "Physics/PhysicsObjectBuilder.hpp"
@@ -40,11 +43,14 @@ GLuint screenWidth = 800, screenHeight = 600;
 
 // Function prototypes
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+void char_callback(GLFWwindow* window, unsigned int codepoint);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 void Do_Movement();
 void error_callback(int error, const char* description);
+void make_floor(PhysicsWorld* physics_world);
+unsigned int GlfwToCeguiKey(int glfwKey);
 void attempt_to_pick_up_weapon();
 void attempt_to_drop_weapon();
 void attempt_to_spawn_bullet();
@@ -59,12 +65,15 @@ bool keys[1024];
 bool buttons[3];
 GLfloat lastX = 400, lastY = 300;
 bool firstMouse = true;
+bool GUIrendering;
+
 std::unordered_set<Larp::Node*> pickupable_items;
 std::unordered_set<Larp::Node*> destructable_items;
 Larp::Node* player_held_item = nullptr;
 Larp::Node* camera_node = nullptr;
 Larp::AnimationHandler* test_gun_animator;
 bool was_in_air = false;
+GUIManager* GUIMan;
 
 int main(void)
 {
@@ -94,8 +103,9 @@ int main(void)
     // Set the required callback functions
     glfwSetKeyCallback(window, key_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
-    glfwSetMouseButtonCallback(window, mouse_button_callback);
     glfwSetScrollCallback(window, scroll_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
+    glfwSetCharCallback(window, char_callback);
 
     // Options
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -104,12 +114,17 @@ int main(void)
     glewExperimental = GL_TRUE;
     glewInit();
 
+   // soundMan = new SoundManager();
+   GUIMan = new GUIManager(graph, window);
+   GUIrendering = false;
+
+
     // Define the viewport dimensions
     glViewport(0, 0, screenWidth, screenHeight);
 
     // Setup some OpenGL options
     glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LESS);
+    glDepthFunc(GL_LESS);
     //glEnable(GL_MULTISAMPLE);
 
     // Setting up PhysicsWorld
@@ -198,13 +213,6 @@ int main(void)
     camera_node = player_node->create_child();
     camera_node->translate(0.0, 0.75, 0.0);
 
-    // Larp::NodePtr player_child = node12->create_child();
-    // Larp::ModelPtr p90_model = Larp::Model::create("assets/P90/P90.obj");
-    // Larp::EntityPtr p90_entity = Larp::Entity::create(p90_model);
-    // p90_entity->set_directional_shadows(true);
-    // player_child->attach_entity(p90_entity);
-    // player_child->translate(-3.0, 4.0, 6.0);
-    // player_child->set_scale(0.2, 0.2, 0.2);
 
 
     make_floor(world);
@@ -226,6 +234,7 @@ int main(void)
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
+        GUIrendering = GUIMan->get_rendering_state();
         // Set frame time
         Larp::Time::update_time();
         // Update animation system
@@ -292,7 +301,8 @@ int main(void)
 
         // Check and call events
         glfwPollEvents();
-        Do_Movement();
+        if(!GUIrendering)
+            Do_Movement();
 
         // Clear the colorbuffer
         glClearColor(0.1f, 0.8f, 0.1f, 1.0f);
@@ -306,6 +316,13 @@ int main(void)
         glm::mat4 view = camera.get_view_matrix();
         glm::vec3 view_pos = camera._position;
         graph->draw(view, projection, view_pos);
+
+        if(GUIrendering)
+        {
+            glDisable(GL_DEPTH_TEST);
+            CEGUI::System::getSingleton().renderAllGUIContexts();
+            glEnable(GL_DEPTH_TEST);
+        }
 
         // Swap the buffers
         glfwSwapBuffers(window);
@@ -371,8 +388,30 @@ void Do_Movement()
 // Is called whenever a key is pressed/released via GLFW
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
-    if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+
+    /*Inject keys for CEGUI. Mainly pressing down on one */
+    if(action == GLFW_PRESS)
+    {
+
+        if(GlfwToCeguiKey(key) != 0)
+        {
+            context.injectKeyDown((CEGUI::Key::Scan)GlfwToCeguiKey(key));
+            /*If I don't add this the arrow keys start putting in weird character codes */
+            if(key == GLFW_KEY_BACKSPACE)
+                context.injectChar((CEGUI::Key::Scan)GlfwToCeguiKey(key));
+        }
+        else
+            context.injectKeyDown((CEGUI::Key::Scan)key);
+    }
+    /* Inject keys for CEGUI. For releasing a key */
+    else if(action == GLFW_RELEASE)
+        context.injectKeyUp((CEGUI::Key::Scan)key);
+
+    if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS && !GUIrendering)
         glfwSetWindowShouldClose(window, GL_TRUE);
+    else if(key == GLFW_KEY_F1 && action == GLFW_PRESS)
+        GUIMan->show_main();
 
     // We don't want people to actually clear the graph
     // if (key == GLFW_KEY_C)
@@ -390,6 +429,16 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         attempt_to_drop_weapon();
 }
 
+/* GLFW has two keyboard related call backs.
+ * One for the physical keyboard and one for the Unicode for the keys 
+ * This one is for the Unicode
+ */
+void char_callback(GLFWwindow* window, unsigned int codepoint)
+{
+    CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+    context.injectChar(codepoint);
+}
+
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
     if(firstMouse)
@@ -399,23 +448,41 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
         firstMouse = false;
     }
 
+    CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+    context.injectMouseMove(xpos - lastX,  ypos - lastY); 
+
     GLfloat xoffset = xpos - lastX;
     GLfloat yoffset = lastY - ypos;
 
     lastX = xpos;
     lastY = ypos;
 
-    glm::quat rotation(0, 0, 0, 1);
-    player->rotate(glm::rotate(rotation, xoffset * 0.05, glm::vec3(0, 1, 0)));
-    camera.process_mouse_movement(0, yoffset);
+    /* May need to change the movement feels weird */
+
+    /* If the GUI is rendering stop mouse movement for the player camera */
+    if(!GUIrendering)
+    {
+        glm::quat rotation(0.0, 0.0, 0.0, 1.0);
+        player->rotate(glm::rotate(rotation, xoffset * 0.05, glm::vec3(0, 1, 0)));
+        camera.process_mouse_movement(0, yoffset);
+    }
 }
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
-    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS && !GUIrendering)
     {
         attempt_to_spawn_bullet();
     }
+
+    if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
+        CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::RightButton);
+    else if(button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
+        CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::RightButton);
+    else if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+         CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::LeftButton);
+    else if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+         CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::LeftButton);
 }
 
 void scroll_callback(GLFWwindow* window, double x_offset, double y_offset)
@@ -427,7 +494,6 @@ void error_callback(int error, const char* description)
 {
     fputs(description, stderr);
 }
-
 /**
  * We attempt to have the player pick up a gun by raycasting to whatever the player is
  * looking at, and then if we hit something in the raycast, we check the distance,
@@ -561,3 +627,17 @@ void make_floor(std::unique_ptr<PhysicsWorld>& world)
     world->get_dynamics_world()->addRigidBody(body);
 }
 
+
+unsigned int GlfwToCeguiKey(int glfwKey)
+{
+    switch(glfwKey)
+    {
+        case GLFW_KEY_UNKNOWN   : return 0;
+        case GLFW_KEY_UP        : return CEGUI::Key::ArrowUp;
+        case GLFW_KEY_DOWN      : return CEGUI::Key::ArrowDown;
+        case GLFW_KEY_LEFT      : return CEGUI::Key::ArrowLeft;
+        case GLFW_KEY_RIGHT     : return CEGUI::Key::ArrowRight;
+        case GLFW_KEY_BACKSPACE : return CEGUI::Key::Backspace;
+        default         : return 0;
+    }
+}

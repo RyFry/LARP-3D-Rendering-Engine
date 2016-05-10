@@ -1,0 +1,12 @@
+prefix=/lusr/opt/cegui-0.8.ceed
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include/cegui-0
+moduledir=${prefix}/lib/cegui-0.8
+datafiles=${prefix}/share/cegui-0
+
+Name: CEGUI-0
+Description: The free GUI library for games and multi-media development.
+Version: 0.8.5
+Libs: -L${libdir} -lCEGUIBase-0
+Cflags: -I${includedir} -I${prefix}/include/cegui-0
