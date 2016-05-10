@@ -8,3 +8,6 @@ objs/*
 
 # Ignore special lib files
 lib/libglfw3.so
+
+# Documentation
+docs

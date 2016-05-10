@@ -5,12 +5,13 @@ OPTFLAG       = -O1
 CXXFLAGS      = -std=c++11 -Wall
 INCLUDES      = -I$(shell pwd)/include
 INCLUDES     += -I/usr/include/bullet
+INCLUDES     += -I./src
 STATIC_FLAGS  = -L$(shell pwd)/lib
 STATIC_LIBS   = -lSOIL
 DYNAMIC_FLAGS = -Wl,-rpath $(shell pwd)/lib
 DYNAMIC_LIBS  = -lassimp
 DYNAMIC_LIBS += -lglfw3 -lpthread -lGLEW -lGL -lXrandr -lXi -lX11 -ldl -lXcursor -lXxf86vm -lXinerama
-DYNAMIC_LIBS += -lBulletSoftBody -lBulletDynamics -lBulletCollision -lLinearMath
+DYNAMIC_LIBS += -lBulletSoftBody -lBulletDynamics -lBulletCollision -lLinearMath -lSDL -lSDL_mixer
 
 SRCDIR        = src
 OBJDIR        = objs
@@ -23,10 +24,10 @@ DEBUG_PROD    = $(BINDIR)/$(DEBUG_DIR)/main
 
 PROFILER      = valgrind
 
-HDRS          = $(wildcard $(SRCDIR)/*.hpp)
-SRCS          = $(wildcard $(SRCDIR)/*.cpp)
-OBJS          = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/$(RELEASE_DIR)/%.o, $(SRCS))
-DEBUG_OBJS    = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/$(DEBUG_DIR)/%.o, $(SRCS))
+HDRS         := $(shell find $(SRCDIR) -name '*.hpp')
+SRCS         := $(shell find $(SRCDIR) -name '*.cpp')
+OBJS         := $(subst $(SRCDIR), $(OBJDIR)/$(RELEASE_DIR), $(SRCS:%.cpp=%.o))
+DEBUG_OBJS   := $(subst $(SRCDIR), $(OBJDIR)/$(DEBUG_DIR), $(SRCS:%.cpp=%.o))
 
 all: $(PROD)
 	@echo 'Compilation finished (release).'
@@ -35,12 +36,12 @@ debug_all: $(DEBUG_PROD)
 	@echo 'Compilation finished (debug).'
 
 $(OBJS): $(OBJDIR)/$(RELEASE_DIR)/%.o: $(SRCDIR)/%.cpp
-	@mkdir -p $(OBJDIR)/$(RELEASE_DIR)
+	@mkdir -p $(@D)
 	@echo -e [CXX] '\t' $@
 	@$(CXX) $(OPTFLAG) $(INCLUDES) $(CXXFLAGS) -c $< -o $@
 
 $(DEBUG_OBJS): $(OBJDIR)/$(DEBUG_DIR)/%.o: $(SRCDIR)/%.cpp
-	@mkdir -p $(OBJDIR)/$(DEBUG_DIR)
+	@mkdir -p $(@D)
 	@echo -e [CXX] '\t' $@
 	@$(CXX) $(OPTFLAG) $(INCLUDES) $(CXXFLAGS) -c $< -o $@
 
@@ -66,8 +67,8 @@ test: debug_all
 clean:
 	rm -f $(PROD)
 	rm -f $(DEBUG_PROD)
-	rm -f $(OBJDIR)/$(RELEASE_DIR)/*.o
-	rm -f $(OBJDIR)/$(DEBUG_DIR)/*.o
+	rm -rf $(OBJDIR)/$(RELEASE_DIR)/
+	rm -rf $(OBJDIR)/$(DEBUG_DIR)/
 	@echo Clean done.
 
 docs: Doxyfile
