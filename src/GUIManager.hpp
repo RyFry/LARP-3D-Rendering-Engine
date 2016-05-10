@@ -139,13 +139,15 @@ class GUIManager
 		*/
 		void quit(const CEGUI::EventArgs&);
 
-		void push_test(const CEGUI::EventArgs&);
+		void light_select(const CEGUI::EventArgs&);
 
 		void spinner_switch(const CEGUI::EventArgs&);
 
+		void edit_finish(const CEGUI::EventArgs&);
 
 		/*This will popluate the spinners for the current editing light */
 		void populate_spinners(const char* name);
+
 
 		/**
 		* Hides the current GUI sheet and mouse

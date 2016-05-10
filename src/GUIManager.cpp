@@ -383,15 +383,15 @@ void GUIManager::setup_menus()
   pointLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_point_light, this));
   spotLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_spot_light, this));
   directionalLight->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::add_directional_light, this));
-  pushTest1->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
-  pushTest2->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
+  pushTest1->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
+  pushTest2->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
 
   ambSwitch->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::spinner_switch, this));
   difSwitch->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::spinner_switch, this));
   specSwitch->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::spinner_switch, this));
   positionSwitch->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::spinner_switch, this));
   directionSwitch->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::spinner_switch, this));
-  accept->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::spinner_switch, this));
+  accept->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::edit_finish, this));
 
   
   quit->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::quit, this));
@@ -440,7 +440,7 @@ void GUIManager::populate_light_list(CEGUI::Window* lightList)
 	// 	temp->setText(tempName);
 	// 	temp->setSize(CEGUI::USize(CEGUI::UDim(0.3,0), CEGUI::UDim(0.05,0)));
 	// 	temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
-	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
+	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
 
 	// 	/*Adds the button to the light list and maps the name of the light to the directional light */
 	// 	lightList->addChild(temp);
@@ -459,7 +459,7 @@ void GUIManager::populate_light_list(CEGUI::Window* lightList)
 	// 	temp->setText(tempName);
 	// 	temp->setSize(CEGUI::USize(CEGUI::UDim(0.3,0), CEGUI::UDim(0.05,0)));
 	// 	temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
-	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
+	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
 
 	// 	/*Adds the button to the light list and maps the name of the light to the directional light */
 	// 	lightList->addChild(temp);
@@ -477,7 +477,7 @@ void GUIManager::populate_light_list(CEGUI::Window* lightList)
 	// 	temp->setText(tempName);
 	// 	temp->setSize(CEGUI::USize(CEGUI::UDim(0.3,0), CEGUI::UDim(0.05,0)));
 	// 	temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
-	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
+	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
 
 	// 	/*Adds the button to the light list and maps the name of the light to the directional light */
 	// 	lightList->addChild(temp);
@@ -515,7 +515,7 @@ void GUIManager::add_point_light(const CEGUI::EventArgs&)
   temp->setText("pointLight1");
   this->_light_list.push_back(temp);
   this->_sheets.at(LIGHTLIST)->addChild(temp);
-  temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
+  temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
 
   this->_point_map.emplace("pointLight1", point_light);
 
@@ -604,7 +604,7 @@ void GUIManager::spinner_switch(const CEGUI::EventArgs&)
  	}	
 }
 	
-void GUIManager::push_test(const CEGUI::EventArgs&)
+void GUIManager::light_select(const CEGUI::EventArgs&)
 {
 	for(uint i = 0; i < this->_light_list.size(); ++i)
 	{
@@ -619,6 +619,27 @@ void GUIManager::push_test(const CEGUI::EventArgs&)
 	}
 }
 
+void GUIManager::edit_finish(const CEGUI::EventArgs&)
+{
+	std::string tempName(this->_light_edit.at(0)->getText().c_str());
+	if(this->_point_map.find(tempName) != this->_point_map.end())
+	{
+		this->_point_map.at(tempName)->set_ambient_intensity((static_cast<CEGUI::Spinner*> (this->_light_edit.at(1)))->getCurrentValue(), 
+																															(static_cast<CEGUI::Spinner*> (this->_light_edit.at(2)))->getCurrentValue(),
+																																	(static_cast<CEGUI::Spinner*> (this->_light_edit.at(3)))->getCurrentValue());
+	}
+	else if(this->_direct_map.find(tempName) != this->_direct_map.end())
+	{
+
+	}
+	else if(this->_spot_map.find(tempName) != this->_spot_map.end())
+	{
+
+	}
+	else
+		assert(false);
+}
+
 void GUIManager::populate_spinners(const char* name)
 {
 	std::string tempName(name);
@@ -626,7 +647,26 @@ void GUIManager::populate_spinners(const char* name)
 	if(this->_point_map.find(tempName) != this->_point_map.end())
 	{
 		glm::vec3 pos = this->_point_map.at(tempName)->_position;
+		glm::vec3 amb = this->_point_map.at(tempName)->_ambient;
+		glm::vec3 dif = this->_point_map.at(tempName)->_diffuse;
+		glm::vec3 spec = this->_point_map.at(tempName)->_specular;
 
+		/*Set as the ambient int to the spinner */
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(1)))->setCurrentValue(amb.x);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(2)))->setCurrentValue(amb.y);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(3)))->setCurrentValue(amb.z);
+
+		/*Sets the diffuse int to the spinner */
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(4)))->setCurrentValue(dif.x);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(5)))->setCurrentValue(dif.y);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(6)))->setCurrentValue(dif.z);
+
+		/*Sets the specular int to the spinner */
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(7)))->setCurrentValue(spec.x);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(8)))->setCurrentValue(spec.y);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(9)))->setCurrentValue(spec.z);
+
+		/*Sets the position to the spinner */
 		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(10)))->setCurrentValue(pos.x);
 		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(11)))->setCurrentValue(pos.y);
 		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(12)))->setCurrentValue(pos.z);
