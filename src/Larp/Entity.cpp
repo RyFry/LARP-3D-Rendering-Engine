@@ -22,15 +22,17 @@ namespace Larp
         // If shadows
         if (_shadow_shader)
         {
+            this->_shader->set_light_space_matrices();
             // The closest shadow map must have the highest resolution which is determined by the index to the power of 2
-            for (GLuint i = NUM_SHADOW_MAPS - 1; i >= 0; --i)
+            for (GLint i = NUM_SHADOW_MAPS - 1; i >= 0; --i)
             {
                 // Set light uniforms
-                this->_shader->set_light_space_matrix(Shader::_light_space_matrix.at(i), i);
+                // this->_shader->set_light_space_matrices(Shader::_light_space_matrix.at(i), i);
                 this->_shader->set_dir_light_position();
                 // need depth map texture function
                 this->_shader->enable_shadow_texture(i);
             }
+            this->_shader->set_csm_frustum_depths();
         }
 
         // NOT SHADOWS

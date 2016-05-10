@@ -45,13 +45,13 @@ namespace Larp
             // Configure depth map FBO
             glGenFramebuffers(1, &_depth_map_FBO);
             // The closest shadow map must have the highest resolution which is determined by the index to the power of 2
-            for (GLuint i = NUM_SHADOW_MAPS - 1; i >= 0; --i)
+            for (GLint i = NUM_SHADOW_MAPS - 1; i >= 0; --i)
             {
                 // - Create depth textures
                 glGenTextures(1, &_depth_map_texture.at(i));
                 glBindTexture(GL_TEXTURE_2D, _depth_map_texture.at(i));
 
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, glm::pow(SHADOW_WIDTH, i), glm::pow(SHADOW_HEIGHT, i), 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH * glm::exp2(i), SHADOW_HEIGHT * glm::exp2(i), 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER); 
@@ -149,12 +149,18 @@ namespace Larp
         return light_space_matrix;
     }
 
-    void Shader::set_light_space_matrix(const glm::mat4& light_space_matrix, GLuint index)
+    void Shader::set_light_space_matrix(const glm::mat4& light_space_matrix)
     {
-        glUniformMatrix4fv(glGetUniformLocation(this->_program, ("lightSpaceMatrix[" + std::to_string(index) + "]").c_str()), 1, GL_FALSE, glm::value_ptr(light_space_matrix));
+        glUniformMatrix4fv(glGetUniformLocation(this->_program, "lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(light_space_matrix));
     }
 
-    void Shader::prepare_depth_map(GLuint index)
+    void Shader::set_light_space_matrices()
+    {
+        glUniformMatrix4fv(glGetUniformLocation(this->_program, "lightSpaceMatrix"), NUM_SHADOW_MAPS, GL_FALSE, glm::value_ptr(_light_space_matrix[0]));
+        // glUniformMatrix4fv(glGetUniformLocation(this->_program, ("lightSpaceMatrix[" + std::to_string(index) + "]").c_str()), 1, GL_FALSE, glm::value_ptr(light_space_matrix));
+    }
+
+    void Shader::prepare_depth_map(GLint index)
     {
         glViewport(0, 0, SHADOW_WIDTH * glm::exp2(index), SHADOW_HEIGHT * glm::exp2(index));
         glBindFramebuffer(GL_FRAMEBUFFER, _depth_map_FBO);
@@ -176,10 +182,25 @@ namespace Larp
         glUniform3fv(glGetUniformLocation(this->_program, "lightPos"), 1, glm::value_ptr(light_pos));
     }
 
-    void Shader::enable_shadow_texture(GLuint index)
+    void Shader::set_csm_frustum_depths()
     {
-        glUniform1i(glGetUniformLocation(this->_program, ("shadowMap[" + std::to_string(index) + "]").c_str()), index);
+        GLfloat far_plane_change = 100.0f / NUM_SHADOW_MAPS;
+        GLfloat cur_far_plane = 0.0f;
+
+        // The closest shadow map must have the highest resolution which is determined by the index to the power of 2
+        for (GLint i = NUM_SHADOW_MAPS - 1; i >= 0; --i)
+        {
+            cur_far_plane += far_plane_change;
+            // std::cout << "index: " << i << " far plane: " << cur_far_plane << std::endl;
+            glUniform1f(glGetUniformLocation(this->_program, ("FrustumDepths[" + std::to_string(i) + "]").c_str()), cur_far_plane);
+        }
+    }
+
+    void Shader::enable_shadow_texture(GLint index)
+    {
+        std::cout << "index: " << index << " texture: " << _depth_map_texture.at(index) << std::endl;
         glActiveTexture(GL_TEXTURE0 + index);
+        glUniform1i(glGetUniformLocation(this->_program, ("shadowMaps[" + std::to_string(index) + "]").c_str()), _depth_map_texture.at(index));
         glBindTexture(GL_TEXTURE_2D, _depth_map_texture.at(index));
     }
 

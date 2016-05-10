@@ -51,13 +51,12 @@ namespace Larp
             GLfloat cur_far_plane = 0.0f;
 
             // The closest shadow map must have the highest resolution which is determined by the index to the power of 2
-            for (GLuint i = NUM_SHADOW_MAPS - 1; i >= 0; --i)
+            for (GLint i = NUM_SHADOW_MAPS - 1; i >= 0; --i)
             {
                 cur_far_plane += far_plane_change;
-
                 Shader::_light_space_matrix.at(i) = Shader::calculate_light_space_matrix(dir_lights[0]->_direction, near_plane, cur_far_plane);
                 Shader::_shadow_shader->use();
-                Shader::_shadow_shader->set_light_space_matrix(Shader::_light_space_matrix.at(i), i);
+                Shader::_shadow_shader->set_light_space_matrix(Shader::_light_space_matrix.at(i));
 
                 Shader::prepare_depth_map(i);
                 this->_root->draw_shadows(identity);

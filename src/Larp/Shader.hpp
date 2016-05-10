@@ -61,11 +61,14 @@ namespace Larp
 
         // The default value for light position should not by in the same axis as the up vector in the lookat function
         static glm::mat4 calculate_light_space_matrix(glm::vec3 light_pos = glm::vec3(0.0f, 10.0f, 1.0f), GLfloat near_plane = 0.1f, GLfloat far_plane = 100.0f);
-        void set_light_space_matrix(const glm::mat4& light_space_matrix, GLuint index);
-        static void prepare_depth_map(GLuint index);
+        void set_light_space_matrix(const glm::mat4& light_space_matrix);
+        // void set_light_space_matrices(const glm::mat4& light_space_matrix, GLint index);
+        void set_light_space_matrices();
+        static void prepare_depth_map(GLint index);
         static void unbind_depth_map();
         void set_dir_light_position(glm::vec3 light_pos = glm::vec3(0.0f, 10.0f, 0.1f));
-        void enable_shadow_texture(GLuint index);
+        void enable_shadow_texture(GLint index);
+        void set_csm_frustum_depths();
     private:
         /**
          * A cache of compiled Shaders.
