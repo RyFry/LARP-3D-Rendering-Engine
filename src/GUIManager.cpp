@@ -213,8 +213,7 @@ void GUIManager::setup_menus()
 	positionSheet->setSize(CEGUI::USize(CEGUI::UDim(0.75f,0), CEGUI::UDim(0.1f,0)));
 	positionSheet->setPosition(CEGUI::UVector2(CEGUI::UDim(0.1f,0),CEGUI::UDim(0.1f,0)));
 
-
-	/* Ambient RGB for the light */
+	/* X,Y,Z Position of the light */
 	CEGUI::Spinner* xPos   = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "xPos"));
 	CEGUI::Spinner* yPos = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "yPos"));
 	CEGUI::Spinner* zPos  = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "zPos"));
@@ -234,12 +233,40 @@ void GUIManager::setup_menus()
 	positionSheet->addChild(zPos);
 
 
+	/*Direction spinners */
+	CEGUI::Window* directionSheet = this->_wmgr->createWindow("TaharezLook/ScrollablePane", "directionSheet");
+
+	directionSheet->setSize(CEGUI::USize(CEGUI::UDim(0.75f,0), CEGUI::UDim(0.1f,0)));
+	directionSheet->setPosition(CEGUI::UVector2(CEGUI::UDim(0.1f,0),CEGUI::UDim(0.1f,0)));
+
+
+	/* X,Y,Z for the direction of the light */
+	CEGUI::Spinner* xDirect   = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "xDirect"));
+	CEGUI::Spinner* yDirect = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "yDirect"));
+	CEGUI::Spinner* zDirect  = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "zDirect"));
+
+	xDirect->setTextInputMode(CEGUI::Spinner::FloatingPoint);
+	xDirect->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(0.0f,0)));
+
+	yDirect->setTextInputMode(CEGUI::Spinner::FloatingPoint);
+	yDirect->setPosition(CEGUI::UVector2(CEGUI::UDim(0.15f,0),CEGUI::UDim(0.0f,0)));
+
+	zDirect->setTextInputMode(CEGUI::Spinner::FloatingPoint);
+	zDirect->setPosition(CEGUI::UVector2(CEGUI::UDim(0.30f,0),CEGUI::UDim(0.0f,0)));
+
+
+	directionSheet->addChild(xDirect);
+	directionSheet->addChild(yDirect);
+	directionSheet->addChild(zDirect);
+
+
 
 	/* Setup the buttons that will be used to change between ambient, diffuse, and specular intensity spinners */
 	CEGUI::Window* ambSwitch = this->_wmgr->createWindow("TaharezLook/Button", "ambSwitch");
 	CEGUI::Window* difSwitch = this->_wmgr->createWindow("TaharezLook/Button", "difSwitch");
 	CEGUI::Window* specSwitch = this->_wmgr->createWindow("TaharezLook/Button", "specSwitch");
 	CEGUI::Window* positionSwitch = this->_wmgr->createWindow("TaharezLook/Button", "posSwitch");
+	CEGUI::Window* directionSwitch = this->_wmgr->createWindow("TaharezLook/Button", "directionSwitch");
 
 
 	ambSwitch->setText("Ambient");
@@ -258,9 +285,16 @@ void GUIManager::setup_menus()
 	positionSwitch->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
 	positionSwitch->setPosition(CEGUI::UVector2(CEGUI::UDim(0.1f,0),CEGUI::UDim(0.4f,0)));
 
+	directionSwitch->setText("Direction");
+	directionSwitch->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
+	directionSwitch->setPosition(CEGUI::UVector2(CEGUI::UDim(0.21f,0),CEGUI::UDim(0.4f,0)));
 
 
+	CEGUI::Window* accept = this->_wmgr->createWindow("TaharezLook/Button", "accept");
 
+	accept->setText("Accept");
+	accept->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.1,0)));
+	accept->setPosition(CEGUI::UVector2(CEGUI::UDim(0.35f,0),CEGUI::UDim(0.6f,0)));
 
 	
 	/* This are the sheets for the spinners for different intensities */
@@ -268,12 +302,16 @@ void GUIManager::setup_menus()
 	lightEdit->addChild(diffuseIntensity);
 	lightEdit->addChild(specularIntensity);
 	lightEdit->addChild(positionSheet);
+	lightEdit->addChild(directionSheet);
+
+	lightEdit->addChild(accept);
 
 
 	lightEdit->addChild(ambSwitch);
 	lightEdit->addChild(difSwitch);
 	lightEdit->addChild(specSwitch);
 	lightEdit->addChild(positionSwitch);
+	lightEdit->addChild(directionSwitch);
 	lightEdit->addChild(name);
 
 
@@ -291,7 +329,13 @@ void GUIManager::setup_menus()
 	this->_light_edit.push_back(greenSpinnerSpecular);
 	this->_light_edit.push_back(blueSpinnerSpecular);
 
+	this->_light_edit.push_back(xPos);
+	this->_light_edit.push_back(yPos);
+	this->_light_edit.push_back(zPos);
 
+	this->_light_edit.push_back(xDirect);
+	this->_light_edit.push_back(yDirect);
+	this->_light_edit.push_back(zDirect);
 
 
 	/* These three will always be last */
@@ -299,24 +343,23 @@ void GUIManager::setup_menus()
 	this->_light_edit.push_back(difSwitch);
 	this->_light_edit.push_back(specSwitch);
 	this->_light_edit.push_back(positionSwitch);
+	this->_light_edit.push_back(directionSwitch);
 
 
 	lightEdit->setSize(CEGUI::USize(CEGUI::UDim(0.75,0), CEGUI::UDim(0.45,0)));
 	lightEdit->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5,0),CEGUI::UDim(0.3f,0)));
 
-	lightList->setSize(CEGUI::USize(CEGUI::UDim(0.75,0), CEGUI::UDim(0.45,0)));
-	lightList->setPosition(CEGUI::UVector2(CEGUI::UDim(0.35f,0),CEGUI::UDim(0.4f,0)));
+	lightList->setSize(CEGUI::USize(CEGUI::UDim(0.3f,0), CEGUI::UDim(0.45,0)));
+	lightList->setPosition(CEGUI::UVector2(CEGUI::UDim(0.2,0),CEGUI::UDim(0.4f,0)));
 
 	pushTest1->setText("Hi thar");
-	pushTest1->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
+	pushTest1->setSize(CEGUI::USize(CEGUI::UDim(0.3f,0), CEGUI::UDim(0.05,0)));
 	pushTest2->setText("Das Kampfer");
-	pushTest2->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
+	pushTest2->setSize(CEGUI::USize(CEGUI::UDim(0.3f,0), CEGUI::UDim(0.05,0)));
 	pushTest2->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(0.05f,0)));
 
 	lightList->addChild(pushTest1);
 	lightList->addChild(pushTest2);
-
-
 
 
 	pointLight->setText("Point Light");
@@ -347,6 +390,8 @@ void GUIManager::setup_menus()
   difSwitch->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::spinner_switch, this));
   specSwitch->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::spinner_switch, this));
   positionSwitch->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::spinner_switch, this));
+  directionSwitch->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::spinner_switch, this));
+  accept->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::spinner_switch, this));
 
   
   quit->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::quit, this));
@@ -365,10 +410,13 @@ void GUIManager::setup_menus()
   this->_sheets.push_back(lightMenu);
   this->_sheets.push_back(lightList);
   this->_sheets.push_back(lightEdit);
+
+  /*All the spinner sheets */
   this->_sheets.push_back(ambientIntensity);
   this->_sheets.push_back(diffuseIntensity);	
   this->_sheets.push_back(specularIntensity);
   this->_sheets.push_back(positionSheet);
+  this->_sheets.push_back(directionSheet);
 
   this->_light_list.push_back(pushTest1);
   this->_light_list.push_back(pushTest2);
@@ -390,7 +438,7 @@ void GUIManager::populate_light_list(CEGUI::Window* lightList)
 	// 	/*setups the window button */
 	// 	temp = this->_wmgr->createWindow("TaharezLook/Button", tempName);
 	// 	temp->setText(tempName);
-	// 	temp->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
+	// 	temp->setSize(CEGUI::USize(CEGUI::UDim(0.3,0), CEGUI::UDim(0.05,0)));
 	// 	temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
 	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
 
@@ -409,7 +457,7 @@ void GUIManager::populate_light_list(CEGUI::Window* lightList)
 	// 	/*setups the window button */
 	// 	temp = this->_wmgr->createWindow("TaharezLook/Button", tempName);
 	// 	temp->setText(tempName);
-	// 	temp->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
+	// 	temp->setSize(CEGUI::USize(CEGUI::UDim(0.3,0), CEGUI::UDim(0.05,0)));
 	// 	temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
 	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
 
@@ -427,7 +475,7 @@ void GUIManager::populate_light_list(CEGUI::Window* lightList)
 	// 	/*setups the window button */
 	// 	temp = this->_wmgr->createWindow("TaharezLook/Button", tempName);
 	// 	temp->setText(tempName);
-	// 	temp->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
+	// 	temp->setSize(CEGUI::USize(CEGUI::UDim(0.3,0), CEGUI::UDim(0.05,0)));
 	// 	temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
 	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
 
@@ -459,6 +507,19 @@ void GUIManager::add_point_light(const CEGUI::EventArgs&)
 	point_light->set_ambient_intensity(0.0f, 1.0f, 0.0f);
   point_light->set_position(0.0f, 2.0f, 0.0f);
 
+
+  /* NEED TO CHANGE FOR LATER USE */
+  CEGUI::Window* temp = this->_wmgr->createWindow("TaharezLook/Button", "pointLight1");
+  temp->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
+  temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(0.1f,0)));
+  temp->setText("pointLight1");
+  this->_light_list.push_back(temp);
+  this->_sheets.at(LIGHTLIST)->addChild(temp);
+  temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::push_test, this));
+
+  this->_point_map.emplace("pointLight1", point_light);
+
+
 }
 
 void GUIManager::add_spot_light(const CEGUI::EventArgs&)
@@ -471,6 +532,7 @@ void GUIManager::add_spot_light(const CEGUI::EventArgs&)
 
 	spot_light->set_ambient_intensity(0.0f, 1.0f, 0.0f);
  	spot_light->set_position(0.0f, 2.0f, 0.0f);
+
 
 }
 
@@ -496,40 +558,50 @@ void GUIManager::quit(const CEGUI::EventArgs&)
 void GUIManager::spinner_switch(const CEGUI::EventArgs&)
 {
 	/*Ambient Int */
- 	if(this->_light_edit.at(this->_light_edit.size()-4)->isCapturedByThis())
+ 	if(this->_light_edit.at(this->_light_edit.size()-5)->isCapturedByThis())
  	{
-
  		this->_sheets.at(AMBINT)->show();
  		this->_sheets.at(DIFINT)->hide();
  		this->_sheets.at(SPECINT)->hide();
  		this->_sheets.at(POSINT)->hide();
-
+ 		this->_sheets.at(DIRINT)->hide();
  	}
  	/*Diffuse Int */
- 	else if(this->_light_edit.at(this->_light_edit.size()-3)->isCapturedByThis())
+ 	else if(this->_light_edit.at(this->_light_edit.size()-4)->isCapturedByThis())
  	{
  		this->_sheets.at(AMBINT)->hide();
  		this->_sheets.at(DIFINT)->show();
  		this->_sheets.at(SPECINT)->hide();
  		this->_sheets.at(POSINT)->hide();
+ 		this->_sheets.at(DIRINT)->hide();
  	}
  	/* Specular Int */
- 	else if(this->_light_edit.at(this->_light_edit.size()-2)->isCapturedByThis())
+ 	else if(this->_light_edit.at(this->_light_edit.size()-3)->isCapturedByThis())
  	{
  		this->_sheets.at(AMBINT)->hide();
  		this->_sheets.at(DIFINT)->hide();
  		this->_sheets.at(SPECINT)->show();
  		this->_sheets.at(POSINT)->hide();
+ 		this->_sheets.at(DIRINT)->hide();
  	}
  	/* Position */
- 	 else if(this->_light_edit.at(this->_light_edit.size()-1)->isCapturedByThis())
+ 	 else if(this->_light_edit.at(this->_light_edit.size()-2)->isCapturedByThis())
  	{
  		this->_sheets.at(AMBINT)->hide();
  		this->_sheets.at(DIFINT)->hide();
  		this->_sheets.at(SPECINT)->hide();
  		this->_sheets.at(POSINT)->show();
-
+ 		this->_sheets.at(DIRINT)->hide();
  	}
+ 	/* Direction */
+ 	else if(this->_light_edit.at(this->_light_edit.size()-1)->isCapturedByThis())
+ 	{
+ 		this->_sheets.at(AMBINT)->hide();
+ 		this->_sheets.at(DIFINT)->hide();
+ 		this->_sheets.at(SPECINT)->hide();
+ 		this->_sheets.at(POSINT)->hide();
+ 		this->_sheets.at(DIRINT)->show();
+ 	}	
 }
 	
 void GUIManager::push_test(const CEGUI::EventArgs&)
@@ -539,13 +611,39 @@ void GUIManager::push_test(const CEGUI::EventArgs&)
 		if(this->_light_list.at(i)->isCapturedByThis())
 		{
 			this->_sheets.at(MAIN)->addChild(this->_sheets.at(LIGHTEDIT));
-			this->_sheets.at(DIFINT)->hide();
-			this->_sheets.at(SPECINT)->hide();
 
-			/* 0 will always be the index for the name of the light */
+			populate_spinners(this->_light_list.at(i)->getText().c_str());
+			// /* 0 will always be the index for the name of the light */
 			this->_light_edit.at(0)->setText(this->_light_list.at(i)->getText());
 		}
 	}
+}
+
+void GUIManager::populate_spinners(const char* name)
+{
+	std::string tempName(name);
+	/*The light is a point light */
+	if(this->_point_map.find(tempName) != this->_point_map.end())
+	{
+		glm::vec3 pos = this->_point_map.at(tempName)->_position;
+
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(10)))->setCurrentValue(pos.x);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(11)))->setCurrentValue(pos.y);
+		(static_cast<CEGUI::Spinner*> (this->_light_edit.at(12)))->setCurrentValue(pos.z);
+	}	
+	/* The light is a directional light */
+	else if(this->_direct_map.find(tempName) != this->_direct_map.end())
+	{
+
+	}
+	/* The light is a spotlight */
+	else if(this->_spot_map.find(tempName) != this->_spot_map.end())
+	{
+
+	}
+	/*This means the light wasn't any type of light this should never happen*/
+	else
+		assert(false);
 }
 
 void GUIManager::hide_GUI()

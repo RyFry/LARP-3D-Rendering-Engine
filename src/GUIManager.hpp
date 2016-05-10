@@ -7,6 +7,8 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <glm/glm.hpp>
+
 
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -37,7 +39,8 @@ class GUIManager
 			AMBINT,
 			DIFINT,
 			SPECINT,
-			POSINT
+			POSINT,
+			DIRINT
 		};
 
 	  /**
@@ -100,11 +103,11 @@ class GUIManager
 	    /* 
 	    * CEGUI window times will be tied to a Pointlightptr
 	    */
-	    std::map<std::string, Larp::PointLightPtr> _pointMap;
+	    std::map<std::string, Larp::PointLightPtr> _point_map;
 
-	    std::map<std::string, Larp::SpotLightPtr> _spotMap;
+	    std::map<std::string, Larp::SpotLightPtr> _spot_map;
 
-	    std::map<std::string, Larp::DirectionalLightPtr> _directMap;
+	    std::map<std::string, Larp::DirectionalLightPtr> _direct_map;
 
   		float _yPos = 0.0f;
 
@@ -139,6 +142,10 @@ class GUIManager
 		void push_test(const CEGUI::EventArgs&);
 
 		void spinner_switch(const CEGUI::EventArgs&);
+
+
+		/*This will popluate the spinners for the current editing light */
+		void populate_spinners(const char* name);
 
 		/**
 		* Hides the current GUI sheet and mouse
