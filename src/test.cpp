@@ -64,6 +64,7 @@ std::unordered_set<Larp::Node*> destructable_items;
 Larp::Node* player_held_item = nullptr;
 Larp::Node* camera_node = nullptr;
 Larp::AnimationHandler* test_gun_animator;
+bool was_in_air = false;
 
 int main(void)
 {
@@ -344,6 +345,27 @@ void Do_Movement()
 
     if (keys[GLFW_KEY_R])
         player->set_position(glm::vec3(0.0, 7.0, 0.0));
+
+    if(!was_in_air && !(player->is_on_floor()))
+    {
+        was_in_air = true;
+    }
+    if(was_in_air && player->is_on_floor())
+    {
+        was_in_air = false;
+        if(player_held_item != nullptr && !(test_gun_animator->get_current_animation() == "fire"))
+        {
+            test_gun_animator->play("land", true, 0);
+        }
+    }
+    if(player_held_item != nullptr && player->is_moving() && player->is_on_floor() && test_gun_animator->get_current_animation() == "NO ANIMATION PLAYING")
+    {
+        test_gun_animator->play("walk", true, 0);
+    }
+    if(player_held_item != nullptr && (!(player->is_moving()) || !(player->is_on_floor())) && test_gun_animator->get_current_animation() == "walk")
+    {
+        test_gun_animator->stop(true);
+    }
 }
 
 // Is called whenever a key is pressed/released via GLFW
@@ -488,10 +510,10 @@ void attempt_to_drop_weapon()
 void attempt_to_spawn_bullet()
 {
     // Only attempt to shoot  a bullet if the user is holding a gun
-    if (player_held_item == nullptr)
+    if (player_held_item == nullptr || test_gun_animator->get_current_animation() == "fire")
         return;
 
-    test_gun_animator->play("reload", true, 0);
+    test_gun_animator->play("fire", true, 0);
     GLfloat yaw = camera._yaw;
     GLfloat pitch = camera._pitch;
     glm::vec3 pos = camera._position;

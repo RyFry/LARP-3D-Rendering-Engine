@@ -73,10 +73,12 @@ void PhysicsPlayerController::update_movement(PhysicsWorld* world)
     if(res.hasHit() && (btFrom.y() - res.m_hitPointWorld.y()) < 0.55f)
     {
         this->_char_controller->setGravity(0.0);
+        this->_on_floor = true;
     }
     else
     {
         this->_char_controller->setGravity(4.9);
+        this->_on_floor = false;
     }
 
     btVector3 movement_direction(0.0f, 0.0f, 0.0f);
@@ -216,4 +218,14 @@ GLfloat PhysicsPlayerController::get_height() const
 GLfloat PhysicsPlayerController::get_depth() const
 {
     return this->_depth;
+}
+
+bool PhysicsPlayerController::is_on_floor() const
+{
+    return _on_floor;
+}
+
+bool PhysicsPlayerController::is_moving() const
+{
+    return this->_directions != STOP;
 }

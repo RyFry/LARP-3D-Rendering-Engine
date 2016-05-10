@@ -66,7 +66,9 @@ namespace Larp
 
 		void stop(bool revert);				//Stop the current animation
 
-		void update(void);					//Updates the animation handler
+		void update(GLfloat frame_time);					//Updates the animation handler
+
+		std::string get_current_animation(void);
 
 		static void update_animations();	/*Static void used to update every animation in _active_handlers;
 											called in every cycle in the main while loop*/

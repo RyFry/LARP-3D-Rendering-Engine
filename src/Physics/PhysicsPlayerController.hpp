@@ -23,6 +23,7 @@ private:
     GLfloat _jump_speed;
     GLfloat _max_slope;
     uint8_t _directions;
+    bool _on_floor;
 public:
     enum PlayerDirection
     {
@@ -113,4 +114,8 @@ public:
     GLfloat get_width() const;
     GLfloat get_height() const;
     GLfloat get_depth() const;
+
+    bool is_on_floor() const;
+
+    bool is_moving() const;
 };
