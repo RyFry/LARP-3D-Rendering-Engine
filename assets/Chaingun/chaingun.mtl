@@ -1,0 +1,35 @@
+# Blender MTL File: 'chaingun.blend'
+# Material Count: 3
+
+newmtl ChaingunMaterial1
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.144068 0.144068 0.144068
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd chainguntexture.png
+map_Ks scratches3.png
+
+newmtl ChaingunMaterial2
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.330508 0.330508 0.330508
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd chainguntexture.png
+map_Ks scratches3.png
+
+newmtl ChaingunMaterial3
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.025000 0.025000 0.025000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd chainguntexture.png
+map_Ks scratches3.png

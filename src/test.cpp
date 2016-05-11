@@ -73,6 +73,9 @@ Weapon* player_held_item = nullptr;
 Larp::Node* camera_node = nullptr;
 Larp::AnimationHandler* test_gun_animator;
 bool was_in_air = false;
+bool firing = false;
+bool walk_sound = false;
+GLfloat air_start_time = 0;
 GUIManager* GUIMan;
 
 int main(void)
@@ -176,17 +179,41 @@ int main(void)
 
     world->get_dynamics_world()->addRigidBody(crate_collider->get_rigid_body());
 
-    Weapon* shotgun = new Weapon("assets/Shotgun/shotgun_000000.obj", "assets/Shotgun/shotgun.lub", "assets/crate/crate.obj", graph->get_root_node(), -90, 0, 1.2);
+    Weapon* shotgun = new Weapon("assets/Shotgun/shotgun_000000.obj",
+                                 "assets/Shotgun/shotgun.lub",
+                                 "assets/crate/crate.obj",
+                                 "shotgun",
+                                 graph->get_root_node(),
+                                 -90, 0, 1.2,
+                                 false);
     shotgun->_node->set_scale(0.1, 0.1, 0.1);
-    shotgun->_node->set_position(3.0, 9.0, 0.0);
+    shotgun->_node->set_position(3.0, 1.5, 0.0);
     shotgun->initiate_physics(world.get());
     pickupable_items.insert(shotgun);
 
-    Weapon* launcher = new Weapon("assets/Rocket Launcher/launcher_000000.obj", "assets/Rocket Launcher/launcher.lub", "assets/rocket/rocket.obj", graph->get_root_node(), 0, -90, 0.5);
+    Weapon* launcher = new Weapon("assets/Rocket Launcher/launcher_000000.obj",
+                                  "assets/Rocket Launcher/launcher.lub",
+                                  "assets/rocket/rocket.obj",
+                                  "rocket_fire",
+                                  graph->get_root_node(),
+                                  0, -90, 0.5,
+                                  false);
     launcher->_node->set_scale(0.1, 0.1, 0.1);
-    launcher->_node->set_position(-3.0, 9.0, 0.0);
+    launcher->_node->set_position(-8.5, 8.5, 8.5);
     launcher->initiate_physics(world.get());
     pickupable_items.insert(launcher);
+
+    Weapon* chaingun = new Weapon("assets/Chaingun/chaingun_000000.obj",
+                                  "assets/Chaingun/chaingun.lub",
+                                  "assets/crate/crate.obj",
+                                  "chaingun",
+                                  graph->get_root_node(),
+                                  0, 0, 0.75,
+                                  true);
+    chaingun->_node->set_scale(0.2, 0.2, 0.2);
+    chaingun->_node->set_position(10.0, 9.0, -10.0);
+    chaingun->initiate_physics(world.get());
+    pickupable_items.insert(chaingun);
 
     /*******************************
      * TESTING - DELETE THIS       *
@@ -294,7 +321,14 @@ int main(void)
         // Check and call events
         glfwPollEvents();
         if(!GUIrendering)
+        {
             Do_Movement();
+
+            if(firing && player_held_item->_auto)
+            {
+                attempt_to_spawn_bullet();
+            }
+        }
 
         // Clear the colorbuffer
         glClearColor(0.1f, 0.8f, 0.1f, 1.0f);
@@ -359,25 +393,29 @@ void Do_Movement()
 
     if(!was_in_air && !(player->is_on_floor()))
     {
-        SoundManager::play_sound("jump");
         was_in_air = true;
+        air_start_time = Larp::Time::current_time();
     }
     if(was_in_air && player->is_on_floor())
     {
         was_in_air = false;
-        if(player_held_item != nullptr && !(player_held_item->_animation->get_current_animation() == "fire"))
+        SoundManager::play_sound("jump");
+        if(player_held_item != nullptr && !(player_held_item->_animation->get_current_animation() == "fire") && Larp::Time::current_time() - air_start_time >= 0.3)
         {
             player_held_item->_animation->play("land", true, 0);
         }
     }
     if(player_held_item != nullptr && player->is_moving() && player->is_on_floor() && player_held_item->_animation->get_current_animation() == "NO ANIMATION PLAYING")
     {
-		SoundManager::play_sound("walk");
         player_held_item->_animation->play("walk", true, 0);
     }
     if(player_held_item != nullptr && (!(player->is_moving()) || !(player->is_on_floor())) && player_held_item->_animation->get_current_animation() == "walk")
     {
         player_held_item->_animation->stop(true);
+    }
+    if(player->is_moving() && player->is_on_floor())
+    {
+        SoundManager::play_sound("walk");
     }
 }
 
@@ -469,8 +507,12 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS && !GUIrendering)
     {
         attempt_to_spawn_bullet();
+        firing = true;
     }
-
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE && !GUIrendering)
+    {
+        firing = false;
+    }
     if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
         CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::RightButton);
     else if(button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
@@ -591,7 +633,7 @@ void attempt_to_spawn_bullet()
     if (player_held_item == nullptr || player_held_item->_animation->get_current_animation() == "fire")
         return;
 
-    SoundManager::play_sound("shotgun");
+    SoundManager::play_sound(player_held_item->_sound);
     player_held_item->_animation->play("fire", true, 0);
     GLfloat yaw = camera._yaw;
     GLfloat pitch = camera._pitch;
