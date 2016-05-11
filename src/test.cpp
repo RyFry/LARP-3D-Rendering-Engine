@@ -591,11 +591,14 @@ void attempt_to_spawn_bullet()
     if (player_held_item == nullptr || player_held_item->_animation->get_current_animation() == "fire")
         return;
 
-	SoundManager::play_sound("shotgun");
+    SoundManager::play_sound("shotgun");
     player_held_item->_animation->play("fire", true, 0);
     GLfloat yaw = camera._yaw;
     GLfloat pitch = camera._pitch;
     glm::vec3 pos = camera._position;
+    glm::quat rotation;
+    rotation = glm::rotate(rotation, -yaw + 90.0, glm::vec3(0, 1, 0));
+    rotation = glm::rotate(rotation, -pitch, glm::vec3(1, 0, 0));
 
     btScalar xz_len = cos(glm::radians(pitch));
     btVector3 direction(xz_len * cos(glm::radians(yaw)), sin(glm::radians(pitch)), xz_len * sin(glm::radians(yaw)));
@@ -606,9 +609,11 @@ void attempt_to_spawn_bullet()
     crate_node->attach_entity(crate_entity);
     crate_node->set_scale(0.04, 0.04, 0.04);
     crate_node->set_position(pos);
+    crate_node->set_orientation(rotation);
 
     PhysicsObjectBuilder<btBoxShape> crate_builder;
     crate_builder.set_position(pos);
+    crate_builder.set_orientation(rotation);
     crate_builder.set_mass(0.2);
     crate_builder.set_restitution(0.0);
     crate_builder.set_user_pointer(crate_node);
