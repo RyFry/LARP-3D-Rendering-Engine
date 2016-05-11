@@ -1,0 +1,54 @@
+assets/Rocket Launcher/launcher_000000.obj
+assets/Rocket Launcher/launcher_000001.obj
+assets/Rocket Launcher/launcher_000002.obj
+assets/Rocket Launcher/launcher_000003.obj
+assets/Rocket Launcher/launcher_000004.obj
+assets/Rocket Launcher/launcher_000005.obj
+assets/Rocket Launcher/launcher_000006.obj
+assets/Rocket Launcher/launcher_000007.obj
+assets/Rocket Launcher/launcher_000008.obj
+assets/Rocket Launcher/launcher_000009.obj
+assets/Rocket Launcher/launcher_000010.obj
+assets/Rocket Launcher/launcher_000011.obj
+assets/Rocket Launcher/launcher_000012.obj
+assets/Rocket Launcher/launcher_000013.obj
+assets/Rocket Launcher/launcher_000014.obj
+assets/Rocket Launcher/launcher_000015.obj
+assets/Rocket Launcher/launcher_000016.obj
+
+3
+
+fire
+8
+0.05
+1
+2
+3
+4
+5
+6
+7
+8
+
+walk
+9
+0.05
+9
+10
+11
+12
+13
+12
+11
+10
+9
+
+land
+5
+0.05
+14
+15
+16
+14
+15
+

@@ -16,6 +16,7 @@
 
 #include "Larp/AnimationHandler.hpp"
 #include "Camera.hpp"
+#include "Weapon.hpp"
 
 #include "Physics/PhysicsMeshColliderBuilder.hpp"
 #include "Physics/PhysicsObjectBuilder.hpp"
@@ -59,11 +60,10 @@ bool keys[1024];
 bool buttons[3];
 GLfloat lastX = 400, lastY = 300;
 bool firstMouse = true;
-std::unordered_set<Larp::Node*> pickupable_items;
+std::unordered_set<Weapon*> pickupable_items;
 std::unordered_set<Larp::Node*> destructable_items;
-Larp::Node* player_held_item = nullptr;
+Weapon* player_held_item = nullptr;
 Larp::Node* camera_node = nullptr;
-Larp::AnimationHandler* test_gun_animator;
 bool was_in_air = false;
 
 int main(void)
@@ -164,30 +164,44 @@ int main(void)
 
     world->get_dynamics_world()->addRigidBody(crate_collider->get_rigid_body());
 
-    Larp::ModelPtr test_gun_model = Larp::Model::create("assets/Shotgun/shotgun_000000.obj");
-    Larp::EntityPtr test_gun_entity = Larp::Entity::create(test_gun_model);
-    test_gun_animator = new Larp::AnimationHandler(test_gun_entity, "assets/Shotgun/shotgun.lub");
-    test_gun_entity->set_directional_shadows(true);
-    Larp::NodePtr test_gun_node = graph->create_child_node();
-    test_gun_node->attach_entity(test_gun_entity);
-    test_gun_node->set_scale(0.1, 0.1, 0.1);
-    test_gun_node->set_position(3.0, 9.0, 0.0);
+    Weapon* shotgun = new Weapon("assets/Shotgun/shotgun_000000.obj", "assets/Shotgun/shotgun.lub", graph->get_root_node());
+    shotgun->_node->set_scale(0.1, 0.1, 0.1);
+    shotgun->_node->set_position(3.0, 9.0, 0.0);
 
     PhysicsObjectBuilder<btBoxShape> test_gun_builder;
     glm::quat test_gun_rot(0, 0, 0, 1);
-    test_gun_rot = glm::rotate(test_gun_rot, 90.0, glm::vec3(0, 0, 1));
-    test_gun_node->set_orientation(test_gun_rot);
+    test_gun_rot = glm::rotate(test_gun_rot, 90.0, glm::vec3(1, 0, 0));
+    shotgun->_node->set_orientation(test_gun_rot);
     test_gun_builder.set_orientation(test_gun_rot);
     test_gun_builder.set_position(glm::vec3(3.0, 9.0, 0.0));
     test_gun_builder.set_mass(1.0);
     test_gun_builder.set_restitution(0.0);
-    test_gun_builder.set_user_pointer(test_gun_node);
+    test_gun_builder.set_user_pointer(shotgun->_node);
 
     PhysicsBoxPtr test_gun_collider = test_gun_builder.build();
 
     world->get_dynamics_world()->addRigidBody(test_gun_collider->get_rigid_body());
 
-    pickupable_items.insert(test_gun_node);
+    pickupable_items.insert(shotgun);
+
+    Weapon* launcher = new Weapon("assets/Rocket Launcher/launcher_000000.obj", "assets/Rocket Launcher/launcher.lub", graph->get_root_node());
+    launcher->_node->set_scale(0.1, 0.1, 0.1);
+    launcher->_node->set_position(-3.0, 9.0, 0.0);
+
+    test_gun_rot = glm::quat(0, 0, 0, 1);
+    test_gun_rot = glm::rotate(test_gun_rot, 90.0, glm::vec3(0, 0, 1));
+    launcher->_node->set_orientation(test_gun_rot);
+    test_gun_builder.set_orientation(test_gun_rot);
+    test_gun_builder.set_position(glm::vec3(3.0, 9.0, 0.0));
+    test_gun_builder.set_mass(1.0);
+    test_gun_builder.set_restitution(0.0);
+    test_gun_builder.set_user_pointer(launcher->_node);
+
+    test_gun_collider = test_gun_builder.build();
+
+    world->get_dynamics_world()->addRigidBody(test_gun_collider->get_rigid_body());
+
+    pickupable_items.insert(launcher);
 
     /*******************************
      * TESTING - DELETE THIS       *
@@ -271,6 +285,7 @@ int main(void)
                 obj->getCollisionFlags() != btCollisionObject::CF_CHARACTER_OBJECT)
             {
                 btTransform trans;
+                trans.setIdentity();
                 body->getMotionState()->getWorldTransform(trans);
                 void* user_pointer = body->getUserPointer();
 
@@ -353,18 +368,18 @@ void Do_Movement()
     if(was_in_air && player->is_on_floor())
     {
         was_in_air = false;
-        if(player_held_item != nullptr && !(test_gun_animator->get_current_animation() == "fire"))
+        if(player_held_item != nullptr && !(player_held_item->_animation->get_current_animation() == "fire"))
         {
-            test_gun_animator->play("land", true, 0);
+            player_held_item->_animation->play("land", true, 0);
         }
     }
-    if(player_held_item != nullptr && player->is_moving() && player->is_on_floor() && test_gun_animator->get_current_animation() == "NO ANIMATION PLAYING")
+    if(player_held_item != nullptr && player->is_moving() && player->is_on_floor() && player_held_item->_animation->get_current_animation() == "NO ANIMATION PLAYING")
     {
-        test_gun_animator->play("walk", true, 0);
+        player_held_item->_animation->play("walk", true, 0);
     }
-    if(player_held_item != nullptr && (!(player->is_moving()) || !(player->is_on_floor())) && test_gun_animator->get_current_animation() == "walk")
+    if(player_held_item != nullptr && (!(player->is_moving()) || !(player->is_on_floor())) && player_held_item->_animation->get_current_animation() == "walk")
     {
-        test_gun_animator->stop(true);
+        player_held_item->_animation->stop(true);
     }
 }
 
@@ -435,6 +450,9 @@ void error_callback(int error, const char* description)
  */
 void attempt_to_pick_up_weapon()
 {
+    if (player_held_item != nullptr)
+        return;
+    
     GLfloat yaw = camera._yaw;
     GLfloat pitch = camera._pitch;
     glm::vec3 pos = camera._position;
@@ -449,11 +467,21 @@ void attempt_to_pick_up_weapon()
     btCollisionWorld::ClosestRayResultCallback result(bt_from, bt_to);
     world->get_dynamics_world()->rayTest(bt_from, bt_to, result);
 
-    if (result.hasHit() && (bt_from - result.m_hitPointWorld).length() < 0.5)
+    if (result.hasHit() && (bt_from - result.m_hitPointWorld).length() < 0.7)
     {
         btRigidBody* collided = const_cast<btRigidBody*>(static_cast<const btRigidBody*>(result.m_collisionObject));
         Larp::NodePtr user_pointer = static_cast<Larp::NodePtr>(collided->getUserPointer());
-        if (user_pointer != nullptr && pickupable_items.find(user_pointer) != pickupable_items.end())
+        Weapon* weaponptr = nullptr;
+        if(user_pointer != nullptr)
+        {
+           for (auto& it:pickupable_items) {
+                if(it->_node == user_pointer)
+                {
+                    weaponptr = it; 
+                }
+            } 
+        }
+        if (weaponptr != nullptr)
         {
             world->get_dynamics_world()->removeRigidBody(const_cast<btRigidBody*>(collided));
             user_pointer->detach_this_from_parent();
@@ -469,7 +497,7 @@ void attempt_to_pick_up_weapon()
             user_pointer->pitch(-90);
 
             // Finally, update our player_held_item to denote that we are actually holding something
-            player_held_item = user_pointer;
+            player_held_item = weaponptr;
         }
     }
 }
@@ -489,12 +517,12 @@ void attempt_to_drop_weapon()
     PhysicsObjectBuilder<btBoxShape> test_gun_builder;
     glm::quat test_gun_rot(0, 0, 0, 1);
     test_gun_rot = glm::rotate(test_gun_rot, 50.0, glm::vec3(0, 0, 1));
-    player_held_item->set_orientation(test_gun_rot);
+    player_held_item->_node->set_orientation(test_gun_rot);
     test_gun_builder.set_orientation(test_gun_rot);
     test_gun_builder.set_position(pos);
     test_gun_builder.set_mass(5.0);
     test_gun_builder.set_restitution(0.0);
-    test_gun_builder.set_user_pointer(player_held_item);
+    test_gun_builder.set_user_pointer(player_held_item->_node);
 
     PhysicsBoxPtr test_gun_collider = test_gun_builder.build();
 
@@ -502,18 +530,18 @@ void attempt_to_drop_weapon()
 
     world->get_dynamics_world()->addRigidBody(test_gun_collider->get_rigid_body());
 
-    player_held_item->detach_this_from_parent();
-    graph->get_root_node()->attach_child(player_held_item);
+    player_held_item->_node->detach_this_from_parent();
+    graph->get_root_node()->attach_child(player_held_item->_node);
     player_held_item = nullptr;
 }
 
 void attempt_to_spawn_bullet()
 {
     // Only attempt to shoot  a bullet if the user is holding a gun
-    if (player_held_item == nullptr || test_gun_animator->get_current_animation() == "fire")
+    if (player_held_item == nullptr || player_held_item->_animation->get_current_animation() == "fire")
         return;
 
-    test_gun_animator->play("fire", true, 0);
+    player_held_item->_animation->play("fire", true, 0);
     GLfloat yaw = camera._yaw;
     GLfloat pitch = camera._pitch;
     glm::vec3 pos = camera._position;

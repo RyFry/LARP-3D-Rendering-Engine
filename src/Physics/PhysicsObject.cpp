@@ -6,6 +6,7 @@ PhysicsObject<BulletShape>::PhysicsObject(glm::quat rotation, glm::vec3 position
                                           Larp::NodePtr user_pointer)
 {
     btTransform transform;
+    transform.setIdentity();
     transform.setOrigin(btVector3(position.x, position.y, position.z));
     transform.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z, rotation.w));
 
