@@ -167,7 +167,7 @@ int main(void)
     destructable_items.insert(crate_node);
 
     PhysicsObjectBuilder<btBoxShape> crate_builder;
-    crate_builder.set_position(glm::vec3(0.0, 4.0, 0.0));
+    crate_builder.set_position(glm::vec3(0.0, 6.0, 0.0));
     crate_builder.set_mass(0.6);
     crate_builder.set_restitution(0.0);
     crate_builder.set_user_pointer(crate_node);
