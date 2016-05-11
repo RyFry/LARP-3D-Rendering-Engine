@@ -35,12 +35,12 @@ all: $(PROD)
 debug_all: $(DEBUG_PROD)
 	@echo 'Compilation finished (debug).'
 
-$(OBJS): $(OBJDIR)/$(RELEASE_DIR)/%.o: $(SRCDIR)/%.cpp
+$(OBJS): $(OBJDIR)/$(RELEASE_DIR)/%.o: $(SRCDIR)/%.cpp $(SRCDIR)/%.hpp
 	@mkdir -p $(@D)
 	@echo -e [CXX] '\t' $@
 	@$(CXX) $(OPTFLAG) $(INCLUDES) $(CXXFLAGS) -c $< -o $@
 
-$(DEBUG_OBJS): $(OBJDIR)/$(DEBUG_DIR)/%.o: $(SRCDIR)/%.cpp
+$(DEBUG_OBJS): $(OBJDIR)/$(DEBUG_DIR)/%.o: $(SRCDIR)/%.cpp $(SRCDIR)/%.hpp
 	@mkdir -p $(@D)
 	@echo -e [CXX] '\t' $@
 	@$(CXX) $(OPTFLAG) $(INCLUDES) $(CXXFLAGS) -c $< -o $@

@@ -22,13 +22,10 @@ PhysicsObject<BulletShape>::PhysicsObject(glm::quat rotation, glm::vec3 position
 
     btRigidBody::btRigidBodyConstructionInfo rigid_body_info(bt_mass, motion_state,
                                                              shape, inertia);
-    // rigid_body_info.m_linearDamping = .01f;
-    // rigid_body_info.m_angularDamping = .01f;
+    
     this->_rigid_body = new btRigidBody(rigid_body_info);
     this->_rigid_body->setRestitution(restitution);
     this->_rigid_body->setUserPointer(user_pointer);
-    // this->_rigid_body->setFriction(.5f);
-    // this->_rigid_body->setRollingFriction(.5f);
 }
 
 template <typename BulletShape>
