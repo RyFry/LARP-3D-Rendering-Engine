@@ -70,7 +70,7 @@ namespace Larp
          * @param directory The directory where the texture given in path is located.
          * @warning This function should @b not be called directory.
          */
-        static Texture* texture_from_file(const char* path, std::string directory);
+        static Texture* texture_from_file(const char* path, std::string directory, Texture::Type type);
 
     private:
         /**

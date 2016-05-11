@@ -25,7 +25,7 @@ namespace Larp
          */
         static std::unordered_map<std::string, UniqueTexture> _loaded_textures;
 
-        Texture(std::string path);
+        Texture(std::string path, Type type);
 
         /**
          * The OpenGL texture ID
@@ -41,7 +41,7 @@ namespace Larp
          */
         aiString _path;
     public:
-        static TexturePtr create(std::string path);
+        static TexturePtr create(std::string path, Type type);
         /**
          * @return a string representation of this Texture's Type.
          */

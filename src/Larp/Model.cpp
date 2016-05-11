@@ -187,7 +187,7 @@ namespace Larp
         return Mesh(vertices, indices, textures);
     }
 
-    std::vector<Texture*> Model::load_material_textures(aiMaterial* mat, aiTextureType type, Texture::Type textureType)
+    std::vector<Texture*> Model::load_material_textures(aiMaterial* mat, aiTextureType type, Texture::Type texture_type)
     {
         std::vector<Texture*> textures;
         for (GLuint i = 0; i < mat->GetTextureCount(type); ++i)
@@ -208,7 +208,8 @@ namespace Larp
             if (!skip)
             {
                 // If the texture isn't already loaded, load it
-                Texture* texture = Mesh::texture_from_file(str.C_Str(), this->_directory);
+                Texture* texture = Mesh::texture_from_file(str.C_Str(), this->_directory, texture_type);
+                textures.push_back(texture);
                 this->_loaded_textures.push_back(texture); // Add to loaded textures
             }
         }

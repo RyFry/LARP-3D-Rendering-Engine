@@ -82,11 +82,11 @@ namespace Larp
         glBindVertexArray(0);
     }
 
-    Texture* Mesh::texture_from_file(const char* path, std::string directory)
+    Texture* Mesh::texture_from_file(const char* path, std::string directory, Texture::Type type)
     {
         //Generate texture ID and load texture data
         std::string filename(path);
         filename = directory + "/" + filename;
-        return Texture::create(filename);
+        return Texture::create(filename, type);
     }
 }

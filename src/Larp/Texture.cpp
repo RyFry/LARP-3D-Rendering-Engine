@@ -4,17 +4,19 @@ namespace Larp
 {
     std::unordered_map<std::string, UniqueTexture> Texture::_loaded_textures;
 
-    TexturePtr Texture::create(std::string path)
+    TexturePtr Texture::create(std::string path, Type type)
     {
         if (_loaded_textures.find(path) == _loaded_textures.end())
         {
-            _loaded_textures.emplace(path, UniqueTexture(new Texture(path)));
+            _loaded_textures.emplace(path, UniqueTexture(new Texture(path, type)));
         }
         return _loaded_textures.at(path).get();
     }
 
-    Texture::Texture(std::string path)
+    Texture::Texture(std::string path, Type type)
     {
+        this->_path = path;
+        this->_type = type;
         glGenTextures(1, &_id);
         int width, height;
         unsigned char* image = SOIL_load_image(path.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
