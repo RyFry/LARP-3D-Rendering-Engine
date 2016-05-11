@@ -187,7 +187,7 @@ int main(void)
 
     PhysicsObjectBuilder<btBoxShape> test_gun_builder;
     glm::quat test_gun_rot(0, 0, 0, 1);
-    test_gun_rot = glm::rotate(test_gun_rot, 90.0, glm::vec3(0, 0, 1));
+    test_gun_rot = glm::rotate(test_gun_rot, 45.0, glm::vec3(0, 0, 1));
     test_gun_node->set_orientation(test_gun_rot);
     test_gun_builder.set_orientation(test_gun_rot);
     test_gun_builder.set_position(glm::vec3(3.0, 9.0, 0.0));
@@ -292,10 +292,10 @@ int main(void)
                     user_node->set_position(trans.getOrigin().getX(),
                                             trans.getOrigin().getY(),
                                             trans.getOrigin().getZ());
-                    user_node->set_orientation(orientation.getX(),
-                                               orientation.getY(),
-                                               orientation.getZ(),
-                                               orientation.getW());
+                    user_node->set_orientation(glm::quat(orientation.getW(),
+                                                         orientation.getX(),
+                                                         orientation.getY(),
+                                                         orientation.getZ()));
                 }
             }
         }
@@ -533,6 +533,7 @@ void attempt_to_pick_up_weapon()
             user_pointer->set_scale(user_pointer_scale.x / player_scale.x,
                                     user_pointer_scale.y / player_scale.y,
                                     user_pointer_scale.z / player_scale.z);
+            user_pointer->set_orientation(glm::quat(1, 0, 0, 0));
             user_pointer->pitch(-90);
 
             // Finally, update our player_held_item to denote that we are actually holding something
