@@ -5,7 +5,7 @@ PhysicsObjectBuilder<BulletShape>::PhysicsObjectBuilder()
     : _orientation(0.0, 0.0, 0.0, 1.0),
       _position(0.0, 0.0, 0.0),
       _mass(0.0),
-      _local_inertia(0.0, 0.0, 0.0),
+      _local_inertia(1.0, 1.0, 1.0),
       _restitution(1.0),
       _user_pointer(nullptr)
 {

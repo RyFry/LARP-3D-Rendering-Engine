@@ -2,26 +2,11 @@
 
 namespace Larp
 {
-    // -------
-    // Texture
-    // -------
-
-    std::string Texture::to_string()
-    {
-        if (this->_type == Texture::DIFFUSE)
-            return "diffuse";
-        if (this->_type == Texture::SPECULAR)
-            return "specular";
-        if (this->_type == Texture::REFLECTION)
-            return "reflection";
-        return "";
-    }
-
     // ----------------
     // Public Functions
     // ----------------
 
-    Mesh::Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<Texture>& textures) :
+    Mesh::Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<Texture*>& textures) :
         _vertices(vertices),
         _indices(indices),
         _textures(textures)
@@ -40,7 +25,7 @@ namespace Larp
             // Retrieve the texture number (diffuseN or specularN)
             std::stringstream ss;
             std::string number;
-            std::string name = this->_textures.at(i).to_string();
+            std::string name = this->_textures.at(i)->to_string();
             if (name == "diffuse")
                 ss << diffuseN++;
             else if (name == "specular")
@@ -55,7 +40,7 @@ namespace Larp
             number = ss.str();
 
             glUniform1i(glGetUniformLocation(shader._program, ("material." + name + number).c_str()), i + 1);
-            glBindTexture(GL_TEXTURE_2D, this->_textures.at(i)._id);
+            glBindTexture(GL_TEXTURE_2D, this->_textures.at(i)->get_id());
         }
         glActiveTexture(GL_TEXTURE1);
 
@@ -97,27 +82,11 @@ namespace Larp
         glBindVertexArray(0);
     }
 
-    GLint Mesh::texture_from_file(const char* path, std::string directory)
+    Texture* Mesh::texture_from_file(const char* path, std::string directory, Texture::Type type)
     {
         //Generate texture ID and load texture data
         std::string filename(path);
         filename = directory + "/" + filename;
-        TextureID texture_id;
-        glGenTextures(1, &texture_id);
-        int width, height;
-        unsigned char* image = SOIL_load_image(filename.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
-        // Assign texture to ID
-        glBindTexture(GL_TEXTURE_2D, texture_id);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-        glGenerateMipmap(GL_TEXTURE_2D);
-
-        // Parameters
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glBindTexture(GL_TEXTURE_2D, 0);
-        SOIL_free_image_data(image);
-        return texture_id;
+        return Texture::create(filename, type);
     }
 }

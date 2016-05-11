@@ -11,7 +11,7 @@ namespace Larp
 
     DirectionalLightPtr LightFactory::create_directional_light(glm::vec3 direction)
     {
-        if (_directional_lights.size() >= _max_directional_lights + 1)
+        if (_directional_lights.size() >= _max_directional_lights)
         {
             THROW_RUNTIME_ERROR("Only " << _max_directional_lights << " directional light(s) allowed");
         }
@@ -22,7 +22,7 @@ namespace Larp
 
     DirectionalLightPtr LightFactory::create_directional_light(GLfloat x, GLfloat y, GLfloat z)
     {
-        if (_directional_lights.size() >= _max_directional_lights + 1)
+        if (_directional_lights.size() >= _max_directional_lights)
         {
             THROW_RUNTIME_ERROR("Only " << _max_directional_lights << " directional light(s) allowed");
         }
@@ -33,7 +33,7 @@ namespace Larp
 
     PointLightPtr LightFactory::create_point_light(glm::vec3 position)
     {
-        if (_point_lights.size() >= _max_point_lights + 1)
+        if (_point_lights.size() >= _max_point_lights)
         {
             THROW_RUNTIME_ERROR("Only " << _max_point_lights << " point light(s) allowed");
         }
@@ -44,7 +44,7 @@ namespace Larp
 
     PointLightPtr LightFactory::create_point_light(GLfloat x, GLfloat y, GLfloat z)
     {
-        if (_point_lights.size() >= _max_point_lights + 1)
+        if (_point_lights.size() >= _max_point_lights)
         {
             THROW_RUNTIME_ERROR("Only " << _max_point_lights << " point light(s) allowed");
         }
@@ -55,7 +55,7 @@ namespace Larp
 
     SpotLightPtr LightFactory::create_spot_light(glm::vec3 position)
     {
-        if (_spot_lights.size() >= _max_spot_lights + 1)
+        if (_spot_lights.size() >= _max_spot_lights)
         {
             THROW_RUNTIME_ERROR("Only " << _max_spot_lights << " spot light(s) allowed");
         }
@@ -66,7 +66,7 @@ namespace Larp
 
     SpotLightPtr LightFactory::create_spot_light(GLfloat x, GLfloat y, GLfloat z)
     {
-        if (_spot_lights.size() >= _max_spot_lights + 1)
+        if (_spot_lights.size() >= _max_spot_lights)
         {
             THROW_RUNTIME_ERROR("Only " << _max_spot_lights << " spot light(s) allowed");
         }

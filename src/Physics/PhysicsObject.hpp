@@ -21,3 +21,4 @@ public:
 typedef PhysicsObject<btBoxShape>* PhysicsBoxPtr;
 typedef PhysicsObject<btCylinderShape>* PhysicsCylinderPtr;
 typedef PhysicsObject<btCapsuleShape>* PhysicsCapsulePtr;
+
