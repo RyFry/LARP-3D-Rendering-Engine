@@ -164,43 +164,16 @@ int main(void)
 
     world->get_dynamics_world()->addRigidBody(crate_collider->get_rigid_body());
 
-    Weapon* shotgun = new Weapon("assets/Shotgun/shotgun_000000.obj", "assets/Shotgun/shotgun.lub", graph->get_root_node());
+    Weapon* shotgun = new Weapon("assets/Shotgun/shotgun_000000.obj", "assets/Shotgun/shotgun.lub", "assets/crate/crate.obj", graph->get_root_node(), -90, 0, 1.2);
     shotgun->_node->set_scale(0.1, 0.1, 0.1);
     shotgun->_node->set_position(3.0, 9.0, 0.0);
-
-    PhysicsObjectBuilder<btBoxShape> test_gun_builder;
-    glm::quat test_gun_rot(0, 0, 0, 1);
-    test_gun_rot = glm::rotate(test_gun_rot, 90.0, glm::vec3(1, 0, 0));
-    shotgun->_node->set_orientation(test_gun_rot);
-    test_gun_builder.set_orientation(test_gun_rot);
-    test_gun_builder.set_position(glm::vec3(3.0, 9.0, 0.0));
-    test_gun_builder.set_mass(1.0);
-    test_gun_builder.set_restitution(0.0);
-    test_gun_builder.set_user_pointer(shotgun->_node);
-
-    PhysicsBoxPtr test_gun_collider = test_gun_builder.build();
-
-    world->get_dynamics_world()->addRigidBody(test_gun_collider->get_rigid_body());
-
+    shotgun->initiate_physics(world.get());
     pickupable_items.insert(shotgun);
 
-    Weapon* launcher = new Weapon("assets/Rocket Launcher/launcher_000000.obj", "assets/Rocket Launcher/launcher.lub", graph->get_root_node());
+    Weapon* launcher = new Weapon("assets/Rocket Launcher/launcher_000000.obj", "assets/Rocket Launcher/launcher.lub", "assets/rocket/rocket.obj", graph->get_root_node(), 0, -90, 0.5);
     launcher->_node->set_scale(0.1, 0.1, 0.1);
     launcher->_node->set_position(-3.0, 9.0, 0.0);
-
-    test_gun_rot = glm::quat(0, 0, 0, 1);
-    test_gun_rot = glm::rotate(test_gun_rot, 90.0, glm::vec3(0, 0, 1));
-    launcher->_node->set_orientation(test_gun_rot);
-    test_gun_builder.set_orientation(test_gun_rot);
-    test_gun_builder.set_position(glm::vec3(3.0, 9.0, 0.0));
-    test_gun_builder.set_mass(1.0);
-    test_gun_builder.set_restitution(0.0);
-    test_gun_builder.set_user_pointer(launcher->_node);
-
-    test_gun_collider = test_gun_builder.build();
-
-    world->get_dynamics_world()->addRigidBody(test_gun_collider->get_rigid_body());
-
+    launcher->initiate_physics(world.get());
     pickupable_items.insert(launcher);
 
     /*******************************
@@ -297,10 +270,10 @@ int main(void)
                     user_node->set_position(trans.getOrigin().getX(),
                                             trans.getOrigin().getY(),
                                             trans.getOrigin().getZ());
-                    user_node->set_orientation(orientation.getX(),
-                                               orientation.getY(),
-                                               orientation.getZ(),
-                                               orientation.getW());
+                    user_node->set_orientation(glm::quat(orientation.getW(),
+                                                         orientation.getX(),
+                                                         orientation.getY(),
+                                                         orientation.getZ()));
                 }
             }
         }
@@ -488,13 +461,15 @@ void attempt_to_pick_up_weapon()
             Larp::NodePtr gun_parent = camera_node->create_child();
             gun_parent->attach_child(user_pointer);
             user_pointer->set_position(0.0, 0.0, 0.0);
-            gun_parent->set_position(-0.1, -0.25, 1.2);
+            gun_parent->set_position(-0.2, -0.25, weaponptr->_offset_z);
             glm::vec3 player_scale = static_cast<Larp::NodePtr>(player->get_user_pointer())->get_scale();
             glm::vec3 user_pointer_scale = user_pointer->get_scale();
             user_pointer->set_scale(user_pointer_scale.x / player_scale.x,
                                     user_pointer_scale.y / player_scale.y,
                                     user_pointer_scale.z / player_scale.z);
-            user_pointer->pitch(-90);
+            user_pointer->set_orientation(glm::quat(1, 0, 0, 0));
+            user_pointer->pitch(weaponptr->_offset_pitch);
+            user_pointer->yaw(weaponptr->_offset_yaw);
 
             // Finally, update our player_held_item to denote that we are actually holding something
             player_held_item = weaponptr;
@@ -549,11 +524,11 @@ void attempt_to_spawn_bullet()
     btScalar xz_len = cos(glm::radians(pitch));
     btVector3 direction(xz_len * cos(glm::radians(yaw)), sin(glm::radians(pitch)), xz_len * sin(glm::radians(yaw)));
 
-    Larp::ModelPtr crate_model = Larp::Model::create("assets/crate/crate.obj");
+    Larp::ModelPtr crate_model = Larp::Model::create(player_held_item->_ammo);
     Larp::EntityPtr crate_entity = Larp::Entity::create(crate_model);
     Larp::NodePtr crate_node = graph->create_child_node();
     crate_node->attach_entity(crate_entity);
-    crate_node->set_scale(0.02, 0.02, 0.02);
+    crate_node->set_scale(0.04, 0.04, 0.04);
     crate_node->set_position(pos);
 
     PhysicsObjectBuilder<btBoxShape> crate_builder;
