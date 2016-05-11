@@ -95,7 +95,7 @@ int main(void)
 
     glfwSetErrorCallback(error_callback);
 
-    GLFWwindow* window = glfwCreateWindow(screenWidth, screenHeight, config.get_title().c_str(), nullptr, nullptr); // Windowed
+    GLFWwindow* window = glfwCreateWindow(screenWidth, screenHeight, config.get_title().c_str(), glfwGetPrimaryMonitor(), nullptr); // Windowed
     if (window == nullptr)
     {
         THROW_RUNTIME_ERROR("GLFWwindow* = nullptr");

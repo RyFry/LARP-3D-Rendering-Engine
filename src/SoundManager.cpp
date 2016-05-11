@@ -58,7 +58,6 @@ void SoundManager::play_sound(std::string effectName)
         if (Mix_Playing(0))
             return;
         std::string temp(effectName + std::to_string(_walk));
-        std::cout << "effectName" << temp << std::endl;
         if(_walk == 0)
         {
             Mix_PlayChannel(0, _sound_effects.at(temp), 0);
@@ -72,6 +71,8 @@ void SoundManager::play_sound(std::string effectName)
     }
     else if(effectName == "jump")
     {
+        if (Mix_Playing(1))
+            return;
         Mix_PlayChannel(1, _sound_effects.at(effectName.c_str()), 0);
     }
     else
