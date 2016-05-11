@@ -232,6 +232,9 @@ int main(void)
     // soundMan = new SoundManager();
     GUIMan = new GUIManager(graph, window);
     GUIrendering = false;
+
+    SoundManager::sound_init();
+    SoundManager::play_music();
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
@@ -330,6 +333,7 @@ int main(void)
     }
 
     glfwTerminate();
+    SoundManager::sound_quit();
 
     return 0;
 }
@@ -358,6 +362,7 @@ void Do_Movement()
 
     if (keys[GLFW_KEY_SPACE])
         player->jump();
+
     if (keys[GLFW_KEY_LEFT_SHIFT])
         camera.process_keyboard(Camera::DOWN, Larp::Time::delta_time());
 
@@ -366,6 +371,7 @@ void Do_Movement()
 
     if(!was_in_air && !(player->is_on_floor()))
     {
+        SoundManager::play_sound("jump");
         was_in_air = true;
     }
     if(was_in_air && player->is_on_floor())
@@ -378,6 +384,7 @@ void Do_Movement()
     }
     if(player_held_item != nullptr && player->is_moving() && player->is_on_floor() && test_gun_animator->get_current_animation() == "NO ANIMATION PLAYING")
     {
+         SoundManager::play_sound("walk");
         test_gun_animator->play("walk", true, 0);
     }
     if(player_held_item != nullptr && (!(player->is_moving()) || !(player->is_on_floor())) && test_gun_animator->get_current_animation() == "walk")
@@ -533,7 +540,6 @@ void attempt_to_pick_up_weapon()
             user_pointer->set_scale(user_pointer_scale.x / player_scale.x,
                                     user_pointer_scale.y / player_scale.y,
                                     user_pointer_scale.z / player_scale.z);
-            user_pointer->set_orientation(glm::quat(1, 0, 0, 0));
             user_pointer->pitch(-90);
 
             // Finally, update our player_held_item to denote that we are actually holding something
@@ -581,6 +587,7 @@ void attempt_to_spawn_bullet()
     if (player_held_item == nullptr || test_gun_animator->get_current_animation() == "fire")
         return;
 
+    SoundManager::play_sound("shotgun");
     test_gun_animator->play("fire", true, 0);
     GLfloat yaw = camera._yaw;
     GLfloat pitch = camera._pitch;

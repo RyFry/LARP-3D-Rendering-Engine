@@ -59,5 +59,8 @@ namespace Larp
          *         in the configuration file, or the `resizable` entry in DEFAULTS
          */
         GLenum is_resizable() const;
+
+        float get_music_volume() const;
+        float get_sound_volume() const;
     };
 }
