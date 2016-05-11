@@ -7,6 +7,7 @@
 #include <map>
 
 #include "Larp/LarpPrerequisites.hpp"
+#include "Larp/ConfigurationLoader.hpp"
 #include "SDL/SDL.h"
 #include "SDL/SDL_mixer.h"
 	
@@ -41,6 +42,8 @@ class SoundManager
 			static float _effect_volume;
 			
 			static float _music_volume;
+
+			static int _walk;
 
 
 };

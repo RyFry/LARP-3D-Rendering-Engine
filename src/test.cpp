@@ -229,9 +229,11 @@ int main(void)
     GLfloat frame_rate_limiter = 0.0f;
     uint64_t iteration_number = 0;
 
-    // soundMan = new SoundManager();
     GUIMan = new GUIManager(graph, window);
     GUIrendering = false;
+
+    SoundManager::sound_init();
+    SoundManager::play_music();
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
@@ -292,10 +294,10 @@ int main(void)
                     user_node->set_position(trans.getOrigin().getX(),
                                             trans.getOrigin().getY(),
                                             trans.getOrigin().getZ());
-                    user_node->set_orientation(orientation.getX(),
+                    user_node->set_orientation(glm::quat(orientation.getW(),
+                                               orientation.getX(),
                                                orientation.getY(),
-                                               orientation.getZ(),
-                                               orientation.getW());
+                                               orientation.getZ()));
                 }
             }
         }
@@ -330,6 +332,7 @@ int main(void)
     }
 
     glfwTerminate();
+    SoundManager::sound_quit();
 
     return 0;
 }
@@ -358,6 +361,7 @@ void Do_Movement()
 
     if (keys[GLFW_KEY_SPACE])
         player->jump();
+
     if (keys[GLFW_KEY_LEFT_SHIFT])
         camera.process_keyboard(Camera::DOWN, Larp::Time::delta_time());
 
@@ -366,6 +370,7 @@ void Do_Movement()
 
     if(!was_in_air && !(player->is_on_floor()))
     {
+        SoundManager::play_sound("jump");
         was_in_air = true;
     }
     if(was_in_air && player->is_on_floor())
@@ -376,8 +381,9 @@ void Do_Movement()
             test_gun_animator->play("land", true, 0);
         }
     }
-    if(player_held_item != nullptr && player->is_moving() && player->is_on_floor() && test_gun_animator->get_current_animation() == "NO ANIMATION PLAYING")
+    if(player_held_item != nullptr && player->is_moving() && player->is_on_floor() && test_gun_animator->get_current_animation() == "NO ANIMATION PLAYING") 
     {
+         SoundManager::play_sound("walk");
         test_gun_animator->play("walk", true, 0);
     }
     if(player_held_item != nullptr && (!(player->is_moving()) || !(player->is_on_floor())) && test_gun_animator->get_current_animation() == "walk")
@@ -580,6 +586,7 @@ void attempt_to_spawn_bullet()
     if (player_held_item == nullptr || test_gun_animator->get_current_animation() == "fire")
         return;
 
+    SoundManager::play_sound("shotgun");
     test_gun_animator->play("fire", true, 0);
     GLfloat yaw = camera._yaw;
     GLfloat pitch = camera._pitch;
