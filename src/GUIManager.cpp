@@ -103,23 +103,23 @@ void GUIManager::setup_menus()
 
 	redSpinnerAmbient->setTextInputMode(CEGUI::Spinner::FloatingPoint);
 	redSpinnerAmbient->setMinimumValue(0.0f);
-	redSpinnerAmbient->setMaximumValue(255.0f);
-	redSpinnerAmbient->setStepSize(10.0f);
-	redSpinnerAmbient->setCurrentValue(10.0f);
+	redSpinnerAmbient->setMaximumValue(1.0f);
+	redSpinnerAmbient->setStepSize(.1f);
+	redSpinnerAmbient->setCurrentValue(0.0f);
 	redSpinnerAmbient->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(0.0f,0)));
 
 	greenSpinnerAmbient->setTextInputMode(CEGUI::Spinner::FloatingPoint);
 	greenSpinnerAmbient->setMinimumValue(0.0f);
-	greenSpinnerAmbient->setMaximumValue(255.0f);
-	greenSpinnerAmbient->setStepSize(10.0f);
-	greenSpinnerAmbient->setCurrentValue(10.0f);
+	greenSpinnerAmbient->setMaximumValue(1.0f);
+	greenSpinnerAmbient->setStepSize(.1f);
+	greenSpinnerAmbient->setCurrentValue(0.0f);
 	greenSpinnerAmbient->setPosition(CEGUI::UVector2(CEGUI::UDim(0.15f,0),CEGUI::UDim(0.0f,0)));
 
 	blueSpinnerAmbient->setTextInputMode(CEGUI::Spinner::FloatingPoint);
 	blueSpinnerAmbient->setMinimumValue(0.0f);
-	blueSpinnerAmbient->setMaximumValue(255.0f);
-	blueSpinnerAmbient->setStepSize(10.0f);
-	blueSpinnerAmbient->setCurrentValue(10.0f);
+	blueSpinnerAmbient->setMaximumValue(1.0f);
+	blueSpinnerAmbient->setStepSize(.1f);
+	blueSpinnerAmbient->setCurrentValue(0.0f);
 	blueSpinnerAmbient->setPosition(CEGUI::UVector2(CEGUI::UDim(0.30f,0),CEGUI::UDim(0.0f,0)));
 
 
@@ -144,23 +144,23 @@ void GUIManager::setup_menus()
 
 	redSpinnerDiffuse->setTextInputMode(CEGUI::Spinner::FloatingPoint);
 	redSpinnerDiffuse->setMinimumValue(0.0f);
-	redSpinnerDiffuse->setMaximumValue(255.0f);
-	redSpinnerDiffuse->setStepSize(10.0f);
-	redSpinnerDiffuse->setCurrentValue(10.0f);
+	redSpinnerDiffuse->setMaximumValue(1.0f);
+	redSpinnerDiffuse->setStepSize(.1f);
+	redSpinnerDiffuse->setCurrentValue(0.0f);
 	redSpinnerDiffuse->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(0.0f,0)));
 
 	greenSpinnerDiffuse->setTextInputMode(CEGUI::Spinner::FloatingPoint);
 	greenSpinnerDiffuse->setMinimumValue(0.0f);
-	greenSpinnerDiffuse->setMaximumValue(255.0f);
-	greenSpinnerDiffuse->setStepSize(10.0f);
-	greenSpinnerDiffuse->setCurrentValue(10.0f);
+	greenSpinnerDiffuse->setMaximumValue(1.0f);
+	greenSpinnerDiffuse->setStepSize(.1f);
+	greenSpinnerDiffuse->setCurrentValue(0.0f);
 	greenSpinnerDiffuse->setPosition(CEGUI::UVector2(CEGUI::UDim(0.15f,0),CEGUI::UDim(0.0f,0)));
 
 	blueSpinnerDiffuse->setTextInputMode(CEGUI::Spinner::FloatingPoint);
 	blueSpinnerDiffuse->setMinimumValue(0.0f);
-	blueSpinnerDiffuse->setMaximumValue(255.0f);
-	blueSpinnerDiffuse->setStepSize(10.0f);
-	blueSpinnerDiffuse->setCurrentValue(10.0f);
+	blueSpinnerDiffuse->setMaximumValue(1.0f);
+	blueSpinnerDiffuse->setStepSize(.1f);
+	blueSpinnerDiffuse->setCurrentValue(0.0f);
 	blueSpinnerDiffuse->setPosition(CEGUI::UVector2(CEGUI::UDim(0.30f,0),CEGUI::UDim(0.0f,0)));
 
 
@@ -176,30 +176,30 @@ void GUIManager::setup_menus()
 	specularIntensity->setPosition(CEGUI::UVector2(CEGUI::UDim(0.1f,0),CEGUI::UDim(0.1f,0)));
 
 
-	/* Ambient RGB for the light */
+	/* Specular RGB for the light */
 	CEGUI::Spinner* redSpinnerSpecular   = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "redSpec"));
 	CEGUI::Spinner* greenSpinnerSpecular = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "greenSpec"));
 	CEGUI::Spinner* blueSpinnerSpecular  = static_cast<CEGUI::Spinner*>(this->_wmgr->createWindow("TaharezLook/Spinner", "blueSpec"));
 
 	redSpinnerSpecular->setTextInputMode(CEGUI::Spinner::FloatingPoint);
 	redSpinnerSpecular->setMinimumValue(0.0f);
-	redSpinnerSpecular->setMaximumValue(255.0f);
-	redSpinnerSpecular->setStepSize(10.0f);
-	redSpinnerSpecular->setCurrentValue(10.0f);
+	redSpinnerSpecular->setMaximumValue(1.0f);
+	redSpinnerSpecular->setStepSize(.1f);
+	redSpinnerSpecular->setCurrentValue(0.0f);
 	redSpinnerSpecular->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(0.0f,0)));
 
 	greenSpinnerSpecular->setTextInputMode(CEGUI::Spinner::FloatingPoint);
 	greenSpinnerSpecular->setMinimumValue(0.0f);
-	greenSpinnerSpecular->setMaximumValue(255.0f);
-	greenSpinnerSpecular->setStepSize(10.0f);
-	greenSpinnerSpecular->setCurrentValue(10.0f);
+	greenSpinnerSpecular->setMaximumValue(1.0f);
+	greenSpinnerSpecular->setStepSize(.1f);
+	greenSpinnerSpecular->setCurrentValue(0.0f);
 	greenSpinnerSpecular->setPosition(CEGUI::UVector2(CEGUI::UDim(0.15f,0),CEGUI::UDim(0.0f,0)));
 
 	blueSpinnerSpecular->setTextInputMode(CEGUI::Spinner::FloatingPoint);
 	blueSpinnerSpecular->setMinimumValue(0.0f);
-	blueSpinnerSpecular->setMaximumValue(255.0f);
-	blueSpinnerSpecular->setStepSize(10.0f);
-	blueSpinnerSpecular->setCurrentValue(10.0f);
+	blueSpinnerSpecular->setMaximumValue(1.0f);
+	blueSpinnerSpecular->setStepSize(.1f);
+	blueSpinnerSpecular->setCurrentValue(0.0f);
 	blueSpinnerSpecular->setPosition(CEGUI::UVector2(CEGUI::UDim(0.30f,0),CEGUI::UDim(0.0f,0)));
 
 
@@ -401,7 +401,7 @@ void GUIManager::setup_menus()
   lightMenu->addChild(spotLight);
   lightMenu->addChild(directionalLight);
 
-  this->populate_light_list();
+ 
 
   mainSheet->addChild(addLight);
   mainSheet->addChild(quit);
@@ -411,6 +411,8 @@ void GUIManager::setup_menus()
   this->_sheets.push_back(lightMenu);
   this->_sheets.push_back(lightList);
   this->_sheets.push_back(lightEdit);
+
+  this->populate_light_list();
 
   /*All the spinner sheets */
   this->_sheets.push_back(ambientIntensity);
@@ -431,62 +433,62 @@ void GUIManager::setup_menus()
 void GUIManager::populate_light_list()
 {
 	// /* Create buttons for each directional light */
-	// CEGUI::Window* temp;
-	// std::string tempName;
-	// for(uint n = 0; n < LightFactory::_directional_lights.size(); ++n)
-	// {
-	// 	tempName = "directionalLight" + n;
+	CEGUI::Window* temp;
+	std::string tempName;
+	for(uint n = 0; n < Larp::LightFactory::_directional_lights.size(); ++n)
+	{
+		tempName = "directionalLight" + std::to_string(n+1);
 
-	// 	/*setups the window button */
-	// 	temp = this->_wmgr->createWindow("TaharezLook/Button", tempName);
-	// 	temp->setText(tempName);
-	// 	temp->setSize(CEGUI::USize(CEGUI::UDim(0.3,0), CEGUI::UDim(0.05,0)));
-	// 	temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
-	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
+		/*setups the window button */
+		temp = this->_wmgr->createWindow("TaharezLook/Button", tempName);
+		temp->setText(tempName);
+		temp->setSize(CEGUI::USize(CEGUI::UDim(0.4,0), CEGUI::UDim(0.05,0)));
+		temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->_yPos,0)));
+		temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
 
-	// 	/*Adds the button to the light list and maps the name of the light to the directional light */
-	// 	this->_sheets.at(LIGHTLIST)->addChild(temp);
-	// 	this->_light_list.push_back(temp);
-	// 	this->_direct_map.emplace(tempName, LightFactor::_directional_lights.at(n));
-	// 	this->yPos += 0.05;
-	// }
+		/*Adds the button to the light list and maps the name of the light to the directional light */
+		this->_sheets.at(LIGHTLIST)->addChild(temp);
+		this->_light_list.push_back(temp);
+		this->_direct_map.emplace(tempName, Larp::LightFactory::_directional_lights.at(0).get());
+		this->_yPos += 0.05;
+	}
 
-	// /* Create buttons for each point lights */
-	// for(n = 0; n < LightFactory::_point_lights.size(); ++n)
-	// {
-	// 	tempName = "pointLight" + n;
+	/* Create buttons for each point lights */
+	for(uint n = 0; n < Larp::LightFactory::_point_lights.size(); ++n)
+	{
+		tempName = "pointLight" + std::to_string(n+1);
 
-	// 	/*setups the window button */
-	// 	temp = this->_wmgr->createWindow("TaharezLook/Button", tempName);
-	// 	temp->setText(tempName);
-	// 	temp->setSize(CEGUI::USize(CEGUI::UDim(0.3,0), CEGUI::UDim(0.05,0)));
-	// 	temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
-	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
+		/*setups the window button */
+		temp = this->_wmgr->createWindow("TaharezLook/Button", tempName);
+		temp->setText(tempName);
+		temp->setSize(CEGUI::USize(CEGUI::UDim(0.4,0), CEGUI::UDim(0.05,0)));
+		temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->_yPos,0)));
+		temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
 
-	// 	/*Adds the button to the light list and maps the name of the light to the directional light */
-	// 	this->_sheets.at(LIGHTLIST)->addChild(temp);
-	// 	this->_light_list.push_back(temp);
-	// 	this->_point_map.emplace(tempName, LightFactor::_point_lights.at(n));
-	// 	this->yPos += 0.05;
-	// }
-	// /*Create buttons for each spot light */
-	// for(n = 0; n < LightFactory::_spot_lights.size(); ++n)
-	// {
-	// 	tempName = "spotLight" + n;
+		/*Adds the button to the light list and maps the name of the light to the directional light */
+		this->_sheets.at(LIGHTLIST)->addChild(temp);
+		this->_light_list.push_back(temp);
+		this->_point_map.emplace(tempName, Larp::LightFactory::_point_lights.at(n).get());
+		this->_yPos += 0.05;
+	}
+	// Create buttons for each spot light 
+	for(uint n = 0; n < Larp::LightFactory::_spot_lights.size(); ++n)
+	{
+		tempName = "spotLight" + std::to_string(n+1);
 
-	// 	/*setups the window button */
-	// 	temp = this->_wmgr->createWindow("TaharezLook/Button", tempName);
-	// 	temp->setText(tempName);
-	// 	temp->setSize(CEGUI::USize(CEGUI::UDim(0.3,0), CEGUI::UDim(0.05,0)));
-	// 	temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
-	// 	temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
+		/*setups the window button */
+		temp = this->_wmgr->createWindow("TaharezLook/Button", tempName);
+		temp->setText(tempName);
+		temp->setSize(CEGUI::USize(CEGUI::UDim(0.4,0), CEGUI::UDim(0.05,0)));
+		temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->_yPos,0)));
+		temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
 
-	// 	/*Adds the button to the light list and maps the name of the light to the directional light */
-	// 	this->_sheets.at(LIGHTLIST)->addChild(temp);
-	// 	this->_light_list.push_back(temp);
-	// 	this->_point_map.emplace(tempName, LightFactor::_spot_lights.at(n));
-	// 	this->yPos += 0.05;
-	// }
+		/*Adds the button to the light list and maps the name of the light to the directional light */
+		this->_sheets.at(LIGHTLIST)->addChild(temp);
+		this->_light_list.push_back(temp);
+		this->_spot_map.emplace(tempName, Larp::LightFactory::_spot_lights.at(n).get());
+		this->_yPos += 0.05;
+	}
 }
 
 bool GUIManager::get_rendering_state()
@@ -508,25 +510,20 @@ void GUIManager::add_point_light(const CEGUI::EventArgs&)
 
 
   /* NEED TO CHANGE FOR LATER USE */
-	// std::string tempName("pointLight" + LightFactory::_point_lights.size());
-	static int n = 1;
-  CEGUI::Window* temp = this->_wmgr->createWindow("TaharezLook/Button", "pointLight" + n);
+	 std::string tempName("pointLight" + std::to_string(Larp::LightFactory::_point_lights.size()));
+  CEGUI::Window* temp = this->_wmgr->createWindow("TaharezLook/Button", tempName);
   
   //  CEGUI::Window* temp = this->_wmgr->createWindow("TaharezLook/Button", tempNAme);
-  temp->setSize(CEGUI::USize(CEGUI::UDim(0.3,0), CEGUI::UDim(0.05,0)));
+  temp->setSize(CEGUI::USize(CEGUI::UDim(0.4f,0), CEGUI::UDim(0.05f,0)));
   temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->_yPos,0)));
   this->_yPos += .05;
-  // temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
   
-  // temp->setText(tempName);
-  std::string tempName ("pointLight" + std::to_string(n));
   std::cout << "Point light name: " << tempName << std::endl;
   temp->setText(tempName);
   this->_light_list.push_back(temp);
   this->_sheets.at(LIGHTLIST)->addChild(temp);
   temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
 
-  ++n;
   this->_point_map.emplace(tempName, point_light);
   //this->_point_map.emplace(tempName, point_light)
 
@@ -541,21 +538,19 @@ void GUIManager::add_spot_light(const CEGUI::EventArgs&)
 
 	Larp::SpotLightPtr spot_light = Larp::LightFactory::create_spot_light();
 
-	spot_light->set_ambient_intensity(0.0f, 1.0f, 0.0f);
- 	spot_light->set_position(0.0f, 2.0f, 0.0f);
-
- 	 /* NEED TO CHANGE FOR LATER USE */
-	// std::string tempName("spotLight" + LightFactory::_spot_lights.size());
-  //  CEGUI::Window* temp = this->_wmgr->createWindow("TaharezLook/Button", tempNAme);
-  // temp->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
-  // temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
+	std::string tempName("spotLight" + std::to_string(Larp::LightFactory::_spot_lights.size()));
+   CEGUI::Window* temp = this->_wmgr->createWindow("TaharezLook/Button", tempName);
+  temp->setSize(CEGUI::USize(CEGUI::UDim(0.4f,0), CEGUI::UDim(0.05,0)));
+  temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->_yPos,0)));
+  this->_yPos += .05;
   
-  // temp->setText(tempName);
-  // this->_light_list.push_back(temp);
-  // this->_sheets.at(LIGHTLIST)->addChild(temp);
-  // temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
+  temp->setText(tempName);
+  this->_light_list.push_back(temp);
+  this->_sheets.at(LIGHTLIST)->addChild(temp);
+  temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
 
-  //this->_spot_map.emplace(tempName, spot_light)
+  this->_spot_map.emplace(tempName, spot_light);
+
 
 
 }
@@ -569,18 +564,18 @@ void GUIManager::add_directional_light(const CEGUI::EventArgs&)
 	Larp::DirectionalLightPtr directional_light = Larp::LightFactory::create_directional_light();
 
 
-	 	 /* NEED TO CHANGE FOR LATER USE */
-	// std::string tempName("directionalLight" + LightFactory::_spot_lights.size());
-  //  CEGUI::Window* temp = this->_wmgr->createWindow("TaharezLook/Button", tempNAme);
-  // temp->setSize(CEGUI::USize(CEGUI::UDim(0.1,0), CEGUI::UDim(0.05,0)));
-  // temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->yPos,0)));
+	std::string tempName("directionalLight" + std::to_string(Larp::LightFactory::_directional_lights.size()));
+   CEGUI::Window* temp = this->_wmgr->createWindow("TaharezLook/Button", tempName);
+  temp->setSize(CEGUI::USize(CEGUI::UDim(0.4,0), CEGUI::UDim(0.05,0)));
+  temp->setPosition(CEGUI::UVector2(CEGUI::UDim(0.0f,0),CEGUI::UDim(this->_yPos,0)));
+  this->_yPos += .05;
   
-  // temp->setText(tempName);
-  // this->_light_list.push_back(temp);
-  // this->_sheets.at(LIGHTLIST)->addChild(temp);
-  // temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
+  temp->setText(tempName);
+  this->_light_list.push_back(temp);
+  this->_sheets.at(LIGHTLIST)->addChild(temp);
+  temp->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUIManager::light_select, this));
 
-  //this->_direct_map.emplace(tempName, direct_light)
+  this->_direct_map.emplace(tempName, directional_light);
 
 	// directional_light->set_ambient_intensity(0.0f, 1.0f, 0.0f);
  // 	directional_light->set_position(0.0f, 2.0f, 0.0f);

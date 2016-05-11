@@ -114,9 +114,6 @@ int main(void)
     glewExperimental = GL_TRUE;
     glewInit();
 
-   // soundMan = new SoundManager();
-   GUIMan = new GUIManager(graph, window);
-   GUIrendering = false;
 
 
     // Define the viewport dimensions
@@ -231,6 +228,10 @@ int main(void)
 
     GLfloat frame_rate_limiter = 0.0f;
     uint64_t iteration_number = 0;
+
+    // soundMan = new SoundManager();
+    GUIMan = new GUIManager(graph, window);
+    GUIrendering = false;
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
