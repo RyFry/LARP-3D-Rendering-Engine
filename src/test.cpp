@@ -323,7 +323,7 @@ int main(void)
         {
             Do_Movement();
 
-            if(firing && player_held_item->_auto)
+            if(firing && player_held_item != nullptr && player_held_item->_auto)
             {
                 attempt_to_spawn_bullet();
             }

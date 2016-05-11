@@ -57,6 +57,7 @@ void GUIManager::setup_menus()
 
 	/* The Add light button and the menu bar that holds all the add light buttons */
 	CEGUI::Window* addLight = this->_wmgr->createWindow("TaharezLook/Button", "addLight");
+	CEGUI::Window* addCrate = this->_wmgr->createWindow("TaharezLook/Button", "addCrate");
 	CEGUI::Window* lightMenu = this->_wmgr->createWindow("TaharezLook/Menubar", "lightMenu");
 
 	/* All the add light buttons */
@@ -69,9 +70,6 @@ void GUIManager::setup_menus()
 
 
 	CEGUI::Window* lightList = this->_wmgr->createWindow("TaharezLook/ScrollablePane", "lightList");
-
-
-
 
 
 
