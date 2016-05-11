@@ -1,8 +1,5 @@
 #pragma once
 
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
 #include <unordered_map>        // std::unordered_map
 #include <cfloat>               // FLT_MAX, FLT_MIN
 #include <cmath>                // abs, exp
@@ -33,7 +30,7 @@ namespace Larp
         GLfloat get_width() const;
         GLfloat get_height() const;
         GLfloat get_depth() const;
-    protected:
+    private:
         /**
          * A cache of loaded Models.
          */
@@ -49,7 +46,7 @@ namespace Larp
         /**
          * List of Textures for each Mesh in this Model.
          */
-        std::vector<Texture> _loaded_textures;
+        std::vector<Texture*> _loaded_textures;
         /**
          * The width of the Model (measured along x-axis)
          */
@@ -101,7 +98,7 @@ namespace Larp
          * @return A vector of loaded Textures
          * @note type and texture_type should both be the respective type (i.e. DIFFUSE or SPECULAR).
          */
-        std::vector<Texture> load_material_textures(aiMaterial* mat, aiTextureType type,
+        std::vector<Texture*> load_material_textures(aiMaterial* mat, aiTextureType type,
                                                     Texture::Type texture_type);
     };
 }

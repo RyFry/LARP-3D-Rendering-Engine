@@ -2,6 +2,7 @@
 
 #include "LarpPrerequisites.hpp"
 #include "Shader.hpp"
+#include "Texture.hpp"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -33,38 +34,6 @@ namespace Larp
         glm::vec2 _tex_coords;
     };
 
-    class Texture
-    {
-    public:
-        /**
-         * Represents the possible types of Texture's that can be made
-         */
-        enum Type
-        {
-            DIFFUSE,
-            SPECULAR,
-            REFLECTION
-        };
-
-        /**
-         * The OpenGL texture ID
-         */
-        TextureID _id;
-        /**
-         * The Type of the texture. Used to determine what variable to attach the associated
-         * Vertex object to in the fragment shader
-         */
-        Type _type;
-        /**
-         * File path to the Texture
-         */
-        aiString _path;
-        /**
-         * @return a string representation of this Texture's Type.
-         */
-        std::string to_string();
-    };
-
     class Mesh
     {
     public:
@@ -79,7 +48,7 @@ namespace Larp
         /**
          * The list of textures associated with this Mesh.
          */
-        std::vector<Texture> _textures;
+        std::vector<Texture*> _textures;
         /**
          * Constructor
          * @param vertices The list of vertices associated with this Mesh. Used for binding the VBO.
@@ -88,7 +57,7 @@ namespace Larp
          * @warning Meshes should @b not be created directly. Instead, a Mesh should be created by creating
          *          a Model.
          */
-        Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<Texture>& textures);
+        Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<Texture*>& textures);
         /**
          * Draws the Mesh by binding the VAO's, VBO's, and EBO's associated with this Mesh.
          * @param shader The shader program to used to draw the Mesh
@@ -101,7 +70,7 @@ namespace Larp
          * @param directory The directory where the texture given in path is located.
          * @warning This function should @b not be called directory.
          */
-        static GLint texture_from_file(const char* path, std::string directory);
+        static Texture* texture_from_file(const char* path, std::string directory);
 
     private:
         /**

@@ -45,6 +45,7 @@ namespace Larp
     typedef std::unique_ptr<Shader>           UniqueShader;
     typedef std::unique_ptr<SkyBox>           UniqueSkyBox;
     typedef std::unique_ptr<SpotLight>        UniqueSpot;
+    typedef std::unique_ptr<Texture>          UniqueTexture;
 
     typedef Entity*                const EntityPtr;
     typedef DirectionalLight*      const DirectionalLightPtr;
@@ -53,6 +54,7 @@ namespace Larp
     typedef PointLight*            const PointLightPtr;
     typedef SceneGraph*            const SceneGraphPtr;
     typedef SpotLight*             const SpotLightPtr;
+    typedef Texture*               const TexturePtr;
 
     // For internal use only
     typedef GLuint VAO;

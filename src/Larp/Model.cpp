@@ -123,7 +123,7 @@ namespace Larp
     {
         std::vector<Vertex> vertices;
         std::vector<GLuint> indices;
-        std::vector<Texture> textures;
+        std::vector<Texture*> textures;
 
         // Process vertices
         for(GLuint i = 0; i < mesh->mNumVertices; i++)
@@ -174,20 +174,22 @@ namespace Larp
         if (mesh->mMaterialIndex >= 0)
         {
             aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-            std::vector<Texture> diffuseMaps = this->load_material_textures(material,
-                                                                            aiTextureType_DIFFUSE, Texture::DIFFUSE);
+            std::vector<Texture*> diffuseMaps = this->load_material_textures(material,
+                                                                             aiTextureType_DIFFUSE,
+                                                                             Texture::DIFFUSE);
             textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-            std::vector<Texture> specularMaps = this->load_material_textures(material,
-                                                                             aiTextureType_SPECULAR, Texture::SPECULAR);
+            std::vector<Texture*> specularMaps = this->load_material_textures(material,
+                                                                              aiTextureType_SPECULAR,
+                                                                              Texture::SPECULAR);
             textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
         }
 
         return Mesh(vertices, indices, textures);
     }
 
-    std::vector<Texture> Model::load_material_textures(aiMaterial* mat, aiTextureType type, Texture::Type textureType)
+    std::vector<Texture*> Model::load_material_textures(aiMaterial* mat, aiTextureType type, Texture::Type textureType)
     {
-        std::vector<Texture> textures;
+        std::vector<Texture*> textures;
         for (GLuint i = 0; i < mat->GetTextureCount(type); ++i)
         {
             aiString str;
@@ -195,7 +197,7 @@ namespace Larp
             GLboolean skip = false;
             for (GLuint j = 0; j < this->_loaded_textures.size(); ++j)
             {
-                if (this->_loaded_textures.at(i)._path == str)
+                if (this->_loaded_textures.at(i)->get_path() == str)
                 {
                     textures.push_back(this->_loaded_textures.at(i));
                     skip = true;
@@ -206,11 +208,7 @@ namespace Larp
             if (!skip)
             {
                 // If the texture isn't already loaded, load it
-                Texture texture;
-                texture._id = Mesh::texture_from_file(str.C_Str(), this->_directory);
-                texture._type = textureType;
-                texture._path = str;
-                textures.push_back(texture);
+                Texture* texture = Mesh::texture_from_file(str.C_Str(), this->_directory);
                 this->_loaded_textures.push_back(texture); // Add to loaded textures
             }
         }
