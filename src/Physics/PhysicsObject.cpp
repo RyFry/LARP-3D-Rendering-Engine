@@ -13,9 +13,9 @@ PhysicsObject<BulletShape>::PhysicsObject(glm::quat rotation, glm::vec3 position
     btScalar bt_mass(mass);
     btVector3 inertia(local_inertia.x, local_inertia.y, local_inertia.z);
 
-    btCollisionShape* shape = new BulletShape(btVector3(user_pointer->get_scaled_width(),
-                                                        user_pointer->get_scaled_height(),
-                                                        user_pointer->get_scaled_depth()));
+    btCollisionShape* shape = new BulletShape(btVector3(user_pointer->get_scaled_width() / 2.0,
+                                                        user_pointer->get_scaled_height() / 2.0,
+                                                        user_pointer->get_scaled_depth() / 2.0));
     btDefaultMotionState* motion_state = new btDefaultMotionState(transform);
 
     shape->calculateLocalInertia(bt_mass, inertia);
