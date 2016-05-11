@@ -74,7 +74,6 @@ Larp::Node* camera_node = nullptr;
 Larp::AnimationHandler* test_gun_animator;
 bool was_in_air = false;
 bool firing = false;
-bool walk_sound = false;
 GLfloat air_start_time = 0;
 GUIManager* GUIMan;
 
