@@ -73,24 +73,24 @@ namespace Larp
          * Creates a new Node that is a child of this Node.
          * @return A pointer to the new Node
          */
-        NodePtr create_child();
+        Node* create_child();
         /**
          * Removes a given Node as a child of this Node object.
          * @note After calling this function, child is still a valid pointer to a Node.
          * @note Use this function instead of delete_child if you wish to attach this
          *       child to another Node.
          */
-        NodePtr remove_child(NodePtr child);
+        Node* remove_child(Node* child);
         /**
          * Removes and deletes a given Node that is a child of this Node object.
          */
-        void delete_child(NodePtr child);
+        void delete_child(Node* child);
         /**
          * Attaches child to this Node, giving it ownership of the child.
          * @param child The Node to make a child of this node
          * @throws runtime_error if this child is attached to another Node.
          */
-        void attach_child(NodePtr child);
+        void attach_child(Node* child);
         /**
          * Detaches this Node from its parent, but does not delete it, so that
          * it may be reattached elsewhere.
@@ -201,7 +201,7 @@ namespace Larp
          * Attaches an Entity to this object
          * @param entity The pointer to the Entity to attach to this object
          */
-        void attach_entity(EntityPtr entity);
+        void attach_entity(Entity* entity);
         /**
          * Deletes the Entity that this Node owns
          * @warning After this function is called, any pointers to this object's
@@ -213,7 +213,7 @@ namespace Larp
          * @warning This function should only be called if you are going to
          *          attach this Node's Entity to another Node.
          */
-        EntityPtr detach_entity();
+        Entity* detach_entity();
 
         GLfloat get_scaled_width() const;
         GLfloat get_scaled_height() const;

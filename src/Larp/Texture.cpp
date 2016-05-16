@@ -4,7 +4,7 @@ namespace Larp
 {
     std::unordered_map<std::string, UniqueTexture> Texture::_loaded_textures;
 
-    TexturePtr Texture::create(std::string path, Type type)
+    Texture* Texture::create(std::string path, Type type)
     {
         if (_loaded_textures.find(path) == _loaded_textures.end())
         {

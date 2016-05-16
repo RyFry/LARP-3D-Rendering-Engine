@@ -3,7 +3,7 @@
 template <typename BulletShape>
 PhysicsObject<BulletShape>::PhysicsObject(glm::quat rotation, glm::vec3 position,
                                           GLfloat mass, glm::vec3 local_inertia, GLfloat restitution,
-                                          Larp::NodePtr user_pointer)
+                                          Larp::Node* user_pointer)
 {
     btTransform transform;
     transform.setIdentity();

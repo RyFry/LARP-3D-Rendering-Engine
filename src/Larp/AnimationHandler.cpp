@@ -8,7 +8,7 @@ namespace Larp
 {
 	std::vector<AnimationHandler*> AnimationHandler::_active_handlers;
 
-	AnimationHandler::AnimationHandler(EntityPtr ent, std::string path)
+	AnimationHandler::AnimationHandler(Entity* ent, std::string path)
 	{
 		_entity = ent;
 		std::ifstream animation_file;

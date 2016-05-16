@@ -8,7 +8,7 @@ namespace Larp
     // Public functions
     // ----------------
 
-    ModelPtr Model::create(std::string path)
+    Model* Model::create(std::string path)
     {
         if (_loaded_models.find(path) == _loaded_models.end())
         {

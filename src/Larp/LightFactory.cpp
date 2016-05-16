@@ -9,7 +9,7 @@ namespace Larp
     const size_t LightFactory::_max_point_lights = 9;
     const size_t LightFactory::_max_spot_lights = 0;
 
-    DirectionalLightPtr LightFactory::create_directional_light(glm::vec3 direction)
+    DirectionalLight* LightFactory::create_directional_light(glm::vec3 direction)
     {
         if (_directional_lights.size() >= _max_directional_lights)
         {
@@ -20,7 +20,7 @@ namespace Larp
         return _directional_lights.back().get();
     }
 
-    DirectionalLightPtr LightFactory::create_directional_light(GLfloat x, GLfloat y, GLfloat z)
+    DirectionalLight* LightFactory::create_directional_light(GLfloat x, GLfloat y, GLfloat z)
     {
         if (_directional_lights.size() >= _max_directional_lights)
         {
@@ -31,7 +31,7 @@ namespace Larp
         return _directional_lights.back().get();
     }
 
-    PointLightPtr LightFactory::create_point_light(glm::vec3 position)
+    PointLight* LightFactory::create_point_light(glm::vec3 position)
     {
         if (_point_lights.size() >= _max_point_lights)
         {
@@ -42,7 +42,7 @@ namespace Larp
         return _point_lights.back().get();
     }
 
-    PointLightPtr LightFactory::create_point_light(GLfloat x, GLfloat y, GLfloat z)
+    PointLight* LightFactory::create_point_light(GLfloat x, GLfloat y, GLfloat z)
     {
         if (_point_lights.size() >= _max_point_lights)
         {
@@ -53,7 +53,7 @@ namespace Larp
         return _point_lights.back().get();
     }
 
-    SpotLightPtr LightFactory::create_spot_light(glm::vec3 position)
+    SpotLight* LightFactory::create_spot_light(glm::vec3 position)
     {
         if (_spot_lights.size() >= _max_spot_lights)
         {
@@ -64,7 +64,7 @@ namespace Larp
         return _spot_lights.back().get();
     }
 
-    SpotLightPtr LightFactory::create_spot_light(GLfloat x, GLfloat y, GLfloat z)
+    SpotLight* LightFactory::create_spot_light(GLfloat x, GLfloat y, GLfloat z)
     {
         if (_spot_lights.size() >= _max_spot_lights)
         {
@@ -75,7 +75,7 @@ namespace Larp
         return _spot_lights.back().get();
     }
 
-    void LightFactory::remove_light(DirectionalLightPtr light)
+    void LightFactory::remove_light(DirectionalLight* light)
     {
         auto func = [light] (UniqueDirectional& l) -> bool
         {
@@ -94,7 +94,7 @@ namespace Larp
         }
     }
 
-    void LightFactory::remove_light(PointLightPtr light)
+    void LightFactory::remove_light(PointLight* light)
     {
         auto func = [light] (UniquePoint& l) -> bool
         {
@@ -113,7 +113,7 @@ namespace Larp
         }
     }
 
-    void LightFactory::remove_light(SpotLightPtr light)
+    void LightFactory::remove_light(SpotLight* light)
     {
         auto func = [light] (UniqueSpot& l) -> bool
         {

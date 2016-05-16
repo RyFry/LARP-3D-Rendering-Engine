@@ -41,7 +41,7 @@ namespace Larp
          */
         aiString _path;
     public:
-        static TexturePtr create(std::string path, Type type);
+        static Texture* create(std::string path, Type type);
         /**
          * @return a string representation of this Texture's Type.
          */

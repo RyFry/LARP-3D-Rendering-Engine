@@ -1,8 +1,8 @@
 #include "PhysicsMeshCollider.hpp"
 
-PhysicsMeshCollider::PhysicsMeshCollider(Larp::ModelPtr model, glm::quat rotation,
+PhysicsMeshCollider::PhysicsMeshCollider(Larp::Model* model, glm::quat rotation,
                                          glm::vec3 position, GLfloat mass, glm::vec3 local_inertia,
-                                         GLfloat restitution, Larp::NodePtr user_pointer)
+                                         GLfloat restitution, Larp::Node* user_pointer)
 {
     // Make the triangle mesh based on the Model's mesh
     const std::vector<Larp::Mesh>& meshes = model->get_meshes();

@@ -3,10 +3,6 @@
 #include <stdexcept>
 #include <unordered_set>
 
-#define GLEW_STATIC
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
 #include "Larp/LarpPrerequisites.hpp"
 #include "Larp/ConfigurationLoader.hpp"
 #include "Larp/Model.hpp"
@@ -18,7 +14,7 @@
 #include "Camera.hpp"
 #include "Weapon.hpp"
 //#include "GUIManager.hpp"
-#include "SoundManager.hpp"
+#include "Sound/SoundManager.hpp"
 
 #include "Physics/PhysicsMeshColliderBuilder.hpp"
 #include "Physics/PhysicsObjectBuilder.hpp"
@@ -57,7 +53,7 @@ void attempt_to_spawn_bullet();
 void make_floor(std::unique_ptr<PhysicsWorld>& physics_world);
 
 // Camera
-Larp::SceneGraphPtr graph = Larp::SceneGraph::singleton();
+Larp::SceneGraph* graph = Larp::SceneGraph::singleton();
 std::unique_ptr<PhysicsWorld> world;
 std::unique_ptr<PhysicsPlayerController> player;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
@@ -79,9 +75,9 @@ GLfloat air_start_time = 0;
 
 int main(void)
 {
-    Larp::ConfigurationLoader config("larp.cfg");
-    screenWidth = config.get_width();
-    screenHeight = config.get_height();
+    Larp::ConfigurationLoader* config = Larp::ConfigurationLoader::load_configurations("larp.cfg");
+    screenWidth = config->get_width();
+    screenHeight = config->get_height();
     // Init GLFW
     if (!glfwInit())
     {
@@ -90,12 +86,12 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_RESIZABLE, config.is_resizable());
+    glfwWindowHint(GLFW_RESIZABLE, config->is_resizable());
     //glfwWindowHint(GLFW_SAMPLES, 4);
 
     glfwSetErrorCallback(error_callback);
 
-    GLFWwindow* window = glfwCreateWindow(screenWidth, screenHeight, config.get_title().c_str(), glfwGetPrimaryMonitor(), nullptr); // Windowed
+    GLFWwindow* window = glfwCreateWindow(screenWidth, screenHeight, config->get_title().c_str(), glfwGetPrimaryMonitor(), nullptr); // Windowed
     if (window == nullptr)
     {
         THROW_RUNTIME_ERROR("GLFWwindow* = nullptr");
@@ -130,16 +126,16 @@ int main(void)
     world.reset(new PhysicsWorld());
     world->init_objects();
 
-    Larp::ModelPtr level = Larp::Model::create("assets/LEVEL/LEVEL.obj");
-    Larp::EntityPtr entity = Larp::Entity::create(level);
+    Larp::Model* level = Larp::Model::create("assets/LEVEL/LEVEL.obj");
+    Larp::Entity* entity = Larp::Entity::create(level);
     entity->set_directional_shadows(true);
-    Larp::DirectionalLightPtr dir_light = Larp::LightFactory::create_directional_light(0.5, -1.0, 1.0);
+    Larp::DirectionalLight* dir_light = Larp::LightFactory::create_directional_light(0.5, -1.0, 1.0);
     dir_light->set_ambient_intensity(0.2, 0.2, 0.2);
 
-    Larp::NodePtr node11 = graph->create_child_node();
-    Larp::NodePtr player_node = graph->create_child_node();
+    Larp::Node* node11 = graph->create_child_node();
+    Larp::Node* player_node = graph->create_child_node();
 
-    Larp::NodePtr node21 = node11->create_child();
+    Larp::Node* node21 = node11->create_child();
     node21->attach_entity(entity);
 
     PhysicsMeshColliderBuilder physics_level_builder = PhysicsMeshColliderBuilder("assets/LEVEL/LEVEL.obj");
@@ -147,14 +143,14 @@ int main(void)
     physics_level_builder.set_restitution(1.0);
     physics_level_builder.set_user_pointer(node21);
 
-    PhysicsMeshColliderPtr physics_level = physics_level_builder.build();
+    PhysicsMeshCollider* physics_level = physics_level_builder.build();
 
     world->get_dynamics_world()->addRigidBody(physics_level->get_rigid_body());
 
-    Larp::ModelPtr crate_model = Larp::Model::create("assets/crate/crate.obj");
-    Larp::EntityPtr entity22 = Larp::Entity::create(crate_model);
+    Larp::Model* crate_model = Larp::Model::create("assets/crate/crate.obj");
+    Larp::Entity* entity22 = Larp::Entity::create(crate_model);
     entity22->set_directional_shadows(true);
-    Larp::NodePtr crate_node = graph->create_child_node();
+    Larp::Node* crate_node = graph->create_child_node();
     crate_node->attach_entity(entity22);
     crate_node->set_scale(0.4, 0.4, 0.4);
     std::cout << "Scaled dimensions of crate: (" << crate_node->get_scaled_width() << ", " << crate_node->get_scaled_height() << ", " << crate_node->get_scaled_depth() << ')' << std::endl;
@@ -168,7 +164,7 @@ int main(void)
     crate_builder.set_restitution(0.0);
     crate_builder.set_user_pointer(crate_node);
 
-    PhysicsBoxPtr crate_collider = crate_builder.build();
+    PhysicsBox* crate_collider = crate_builder.build();
 
     world->get_dynamics_world()->addRigidBody(crate_collider->get_rigid_body());
 
@@ -269,7 +265,7 @@ int main(void)
         world->get_dynamics_world()->stepSimulation(1.0f / FRAME_RATE, 10);
 
         player->step(world.get(), 1.0f / FRAME_RATE);
-        Larp::NodePtr player_node = player->get_user_pointer();
+        Larp::Node* player_node = player->get_user_pointer();
         glm::vec3 pos = player->get_position();
         glm::quat quat = player->get_orientation();
         player_node->set_position(pos);
@@ -298,7 +294,7 @@ int main(void)
                 if (user_pointer != nullptr)
                 {
                     btQuaternion orientation = trans.getRotation();
-                    Larp::NodePtr user_node = static_cast<Larp::NodePtr>(user_pointer);
+                    Larp::Node* user_node = static_cast<Larp::Node*>(user_pointer);
 
                     user_node->set_position(trans.getOrigin().getX(),
                                             trans.getOrigin().getY(),
@@ -553,7 +549,7 @@ void attempt_to_pick_up_weapon()
     if (result.hasHit() && (bt_from - result.m_hitPointWorld).length() < 0.7)
     {
         btRigidBody* collided = const_cast<btRigidBody*>(static_cast<const btRigidBody*>(result.m_collisionObject));
-        Larp::NodePtr user_pointer = static_cast<Larp::NodePtr>(collided->getUserPointer());
+        Larp::Node* user_pointer = static_cast<Larp::Node*>(collided->getUserPointer());
         Weapon* weaponptr = nullptr;
         if(user_pointer != nullptr)
         {
@@ -568,11 +564,11 @@ void attempt_to_pick_up_weapon()
         {
             world->get_dynamics_world()->removeRigidBody(const_cast<btRigidBody*>(collided));
             user_pointer->detach_this_from_parent();
-            Larp::NodePtr gun_parent = camera_node->create_child();
+            Larp::Node* gun_parent = camera_node->create_child();
             gun_parent->attach_child(user_pointer);
             user_pointer->set_position(0.0, 0.0, 0.0);
             gun_parent->set_position(-0.2, -0.25, weaponptr->_offset_z);
-            glm::vec3 player_scale = static_cast<Larp::NodePtr>(player->get_user_pointer())->get_scale();
+            glm::vec3 player_scale = static_cast<Larp::Node*>(player->get_user_pointer())->get_scale();
             glm::vec3 user_pointer_scale = user_pointer->get_scale();
             user_pointer->set_scale(user_pointer_scale.x / player_scale.x,
                                     user_pointer_scale.y / player_scale.y,
@@ -609,7 +605,7 @@ void attempt_to_drop_weapon()
     test_gun_builder.set_restitution(0.0);
     test_gun_builder.set_user_pointer(player_held_item->_node);
 
-    PhysicsBoxPtr test_gun_collider = test_gun_builder.build();
+    PhysicsBox* test_gun_collider = test_gun_builder.build();
 
     test_gun_collider->get_rigid_body()->setLinearVelocity(direction * 5);
 
@@ -638,9 +634,9 @@ void attempt_to_spawn_bullet()
     btScalar xz_len = cos(glm::radians(pitch));
     btVector3 direction(xz_len * cos(glm::radians(yaw)), sin(glm::radians(pitch)), xz_len * sin(glm::radians(yaw)));
 
-    Larp::ModelPtr crate_model = Larp::Model::create(player_held_item->_ammo);
-    Larp::EntityPtr crate_entity = Larp::Entity::create(crate_model);
-    Larp::NodePtr crate_node = graph->create_child_node();
+    Larp::Model* crate_model = Larp::Model::create(player_held_item->_ammo);
+    Larp::Entity* crate_entity = Larp::Entity::create(crate_model);
+    Larp::Node* crate_node = graph->create_child_node();
     crate_node->attach_entity(crate_entity);
     crate_node->set_scale(0.04, 0.04, 0.04);
     crate_node->set_position(pos);
@@ -653,7 +649,7 @@ void attempt_to_spawn_bullet()
     crate_builder.set_restitution(0.0);
     crate_builder.set_user_pointer(crate_node);
 
-    PhysicsBoxPtr crate_collider = crate_builder.build();
+    PhysicsBox* crate_collider = crate_builder.build();
 
     crate_collider->get_rigid_body()->setLinearVelocity(direction * 100);
     world->get_dynamics_world()->addRigidBody(crate_collider->get_rigid_body());

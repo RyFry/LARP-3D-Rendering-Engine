@@ -43,12 +43,12 @@ void PhysicsMeshColliderBuilder::set_restitution(GLfloat restitution)
     this->_restitution = restitution;
 }
 
-void PhysicsMeshColliderBuilder::set_user_pointer(Larp::NodePtr user_pointer)
+void PhysicsMeshColliderBuilder::set_user_pointer(Larp::Node* user_pointer)
 {
     this->_user_pointer = user_pointer;
 }
 
-PhysicsMeshColliderPtr PhysicsMeshColliderBuilder::build()
+PhysicsMeshCollider* PhysicsMeshColliderBuilder::build()
 {
     return new PhysicsMeshCollider(_model, _orientation, _position, _mass, _local_inertia,
                                    _restitution, _user_pointer);

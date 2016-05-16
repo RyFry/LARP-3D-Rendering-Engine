@@ -6,10 +6,10 @@ namespace Larp
         { "title",        "Default Title" },
         { "width",        "800" },
         { "height",       "600" },
-        { "resizable",    "false" },
-        { "music_volume", "0.02" },
-        { "sound_volume", "0.2" }
+        { "resizable",    "false" }
     };
+
+    std::unordered_map<std::string, UniqueConfigurationLoader> ConfigurationLoader::_loaded_configurations;
 
     ConfigurationLoader::ConfigurationLoader(std::string file_path)
     {
@@ -29,41 +29,56 @@ namespace Larp
         }
         catch (std::ifstream::failure e)
         {
-            PRINT_ERROR("Failed to read " << file_path << ", so default configuration options will be used : " << e.what());
+            PRINT_ERROR("Failed to read `" << file_path << "`, so default configuration will be used : " << e.what());
         }
 
         /*
-         * Next, go line by line and make sure that all of the options provided
-         * are one of the allowed options.
-         * If they are one of the allowed options, then add the option to the _settings field
-         * If they are not one of the allowed options, then print an error message saying it's
+         * Next, go line by line and make sure that all of the configurations provided
+         * are one of the allowed configurations.
+         * If they are one of the allowed configurations, then add the configuration to the _configurations field
+         * If they are not one of the allowed configurations, then print an error message saying it's
          * being ignored
          */
         while (config_stream)
         {
-            std::string option;
-            std::string setting;
-            config_stream >> option >> setting;
+            std::string configuration;
+            std::string value;
+            config_stream >> configuration >> value;
 
             // Avoid blank lines
-            if (option == "")
+            if (configuration == "")
                 continue;
 
-            if (Larp::ConfigurationLoader::DEFAULTS.find(option) == Larp::ConfigurationLoader::DEFAULTS.end())
+            if (Larp::ConfigurationLoader::DEFAULTS.find(configuration) == Larp::ConfigurationLoader::DEFAULTS.end())
             {
-                PRINT_ERROR('`' << option << "` is not a valid configuration option. Ignoring.");
+                PRINT_ERROR('`' << configuration << "` is not a valid configuration. Ignoring.");
             }
             else
             {
-                this->_settings[option] = setting;
+                // If the mapping (configuration -> somevalue) already exists, then emplace returns a pair
+                // where the second value is false.
+                auto is_emplaced = this->_configurations.emplace(configuration, value);
+                if (is_emplaced.second == false)
+                {
+                    PRINT_ERROR("Could not insert `" << configuration << "` with value `" << value << "` because it already exists.");
+                }
             }
         }
+    }
+
+    ConfigurationLoader* ConfigurationLoader::load_configurations(std::string path)
+    {
+        if (_loaded_configurations.find(path) == _loaded_configurations.end())
+        {
+            _loaded_configurations.emplace(path, UniqueConfigurationLoader(new ConfigurationLoader(path)));
+        }
+        return _loaded_configurations.at(path).get();
     }
 
     std::string ConfigurationLoader::get_title() const
     {
         // Was a title provided?
-        if (this->_settings.find("title") == this->_settings.end())
+        if (this->_configurations.find("title") == this->_configurations.end())
         {
             std::cout << "`title` was not provided, providing default title of `"
                       << Larp::ConfigurationLoader::DEFAULTS.at("title")
@@ -73,14 +88,14 @@ namespace Larp
         }
         else
         {
-            return this->_settings.at("title");
+            return this->_configurations.at("title");
         }
     }
 
     size_t ConfigurationLoader::get_width() const
     {
         // Was a width provided?
-        if (this->_settings.find("width") == this->_settings.end())
+        if (this->_configurations.find("width") == this->_configurations.end())
         {
             std::cout << "`width` was not provided, providing default width of "
                       << Larp::ConfigurationLoader::DEFAULTS.at("width")
@@ -92,7 +107,7 @@ namespace Larp
         }
         else
         {
-            std::stringstream sstream(this->_settings.at("width"));
+            std::stringstream sstream(this->_configurations.at("width"));
             size_t ret_val;
             sstream >> ret_val;
             return ret_val;
@@ -102,7 +117,7 @@ namespace Larp
     size_t ConfigurationLoader::get_height() const
     {
         // Was a height provided?
-        if (this->_settings.find("height") == this->_settings.end())
+        if (this->_configurations.find("height") == this->_configurations.end())
         {
             std::cout << "`height` was not provided, providing default height of "
                       << Larp::ConfigurationLoader::DEFAULTS.at("height")
@@ -114,7 +129,7 @@ namespace Larp
         }
         else
         {
-            std::stringstream sstream(this->_settings.at("height"));
+            std::stringstream sstream(this->_configurations.at("height"));
             size_t ret_val;
             sstream >> ret_val;
             return ret_val;
@@ -124,7 +139,7 @@ namespace Larp
     GLenum ConfigurationLoader::is_resizable() const
     {
         // Was a resizable provided?
-        if (this->_settings.find("resizable") == this->_settings.end())
+        if (this->_configurations.find("resizable") == this->_configurations.end())
         {
             std::cout << "`resizable` was not provided, providing default resizable of "
                       << Larp::ConfigurationLoader::DEFAULTS.at("resizable")
@@ -133,14 +148,14 @@ namespace Larp
         }
         else
         {
-            return this->_settings.at("resizable") == "true" ? GL_TRUE : GL_FALSE;
+            return this->_configurations.at("resizable") == "true" ? GL_TRUE : GL_FALSE;
         }
     }
 
     float ConfigurationLoader::get_music_volume() const
     {
         // Was a music_volume provided?
-        if (this->_settings.find("music_volume") == this->_settings.end())
+        if (this->_configurations.find("music_volume") == this->_configurations.end())
         {
             std::cout << "`music_volume` was not provided, providing default width of "
                       << Larp::ConfigurationLoader::DEFAULTS.at("music_volume")
@@ -152,7 +167,7 @@ namespace Larp
         }
         else
         {
-            std::stringstream sstream(this->_settings.at("music_volume"));
+            std::stringstream sstream(this->_configurations.at("music_volume"));
             float ret_val;
             sstream >> ret_val;
             return ret_val;
@@ -162,7 +177,7 @@ namespace Larp
     float ConfigurationLoader::get_sound_volume() const
     {
         // Was a music_volume provided?
-        if (this->_settings.find("sound_volume") == this->_settings.end())
+        if (this->_configurations.find("sound_volume") == this->_configurations.end())
         {
             std::cout << "`sound_volume` was not provided, providing default width of "
                       << Larp::ConfigurationLoader::DEFAULTS.at("sound_volume")
@@ -174,7 +189,7 @@ namespace Larp
         }
         else
         {
-            std::stringstream sstream(this->_settings.at("sound_volume"));
+            std::stringstream sstream(this->_configurations.at("sound_volume"));
             float ret_val;
             sstream >> ret_val;
             return ret_val;

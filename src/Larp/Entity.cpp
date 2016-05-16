@@ -3,14 +3,14 @@
 
 namespace Larp
 {
-    Entity::Entity(ModelPtr model)
+    Entity::Entity(Model* model)
         : _shadow_shader(nullptr),
         _shader(Shader::get_default_shader()),
         _model(model)
     {
     }
 
-    EntityPtr Entity::create(ModelPtr model)
+    Entity* Entity::create(Model* model)
     {
         return new Entity(model);
     }
@@ -89,7 +89,7 @@ namespace Larp
         }
     }
 
-    void Entity::switch_model(ModelPtr m)
+    void Entity::switch_model(Model* m)
     {
         _model = m;
     }

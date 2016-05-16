@@ -34,7 +34,7 @@ public:
         BACKWARD = 8
     };
 
-    PhysicsPlayerController(PhysicsWorld* physics_world, const Larp::NodePtr node,
+    PhysicsPlayerController(PhysicsWorld* physics_world, const Larp::Node* node,
                             GLfloat width, GLfloat height, GLfloat depth,
                             glm::vec3 initial_position = glm::vec3(0, 0, 0),
                             GLfloat forward_speed = .03,
@@ -80,7 +80,7 @@ public:
     /**
      * @return The user pointer attached to this object
      */
-    Larp::NodePtr get_user_pointer();
+    Larp::Node* get_user_pointer();
     /**
      * @return The position of this PlayerController in the PhysicsWorld
      */

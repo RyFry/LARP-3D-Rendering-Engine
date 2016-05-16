@@ -58,7 +58,7 @@ namespace Larp
          *          lighting parameters.
          * @warning Do not add this type of light if Entity specified shaders do not support them.
          */
-        static DirectionalLightPtr create_directional_light(glm::vec3 direction = glm::vec3(0.0f, -1.0f, 0.0f));
+        static DirectionalLight* create_directional_light(glm::vec3 direction = glm::vec3(0.0f, -1.0f, 0.0f));
         /**
          * Creates a directional light that faces downwards by default and adds the light
          * to the SceneGraph's vector of directional lights.
@@ -69,7 +69,7 @@ namespace Larp
          *          lighting parameters.
          * @warning Do not add this type of light if Entity specified shaders do not support them.
          */
-        static DirectionalLightPtr create_directional_light(GLfloat x, GLfloat y, GLfloat z);
+        static DirectionalLight* create_directional_light(GLfloat x, GLfloat y, GLfloat z);
         /**
          * Creates a point light that is positioned at (0, 0, 0) by default and adds the light
          * to the SceneGraph's vector of point lights.
@@ -78,7 +78,7 @@ namespace Larp
          *          lighting parameters.
          * @warning Do not add this type of light if Entity specified shaders do not support them.
          */
-        static PointLightPtr create_point_light(glm::vec3 position = glm::vec3(0.0f));
+        static PointLight* create_point_light(glm::vec3 position = glm::vec3(0.0f));
         /**
          * Creates a point light that is positioned at (0, 0, 0) by default and adds the light
          * to the SceneGraph's vector of point lights.
@@ -87,7 +87,7 @@ namespace Larp
          *          lighting parameters.
          * @warning Do not add this type of light if Entity specified shaders do not support them.
          */
-        static PointLightPtr create_point_light(GLfloat x, GLfloat y, GLfloat z);
+        static PointLight* create_point_light(GLfloat x, GLfloat y, GLfloat z);
         /**
          * Creates a spot light that is positioned at (0, 0, 0) by default and adds the light
          * to the SceneGraph's vector of spot lights.
@@ -96,7 +96,7 @@ namespace Larp
          *          lighting parameters.
          * @warning Do not add this type of light if Entity specified shaders do not support them.
          */
-        static SpotLightPtr create_spot_light(glm::vec3 position = glm::vec3(0.0f));
+        static SpotLight* create_spot_light(glm::vec3 position = glm::vec3(0.0f));
         /**
          * Creates a spot light that is positioned at (0, 0, 0) by default and adds the light
          * to the SceneGraph's vector of spot lights.
@@ -105,21 +105,21 @@ namespace Larp
          *          lighting parameters.
          * @warning Do not add this type of light if Entity specified shaders do not support them.
          */
-        static SpotLightPtr create_spot_light(GLfloat x, GLfloat y, GLfloat z);
+        static SpotLight* create_spot_light(GLfloat x, GLfloat y, GLfloat z);
         /**
          * Removes the specified light from the respective light's vector in the SceneGraph
          * @param A constant directional light pointer that will be used to remove the light from the vector.
          */
-        static void remove_light(DirectionalLightPtr light);
+        static void remove_light(DirectionalLight* light);
         /**
          * Removes the specified light from the respective light's vector in the SceneGraph
          * @param A constant point light pointer that will be used to remove the light from the vector.
          */
-        static void remove_light(PointLightPtr light);
+        static void remove_light(PointLight* light);
         /**
          * Removes the specified light from the respective light's vector in the SceneGraph
          * @param A constant spot light pointer that will be used to remove the light from the vector.
          */
-        static void remove_light(SpotLightPtr light);
+        static void remove_light(SpotLight* light);
     };
 }

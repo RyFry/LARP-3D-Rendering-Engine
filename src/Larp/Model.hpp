@@ -17,7 +17,7 @@ namespace Larp
          * @param path The path to the desired model to be loaded.
          * @return A pointer to the Model specified by path.
          */
-        static ModelPtr create(std::string path);
+        static Model* create(std::string path);
         /**
          * Draws all of the meshes in this Model.
          * @param shader The shader program to render this Model with.

@@ -40,15 +40,15 @@ namespace Larp
          * @param shader A Shader object used during rendering
          * @param model The Model to draw during rendering
          */
-        Entity(ModelPtr model);
+        Entity(Model* model);
     public:
         /**
-         * Creates a EntityPtr
+         * Creates a Entity*
          * @param shader A Shader object used during rendering
          * @param model The Model to draw during rendering
-         * @return The EntityPtr with the same shader and model passed as parameters
+         * @return The Entity* with the same shader and model passed as parameters
          */
-        static EntityPtr create(ModelPtr model);
+        static Entity* create(Model* model);
         /**
          * Draws the model atteched to this entity using the
          * associated shader
@@ -80,7 +80,7 @@ namespace Larp
         GLfloat get_depth() const;
 
         void set_directional_shadows(bool value);
-        void switch_model(ModelPtr m);
+        void switch_model(Model* m);
         // void set_wireframe(bool value);
         
         // void set_ambient(bool value);

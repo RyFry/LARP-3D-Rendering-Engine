@@ -5,14 +5,12 @@ Mix_Music* SoundManager::_background_music;
 std::map<std::string, Mix_Chunk*> SoundManager::_sound_effects;
 
 float SoundManager::_effect_volume = 0.2f;
-
 float SoundManager::_music_volume = 0.02f;
-
 int SoundManager::_walk = 0;
 
 SoundManager::SoundManager()
 {
-
+    
 }
 
 SoundManager::~SoundManager()
@@ -21,9 +19,9 @@ SoundManager::~SoundManager()
 
 void SoundManager::sound_init()
 {
-    Larp::ConfigurationLoader config("larp.cfg");
-    _music_volume = config.get_music_volume();
-    _effect_volume = config.get_sound_volume();
+    Larp::CustomConfigurationLoader* config = Larp::CustomConfigurationLoader::load_configurations("sound.cfg");
+    _music_volume = std::stof(config->get_configuration("music_volume"));
+    _effect_volume = std::stof(config->get_configuration("sound_volume"));
 
     SDL_Init(SDL_INIT_EVERYTHING);
 

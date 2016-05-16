@@ -164,8 +164,8 @@ namespace Larp
     {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         // move this into a function
-        Larp::ConfigurationLoader config("larp.cfg");
-        glViewport(0, 0, config.get_width(), config.get_height()); // need to make these values a variable, possibly in larp prereqs
+        Larp::ConfigurationLoader* config = Larp::ConfigurationLoader::load_configurations("larp.cfg");
+        glViewport(0, 0, config->get_width(), config->get_height()); // need to make these values a variable, possibly in larp prereqs
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 

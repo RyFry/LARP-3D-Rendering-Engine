@@ -68,18 +68,18 @@ namespace Larp
          * Returns the single instance of SceneGraph
          * @return The singleton instance of SceneGraph
          */
-        static SceneGraphPtr singleton();
+        static SceneGraph* singleton();
         /**
          * Creates a new child on the root Node of the SceneGraph
          * @return The new child node attached to the root
          * @note The new child may not come before the other children
          *       during rendering
          */
-        NodePtr create_child_node();
+        Node* create_child_node();
         /**
          * @return The root Node of the SceneGraph
          */
-        NodePtr get_root_node();
+        Node* get_root_node();
         /**
          * Clears all Nodes from the SceneGraph
          */

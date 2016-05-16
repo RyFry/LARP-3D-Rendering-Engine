@@ -52,7 +52,7 @@ public:
      * @param user_pointer The user pointer amount
      * @default nullptr
      */
-    void set_user_pointer(Larp::NodePtr user_pointer);
+    void set_user_pointer(Larp::Node* user_pointer);
     PhysicsObject<BulletShape>* build();
 };
 

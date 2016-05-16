@@ -13,7 +13,7 @@ namespace Larp
     {
     }
 
-    SceneGraphPtr SceneGraph::singleton()
+    SceneGraph* SceneGraph::singleton()
     {
         if (!_singleton)
         {
@@ -22,12 +22,12 @@ namespace Larp
         return _singleton.get();
     }
 
-    NodePtr SceneGraph::create_child_node()
+    Node* SceneGraph::create_child_node()
     {
         return this->_root->create_child();
     }
 
-    NodePtr SceneGraph::get_root_node()
+    Node* SceneGraph::get_root_node()
     {
         return this->_root.get();
     }

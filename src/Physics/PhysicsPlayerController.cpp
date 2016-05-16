@@ -1,6 +1,6 @@
 #include "PhysicsPlayerController.hpp"
 
-PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, const Larp::NodePtr node,
+PhysicsPlayerController::PhysicsPlayerController(PhysicsWorld* physics_world, const Larp::Node* node,
                                                  GLfloat width, GLfloat height, GLfloat depth,
                                                  glm::vec3 initial_position, GLfloat forward_speed,
                                                  GLfloat backward_speed, GLfloat strafe_speed,
@@ -153,9 +153,9 @@ void PhysicsPlayerController::step(PhysicsWorld* world, GLfloat delta_time)
     this->_char_controller->playerStep(world->get_dynamics_world(), delta_time);
 }
 
-Larp::NodePtr PhysicsPlayerController::get_user_pointer()
+Larp::Node* PhysicsPlayerController::get_user_pointer()
 {
-    return static_cast<Larp::NodePtr>(this->_ghost_object->getUserPointer());
+    return static_cast<Larp::Node*>(this->_ghost_object->getUserPointer());
 }
 
 glm::vec3 PhysicsPlayerController::get_position() const

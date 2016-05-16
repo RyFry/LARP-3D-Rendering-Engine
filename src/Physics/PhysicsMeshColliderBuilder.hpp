@@ -13,7 +13,7 @@ private:
     /**
      * The Model that this mesh collider will be built from.
      */
-    Larp::ModelPtr _model;
+    Larp::Model* _model;
     /**
      * The orientation of the Mesh collider that will be built.
      */
@@ -38,7 +38,7 @@ private:
     GLfloat _restitution;
     /**
      * The data pointer of this Mesh collider. This should be initialized
-     * to the Larp::NodePtr that is attached to the Model provided
+     * to the Larp::Node* that is attached to the Model provided
      * to the Mesh collider.
      */
     Larp::Node* _user_pointer;
@@ -85,6 +85,6 @@ public:
      * @param user_pointer The user pointer amount
      * @default nullptr
      */
-    void set_user_pointer(Larp::NodePtr user_pointer);
-    PhysicsMeshColliderPtr build();
+    void set_user_pointer(Larp::Node* user_pointer);
+    PhysicsMeshCollider* build();
 };

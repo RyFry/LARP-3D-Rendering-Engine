@@ -49,7 +49,7 @@ void PhysicsObjectBuilder<BulletShape>::set_restitution(GLfloat restitution)
 }
 
 template <typename BulletShape>
-void PhysicsObjectBuilder<BulletShape>::set_user_pointer(Larp::NodePtr user_pointer)
+void PhysicsObjectBuilder<BulletShape>::set_user_pointer(Larp::Node* user_pointer)
 {
     this->_user_pointer = user_pointer;
 }

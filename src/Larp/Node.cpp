@@ -34,15 +34,15 @@ namespace Larp
             it.second->draw_shadows(my_model);
     }
 
-    NodePtr Node::create_child()
+    Node* Node::create_child()
     {
         Node* tmp = new Node();
         tmp->_parent = this;
         this->_children[tmp] = UniqueNode(tmp);
-        return NodePtr(tmp);
+        return tmp;
     }
 
-    NodePtr Node::remove_child(NodePtr child)
+    Node* Node::remove_child(Node* child)
     {
         Node* ret_val = child;
         auto it = this->_children.find(ret_val);
@@ -55,10 +55,10 @@ namespace Larp
         ret_val->_parent = nullptr; // Make the parent nullptr for testing when the user (possibly)
                                     // reatteches the Node somewhere else
         this->_children.erase(it);
-        return NodePtr(ret_val);
+        return ret_val;
     }
 
-    void Node::delete_child(NodePtr child)
+    void Node::delete_child(Node* child)
     {
         auto it = this->_children.find(const_cast<Node*>(child));
         if (it == this->_children.end())
@@ -68,7 +68,7 @@ namespace Larp
         this->_children.erase(it);
     }
 
-    void Node::attach_child(NodePtr child)
+    void Node::attach_child(Node* child)
     {
         if (child->_parent != nullptr)
         {
@@ -182,7 +182,7 @@ namespace Larp
         return this->_scale;
     }
 
-    void Node::attach_entity(EntityPtr entity)
+    void Node::attach_entity(Entity* entity)
     {
         this->_entity.reset(entity);
     }
@@ -192,7 +192,7 @@ namespace Larp
         this->_entity.reset(nullptr);
     }
 
-    EntityPtr Node::detach_entity()
+    Entity* Node::detach_entity()
     {
         return this->_entity.release();
     }

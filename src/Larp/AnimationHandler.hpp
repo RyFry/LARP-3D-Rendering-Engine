@@ -59,7 +59,7 @@ namespace Larp
 	{
 
 	public:
-		AnimationHandler(EntityPtr ent, std::string path); /*Constructs an animation handler to use on an entity
+		AnimationHandler(Entity* ent, std::string path); /*Constructs an animation handler to use on an entity
 														   from an animation file*/
 
 		void play(std::string name, bool revert_at_end, int loop); //Plays an animation
