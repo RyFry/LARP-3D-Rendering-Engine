@@ -17,7 +17,7 @@
 #include "Larp/AnimationHandler.hpp"
 #include "Camera.hpp"
 #include "Weapon.hpp"
-#include "GUIManager.hpp"
+//#include "GUIManager.hpp"
 #include "SoundManager.hpp"
 
 #include "Physics/PhysicsMeshColliderBuilder.hpp"
@@ -50,7 +50,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 void Do_Movement();
 void error_callback(int error, const char* description);
 void make_floor(PhysicsWorld* physics_world);
-unsigned int GlfwToCeguiKey(int glfwKey);
+// unsigned int GlfwToCeguiKey(int glfwKey);
 void attempt_to_pick_up_weapon();
 void attempt_to_drop_weapon();
 void attempt_to_spawn_bullet();
@@ -75,7 +75,7 @@ Larp::AnimationHandler* test_gun_animator;
 bool was_in_air = false;
 bool firing = false;
 GLfloat air_start_time = 0;
-GUIManager* GUIMan;
+//GUIManager* GUIMan;
 
 int main(void)
 {
@@ -135,17 +135,11 @@ int main(void)
     entity->set_directional_shadows(true);
     Larp::DirectionalLightPtr dir_light = Larp::LightFactory::create_directional_light(0.5, -1.0, 1.0);
     dir_light->set_ambient_intensity(0.2, 0.2, 0.2);
-    //Larp::PointLightPtr point_light = Larp::LightFactory::create_point_light();
 
-    //point_light->set_ambient_color(4.0f, 2.0f, 6.0f);
-    //point_light->set_position(0.0f, 2.0f, -5.0f);
-
-    //graph->remove_light(dir_light);
     Larp::NodePtr node11 = graph->create_child_node();
     Larp::NodePtr player_node = graph->create_child_node();
 
     Larp::NodePtr node21 = node11->create_child();
-    //node21->set_scale(0.1f, 0.1f, 0.1f);
     node21->attach_entity(entity);
 
     PhysicsMeshColliderBuilder physics_level_builder = PhysicsMeshColliderBuilder("assets/LEVEL/LEVEL.obj");
@@ -164,12 +158,12 @@ int main(void)
     crate_node->attach_entity(entity22);
     crate_node->set_scale(0.4, 0.4, 0.4);
     std::cout << "Scaled dimensions of crate: (" << crate_node->get_scaled_width() << ", " << crate_node->get_scaled_height() << ", " << crate_node->get_scaled_depth() << ')' << std::endl;
-    crate_node->set_position(0.0, 4.0, 0.0);
+    crate_node->set_position(0.0, 6.0, 3.0);
 
     destructable_items.insert(crate_node);
 
     PhysicsObjectBuilder<btBoxShape> crate_builder;
-    crate_builder.set_position(glm::vec3(0.0, 6.0, 0.0));
+    crate_builder.set_position(glm::vec3(0.0, 6.0, 3.0));
     crate_builder.set_mass(0.6);
     crate_builder.set_restitution(0.0);
     crate_builder.set_user_pointer(crate_node);
@@ -243,7 +237,7 @@ int main(void)
     uint64_t iteration_number = 0;
 
     // soundMan = new SoundManager();
-    GUIMan = new GUIManager(graph, window);
+//    GUIMan = new GUIManager(graph, window);
     GUIrendering = false;
 
     SoundManager::sound_init();
@@ -251,7 +245,7 @@ int main(void)
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
-        GUIrendering = GUIMan->get_rendering_state();
+//        GUIrendering = GUIMan->get_rendering_state();
         // Set frame time
         Larp::Time::update_time();
         // Update animation system
@@ -345,7 +339,7 @@ int main(void)
         if(GUIrendering)
         {
             glDisable(GL_DEPTH_TEST);
-            CEGUI::System::getSingleton().renderAllGUIContexts();
+            // CEGUI::System::getSingleton().renderAllGUIContexts();
             glEnable(GL_DEPTH_TEST);
         }
 
@@ -421,30 +415,30 @@ void Do_Movement()
 // Is called whenever a key is pressed/released via GLFW
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
-    CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+//    CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
 
     /*Inject keys for CEGUI. Mainly pressing down on one */
     if(action == GLFW_PRESS)
     {
 
-        if(GlfwToCeguiKey(key) != 0)
-        {
-            context.injectKeyDown((CEGUI::Key::Scan)GlfwToCeguiKey(key));
-            /*If I don't add this the arrow keys start putting in weird character codes */
-            if(key == GLFW_KEY_BACKSPACE)
-                context.injectChar((CEGUI::Key::Scan)GlfwToCeguiKey(key));
-        }
-        else
-            context.injectKeyDown((CEGUI::Key::Scan)key);
+        // if(GlfwToCeguiKey(key) != 0)
+        // {
+        //     context.injectKeyDown((CEGUI::Key::Scan)GlfwToCeguiKey(key));
+        //     /*If I don't add this the arrow keys start putting in weird character codes */
+        //     if(key == GLFW_KEY_BACKSPACE)
+        //         context.injectChar((CEGUI::Key::Scan)GlfwToCeguiKey(key));
+        // }
+        // else
+        //     context.injectKeyDown((CEGUI::Key::Scan)key);
     }
     /* Inject keys for CEGUI. For releasing a key */
-    else if(action == GLFW_RELEASE)
-        context.injectKeyUp((CEGUI::Key::Scan)key);
+    // else if(action == GLFW_RELEASE)
+    //     context.injectKeyUp((CEGUI::Key::Scan)key);
 
     if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS && !GUIrendering)
         glfwSetWindowShouldClose(window, GL_TRUE);
-    else if(key == GLFW_KEY_F1 && action == GLFW_PRESS)
-        GUIMan->show_main();
+    // else if(key == GLFW_KEY_F1 && action == GLFW_PRESS)
+    //     GUIMan->show_main();
 
     // We don't want people to actually clear the graph
     // if (key == GLFW_KEY_C)
@@ -468,8 +462,8 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
  */
 void char_callback(GLFWwindow* window, unsigned int codepoint)
 {
-    CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-    context.injectChar(codepoint);
+    // CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+    // context.injectChar(codepoint);
 }
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
@@ -481,8 +475,8 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
         firstMouse = false;
     }
 
-    CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-    context.injectMouseMove(xpos - lastX,  ypos - lastY); 
+    // CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+    // context.injectMouseMove(xpos - lastX,  ypos - lastY); 
 
     GLfloat xoffset = xpos - lastX;
     GLfloat yoffset = lastY - ypos;
@@ -512,14 +506,14 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     {
         firing = false;
     }
-    if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
-        CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::RightButton);
-    else if(button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
-        CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::RightButton);
-    else if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-         CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::LeftButton);
-    else if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
-         CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::LeftButton);
+    // if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
+    //     CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::RightButton);
+    // else if(button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
+    //     CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::RightButton);
+    // else if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+    //      CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::LeftButton);
+    // else if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+    //      CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::LeftButton);
 }
 
 void scroll_callback(GLFWwindow* window, double x_offset, double y_offset)
@@ -687,16 +681,16 @@ void make_floor(std::unique_ptr<PhysicsWorld>& world)
 }
 
 
-unsigned int GlfwToCeguiKey(int glfwKey)
-{
-    switch(glfwKey)
-    {
-        case GLFW_KEY_UNKNOWN   : return 0;
-        case GLFW_KEY_UP        : return CEGUI::Key::ArrowUp;
-        case GLFW_KEY_DOWN      : return CEGUI::Key::ArrowDown;
-        case GLFW_KEY_LEFT      : return CEGUI::Key::ArrowLeft;
-        case GLFW_KEY_RIGHT     : return CEGUI::Key::ArrowRight;
-        case GLFW_KEY_BACKSPACE : return CEGUI::Key::Backspace;
-        default         : return 0;
-    }
-}
+// unsigned int GlfwToCeguiKey(int glfwKey)
+// {
+//     switch(glfwKey)
+//     {
+//         case GLFW_KEY_UNKNOWN   : return 0;
+//         case GLFW_KEY_UP        : return CEGUI::Key::ArrowUp;
+//         case GLFW_KEY_DOWN      : return CEGUI::Key::ArrowDown;
+//         case GLFW_KEY_LEFT      : return CEGUI::Key::ArrowLeft;
+//         case GLFW_KEY_RIGHT     : return CEGUI::Key::ArrowRight;
+//         case GLFW_KEY_BACKSPACE : return CEGUI::Key::Backspace;
+//         default         : return 0;
+//     }
+// }
