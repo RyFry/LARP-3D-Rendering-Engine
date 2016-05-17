@@ -43,7 +43,7 @@ void char_callback(GLFWwindow* window, unsigned int codepoint);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
-void Do_Movement();
+void do_movement();
 void error_callback(int error, const char* description);
 void make_floor(PhysicsWorld* physics_world);
 // unsigned int GlfwToCeguiKey(int glfwKey);
@@ -213,13 +213,11 @@ int main(void)
     camera_node = player_node->create_child();
     camera_node->translate(0.0, 0.75, 0.0);
 
-
-
     make_floor(world);
 
     // Skybox stuff
     std::vector<const GLchar*> skybox_files;
-    skybox_files.push_back("assets/skybox/right.jpg");//assets/mp_drakeq/drakeq_rt.tga");
+    skybox_files.push_back("assets/skybox/right.jpg");
     skybox_files.push_back("assets/skybox/left.jpg");
     skybox_files.push_back("assets/skybox/top.jpg");
     skybox_files.push_back("assets/skybox/bottom.jpg");
@@ -228,12 +226,11 @@ int main(void)
     Larp::SkyBox skybox(skybox_files);
     graph->set_skybox(&skybox);
 
-
     GLfloat frame_rate_limiter = 0.0f;
     uint64_t iteration_number = 0;
 
     // soundMan = new SoundManager();
-//    GUIMan = new GUIManager(graph, window);
+    // GUIMan = new GUIManager(graph, window);
     GUIrendering = false;
 
     SoundManager::sound_init();
@@ -241,7 +238,7 @@ int main(void)
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
-//        GUIrendering = GUIMan->get_rendering_state();
+        // GUIrendering = GUIMan->get_rendering_state();
         // Set frame time
         Larp::Time::update_time();
         // Update animation system
@@ -258,7 +255,7 @@ int main(void)
 
         // Check and call events
         glfwPollEvents();
-        Do_Movement();
+        do_movement();
 
         player->update_movement(world.get());
 
@@ -311,7 +308,7 @@ int main(void)
         glfwPollEvents();
         if(!GUIrendering)
         {
-            Do_Movement();
+            do_movement();
 
             if(firing && player_held_item != nullptr && player_held_item->_auto)
             {
@@ -350,7 +347,7 @@ int main(void)
 }
 
 // Moves/alters the camera positions based on user input
-void Do_Movement()
+void do_movement()
 {
     // Camera controls
     if (keys[GLFW_KEY_UP])
@@ -453,7 +450,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 }
 
 /* GLFW has two keyboard related call backs.
- * One for the physical keyboard and one for the Unicode for the keys 
+ * One for the physical keyboard and one for the Unicode for the keys
  * This one is for the Unicode
  */
 void char_callback(GLFWwindow* window, unsigned int codepoint)
@@ -472,7 +469,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     }
 
     // CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-    // context.injectMouseMove(xpos - lastX,  ypos - lastY); 
+    // context.injectMouseMove(xpos - lastX,  ypos - lastY);
 
     GLfloat xoffset = xpos - lastX;
     GLfloat yoffset = lastY - ypos;
@@ -531,7 +528,7 @@ void attempt_to_pick_up_weapon()
 {
     if (player_held_item != nullptr)
         return;
-    
+
     GLfloat yaw = camera._yaw;
     GLfloat pitch = camera._pitch;
     glm::vec3 pos = camera._position;
@@ -556,9 +553,9 @@ void attempt_to_pick_up_weapon()
            for (auto& it:pickupable_items) {
                 if(it->_node == user_pointer)
                 {
-                    weaponptr = it; 
+                    weaponptr = it;
                 }
-            } 
+            }
         }
         if (weaponptr != nullptr)
         {
