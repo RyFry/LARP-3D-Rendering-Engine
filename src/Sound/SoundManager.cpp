@@ -8,15 +8,6 @@ float SoundManager::_effect_volume = 0.2f;
 float SoundManager::_music_volume = 0.02f;
 int SoundManager::_walk = 0;
 
-SoundManager::SoundManager()
-{
-    
-}
-
-SoundManager::~SoundManager()
-{
-}
-
 void SoundManager::sound_init()
 {
     Larp::CustomConfigurationLoader* config = Larp::CustomConfigurationLoader::load_configurations("sound.cfg");
@@ -48,14 +39,13 @@ void SoundManager::sound_quit()
     SDL_Quit();
 }
 
-void SoundManager::play_sound(std::string effectName)
+void SoundManager::play_sound(std::string effect_name)
 {
-
-    if(effectName == "walk")
+    if(effect_name == "walk")
     {
         if (Mix_Playing(0))
             return;
-        std::string temp(effectName + std::to_string(_walk));
+        std::string temp(effect_name + std::to_string(_walk));
         if(_walk == 0)
         {
             Mix_PlayChannel(0, _sound_effects.at(temp), 0);
@@ -67,17 +57,18 @@ void SoundManager::play_sound(std::string effectName)
             --_walk;
         }
     }
-    else if(effectName == "jump")
+    else if(effect_name == "jump")
     {
         if (Mix_Playing(1))
             return;
-        Mix_PlayChannel(1, _sound_effects.at(effectName.c_str()), 0);
+        Mix_PlayChannel(1, _sound_effects.at(effect_name.c_str()), 0);
     }
     else
     {
-        Mix_PlayChannel(-1, _sound_effects.at(effectName.c_str()), 0);
+        Mix_PlayChannel(-1, _sound_effects.at(effect_name.c_str()), 0);
     }
 }
+
 void SoundManager::play_music()
 {
     Mix_PlayMusic(_background_music, -1);
@@ -101,5 +92,4 @@ void SoundManager::music_change_volume(const float vol)
 {
     Mix_VolumeMusic(MIX_MAX_VOLUME * vol);
     _music_volume = vol;
-
 }

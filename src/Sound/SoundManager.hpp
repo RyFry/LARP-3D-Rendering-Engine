@@ -12,9 +12,6 @@
 class SoundManager
 {
 public:
-    SoundManager();
-    ~SoundManager();
-
     static void sound_init();
     static void sound_quit();
     static void play_sound(std::string  effectName);
