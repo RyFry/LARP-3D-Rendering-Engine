@@ -35,11 +35,9 @@ namespace Larp
     void SceneGraph::clear()
     {
         /*
-         * Since we're using shared_ptr's, resetting _root by making it
+         * Since we're using unique_ptr's, resetting _root by making it
          * point to new Node object will delete the current root, which
          * will cascade and subsequently delete all of its children
-         * (Assuming the user doesn't have any saved copies of the Node's
-         * already in the SceneGraph)
          */
         this->_root.reset(new Node());
     }
