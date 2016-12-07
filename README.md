@@ -1,5 +1,5 @@
-# cs354r-final-game-project
-Repo for game technology final game project.
+# LARP-3D-Rendering-Engine
+Repo for a 3d rendering engine intended to explore the concepts of computer graphics.
 
 ### Contributors
 | Name           | Github         |
