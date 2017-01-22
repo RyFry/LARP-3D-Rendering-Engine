@@ -22,19 +22,25 @@ namespace Larp
          * A map of pre-defined options, as well as their default values should
          * the user not provide them in the config file.
          */
-        static std::unordered_map<std::string, std::string> DEFAULTS;
+        const std::unordered_map<std::string, std::string> c_defaults =
+        {
+            { "title",        "Default Title" },
+            { "width",        "800" },
+            { "height",       "600" },
+            { "resizable",    "false" }
+        };
         /**
          * Since we only want to load the configurations once, we make a static map between
          * ConfigurationLoaders. This way, the user can load as many configuration files
          * that they want for whatever purposes they have (e.g. a game that runs in two
          * separate windows).
          */
-        static std::unordered_map<std::string, UniqueConfigurationLoader> _loaded_configurations;
+        static std::unordered_map<std::string, UniqueConfigurationLoader> s_loaded_configurations;
         /**
          * A map of (option -> value) that defines the configuration options provided
          * by the user in the config file.
          */
-        std::unordered_map<std::string, std::string> _configurations;
+        std::unordered_map<std::string, std::string> m_configurations;
         /**
          * Loads the configuration options from the given configuration file.
          * @param path The path to the configuration file to load.

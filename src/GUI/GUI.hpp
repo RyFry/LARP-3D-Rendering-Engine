@@ -3,7 +3,7 @@
 class GUI
 {
 private:
-    bool _is_active;
+    bool m_is_active;
 
 public:
     GUI();

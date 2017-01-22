@@ -11,23 +11,23 @@ namespace Larp
         /**
          * The direction the DirectionalLight is aiming
          */
-        glm::vec3 _direction;
+        glm::vec3 m_direction;
         /**
          * Intensity of this DirectionalLight's ambient light. Ambient light is usually set to
          * a low intensity because the ambient color should not be too dominant.
          */
-        glm::vec3 _ambient;
+        glm::vec3 m_ambient;
         /**
          * Intensity of this DirectionalLight's diffuse light. Diffuse light is usually set to
          * to the exact color the user would like the light to have; often a bright white
          * color.
          */
-        glm::vec3 _diffuse;
+        glm::vec3 m_diffuse;
         /**
          * Intensity of this DirectionalLight's specular light. Specular light is usually kept at
          * glm::vec3(1.0f) shining at full intensity.
          */
-        glm::vec3 _specular;
+        glm::vec3 m_specular;
         /**
          * Constructor
          * @param x The x value of the DirectionalLight's direction.

@@ -11,39 +11,39 @@ namespace Larp
          /**
          * This PointLights's position
          */
-        glm::vec3 _position;
+        glm::vec3 m_position;
         /**
          * A constant value used to reduce the PointLight's intensity over a distance.
          * This is usually kept at 1.0 to make sure the denominator of the equation
          * this value is used in is never smaller than 1.
          */
-        static const GLfloat _constant;
+        static const GLfloat sc_constant;
         /**
          * This linear term is used as part of the attenuation equation which reduces
          * a light's intensity of a distance.
          */
-        GLfloat _linear;
+        GLfloat m_linear;
         /**
          * This quadratic term is used as part of the attenuation equation which reduces
          * a light's intensity of a distance.
          */
-        GLfloat _quadratic;
+        GLfloat m_quadratic;
         /**
          * Intensity of this PointLight's ambient light. Ambient light is usually set to
          * a low intensity because the ambient color should not be too dominant.
          */
-        glm::vec3 _ambient;
+        glm::vec3 m_ambient;
         /**
          * Intensity of this PointLight's diffuse light. Diffuse light is usually set to
          * to the exact color the user would like the light to have; often a bright white
          * color.
          */
-        glm::vec3 _diffuse;
+        glm::vec3 m_diffuse;
         /**
          * Intensity of this PointLight's specular light. Specular light is usually kept at
          * glm::vec3(1.0f) shining at full intensity.
          */
-        glm::vec3 _specular;
+        glm::vec3 m_specular;
         /**
          * Constructor
          * @param x The x value of the PointLight's position.

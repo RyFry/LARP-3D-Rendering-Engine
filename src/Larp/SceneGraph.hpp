@@ -15,48 +15,48 @@ namespace Larp
         /**
          * The root pNode of this SceneGraph
          */
-        UniqueNode _root;
+        UniqueNode m_root;
         /**
          * A Singleton instance of the SceneGraph class that prevents
          * users from making more than one SceneGraph.
          */
-        static UniqueSceneGraph _singleton;
+        static UniqueSceneGraph s_singleton;
         /**
          * The vector of directional lights currently held by the SceneGraph.
          * If the vector is not empty, these will eventually be incorporated 
          * in the lighting calculations after they are passed from the SceneGraph
          * to the Node(s) and eventually and Entity.
          */
-        std::vector<UniqueDirectional> _directional_lights;
+        std::vector<UniqueDirectional> m_directional_lights;
         /**
          * The vector of point lights currently held by the SceneGraph.
          * If the vector is not empty, these will eventually be incorporated 
          * in the lighting calculations after they are passed from the SceneGraph
          * to the Node(s) and eventually and Entity.
          */
-        std::vector<UniquePoint> _point_lights;
+        std::vector<UniquePoint> m_point_lights;
         /**
          * The vector of spot lights currently held by the SceneGraph.
          * If the vector is not empty, these will eventually be incorporated 
          * in the lighting calculations after they are passed from the SceneGraph
          * to the Node(s) and eventually and Entity.
          */
-        std::vector<UniqueSpot> _spot_lights;
+        std::vector<UniqueSpot> m_spot_lights;
         /**
          * This is the maximum number of directional lights that may be added to the SceneGraph
          */
-        static const size_t _max_directional_lights;
+        static const size_t sc_max_directional_lights;
         /**
          * This is the maximum number of point lights that may be added to the SceneGraph
          */
-        static const size_t _max_point_lights;
+        static const size_t sc_max_point_lights;
         /**
          * This is the maximum number of spot lights that may be added to the SceneGraph
          * @warning SpotLights are not currently supported.
          */
-        static const size_t _max_spot_lights;
+        static const size_t sc_max_spot_lights;
 
-        SkyBox* _skybox;
+        SkyBox* m_skybox;
 
         /**
          * Default constructor. Made private to avoid having multiple

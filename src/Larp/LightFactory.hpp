@@ -18,16 +18,16 @@ namespace Larp
         /**
          * This is the maximum number of directional lights that may be added to the SceneGraph
          */
-        static const size_t _max_directional_lights;
+        static const size_t sc_max_directional_lights;
         /**
          * This is the maximum number of point lights that may be added to the SceneGraph
          */
-        static const size_t _max_point_lights;
+        static const size_t sc_max_point_lights;
         /**
          * This is the maximum number of spot lights that may be added to the SceneGraph
          * @warning SpotLights are not currently supported.
          */
-        static const size_t _max_spot_lights;
+        static const size_t sc_max_spot_lights;
     public:
         /**
          * The vector of directional lights currently held by the SceneGraph.
@@ -35,21 +35,21 @@ namespace Larp
          * in the lighting calculations after they are passed from the SceneGraph
          * to the Node(s) and eventually and Entity.
          */
-        static std::vector<UniqueDirectional> _directional_lights;
+        static std::vector<UniqueDirectional> s_directional_lights;
         /**
          * The vector of point lights currently held by the SceneGraph.
          * If the vector is not empty, these will eventually be incorporated 
          * in the lighting calculations after they are passed from the SceneGraph
          * to the Node(s) and eventually and Entity.
          */
-        static std::vector<UniquePoint> _point_lights;
+        static std::vector<UniquePoint> s_point_lights;
         /**
          * The vector of spot lights currently held by the SceneGraph.
          * If the vector is not empty, these will eventually be incorporated 
          * in the lighting calculations after they are passed from the SceneGraph
          * to the Node(s) and eventually and Entity.
          */
-        static std::vector<UniqueSpot> _spot_lights;
+        static std::vector<UniqueSpot> s_spot_lights;
         /**
          * Creates a directional light that faces downwards by default and adds the light
          * to the SceneGraph's vector of directional lights.

@@ -6,10 +6,11 @@
 #include "Larp/Node.hpp"
 #include "Larp/Entity.hpp"
 
-#include "Physics/PhysicsMeshColliderBuilder.hpp"
-#include "Physics/PhysicsObjectBuilder.hpp"
+#include "Physics/MeshColliderBuilder.hpp"
+#include "Physics/ObjectBuilder.hpp"
 
-struct Weapon {
+struct Weapon
+{
     Weapon (std::string default_model_path,
             std::string anim_path,
             std::string ammo_path,
@@ -18,15 +19,15 @@ struct Weapon {
             GLfloat pitch, GLfloat yaw, GLfloat z,
             bool automatic);
 
-    void initiate_physics(PhysicsWorld* world);
+    void initiate_physics(Physics::World* world);
 
-    GLfloat _offset_pitch;
-    GLfloat _offset_yaw;
-    GLfloat _offset_z;
-    Larp::Node* _node;
-    Larp::AnimationHandler* _animation;
-    Larp::Entity* _entity;
-    std::string _ammo;
-    std::string _sound;
-    bool _auto;
+    GLfloat m_offset_pitch;
+    GLfloat m_offset_yaw;
+    GLfloat m_offset_z;
+    Larp::Node* m_node;
+    Larp::AnimationHandler* m_animation;
+    Larp::Entity* m_entity;
+    std::string m_ammo;
+    std::string m_sound;
+    bool m_auto;
 };

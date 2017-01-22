@@ -2,7 +2,7 @@
 
 namespace Larp
 {
-    std::unordered_map<std::string, UniqueCustomConfigurationLoader> CustomConfigurationLoader::_loaded_configurations;
+    std::unordered_map<std::string, UniqueCustomConfigurationLoader> CustomConfigurationLoader::s_loaded_configurations;
 
     CustomConfigurationLoader::CustomConfigurationLoader(std::string path, bool throw_if_failure)
     {
@@ -45,40 +45,40 @@ namespace Larp
 
             // If the mapping (configuration -> somevalue) already exists, then emplace returns a pair
             // where the second value is false.
-            auto is_emplaced = this->_configurations.emplace(configuration, value);
+            auto is_emplaced = m_configurations.emplace(configuration, value);
             if (is_emplaced.second == false)
             {
                 PRINT_ERROR("Could not insert `" << configuration << "` with value `" << value << "` because it already exists.");
             }
         }
 
-        this->_path = path;
+        m_path = path;
     }
 
     CustomConfigurationLoader* CustomConfigurationLoader::load_configurations(std::string path, bool throw_if_failure)
     {
-        if (_loaded_configurations.find(path) == _loaded_configurations.end())
+        if (s_loaded_configurations.find(path) == s_loaded_configurations.end())
         {
-            _loaded_configurations.emplace(path,
+            s_loaded_configurations.emplace(path,
                                            UniqueCustomConfigurationLoader(new CustomConfigurationLoader(path, throw_if_failure)));
         }
-        return _loaded_configurations.at(path).get();
+        return s_loaded_configurations.at(path).get();
     }
 
     std::string CustomConfigurationLoader::get_configuration(std::string configuration)
     {
-        if (this->_configurations.find(configuration) == this->_configurations.end())
+        if (m_configurations.find(configuration) == m_configurations.end())
         {
             PRINT_ERROR("Could not get configuration for configuration `" <<
                         configuration <<
                         "` because it was not found in `" <<
-                        this->_path <<
+                        m_path <<
                         "`. Returning empty string.");
             return "";
         }
         else
         {
-            return this->_configurations.at(configuration);
+            return m_configurations.at(configuration);
         }
     }
 }

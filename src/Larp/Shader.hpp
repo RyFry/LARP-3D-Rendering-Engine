@@ -23,11 +23,11 @@ namespace Larp
         /**
          * The ID of the OpenGL Program associated with this Shader
          */
-        ShaderProgram _program;
+        ShaderProgram m_program;
 
-        static Shader* _shadow_shader;
+        static Shader* s_shadow_shader;
 
-        static glm::mat4 _light_space_matrix;
+        static glm::mat4 s_light_space_matrix;
 
         /**
          * If the model at path is not already loaded, then it will be loaded and cached.
@@ -70,22 +70,22 @@ namespace Larp
         /**
          * A cache of compiled Shaders.
          */
-        static std::unordered_map<std::string, UniqueShader> _compiled_shaders;
+        static std::unordered_map<std::string, UniqueShader> s_compiled_shaders;
         /**
          * Checks if the OpenGL code has been called to configure the depth map
          */
-        static bool _depth_map_configured;
+        static bool s_depth_map_configured;
         /**
          * A framebuffer object for rendering the depth map
          */
-        static GLuint _depth_map_FBO;
+        static GLuint s_depth_map_FBO;
         /**
          * A 2D texture that is used as the framebuffer's depth buffer
          */
-        static GLuint _depth_map_texture;
+        static GLuint s_depth_map_texture;
 
-        static const GLuint SHADOW_WIDTH;
-        static const GLuint SHADOW_HEIGHT;
+        static const GLuint sc_shadow_width;
+        static const GLuint sc_shadow_height;
         /**
          * Constructor
          * @param vertex_path   The path to the desired vertex shader.

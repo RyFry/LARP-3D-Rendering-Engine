@@ -23,15 +23,15 @@ namespace Larp
         /**
          * The position of the Vertex
          */
-        glm::vec3 _position;
+        glm::vec3 m_position;
         /**
          * The vertex normal for this Vertex
          */
-        glm::vec3 _normal;
+        glm::vec3 m_normal;
         /**
          * The (u, v) coordinate of the Texture for this Vertex
          */
-        glm::vec2 _tex_coords;
+        glm::vec2 m_tex_coords;
     };
 
     class Mesh
@@ -40,15 +40,15 @@ namespace Larp
         /**
          * The list of vertices associated with this Mesh. Used when binding the VBO.
          */
-        std::vector<Vertex> _vertices;
+        std::vector<Vertex> m_vertices;
         /**
          * The list of indices associated with this Mesh. Used when binding the EBO.
          */
-        std::vector<GLuint> _indices;
+        std::vector<GLuint> m_indices;
         /**
          * The list of textures associated with this Mesh.
          */
-        std::vector<Texture*> _textures;
+        std::vector<Texture*> m_textures;
         /**
          * Constructor
          * @param vertices The list of vertices associated with this Mesh. Used for binding the VBO.
@@ -76,15 +76,15 @@ namespace Larp
         /**
          * Associated OpenGL VAO
          */
-        VAO _VAO;
+        VAO m_VAO;
         /**
          * Associated OpenGL VBO
          */
-        VBO _VBO;
+        VBO m_VBO;
         /**
          * Associated OpenGL EBO
          */
-        EBO _EBO;
+        EBO m_EBO;
 
         /**
          * Sets up this Meshes VAO, VBO, and EBO, and binds the vertices, indices, and textures

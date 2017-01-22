@@ -2,7 +2,7 @@
 
 namespace Larp
 {
-    std::unordered_map<std::string, UniqueModel> Model::_loaded_models;
+    std::unordered_map<std::string, UniqueModel> Model::s_loaded_models;
 
     // ----------------
     // Public functions
@@ -10,37 +10,37 @@ namespace Larp
 
     Model* Model::create(std::string path)
     {
-        if (_loaded_models.find(path) == _loaded_models.end())
+        if (s_loaded_models.find(path) == s_loaded_models.end())
         {
-            _loaded_models.emplace(path, UniqueModel(new Model(path)));
+            s_loaded_models.emplace(path, UniqueModel(new Model(path)));
         }
-        return _loaded_models.at(path).get();
+        return s_loaded_models.at(path).get();
     }
 
     void Model::draw(Shader& shader)
     {
-        for (GLuint i = 0; i < this->_meshes.size(); ++i)
-            this->_meshes.at(i).draw(shader);
+        for (GLuint i = 0; i < m_meshes.size(); ++i)
+            m_meshes.at(i).draw(shader);
     }
 
     const std::vector<Mesh>& Model::get_meshes()
     {
-        return this->_meshes;
+        return m_meshes;
     }
 
     GLfloat Model::get_width() const
     {
-        return this->_width;
+        return m_width;
     }
 
     GLfloat Model::get_height() const
     {
-        return this->_height;
+        return m_height;
     }
 
     GLfloat Model::get_depth() const
     {
-        return this->_depth;
+        return m_depth;
     }
 
     // -----------------
@@ -48,9 +48,9 @@ namespace Larp
     // -----------------
 
     Model::Model(std::string path)
-        : _width(0.0f),
-          _height(0.0f),
-          _depth(0.0f)
+        : m_width(0.0f),
+          m_height(0.0f),
+          m_depth(0.0f)
     {
         this->load_model(path);
 
@@ -62,30 +62,30 @@ namespace Larp
         GLfloat max_y = FLT_MIN;
         GLfloat max_z = FLT_MIN;
 
-        for (auto& mesh : this->_meshes)
+        for (auto& mesh : m_meshes)
         {
-            for (auto& vert : mesh._vertices)
+            for (auto& vert : mesh.m_vertices)
             {
-                if (vert._position.x < min_x)
-                    min_x = vert._position.x;
-                if (vert._position.x > max_x)
-                    max_x = vert._position.x;
-                if (vert._position.y < min_y)
-                    min_y = vert._position.y;
-                if (vert._position.y > max_y)
-                    max_y = vert._position.y;
-                if (vert._position.z < min_z)
-                    min_z = vert._position.z;
-                if (vert._position.z > max_z)
-                    max_z = vert._position.z;
+                if (vert.m_position.x < min_x)
+                    min_x = vert.m_position.x;
+                if (vert.m_position.x > max_x)
+                    max_x = vert.m_position.x;
+                if (vert.m_position.y < min_y)
+                    min_y = vert.m_position.y;
+                if (vert.m_position.y > max_y)
+                    max_y = vert.m_position.y;
+                if (vert.m_position.z < min_z)
+                    min_z = vert.m_position.z;
+                if (vert.m_position.z > max_z)
+                    max_z = vert.m_position.z;
             }
         }
 
-        this->_width = max_x - min_x;
-        this->_height = max_y - min_y;
-        this->_depth = max_z - min_z;
+        m_width = max_x - min_x;
+        m_height = max_y - min_y;
+        m_depth = max_z - min_z;
         std::cout << "Dimensions of " << path << ": ("
-                  << this->_width << ", " << this->_height << ", " << this->_depth << ')' << std::endl;
+                  << m_width << ", " << m_height << ", " << m_depth << ')' << std::endl;
     }
 
     void Model::load_model(std::string path)
@@ -99,7 +99,7 @@ namespace Larp
             return;
         }
 
-        this->_directory = path.substr(0, path.find_last_of('/'));
+        m_directory = path.substr(0, path.find_last_of('/'));
         this->process_node(scene->mRootNode, scene);
     }
 
@@ -109,7 +109,7 @@ namespace Larp
         for(GLuint i = 0; i < node->mNumMeshes; i++)
         {
             aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-            this->_meshes.push_back(this->process_mesh(mesh, scene));
+            m_meshes.push_back(this->process_mesh(mesh, scene));
         }
 
         // Then do the same for each of its children
@@ -138,7 +138,7 @@ namespace Larp
             vector.x = mesh->mVertices[i].x;
             vector.y = mesh->mVertices[i].y;
             vector.z = mesh->mVertices[i].z;
-            vertex._position = vector;
+            vertex.m_position = vector;
 
             if (mesh->mNormals == NULL)
             {
@@ -147,17 +147,17 @@ namespace Larp
             vector.x = mesh->mNormals[i].x;
             vector.y = mesh->mNormals[i].y;
             vector.z = mesh->mNormals[i].z;
-            vertex._normal = vector;
+            vertex.m_normal = vector;
 
             if (mesh->mTextureCoords[0])
             {
                 glm::vec2 vec;
                 vec.x = mesh->mTextureCoords[0][i].x;
                 vec.y = mesh->mTextureCoords[0][i].y;
-                vertex._tex_coords = vec;
+                vertex.m_tex_coords = vec;
             }
             else
-                vertex._tex_coords = glm::vec2(0.0f, 0.0f);
+                vertex.m_tex_coords = glm::vec2(0.0f, 0.0f);
 
             vertices.push_back(vertex);
         }
@@ -174,14 +174,14 @@ namespace Larp
         if (mesh->mMaterialIndex >= 0)
         {
             aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-            std::vector<Texture*> diffuseMaps = this->load_material_textures(material,
-                                                                             aiTextureType_DIFFUSE,
-                                                                             Texture::DIFFUSE);
-            textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-            std::vector<Texture*> specularMaps = this->load_material_textures(material,
+            std::vector<Texture*> diffuse_maps = this->load_material_textures(material,
+                                                                              aiTextureType_DIFFUSE,
+                                                                              Texture::DIFFUSE);
+            textures.insert(textures.end(), diffuse_maps.begin(), diffuse_maps.end());
+            std::vector<Texture*> specular_maps = this->load_material_textures(material,
                                                                               aiTextureType_SPECULAR,
                                                                               Texture::SPECULAR);
-            textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+            textures.insert(textures.end(), specular_maps.begin(), specular_maps.end());
         }
 
         return Mesh(vertices, indices, textures);
@@ -195,11 +195,11 @@ namespace Larp
             aiString str;
             mat->GetTexture(type, i, &str);
             GLboolean skip = false;
-            for (GLuint j = 0; j < this->_loaded_textures.size(); ++j)
+            for (GLuint j = 0; j < m_loaded_textures.size(); ++j)
             {
-                if (this->_loaded_textures.at(i)->get_path() == str)
+                if (m_loaded_textures.at(i)->get_path() == str)
                 {
-                    textures.push_back(this->_loaded_textures.at(i));
+                    textures.push_back(m_loaded_textures.at(i));
                     skip = true;
                     break;
                 }
@@ -208,9 +208,9 @@ namespace Larp
             if (!skip)
             {
                 // If the texture isn't already loaded, load it
-                Texture* texture = Mesh::texture_from_file(str.C_Str(), this->_directory, texture_type);
+                Texture* texture = Mesh::texture_from_file(str.C_Str(), m_directory, texture_type);
                 textures.push_back(texture);
-                this->_loaded_textures.push_back(texture); // Add to loaded textures
+                m_loaded_textures.push_back(texture); // Add to loaded textures
             }
         }
 

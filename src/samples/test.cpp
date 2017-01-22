@@ -16,10 +16,10 @@
 //#include "GUIManager.hpp"
 #include "Sound/SoundManager.hpp"
 
-#include "Physics/PhysicsMeshColliderBuilder.hpp"
-#include "Physics/PhysicsObjectBuilder.hpp"
-#include "Physics/PhysicsPlayerController.hpp"
-#include "Physics/PhysicsWorld.hpp"
+#include "Physics/MeshColliderBuilder.hpp"
+#include "Physics/ObjectBuilder.hpp"
+#include "Physics/PlayerController.hpp"
+#include "Physics/World.hpp"
 
 // GLM Mathemtics
 #include <glm/glm.hpp>
@@ -45,17 +45,17 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 void do_movement();
 void error_callback(int error, const char* description);
-void make_floor(PhysicsWorld* physics_world);
+void make_floor(Physics::World* physics_world);
 // unsigned int GlfwToCeguiKey(int glfwKey);
 void attempt_to_pick_up_weapon();
 void attempt_to_drop_weapon();
 void attempt_to_spawn_bullet();
-void make_floor(std::unique_ptr<PhysicsWorld>& physics_world);
+void make_floor(std::unique_ptr<Physics::World>& physics_world);
 
 // Camera
 Larp::SceneGraph* graph = Larp::SceneGraph::singleton();
-std::unique_ptr<PhysicsWorld> world;
-std::unique_ptr<PhysicsPlayerController> player;
+std::unique_ptr<Physics::World> world;
+std::unique_ptr<Physics::PlayerController> player;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 bool keys[1024];
 bool buttons[3];
@@ -122,8 +122,8 @@ int main(void)
 	glDepthFunc(GL_LESS);
     //glEnable(GL_MULTISAMPLE);
 
-    // Setting up PhysicsWorld
-    world.reset(new PhysicsWorld());
+    // Setting up Physics::World
+    world.reset(new Physics::World());
     world->init_objects();
 
     Larp::Model* level = Larp::Model::create("assets/LEVEL/LEVEL.obj");
@@ -138,12 +138,12 @@ int main(void)
     Larp::Node* node21 = node11->create_child();
     node21->attach_entity(entity);
 
-    PhysicsMeshColliderBuilder physics_level_builder = PhysicsMeshColliderBuilder("assets/LEVEL/LEVEL.obj");
+    Physics::MeshColliderBuilder physics_level_builder = Physics::MeshColliderBuilder("assets/LEVEL/LEVEL.obj");
     physics_level_builder.set_mass(0.0);
     physics_level_builder.set_restitution(1.0);
     physics_level_builder.set_user_pointer(node21);
 
-    PhysicsMeshCollider* physics_level = physics_level_builder.build();
+    Physics::MeshCollider* physics_level = physics_level_builder.build();
 
     world->get_dynamics_world()->addRigidBody(physics_level->get_rigid_body());
 
@@ -158,13 +158,13 @@ int main(void)
 
     destructable_items.insert(crate_node);
 
-    PhysicsObjectBuilder<btBoxShape> crate_builder;
+    Physics::ObjectBuilder<btBoxShape> crate_builder;
     crate_builder.set_position(glm::vec3(0.0, 6.0, 3.0));
     crate_builder.set_mass(0.6);
     crate_builder.set_restitution(0.0);
     crate_builder.set_user_pointer(crate_node);
 
-    PhysicsBox* crate_collider = crate_builder.build();
+    Physics::Box* crate_collider = crate_builder.build();
 
     world->get_dynamics_world()->addRigidBody(crate_collider->get_rigid_body());
 
@@ -175,8 +175,8 @@ int main(void)
                                  graph->get_root_node(),
                                  -90, 0, 1.2,
                                  false);
-    shotgun->_node->set_scale(0.1, 0.1, 0.1);
-    shotgun->_node->set_position(3.0, 1.5, 0.0);
+    shotgun->m_node->set_scale(0.1, 0.1, 0.1);
+    shotgun->m_node->set_position(3.0, 1.5, 0.0);
     shotgun->initiate_physics(world.get());
     pickupable_items.insert(shotgun);
 
@@ -187,8 +187,8 @@ int main(void)
                                   graph->get_root_node(),
                                   0, -90, 0.5,
                                   false);
-    launcher->_node->set_scale(0.1, 0.1, 0.1);
-    launcher->_node->set_position(-8.5, 8.5, 8.5);
+    launcher->m_node->set_scale(0.1, 0.1, 0.1);
+    launcher->m_node->set_position(-8.5, 8.5, 8.5);
     launcher->initiate_physics(world.get());
     pickupable_items.insert(launcher);
 
@@ -199,15 +199,15 @@ int main(void)
                                   graph->get_root_node(),
                                   0, 0, 0.75,
                                   true);
-    chaingun->_node->set_scale(0.2, 0.2, 0.2);
-    chaingun->_node->set_position(10.0, 9.0, -10.0);
+    chaingun->m_node->set_scale(0.2, 0.2, 0.2);
+    chaingun->m_node->set_position(10.0, 9.0, -10.0);
     chaingun->initiate_physics(world.get());
     pickupable_items.insert(chaingun);
 
     /*******************************
      * TESTING - DELETE THIS       *
      *******************************/
-    player.reset(new PhysicsPlayerController(world.get(), player_node, .35, .75, .15, glm::vec3(0, 5.0, 2.0)));
+    player.reset(new Physics::PlayerController(world.get(), player_node, .35, .75, .15, glm::vec3(0, 5.0, 2.0)));
     player->set_user_pointer(player_node);
 
     camera_node = player_node->create_child();
@@ -267,12 +267,12 @@ int main(void)
         glm::quat quat = player->get_orientation();
         player_node->set_position(pos);
         player_node->set_orientation(quat);
-        camera._position = glm::vec3(pos.x, pos.y + player->get_height(), pos.z);
-        camera._yaw = player->get_yaw();
+        camera.m_position = glm::vec3(pos.x, pos.y + player->get_height(), pos.z);
+        camera.m_yaw = player->get_yaw();
 
         glm::quat item_quat;
         //item_quat = glm::rotate(item_quat, 90.0f, glm::vec3(0, 1, 0));
-        item_quat = glm::rotate(item_quat, -camera._pitch, glm::vec3(1, 0, 0));
+        item_quat = glm::rotate(item_quat, -camera.m_pitch, glm::vec3(1, 0, 0));
         camera_node->set_orientation(item_quat);
 
         for (size_t i = 0; i < world->get_collision_object_count(); ++i)
@@ -310,7 +310,7 @@ int main(void)
         {
             do_movement();
 
-            if(firing && player_held_item != nullptr && player_held_item->_auto)
+            if(firing && player_held_item != nullptr && player_held_item->m_auto)
             {
                 attempt_to_spawn_bullet();
             }
@@ -324,9 +324,9 @@ int main(void)
         // node11->pitch(Larp::Time::delta_time() * 23.0);
         // node11->roll(Larp::Time::delta_time() * 17.0);
 
-        glm::mat4 projection = glm::perspective(camera._zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
+        glm::mat4 projection = glm::perspective(camera.m_zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
         glm::mat4 view = camera.get_view_matrix();
-        glm::vec3 view_pos = camera._position;
+        glm::vec3 view_pos = camera.m_position;
         graph->draw(view, projection, view_pos);
 
         if(GUIrendering)
@@ -360,13 +360,13 @@ void do_movement()
         camera.process_keyboard(Camera::RIGHT, Larp::Time::delta_time());
 
     if (keys[GLFW_KEY_S])
-        player->add_movement_direction(PhysicsPlayerController::PlayerDirection::BACKWARD);
+        player->add_movement_direction(Physics::PlayerController::PlayerDirection::BACKWARD);
     if (keys[GLFW_KEY_A])
-        player->add_movement_direction(PhysicsPlayerController::PlayerDirection::LEFT);
+        player->add_movement_direction(Physics::PlayerController::PlayerDirection::LEFT);
     if (keys[GLFW_KEY_D])
-        player->add_movement_direction(PhysicsPlayerController::PlayerDirection::RIGHT);
+        player->add_movement_direction(Physics::PlayerController::PlayerDirection::RIGHT);
     if (keys[GLFW_KEY_W])
-        player->add_movement_direction(PhysicsPlayerController::PlayerDirection::FORWARD);
+        player->add_movement_direction(Physics::PlayerController::PlayerDirection::FORWARD);
 
     if (keys[GLFW_KEY_SPACE])
         player->jump();
@@ -386,18 +386,18 @@ void do_movement()
     {
         was_in_air = false;
         SoundManager::play_sound("jump");
-        if(player_held_item != nullptr && !(player_held_item->_animation->get_current_animation() == "fire") && Larp::Time::current_time() - air_start_time >= 0.3)
+        if(player_held_item != nullptr && !(player_held_item->m_animation->get_current_animation() == "fire") && Larp::Time::current_time() - air_start_time >= 0.3)
         {
-            player_held_item->_animation->play("land", true, 0);
+            player_held_item->m_animation->play("land", true, 0);
         }
     }
-    if(player_held_item != nullptr && player->is_moving() && player->is_on_floor() && player_held_item->_animation->get_current_animation() == "NO ANIMATION PLAYING")
+    if(player_held_item != nullptr && player->is_moving() && player->is_on_floor() && player_held_item->m_animation->get_current_animation() == "NO ANIMATION PLAYING")
     {
-        player_held_item->_animation->play("walk", true, 0);
+        player_held_item->m_animation->play("walk", true, 0);
     }
-    if(player_held_item != nullptr && (!(player->is_moving()) || !(player->is_on_floor())) && player_held_item->_animation->get_current_animation() == "walk")
+    if(player_held_item != nullptr && (!(player->is_moving()) || !(player->is_on_floor())) && player_held_item->m_animation->get_current_animation() == "walk")
     {
-        player_held_item->_animation->stop(true);
+        player_held_item->m_animation->stop(true);
     }
     if(player->is_moving() && player->is_on_floor())
     {
@@ -529,9 +529,9 @@ void attempt_to_pick_up_weapon()
     if (player_held_item != nullptr)
         return;
 
-    GLfloat yaw = camera._yaw;
-    GLfloat pitch = camera._pitch;
-    glm::vec3 pos = camera._position;
+    GLfloat yaw = camera.m_yaw;
+    GLfloat pitch = camera.m_pitch;
+    glm::vec3 pos = camera.m_position;
 
     btScalar xz_len = cos(glm::radians(pitch));
     btVector3 bt_to(xz_len * cos(glm::radians(yaw)),
@@ -551,7 +551,7 @@ void attempt_to_pick_up_weapon()
         if(user_pointer != nullptr)
         {
            for (auto& it:pickupable_items) {
-                if(it->_node == user_pointer)
+                if(it->m_node == user_pointer)
                 {
                     weaponptr = it;
                 }
@@ -564,15 +564,15 @@ void attempt_to_pick_up_weapon()
             Larp::Node* gun_parent = camera_node->create_child();
             gun_parent->attach_child(user_pointer);
             user_pointer->set_position(0.0, 0.0, 0.0);
-            gun_parent->set_position(-0.2, -0.25, weaponptr->_offset_z);
+            gun_parent->set_position(-0.2, -0.25, weaponptr->m_offset_z);
             glm::vec3 player_scale = static_cast<Larp::Node*>(player->get_user_pointer())->get_scale();
             glm::vec3 user_pointer_scale = user_pointer->get_scale();
             user_pointer->set_scale(user_pointer_scale.x / player_scale.x,
                                     user_pointer_scale.y / player_scale.y,
                                     user_pointer_scale.z / player_scale.z);
             user_pointer->set_orientation(glm::quat(1, 0, 0, 0));
-            user_pointer->pitch(weaponptr->_offset_pitch);
-            user_pointer->yaw(weaponptr->_offset_yaw);
+            user_pointer->pitch(weaponptr->m_offset_pitch);
+            user_pointer->yaw(weaponptr->m_offset_yaw);
 
             // Finally, update our player_held_item to denote that we are actually holding something
             player_held_item = weaponptr;
@@ -585,45 +585,45 @@ void attempt_to_drop_weapon()
     if (player_held_item == nullptr)
         return;
 
-    GLfloat yaw = camera._yaw;
-    GLfloat pitch = camera._pitch;
-    glm::vec3 pos = camera._position;
+    GLfloat yaw = camera.m_yaw;
+    GLfloat pitch = camera.m_pitch;
+    glm::vec3 pos = camera.m_position;
 
     btScalar xz_len = cos(glm::radians(pitch));
     btVector3 direction(xz_len * cos(glm::radians(yaw)), sin(glm::radians(pitch)), xz_len * sin(glm::radians(yaw)));
 
-    PhysicsObjectBuilder<btBoxShape> test_gun_builder;
+    Physics::ObjectBuilder<btBoxShape> test_gun_builder;
     glm::quat test_gun_rot(0, 0, 0, 1);
     test_gun_rot = glm::rotate(test_gun_rot, 50.0, glm::vec3(0, 0, 1));
-    player_held_item->_node->set_orientation(test_gun_rot);
+    player_held_item->m_node->set_orientation(test_gun_rot);
     test_gun_builder.set_orientation(test_gun_rot);
     test_gun_builder.set_position(pos);
     test_gun_builder.set_mass(5.0);
     test_gun_builder.set_restitution(0.0);
-    test_gun_builder.set_user_pointer(player_held_item->_node);
+    test_gun_builder.set_user_pointer(player_held_item->m_node);
 
-    PhysicsBox* test_gun_collider = test_gun_builder.build();
+    Physics::Box* test_gun_collider = test_gun_builder.build();
 
     test_gun_collider->get_rigid_body()->setLinearVelocity(direction * 5);
 
     world->get_dynamics_world()->addRigidBody(test_gun_collider->get_rigid_body());
 
-    player_held_item->_node->detach_this_from_parent();
-    graph->get_root_node()->attach_child(player_held_item->_node);
+    player_held_item->m_node->detach_this_from_parent();
+    graph->get_root_node()->attach_child(player_held_item->m_node);
     player_held_item = nullptr;
 }
 
 void attempt_to_spawn_bullet()
 {
     // Only attempt to shoot  a bullet if the user is holding a gun
-    if (player_held_item == nullptr || player_held_item->_animation->get_current_animation() == "fire")
+    if (player_held_item == nullptr || player_held_item->m_animation->get_current_animation() == "fire")
         return;
 
-    SoundManager::play_sound(player_held_item->_sound);
-    player_held_item->_animation->play("fire", true, 0);
-    GLfloat yaw = camera._yaw;
-    GLfloat pitch = camera._pitch;
-    glm::vec3 pos = camera._position;
+    SoundManager::play_sound(player_held_item->m_sound);
+    player_held_item->m_animation->play("fire", true, 0);
+    GLfloat yaw = camera.m_yaw;
+    GLfloat pitch = camera.m_pitch;
+    glm::vec3 pos = camera.m_position;
     glm::quat rotation;
     rotation = glm::rotate(rotation, -yaw + 90.0, glm::vec3(0, 1, 0));
     rotation = glm::rotate(rotation, -pitch, glm::vec3(1, 0, 0));
@@ -631,7 +631,7 @@ void attempt_to_spawn_bullet()
     btScalar xz_len = cos(glm::radians(pitch));
     btVector3 direction(xz_len * cos(glm::radians(yaw)), sin(glm::radians(pitch)), xz_len * sin(glm::radians(yaw)));
 
-    Larp::Model* crate_model = Larp::Model::create(player_held_item->_ammo);
+    Larp::Model* crate_model = Larp::Model::create(player_held_item->m_ammo);
     Larp::Entity* crate_entity = Larp::Entity::create(crate_model);
     Larp::Node* crate_node = graph->create_child_node();
     crate_node->attach_entity(crate_entity);
@@ -639,20 +639,20 @@ void attempt_to_spawn_bullet()
     crate_node->set_position(pos);
     crate_node->set_orientation(rotation);
 
-    PhysicsObjectBuilder<btBoxShape> crate_builder;
+    Physics::ObjectBuilder<btBoxShape> crate_builder;
     crate_builder.set_position(pos);
     crate_builder.set_orientation(rotation);
     crate_builder.set_mass(0.2);
     crate_builder.set_restitution(0.0);
     crate_builder.set_user_pointer(crate_node);
 
-    PhysicsBox* crate_collider = crate_builder.build();
+    Physics::Box* crate_collider = crate_builder.build();
 
     crate_collider->get_rigid_body()->setLinearVelocity(direction * 100);
     world->get_dynamics_world()->addRigidBody(crate_collider->get_rigid_body());
 }
 
-void make_floor(std::unique_ptr<PhysicsWorld>& world)
+void make_floor(std::unique_ptr<Physics::World>& world)
 {
     btTransform trans;
     trans.setIdentity();

@@ -2,15 +2,15 @@
 
 namespace Larp
 {
-    Shader* Shader::_shadow_shader = nullptr;
-    glm::mat4 Shader::_light_space_matrix;
-    std::unordered_map<std::string, UniqueShader> Shader::_compiled_shaders;
-    GLuint Shader::_depth_map_FBO;
-    GLuint Shader::_depth_map_texture;
-    bool Shader::_depth_map_configured = false;
+    Shader* Shader::s_shadow_shader = nullptr;
+    glm::mat4 Shader::s_light_space_matrix;
+    std::unordered_map<std::string, UniqueShader> Shader::s_compiled_shaders;
+    GLuint Shader::s_depth_map_FBO;
+    GLuint Shader::s_depth_map_texture;
+    bool Shader::s_depth_map_configured = false;
 
-    const GLuint Shader::SHADOW_WIDTH = 1024;
-    const GLuint Shader::SHADOW_HEIGHT = 1024;
+    const GLuint Shader::sc_shadow_width = 1024;
+    const GLuint Shader::sc_shadow_height = 1024;
 
     // ----------------
     // Public functions
@@ -26,44 +26,44 @@ namespace Larp
 
         std::string appended_paths = ss.str();
 
-        if (_compiled_shaders.find(appended_paths) == _compiled_shaders.end())
+        if (s_compiled_shaders.find(appended_paths) == s_compiled_shaders.end())
         {
-            _compiled_shaders.emplace(appended_paths, UniqueShader(new Shader(vertex_path, fragment_path, geometry_path)));
+            s_compiled_shaders.emplace(appended_paths, UniqueShader(new Shader(vertex_path, fragment_path, geometry_path)));
         }
-        return _compiled_shaders.at(appended_paths).get();
+        return s_compiled_shaders.at(appended_paths).get();
     }
 
     void Shader::use()
     {
-        glUseProgram(this->_program);
+        glUseProgram(m_program);
     }
 
     Shader* Shader::get_depth_map_shader()
     {
-        if (!_depth_map_configured)
+        if (!s_depth_map_configured)
         {
             // Configure depth map FBO
-            glGenFramebuffers(1, &_depth_map_FBO);
+            glGenFramebuffers(1, &s_depth_map_FBO);
             // - Create depth texture
-            glGenTextures(1, &_depth_map_texture);
-            glBindTexture(GL_TEXTURE_2D, _depth_map_texture);
+            glGenTextures(1, &s_depth_map_texture);
+            glBindTexture(GL_TEXTURE_2D, s_depth_map_texture);
 
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, sc_shadow_width, sc_shadow_height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER); 
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
             GLfloat borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
             glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
 
-            glBindFramebuffer(GL_FRAMEBUFFER, _depth_map_FBO);
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, _depth_map_texture, 0);
+            glBindFramebuffer(GL_FRAMEBUFFER, s_depth_map_FBO);
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, s_depth_map_texture, 0);
             glDrawBuffer(GL_NONE);
             glReadBuffer(GL_NONE);
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
         }
-        _shadow_shader = create("shaders/shadow_mapping_depth.vert", "shaders/shadow_mapping_depth.frag");
-        return _shadow_shader;
+        s_shadow_shader = create("shaders/shadow_mapping_depth.vert", "shaders/shadow_mapping_depth.frag");
+        return s_shadow_shader;
     }
 
     Shader* Shader::get_shadow_map_shader()
@@ -83,56 +83,56 @@ namespace Larp
 
     void Shader::set_shininess(const GLfloat shininess)
     {
-        glUniform1f(glGetUniformLocation(this->_program, "material.shininess"), shininess);
+        glUniform1f(glGetUniformLocation(m_program, "material.shininess"), shininess);
     }
 
     void Shader::set_view_position(const glm::vec3& view_pos)
     {
-        glUniform3f(glGetUniformLocation(this->_program, "viewPos"), view_pos.x, view_pos.y, view_pos.z);
+        glUniform3f(glGetUniformLocation(m_program, "viewPos"), view_pos.x, view_pos.y, view_pos.z);
     }
 
     void Shader::set_mvp(const glm::mat4& model, const glm::mat4& view, const glm::mat4& projection)
     {
-        glUniformMatrix4fv(glGetUniformLocation(this->_program, "projection"), 1, GL_FALSE,
+        glUniformMatrix4fv(glGetUniformLocation(m_program, "projection"), 1, GL_FALSE,
                            glm::value_ptr(projection));
-        glUniformMatrix4fv(glGetUniformLocation(this->_program, "view"), 1, GL_FALSE,
+        glUniformMatrix4fv(glGetUniformLocation(m_program, "view"), 1, GL_FALSE,
                            glm::value_ptr(view));
-        glUniformMatrix4fv(glGetUniformLocation(this->_program, "model"), 1, GL_FALSE,
+        glUniformMatrix4fv(glGetUniformLocation(m_program, "model"), 1, GL_FALSE,
                            glm::value_ptr(model));
     }
 
     void Shader::set_directional_lights()
     {
-        std::vector<UniqueDirectional>& lights = LightFactory::_directional_lights;
+        std::vector<UniqueDirectional>& lights = LightFactory::s_directional_lights;
 
         bool use_directional_lighting = !lights.empty();
-        glUniform1i(glGetUniformLocation(this->_program, "directionalLight"), use_directional_lighting);
+        glUniform1i(glGetUniformLocation(m_program, "directionalLight"), use_directional_lighting);
 
         if (use_directional_lighting)
         {
-          glUniform3f(glGetUniformLocation(this->_program, "dirLight.direction"), lights[0]->_direction.x, lights[0]->_direction.y, lights[0]->_direction.z);
-          glUniform3f(glGetUniformLocation(this->_program, "dirLight.ambient"), lights[0]->_ambient.x, lights[0]->_ambient.y, lights[0]->_ambient.z);
-          glUniform3f(glGetUniformLocation(this->_program, "dirLight.diffuse"), lights[0]->_diffuse.x, lights[0]->_diffuse.y, lights[0]->_diffuse.z);
-          glUniform3f(glGetUniformLocation(this->_program, "dirLight.specular"), lights[0]->_specular.x, lights[0]->_specular.y, lights[0]->_specular.z);
+          glUniform3f(glGetUniformLocation(m_program, "dirLight.direction"), lights[0]->m_direction.x, lights[0]->m_direction.y, lights[0]->m_direction.z);
+          glUniform3f(glGetUniformLocation(m_program, "dirLight.ambient"), lights[0]->m_ambient.x, lights[0]->m_ambient.y, lights[0]->m_ambient.z);
+          glUniform3f(glGetUniformLocation(m_program, "dirLight.diffuse"), lights[0]->m_diffuse.x, lights[0]->m_diffuse.y, lights[0]->m_diffuse.z);
+          glUniform3f(glGetUniformLocation(m_program, "dirLight.specular"), lights[0]->m_specular.x, lights[0]->m_specular.y, lights[0]->m_specular.z);
         }
     }
 
     void Shader::set_point_lights()
     {
-        std::vector<UniquePoint>& lights = LightFactory::_point_lights;
+        std::vector<UniquePoint>& lights = LightFactory::s_point_lights;
 
         int num_point_lights = lights.size();
-        glUniform1i(glGetUniformLocation(this->_program, "numPointLights"), num_point_lights);
-        
+        glUniform1i(glGetUniformLocation(m_program, "numPointLights"), num_point_lights);
+
         for (int i = 0; i < num_point_lights; ++i)
         {
-          glUniform3f(glGetUniformLocation(this->_program, ("pointLights[" + std::to_string(i) + "].position").c_str()), lights[i]->_position.x, lights[i]->_position.y, lights[i]->_position.z);
-          glUniform3f(glGetUniformLocation(this->_program, ("pointLights[" + std::to_string(i) + "].ambient").c_str()), lights[i]->_ambient.x, lights[i]->_ambient.y, lights[i]->_ambient.z);
-          glUniform3f(glGetUniformLocation(this->_program, ("pointLights[" + std::to_string(i) + "].diffuse").c_str()), lights[i]->_diffuse.x, lights[i]->_diffuse.y, lights[i]->_diffuse.z);
-          glUniform3f(glGetUniformLocation(this->_program, ("pointLights[" + std::to_string(i) + "].specular").c_str()), lights[i]->_specular.x, lights[i]->_specular.y, lights[i]->_specular.z);
-          glUniform1f(glGetUniformLocation(this->_program, ("pointLights[" + std::to_string(i) + "].constant").c_str()), lights[i]->_constant);
-          glUniform1f(glGetUniformLocation(this->_program, ("pointLights[" + std::to_string(i) + "].linear").c_str()), lights[i]->_linear);
-          glUniform1f(glGetUniformLocation(this->_program, ("pointLights[" + std::to_string(i) + "].quadratic").c_str()), lights[i]->_quadratic);
+          glUniform3f(glGetUniformLocation(m_program, ("pointLights[" + std::to_string(i) + "].position").c_str()), lights[i]->m_position.x, lights[i]->m_position.y, lights[i]->m_position.z);
+          glUniform3f(glGetUniformLocation(m_program, ("pointLights[" + std::to_string(i) + "].ambient").c_str()), lights[i]->m_ambient.x, lights[i]->m_ambient.y, lights[i]->m_ambient.z);
+          glUniform3f(glGetUniformLocation(m_program, ("pointLights[" + std::to_string(i) + "].diffuse").c_str()), lights[i]->m_diffuse.x, lights[i]->m_diffuse.y, lights[i]->m_diffuse.z);
+          glUniform3f(glGetUniformLocation(m_program, ("pointLights[" + std::to_string(i) + "].specular").c_str()), lights[i]->m_specular.x, lights[i]->m_specular.y, lights[i]->m_specular.z);
+          glUniform1f(glGetUniformLocation(m_program, ("pointLights[" + std::to_string(i) + "].constant").c_str()), lights[i]->sc_constant);
+          glUniform1f(glGetUniformLocation(m_program, ("pointLights[" + std::to_string(i) + "].linear").c_str()), lights[i]->m_linear);
+          glUniform1f(glGetUniformLocation(m_program, ("pointLights[" + std::to_string(i) + "].quadratic").c_str()), lights[i]->m_quadratic);
         }
     }
 
@@ -142,7 +142,7 @@ namespace Larp
         glm::mat4 light_space_matrix;
         GLfloat near_plane = 0.1f, far_plane = 100.0f;
         light_projection = glm::ortho(-15.0f, 15.0f, -15.0f, 15.0f, near_plane, far_plane);
-        //light_projection = glm::perspective(45.0f, (GLfloat)SHADOW_WIDTH / (GLfloat)SHADOW_HEIGHT, near_plane, far_plane); // Note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene.
+        //light_projection = glm::perspective(45.0f, (GLfloat)sc_shadow_width / (GLfloat)sc_shadow_height, near_plane, far_plane); // Note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene.
         light_view = glm::lookAt(-light_pos * 20.0f, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.000001584f));
         light_space_matrix = light_projection * light_view;
         return light_space_matrix;
@@ -150,13 +150,13 @@ namespace Larp
 
     void Shader::set_light_space_matrix(const glm::mat4& light_space_matrix)
     {
-        glUniformMatrix4fv(glGetUniformLocation(this->_program, "lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(light_space_matrix));
+        glUniformMatrix4fv(glGetUniformLocation(m_program, "lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(light_space_matrix));
     }
 
     void Shader::prepare_depth_map()
     {
-        glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
-        glBindFramebuffer(GL_FRAMEBUFFER, _depth_map_FBO);
+        glViewport(0, 0, sc_shadow_width, sc_shadow_height);
+        glBindFramebuffer(GL_FRAMEBUFFER, s_depth_map_FBO);
         glClear(GL_DEPTH_BUFFER_BIT);
     }
 
@@ -171,14 +171,14 @@ namespace Larp
 
     void Shader::set_dir_light_position(glm::vec3 light_pos)
     {
-        glUniform3fv(glGetUniformLocation(this->_program, "lightPos"), 1, glm::value_ptr(light_pos));
+        glUniform3fv(glGetUniformLocation(m_program, "lightPos"), 1, glm::value_ptr(light_pos));
     }
 
     void Shader::enable_shadow_texture()
     {
-        glUniform1i(glGetUniformLocation(this->_program, "shadowMap"), 0);
+        glUniform1i(glGetUniformLocation(m_program, "shadowMap"), 0);
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, _depth_map_texture);
+        glBindTexture(GL_TEXTURE_2D, s_depth_map_texture);
     }
 
     // -----------------
@@ -202,19 +202,19 @@ namespace Larp
         if (geometry_path != nullptr)
             geometry = Shader::compile_shader(g_shader_code, GL_GEOMETRY_SHADER);
         // Shader Program
-        this->_program = glCreateProgram();
-        glAttachShader(this->_program, vertex);
-        glAttachShader(this->_program, fragment);
+        m_program = glCreateProgram();
+        glAttachShader(m_program, vertex);
+        glAttachShader(m_program, fragment);
         if (geometry_path != nullptr)
-            glAttachShader(this->_program, geometry);
-        glLinkProgram(this->_program);
+            glAttachShader(m_program, geometry);
+        glLinkProgram(m_program);
         // Print linking errors if any
         GLint success;
         GLchar infoLog[512];
-        glGetProgramiv(this->_program, GL_LINK_STATUS, &success);
+        glGetProgramiv(m_program, GL_LINK_STATUS, &success);
         if (!success)
         {
-            glGetProgramInfoLog(this->_program, 512, NULL, infoLog);
+            glGetProgramInfoLog(m_program, 512, NULL, infoLog);
             std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
         }
         // Delete the shaders as they're linked into our program now and no longer necessery

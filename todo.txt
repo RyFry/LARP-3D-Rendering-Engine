@@ -1,0 +1,12 @@
+Long term goals:
+   * GUI
+   * Physics
+
+
+GUI components:
+   * Buttons
+   * Text
+   * Scrollbars
+   * Progressbars
+   * Views
+   * Sub-regions in a view

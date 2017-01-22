@@ -23,23 +23,23 @@ namespace Larp
         /**
          * A cache of loaded Textures.
          */
-        static std::unordered_map<std::string, UniqueTexture> _loaded_textures;
+        static std::unordered_map<std::string, UniqueTexture> s_loaded_textures;
 
         Texture(std::string path, Type type);
 
         /**
          * The OpenGL texture ID
          */
-        TextureID _id;
+        TextureID m_id;
         /**
          * The Type of the texture. Used to determine what variable to attach the associated
          * Vertex object to in the fragment shader
          */
-        Type _type;
+        Type m_type;
         /**
          * File path to the Texture
          */
-        aiString _path;
+        aiString m_path;
     public:
         static Texture* create(std::string path, Type type);
         /**

@@ -20,16 +20,16 @@ namespace Larp
          * The Shader used during rendering of the Model attached
          * to this Entity.
          */
-        Shader* _shadow_shader;
+        Shader* m_shadow_shader;
         /**
          * The Shader used during rendering of the Model attached
          * to this Entity.
          */
-        Shader* _shader;
+        Shader* m_shader;
         /**
          * The Model rendered.
          */
-        Model* _model;
+        Model* m_model;
 
         /**
          * Default Constructor

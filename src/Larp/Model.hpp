@@ -34,31 +34,31 @@ namespace Larp
         /**
          * A cache of loaded Models.
          */
-        static std::unordered_map<std::string, UniqueModel> _loaded_models;
+        static std::unordered_map<std::string, UniqueModel> s_loaded_models;
         /**
          * List of Meshes for this Model.
          */
-        std::vector<Mesh> _meshes;
+        std::vector<Mesh> m_meshes;
         /**
          * The directory that this Model is stored in.
          */
-        std::string _directory;
+        std::string m_directory;
         /**
          * List of Textures for each Mesh in this Model.
          */
-        std::vector<Texture*> _loaded_textures;
+        std::vector<Texture*> m_loaded_textures;
         /**
          * The width of the Model (measured along x-axis)
          */
-        GLfloat _width;
+        GLfloat m_width;
         /**
          * The height of the Model (measured along y-axis)
          */
-        GLfloat _height;
+        GLfloat m_height;
         /**
          * The depth of the Model (measured along z-axis)
          */
-        GLfloat _depth;
+        GLfloat m_depth;
         /**
          * Default Constructor
          * @note This prevents users from creating Models.
@@ -88,7 +88,7 @@ namespace Larp
          */
         Mesh process_mesh(aiMesh* mesh, const aiScene* scene);
         /**
-         * Loads the textures for the material. After this function runs, this Model's _loaded_textures
+         * Loads the textures for the material. After this function runs, this Model's s_loaded_textures
          * will be populated with all of the Textures necessary to render the Model.
          * @param mat The material to load textures for.
          * @param type The type of the texture to load. Should be one of aiTextureType_DIFFUSE,

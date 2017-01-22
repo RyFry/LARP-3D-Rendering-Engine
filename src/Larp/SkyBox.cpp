@@ -1,5 +1,8 @@
 #include "SkyBox.hpp"
 
+// Macro for adding verts to the sky box
+#define ADD_VERT(X, Y, Z) (m_vertices.push_back(glm::vec3(X, Y, Z)));
+
 namespace Larp
 {
     SkyBox::SkyBox(std::string pos_x, std::string neg_x,
@@ -30,27 +33,27 @@ namespace Larp
         this->add_vertices();
 
         // Get the shader
-        this->_shader = Shader::get_skybox_shader();
+        m_shader = Shader::get_skybox_shader();
 
         // Setup the VAO
-        glGenVertexArrays(1, &this->_VAO);
-        glGenBuffers(1, &this->_VBO);
+        glGenVertexArrays(1, &m_VAO);
+        glGenBuffers(1, &m_VBO);
 
-        glBindVertexArray(this->_VAO);
-        glBindBuffer(GL_ARRAY_BUFFER, this->_VBO);
-        glBufferData(GL_ARRAY_BUFFER, this->_vertices.size() * sizeof(glm::vec3), &this->_vertices[0], GL_STATIC_DRAW);
+        glBindVertexArray(m_VAO);
+        glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+        glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(glm::vec3), &m_vertices[0], GL_STATIC_DRAW);
 
         // Vertex Positions
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *) 0);
         glBindVertexArray(0);
 
-        glGenTextures(1, &this->_texture_id);
+        glGenTextures(1, &m_texture_id);
 
         int width, height;
         unsigned char* image;
 
-        glBindTexture(GL_TEXTURE_CUBE_MAP, this->_texture_id);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, m_texture_id);
         for(GLuint i = 0; i < faces.size(); ++i)
         {
             image = SOIL_load_image(faces[i], &width, &height, 0, SOIL_LOAD_RGB);
@@ -70,67 +73,67 @@ namespace Larp
 
     void SkyBox::add_vertices()
     {
-        this->_vertices.push_back(glm::vec3(-1.0f,  1.0f, -1.0f));
-        this->_vertices.push_back(glm::vec3(-1.0f, -1.0f, -1.0f));
-        this->_vertices.push_back(glm::vec3( 1.0f, -1.0f, -1.0f));
-        this->_vertices.push_back(glm::vec3( 1.0f, -1.0f, -1.0f));
-        this->_vertices.push_back(glm::vec3( 1.0f,  1.0f, -1.0f));
-        this->_vertices.push_back(glm::vec3(-1.0f,  1.0f, -1.0f));
+        ADD_VERT(-1.0f,  1.0f, -1.0f)
+        ADD_VERT(-1.0f, -1.0f, -1.0f)
+        ADD_VERT( 1.0f, -1.0f, -1.0f)
+        ADD_VERT( 1.0f, -1.0f, -1.0f)
+        ADD_VERT( 1.0f,  1.0f, -1.0f)
+        ADD_VERT(-1.0f,  1.0f, -1.0f)
 
-        this->_vertices.push_back(glm::vec3(-1.0f, -1.0f,  1.0f));
-        this->_vertices.push_back(glm::vec3(-1.0f, -1.0f, -1.0f));
-        this->_vertices.push_back(glm::vec3(-1.0f,  1.0f, -1.0f));
-        this->_vertices.push_back(glm::vec3(-1.0f,  1.0f, -1.0f));
-        this->_vertices.push_back(glm::vec3(-1.0f,  1.0f,  1.0f));
-        this->_vertices.push_back(glm::vec3(-1.0f, -1.0f,  1.0f));
+        ADD_VERT(-1.0f, -1.0f,  1.0f)
+        ADD_VERT(-1.0f, -1.0f, -1.0f)
+        ADD_VERT(-1.0f,  1.0f, -1.0f)
+        ADD_VERT(-1.0f,  1.0f, -1.0f)
+        ADD_VERT(-1.0f,  1.0f,  1.0f)
+        ADD_VERT(-1.0f, -1.0f,  1.0f)
 
-        this->_vertices.push_back(glm::vec3( 1.0f, -1.0f, -1.0f));
-        this->_vertices.push_back(glm::vec3( 1.0f, -1.0f,  1.0f));
-        this->_vertices.push_back(glm::vec3( 1.0f,  1.0f,  1.0f));
-        this->_vertices.push_back(glm::vec3( 1.0f,  1.0f,  1.0f));
-        this->_vertices.push_back(glm::vec3( 1.0f,  1.0f, -1.0f));
-        this->_vertices.push_back(glm::vec3( 1.0f, -1.0f, -1.0f));
+        ADD_VERT( 1.0f, -1.0f, -1.0f)
+        ADD_VERT( 1.0f, -1.0f,  1.0f)
+        ADD_VERT( 1.0f,  1.0f,  1.0f)
+        ADD_VERT( 1.0f,  1.0f,  1.0f)
+        ADD_VERT( 1.0f,  1.0f, -1.0f)
+        ADD_VERT( 1.0f, -1.0f, -1.0f)
 
-        this->_vertices.push_back(glm::vec3(-1.0f, -1.0f,  1.0f));
-        this->_vertices.push_back(glm::vec3(-1.0f,  1.0f,  1.0f));
-        this->_vertices.push_back(glm::vec3( 1.0f,  1.0f,  1.0f));
-        this->_vertices.push_back(glm::vec3( 1.0f,  1.0f,  1.0f));
-        this->_vertices.push_back(glm::vec3( 1.0f, -1.0f,  1.0f));
-        this->_vertices.push_back(glm::vec3(-1.0f, -1.0f,  1.0f));
+        ADD_VERT(-1.0f, -1.0f,  1.0f)
+        ADD_VERT(-1.0f,  1.0f,  1.0f)
+        ADD_VERT( 1.0f,  1.0f,  1.0f)
+        ADD_VERT( 1.0f,  1.0f,  1.0f)
+        ADD_VERT( 1.0f, -1.0f,  1.0f)
+        ADD_VERT(-1.0f, -1.0f,  1.0f)
 
-        this->_vertices.push_back(glm::vec3(-1.0f,  1.0f, -1.0f));
-        this->_vertices.push_back(glm::vec3( 1.0f,  1.0f, -1.0f));
-        this->_vertices.push_back(glm::vec3( 1.0f,  1.0f,  1.0f));
-        this->_vertices.push_back(glm::vec3( 1.0f,  1.0f,  1.0f));
-        this->_vertices.push_back(glm::vec3(-1.0f,  1.0f,  1.0f));
-        this->_vertices.push_back(glm::vec3(-1.0f,  1.0f, -1.0f));
+        ADD_VERT(-1.0f,  1.0f, -1.0f)
+        ADD_VERT( 1.0f,  1.0f, -1.0f)
+        ADD_VERT( 1.0f,  1.0f,  1.0f)
+        ADD_VERT( 1.0f,  1.0f,  1.0f)
+        ADD_VERT(-1.0f,  1.0f,  1.0f)
+        ADD_VERT(-1.0f,  1.0f, -1.0f)
 
-        this->_vertices.push_back(glm::vec3(-1.0f, -1.0f, -1.0f));
-        this->_vertices.push_back(glm::vec3(-1.0f, -1.0f,  1.0f));
-        this->_vertices.push_back(glm::vec3( 1.0f, -1.0f, -1.0f));
-        this->_vertices.push_back(glm::vec3( 1.0f, -1.0f, -1.0f));
-        this->_vertices.push_back(glm::vec3(-1.0f, -1.0f,  1.0f));
-        this->_vertices.push_back(glm::vec3( 1.0f, -1.0f,  1.0f));
+        ADD_VERT(-1.0f, -1.0f, -1.0f)
+        ADD_VERT(-1.0f, -1.0f,  1.0f)
+        ADD_VERT( 1.0f, -1.0f, -1.0f)
+        ADD_VERT( 1.0f, -1.0f, -1.0f)
+        ADD_VERT(-1.0f, -1.0f,  1.0f)
+        ADD_VERT( 1.0f, -1.0f,  1.0f)
     }
 
     void SkyBox::draw(const glm::mat4& view, const glm::mat4& projection)
     {
         glDepthFunc(GL_LEQUAL);
-        this->_shader->use();
+        m_shader->use();
         // Remove translation part of the view matrix
         glm::mat4 new_view = glm::mat4(glm::mat3(view));
-        glUniformMatrix4fv(glGetUniformLocation(this->_shader->_program, "projection"),
+        glUniformMatrix4fv(glGetUniformLocation(m_shader->m_program, "projection"),
                            1,
                            GL_FALSE,
                            glm::value_ptr(projection));
-        glUniformMatrix4fv(glGetUniformLocation(this->_shader->_program, "view"),
+        glUniformMatrix4fv(glGetUniformLocation(m_shader->m_program, "view"),
                            1,
                            GL_FALSE,
                            glm::value_ptr(new_view));
-        glBindVertexArray(this->_VAO);
+        glBindVertexArray(m_VAO);
         glActiveTexture(GL_TEXTURE0);
-        glUniform1i(glGetUniformLocation(this->_shader->_program, "skybox"), 0);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, this->_texture_id);
+        glUniform1i(glGetUniformLocation(m_shader->m_program, "skybox"), 0);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, m_texture_id);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glBindVertexArray(0);
         glDepthFunc(GL_LESS);

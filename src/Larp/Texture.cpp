@@ -2,26 +2,26 @@
 
 namespace Larp
 {
-    std::unordered_map<std::string, UniqueTexture> Texture::_loaded_textures;
+    std::unordered_map<std::string, UniqueTexture> Texture::s_loaded_textures;
 
     Texture* Texture::create(std::string path, Type type)
     {
-        if (_loaded_textures.find(path) == _loaded_textures.end())
+        if (s_loaded_textures.find(path) == s_loaded_textures.end())
         {
-            _loaded_textures.emplace(path, UniqueTexture(new Texture(path, type)));
+            s_loaded_textures.emplace(path, UniqueTexture(new Texture(path, type)));
         }
-        return _loaded_textures.at(path).get();
+        return s_loaded_textures.at(path).get();
     }
 
     Texture::Texture(std::string path, Type type)
     {
-        this->_path = path;
-        this->_type = type;
-        glGenTextures(1, &_id);
+        m_path = path;
+        m_type = type;
+        glGenTextures(1, &m_id);
         int width, height;
         unsigned char* image = SOIL_load_image(path.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
         // Assign texture to ID
-        glBindTexture(GL_TEXTURE_2D, _id);
+        glBindTexture(GL_TEXTURE_2D, m_id);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
         glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -36,22 +36,22 @@ namespace Larp
 
     std::string Texture::to_string()
     {
-        if (this->_type == Texture::DIFFUSE)
+        if (m_type == Texture::DIFFUSE)
             return "diffuse";
-        if (this->_type == Texture::SPECULAR)
+        if (m_type == Texture::SPECULAR)
             return "specular";
-        if (this->_type == Texture::REFLECTION)
+        if (m_type == Texture::REFLECTION)
             return "reflection";
         return "";
     }
 
     TextureID Texture::get_id()
     {
-        return this->_id;
+        return m_id;
     }
 
     aiString& Texture::get_path()
     {
-        return this->_path;
+        return m_path;
     }
 }

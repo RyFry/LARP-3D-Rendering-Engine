@@ -23,28 +23,28 @@ namespace Larp
         /**
          * The Entity object attached to this Node. Drawn during rendering.
          */
-        UniqueEntity _entity;
+        UniqueEntity m_entity;
         /**
          * This Node's parent Node.
          */
-        Node* _parent;
+        Node* m_parent;
         /**
          * All of this Node's child Node's. We use a map instead of a set
          * because std::unordered_set doesn't support non-const iterators
          */
-        std::unordered_map<Node*, UniqueNode> _children;
+        std::unordered_map<Node*, UniqueNode> m_children;
         /**
          * This Node's position
          */
-        glm::vec3 _position;
+        glm::vec3 m_position;
         /**
          * This Node's rotation
          */
-        glm::quat _rotation;
+        glm::quat m_rotation;
         /**
          * This Node's scale
          */
-        glm::vec3 _scale;
+        glm::vec3 m_scale;
     public:
         /**
          * Default Constructor

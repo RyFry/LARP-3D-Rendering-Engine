@@ -21,7 +21,8 @@ public:
     /**
      * Enum that defines several directions for the Camera to move
      */
-    enum CameraMovement {
+    enum CameraMovement
+    {
         FORWARD,
         BACKWARD,
         LEFT,
@@ -33,66 +34,66 @@ public:
     /**
      * Default yaw for a Camera object when not provided to the constructor
      */
-    static const GLfloat YAW;
+    static const GLfloat sc_yaw;
     /**
      * Default pitch for a Camera object when not provided to the constructor
      */
-    static const GLfloat PITCH;
+    static const GLfloat sc_pitch;
     /**
      * Default speed for a Camera object when not provided to the constructor
      */
-    static const GLfloat SPEED;
+    static const GLfloat sc_speed;
     /**
      * Default sensitivity for a Camera object.
      */
-    static const GLfloat SENSITIVITY;
+    static const GLfloat sc_sensitivity;
     /**
      * Default zoom for a Camera object.
      */
-    static const GLfloat ZOOM;
+    static const GLfloat sc_zoom;
 
     /**
      * Current position of the camera
      */
-    glm::vec3 _position;
+    glm::vec3 m_position;
     /**
      * Vector representing which direction the Camera is facing.
      * Used when calculating how the Camera moves forward and backward.
      */
-    glm::vec3 _front;
+    glm::vec3 m_front;
     /**
      * The vector used to calculate the Camera's lookAt matrix.
      */
-    glm::vec3 _up;
+    glm::vec3 m_up;
     /**
      * Vector representing the x-axis in view space. Also used to calculate
      * how the Camera moves left and right.
      */
-    glm::vec3 _right;
+    glm::vec3 m_right;
     /**
      * The world's up vector used to update the Camera's view matrix.
      */
-    glm::vec3 _world_up;
+    glm::vec3 m_world_up;
     /**
      * This Camera's yaw in degrees
      */
-    GLfloat _yaw;
+    GLfloat m_yaw;
     /**
      * This Camera's pitch in degrees
      */
-    GLfloat _pitch;
+    GLfloat m_pitch;
     /**
      * Determines how fast the Camera moves
      */
-    GLfloat _movement_speed;
+    GLfloat m_movement_speed;
     /**
      * Determines how much the Camera rotates on mouse movement
      */
-    GLfloat _mouse_sensitivity;
+    GLfloat m_mouse_sensitivity;
     /**
      * The current zoom of the Camera
      */
-    GLfloat _zoom;
+    GLfloat m_zoom;
 
     /**
      * Constructor
@@ -107,8 +108,8 @@ public:
      */
     Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f),
            glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f),
-           GLfloat yaw = YAW,
-           GLfloat pitch = PITCH);
+           GLfloat yaw = sc_yaw,
+           GLfloat pitch = sc_pitch);
     /**
      * Constructor
      * @param pos_x The starting x position of the Camera.
@@ -124,7 +125,7 @@ public:
      */
     Camera(GLfloat pos_x, GLfloat pos_y, GLfloat pos_z,
            GLfloat up_x, GLfloat up_y, GLfloat up_z,
-           GLfloat yaw = YAW, GLfloat pitch = PITCH);
+           GLfloat yaw = sc_yaw, GLfloat pitch = sc_pitch);
     /**
      * @return the view matrix calculated using Euler angles and the lookAt matrix
      */

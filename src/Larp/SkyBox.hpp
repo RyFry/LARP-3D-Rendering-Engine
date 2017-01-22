@@ -11,11 +11,11 @@ namespace Larp
     class SkyBox
     {
     private:
-        TextureID _texture_id;
-        VAO _VAO;
-        VBO _VBO;
-        std::vector<glm::vec3> _vertices;
-        Shader* _shader;
+        TextureID m_texture_id;
+        VAO m_VAO;
+        VBO m_VBO;
+        std::vector<glm::vec3> m_vertices;
+        Shader* m_shader;
 
         void setup_skybox(std::vector<const GLchar*> faces);
         void add_vertices();

@@ -29,16 +29,16 @@ namespace Larp
          * that they want for whatever purposes they have (e.g. a game that runs in two
          * separate windows).
          */
-        static std::unordered_map<std::string, UniqueCustomConfigurationLoader> _loaded_configurations;
+        static std::unordered_map<std::string, UniqueCustomConfigurationLoader> s_loaded_configurations;
         /**
          * A map of (configuration -> value) that defines the configuration configurations provided
          * by the user in the config file.
          */
-        std::unordered_map<std::string, std::string> _configurations;
+        std::unordered_map<std::string, std::string> m_configurations;
         /**
          * The path to the configuration file that was loaded
          */
-        std::string _path;
+        std::string m_path;
         /**
          * Loads the configuration configurations from the given configuration file.
          * @param path The path to the configuration file to load.

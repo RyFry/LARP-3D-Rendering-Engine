@@ -6,6 +6,9 @@ objs/*
 \#*\#
 *~
 
+# Ignore Vim temporary files
+*.swp
+
 # Ignore special lib files
 lib/libglfw3.so
 
