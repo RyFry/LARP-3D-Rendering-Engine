@@ -1,6 +1,7 @@
 Long term goals:
    * GUI
    * Physics
+   * Native Windows support through Direct3D
 
 
 GUI components:
