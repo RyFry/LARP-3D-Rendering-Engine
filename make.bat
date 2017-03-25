@@ -7,14 +7,14 @@ set OPTIONS=/Zi /Foobj\game.obj /Fdobj\game.pdb
 set LINK=user32.lib d3d11.lib d3dx11.lib d3dx10.lib
 set OUTPUT=bin\game.exe
 set CXX=cl.exe
-set LINKEROPTIONS=/link /OUT:out/game.exe /PDB:out/game.pdb
+set LINKEROPTIONS=/link /OUT:out\game.exe /PDB:out\game.pdb
 
 echo. 
 echo ========= COMMAND =========
-echo %CXX% %OPTIONS% %SOURCES% %LINK% /OUT:%OUTPUT% %LINKEROPTIONS%
+echo %CXX% %OPTIONS% %SOURCES% %LINK% %LINKEROPTIONS%
 echo =========== END ===========
 echo.
 
 md out
 md obj
-%CXX% %OPTIONS% %SOURCES% %LINK% /OUT:%OUTPUT% %LINKEROPTIONS%
+%CXX% %OPTIONS% %SOURCES% %LINK% %LINKEROPTIONS%
