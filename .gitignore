@@ -1,6 +1,6 @@
 # Ignore objs and bin folders
 bin/*
-objs/*
+obj/*
 out/*
 
 # Ignore Emacs temporary files
