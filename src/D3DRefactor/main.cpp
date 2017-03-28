@@ -4,6 +4,7 @@
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dx10.h>
+#include <xnamath.h>
 
 // include the Direct3D library file
 #pragma comment (lib, "d3d11.lib")
@@ -11,8 +12,8 @@
 #pragma comment (lib, "d3dx10.lib")
 
 // Define the screen resolution
-#define SCREEN_WIDTH  800
-#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH  1280
+#define SCREEN_HEIGHT 720
 
 // Vertex struct
 struct Vert
@@ -230,14 +231,14 @@ void InitGraphics()
     {
         {  0.0f,   0.5f, 0.0f, D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f) },
         {  0.45f, -0.5f, 0.0f, D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f) },
-        { -0.45f, -0.5f, 0.0f, D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f) }
+        { -0.45f, -0.5f, 0.0f, D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f) },
     };
 
     D3D11_BUFFER_DESC bd;
     ZeroMemory(&bd, sizeof(bd));
 
     bd.Usage = D3D11_USAGE_DYNAMIC;             // write access by CPU and read access by GPU
-    bd.ByteWidth = sizeof(Vert) * 3;            // size is the Vert struct * 3
+    bd.ByteWidth = sizeof(Vert) * 6;            // size is the Vert struct * 3
     bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;    // use as a vertex buffer
     bd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE; // allow CPU to write in buffer
 
