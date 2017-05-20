@@ -6,6 +6,8 @@
 #include <d3dx10.h>
 #include <xnamath.h>
 
+// #include <glm/glm.hpp>
+
 // include the Direct3D library file
 #pragma comment (lib, "d3d11.lib")
 #pragma comment (lib, "d3dx11.lib")
@@ -33,7 +35,7 @@ ID3D11InputLayout * g_layout;          // The input layout object
 ID3D11VertexShader * g_VS;             // the vertex shader
 ID3D11PixelShader * g_PS;              // the pixel shader
 
-ID3D11Buffer * g_VBuffer;
+ID3D11Buffer * g_VBuffer;              // the vertex buffer
 
 // function prototypes
 void InitD3D(HWND hWnd);      // sets up and initializes Direct3D
