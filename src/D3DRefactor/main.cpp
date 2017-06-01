@@ -6,52 +6,61 @@
 #include <d3dx10.h>
 #include <xnamath.h>
 
+#include <vector>
+#include <string>
+
+#include "../Common/defines.hpp"
+
 // #include <glm/glm.hpp>
 
 // include the Direct3D library file
-#pragma comment (lib, "d3d11.lib")
-#pragma comment (lib, "d3dx11.lib")
-#pragma comment (lib, "d3dx10.lib")
+#pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "d3dx11.lib")
+#pragma comment(lib, "d3dx10.lib")
 
 // Define the screen resolution
-#define SCREEN_WIDTH  1280
+#define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 
 // Vertex struct
 struct Vert
 {
-    FLOAT X, Y, Z; // position
-    D3DXCOLOR Color; // color
+    FLOAT m_x;         // x-position
+    FLOAT m_y;         // y-position
+    FLOAT m_z;         // z-position
+    D3DXCOLOR m_color; // color
 };
 
 // global declarations
-IDXGISwapChain * g_swapChain;          // The pointer to the swap chain interface
-ID3D11Device * g_dev;                  // The pointer to our Direct3D device interface
-ID3D11DeviceContext * g_devCon;        // The pointer to our Direct3D device context
-ID3D11RenderTargetView * g_backBuffer; // The back buffer render target
-ID3D11InputLayout * g_layout;          // The input layout object
+IDXGISwapChain *g_swapChain;          // The pointer to the swap chain interface
+ID3D11Device *g_dev;                  // The pointer to our Direct3D device interface
+ID3D11DeviceContext *g_devCon;        // The pointer to our Direct3D device context
+ID3D11RenderTargetView *g_backBuffer; // The back buffer render target
+ID3D11InputLayout *g_layout;          // The input layout object
 
 // Shader objects
-ID3D11VertexShader * g_VS;             // the vertex shader
-ID3D11PixelShader * g_PS;              // the pixel shader
+ID3D11VertexShader *g_VS; // the vertex shader
+ID3D11PixelShader *g_PS;  // the pixel shader
 
-ID3D11Buffer * g_VBuffer;              // the vertex buffer
+ID3D11Buffer *g_VBuffer; // the vertex buffer
 
 // function prototypes
-void InitD3D(HWND hWnd);      // sets up and initializes Direct3D
-void InitPipeline(void);      // initialize the rendering pipeline
-void InitGraphics(void);      // initialize the graphics data for rendering
-void RenderFrame(void);       // renders a single frame
-void CleanD3D(void);          // closes Direct3D and releases memory
+void InitD3D(HWND hWnd); // sets up and initializes Direct3D
+void InitPipeline(void); // initialize the rendering pipeline
+void InitGraphics(void); // initialize the graphics data for rendering
+void RenderFrame(void);  // renders a single frame
+void CleanD3D(void);     // closes Direct3D and releases memory
 
 // the WindowProc function prototype
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 // the entry point for any Windows program
-int WINAPI WinMain(HINSTANCE hInstance,
-                   HINSTANCE hPrevInstance,
-                   LPSTR lpCmdLine,
-                   int nCmdShow)
+int WINAPI WinMain(
+    HINSTANCE hInstance,
+    HINSTANCE hPrevInstance,
+    LPSTR lpCmdLine,
+    int nCmdShow
+    )
 {
     HWND hWnd;
     WNDCLASSEX wc;
@@ -68,21 +77,23 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
     RegisterClassEx(&wc);
 
-    RECT wr = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+    RECT wr = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE);
-    
-    hWnd = CreateWindowEx(NULL,
-                          "WindowClass",
-                          "Our First Direct3D Program",
-                          WS_OVERLAPPEDWINDOW,
-                          300,
-                          300,
-                          wr.right - wr.left,
-                          wr.bottom - wr.top,
-                          NULL,
-                          NULL,
-                          hInstance,
-                          NULL);
+
+    hWnd = CreateWindowEx(
+        NULL,
+        "WindowClass",
+        "Our First Direct3D Program",
+        WS_OVERLAPPEDWINDOW,
+        300,
+        300,
+        wr.right - wr.left,
+        wr.bottom - wr.top,
+        NULL,
+        NULL,
+        hInstance,
+        NULL
+        );
 
     ShowWindow(hWnd, nCmdShow);
 
@@ -92,7 +103,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
     // enter the main loop:
 
     MSG msg;
-    
+
     while (TRUE)
     {
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
@@ -114,7 +125,10 @@ int WINAPI WinMain(HINSTANCE hInstance,
 }
 
 // this is the main message handler for the program
-LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WindowProc(HWND hWnd,
+                            UINT message,
+                            WPARAM wParam,
+                            LPARAM lParam)
 {
     switch (message)
     {
@@ -122,7 +136,8 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
     {
         PostQuitMessage(0);
         return 0;
-    } break;
+    }
+    break;
     }
 
     return DefWindowProc(hWnd, message, wParam, lParam);
@@ -149,22 +164,24 @@ void InitD3D(HWND hWnd)
     scd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH; // allow full-screen switching
 
     // create a device, device context and swap chain using the information in the scd struct
-    D3D11CreateDeviceAndSwapChain(NULL,
-                                  D3D_DRIVER_TYPE_HARDWARE,
-                                  NULL,
-                                  NULL,
-                                  NULL,
-                                  NULL,
-                                  D3D11_SDK_VERSION,
-                                  &scd,
-                                  &g_swapChain,
-                                  &g_dev,
-                                  NULL,
-                                  &g_devCon);
+    D3D11CreateDeviceAndSwapChain(
+        NULL,
+        D3D_DRIVER_TYPE_HARDWARE,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        D3D11_SDK_VERSION,
+        &scd,
+        &g_swapChain,
+        &g_dev,
+        NULL,
+        &g_devCon
+        );
 
     // get the address of the back buffer
-    ID3D11Texture2D * pBackBuffer;
-    g_swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*) &pBackBuffer);
+    ID3D11Texture2D *pBackBuffer;
+    g_swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID *)&pBackBuffer);
 
     // use the back buffer address to create the render target
     g_dev->CreateRenderTargetView(pBackBuffer, NULL, &g_backBuffer);
@@ -229,11 +246,10 @@ void CleanD3D()
 void InitGraphics()
 {
     // create a triangle using the Vert struct
-    Vert OurVertices[] =
-    {
-        {  0.0f,   0.5f, 0.0f, D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f) },
-        {  0.45f, -0.5f, 0.0f, D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f) },
-        { -0.45f, -0.5f, 0.0f, D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f) },
+    Vert ourVertices[] = {
+        {0.0f, 0.5f, 0.0f, D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f)},
+        {0.45f, -0.5f, 0.0f, D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f)},
+        {-0.45f, -0.5f, 0.0f, D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f)},
     };
 
     D3D11_BUFFER_DESC bd;
@@ -249,14 +265,14 @@ void InitGraphics()
     // copy the vertices into the buffer
     D3D11_MAPPED_SUBRESOURCE ms;
     g_devCon->Map(g_VBuffer, NULL, D3D11_MAP_WRITE_DISCARD, NULL, &ms); // map the buffer
-    memcpy(ms.pData, OurVertices, sizeof(OurVertices));                 // copy the data
+    memcpy(ms.pData, ourVertices, sizeof(ourVertices));                 // copy the data
     g_devCon->Unmap(g_VBuffer, NULL);                                   // unmap the buffer
 }
 
 void InitPipeline()
 {
     // load and compile the two shaders
-    ID3D10Blob * VS, * PS;
+    ID3D10Blob *VS, *PS;
     D3DX11CompileFromFile("shaders\\shaders.shader", 0, 0, "VShader", "vs_4_0", 0, 0, 0, &VS, 0, 0);
     D3DX11CompileFromFile("shaders\\shaders.shader", 0, 0, "PShader", "ps_4_0", 0, 0, 0, &PS, 0, 0);
 
@@ -267,13 +283,42 @@ void InitPipeline()
     // set the shader objects
     g_devCon->VSSetShader(g_VS, 0, 0);
     g_devCon->PSSetShader(g_PS, 0, 0);
-    
+
     D3D11_INPUT_ELEMENT_DESC ied[] =
-    {
-        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,  0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-        { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-    };
+        {
+            {"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
+            {"COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0},
+        };
 
     g_dev->CreateInputLayout(ied, 2, VS->GetBufferPointer(), VS->GetBufferSize(), &g_layout);
-    g_devCon->IASetInputLayout(g_layout);        
+    g_devCon->IASetInputLayout(g_layout);
 }
+
+/*
+void LogAdapters()
+{
+    UINT i = 0;
+    IDXGIAdapter* adapter = nullptr;
+    std::vector<IDXGIAdapter *> adapterList;
+    while (mdxgiFactory->EnumAdapters(i, &adapter) != DXGI_ERROR_NOT_FOUND)
+    {
+        DXGI_ADAPTER_DESC desc;
+        adapter->GetDesc(&desc);
+
+        std::wstring text = L"***Adapter: ";
+        text += desc.Description;
+        text += L"\n";
+
+        OutputDebugString(text.c_str());
+        adapterList.push_back(adapter);
+
+        ++i;
+    }
+
+    for (auto& it : adapterList)
+    {
+        LogAdapterOutputs(*it);
+        ReleaseCom(*it);
+    }
+}
+*/
