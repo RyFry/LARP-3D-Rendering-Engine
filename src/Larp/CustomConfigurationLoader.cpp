@@ -1,5 +1,7 @@
 #include "CustomConfigurationLoader.hpp"
 
+#include <fstream>
+
 namespace Larp
 {
     std::unordered_map<std::string, UniqueCustomConfigurationLoader> CustomConfigurationLoader::s_loaded_configurations;
