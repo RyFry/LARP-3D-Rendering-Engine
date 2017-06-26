@@ -75,9 +75,9 @@ namespace Larp
         return m_model->get_depth();
     }
 
-    void Entity::set_directional_shadows(bool value)
+    void Entity::set_directional_shadows(bool use_shadow_maps)
     {
-        if (value)
+        if (use_shadow_maps)
         {
             m_shadow_shader = Shader::get_depth_map_shader();
             m_shader = Shader::get_shadow_map_shader();
