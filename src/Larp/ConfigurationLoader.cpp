@@ -63,6 +63,9 @@ namespace Larp
 
     ConfigurationLoader* ConfigurationLoader::load_configurations(std::string path)
     {
+        // @note: If the user specifies the configuration loader using both a
+        // relative path and an absolute path, this will load the same
+        // configuration file more than once, which we don't want.
         if (s_loaded_configurations.find(path) == s_loaded_configurations.end())
         {
             s_loaded_configurations.emplace(path, UniqueConfigurationLoader(new ConfigurationLoader(path)));
@@ -72,7 +75,6 @@ namespace Larp
 
     std::string ConfigurationLoader::get_title() const
     {
-        // Was a title provided?
         if (m_configurations.find("title") == m_configurations.end())
         {
             std::cout << "`title` was not provided, providing default title of `"

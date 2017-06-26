@@ -11,7 +11,7 @@ namespace Larp
      * allowing the user to define custom configurations
      * (e.g. for sound, it is possible to define paths to sound effects, volume
      * levels, play channels, etc.).
-     * This class cannot only load files of the form:
+     * This class can only load files of the form:
      *
      *    KEY1, STRING_VALUE1
      *    KEY2, STRING_VALUE2
@@ -40,8 +40,10 @@ namespace Larp
         std::string m_path;
         /**
          * Loads the configuration configurations from the given configuration file.
-         * @param path The path to the configuration file to load.
-         * @param throw_if_failure If `true`, then the program will throw an error
+         * @param path The path to the configuration file to load. The user should use
+         *             the same convention to load configuration files (i.e. relative or absolute paths),
+         *             otherwise we will load the same file multiple times.
+* @param throw_if_failure If `true`, then the program will throw an error
          *                         if the file at path cannot be opened.
          *                         If `false`, then an error will be printed to the console,
          *                         but execution will continue.
@@ -50,7 +52,9 @@ namespace Larp
     public:
         /**
          * Loads the configuration configurations from the given configuration file.
-         * @param path The path to the configuration file to load.
+         * @param path The path to the configuration file to load. The user should use
+         *             the same convention to load configuration files (i.e. relative or absolute paths),
+         *             otherwise we will load the same file multiple times.
          * @param throw_if_failure If `true`, then the program will throw an error
          *                         if the file at path cannot be opened.
          *                         If `false`, then an error will be printed to the console,

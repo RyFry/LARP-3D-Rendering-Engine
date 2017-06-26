@@ -61,8 +61,7 @@ namespace Larp
     {
         if (s_loaded_configurations.find(path) == s_loaded_configurations.end())
         {
-            s_loaded_configurations.emplace(path,
-                                           UniqueCustomConfigurationLoader(new CustomConfigurationLoader(path, throw_if_failure)));
+            s_loaded_configurations.emplace(path, UniqueCustomConfigurationLoader(new CustomConfigurationLoader(path, throw_if_failure)));
         }
         return s_loaded_configurations.at(path).get();
     }

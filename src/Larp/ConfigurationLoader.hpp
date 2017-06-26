@@ -42,7 +42,9 @@ namespace Larp
         std::unordered_map<std::string, std::string> m_configurations;
         /**
          * Loads the configuration options from the given configuration file.
-         * @param path The path to the configuration file to load.
+         * @param path The path to the configuration file to load. The user should use
+         *             the same convention to load configuration files (i.e. relative or absolute paths),
+         *             otherwise we will load the same file multiple times.
          * @note If options are provided that are not part of the pre-defined
          *       acceptable options, an error message is printed to the console,
          *       but execution will not be stopped.
@@ -56,7 +58,9 @@ namespace Larp
     public:
         /**
          * Loads a given configuration file
-         * @param path The path to the configuration file to load.
+         * @param path The path to the configuration file to load. The user should use
+         *             the same convention to load configuration files (i.e. relative or absolute paths),
+         *             otherwise we will load the same file multiple times.
          * @default If given no parameter, this function will attempt to load
          *          "larp.cfg", which it expects to find in the directory in which
          *          this program was run.
@@ -91,8 +95,13 @@ namespace Larp
          *         in the configuration file, or the `resizable` entry in DEFAULTS
          */
         GLenum is_resizable() const;
-
+        /**
+         * @return The music volume of the game.
+         */
         float get_music_volume() const;
+        /**
+         * @return The sound volume of the game.
+         */
         float get_sound_volume() const;
     };
 }
