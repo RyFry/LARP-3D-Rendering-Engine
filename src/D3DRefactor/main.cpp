@@ -9,7 +9,7 @@
 #include <vector>
 #include <string>
 
-#include "../Common/defines.hpp"
+#include "../Common/Defines.hpp"
 
 // #include <glm/glm.hpp>
 
