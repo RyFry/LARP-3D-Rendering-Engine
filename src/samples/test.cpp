@@ -153,7 +153,14 @@ int main(void)
     Larp::Node* crate_node = graph->create_child_node();
     crate_node->attach_entity(entity22);
     crate_node->set_scale(0.4, 0.4, 0.4);
-    std::cout << "Scaled dimensions of crate: (" << crate_node->get_scaled_width() << ", " << crate_node->get_scaled_height() << ", " << crate_node->get_scaled_depth() << ')' << std::endl;
+    std::cout << "Scaled dimensions of crate: ("
+              << crate_node->get_scaled_width()
+              << ", "
+              << crate_node->get_scaled_height()
+              << ", "
+              << crate_node->get_scaled_depth()
+              << ')'
+              << std::endl;
     crate_node->set_position(0.0, 6.0, 3.0);
 
     destructable_items.insert(crate_node);

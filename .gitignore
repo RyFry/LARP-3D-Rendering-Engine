@@ -6,6 +6,7 @@ out/*
 # Ignore Emacs temporary files
 \#*\#
 *~
+\.\#*
 
 # Ignore Vim temporary files
 *.swp
